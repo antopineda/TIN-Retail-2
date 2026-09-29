@@ -1,0 +1,194 @@
+sku;nombre;categoria;subcategoria;marca;proveedor;costo_unitario;precio_lista;activo
+SKU-0001;Arroz Tucapel F1;ABARR;Arroz y legumbres;Tucapel;Tucapel;792;$1.200;1
+SKU-0002;Arroz Tucapel F2;abarrotes;Arroz y legumbres;Tucapel;Tucapel;765;1.202,00;1
+SKU-0003;Arroz Tucapel F3;abarrotes;Arroz y legumbres;Tucapel;Tucapel;776;1.215,00;SI
+SKU-0001;ARROZ TUCAPEL F1  ;abarrotes;Arroz y legumbres;Tucapel;Tucapel;800;1.190,00;No
+SKU-0004;Arroz Tucapel F4;ABARR;Arroz y legumbres;Tucapel;Tucapel;781;$1.168;1
+SKU-0005;Arroz Tucapel F5;abarrotes;Arroz y legumbres;Tucapel;Tucapel;N/A;1.215;Sí
+SKU-0006;Arroz Miraflores F1;Abarrotes;Arroz y legumbres;Miraflores;Miraflores;654;$979;Sí
+SKU-0007;Arroz Miraflores F2;ABARR;Arroz y legumbres;Miraflores;Miraflores;638;$1.002;1
+SKU-0008;Arroz Miraflores F3;abarrotes;Arroz y legumbres;Miraflores;Miraflores;622;975;
+SKU-0009;Arroz Miraflores F4;abarrotes;Arroz y legumbres;Miraflores;Miraflores;638;1.011;1
+SKU-0010;Arroz Miraflores F5;abarrotes;Arroz y legumbres;Miraflores;Miraflores;622;$1.013;Sí
+SKU-0011;Aceites Chef F1;ABARR;Aceites;Chef;Chef;1371;1.934,00;si
+SKU-0012;Aceites Chef F2;ABARR;Aceites;Chef;Chef;1323;2.039;Sí
+SKU-0013;Aceites Chef F3;abarrotes;Aceites;Chef;Chef;1.319;1.956;1
+SKU-0014;Aceites Chef F4;ABARR;Aceites;Chef;Chef;1325;2.047,00;Sí
+SKU-0015;Aceites Chef F5;Abarrotes;Aceites;Chef;Chef;1.362;1.953,00;1
+SKU-0016;Aceites Miraflores F1;ABARR;Aceites;Miraflores;Miraflores;1226;$1.843;si
+SKU-0017;Aceites Miraflores F2;ABARR;Aceites;Miraflores;Miraflores;1189;1.742,00;SI
+SKU-0018;Aceites Miraflores F3;Abarrotes;Aceites;Miraflores;Miraflores;1.191;1.792,00;SI
+sku;nombre;categoria;subcategoria;marca;proveedor;costo_unitario;precio_lista;activo
+SKU-0019;Aceites Miraflores F4;abarrotes;Aceites;Miraflores;Miraflores;1189;1.753,00;si
+SKU-0020;Aceites Miraflores F5;ABARR;Aceites;Miraflores;Miraflores;1189;1.773,00;1
+SKU-0021;Pastas Carozzi F1;Abarrotes;Pastas;Carozzi;Carozzi;522;$825;Sí
+SKU-0022;Pastas Carozzi F2;Abarrotes;Pastas;Carozzi;Carozzi;534;844,00;si
+SKU-0023;Pastas Carozzi F3;ABARR;Pastas;Carozzi;Carozzi;507;871;Sí
+SKU-0024;Pastas Carozzi F4;ABARR;Pastas;Carozzi;Carozzi;531;859;si
+SKU-0025;Pastas Carozzi F5;abarrotes;Pastas;Carozzi;Carozzi;513;857;1
+SKU-0026;Pastas Lucchetti F1;abarrotes;Pastas;Lucchetti;Lucchetti;469;$775;1
+SKU-0027;Pastas Lucchetti F2;abarrotes;Pastas;Lucchetti;Lucchetti;469;$768;SI
+SKU-0028;Pastas Lucchetti F3;ABARR;Pastas;Lucchetti;Lucchetti;475;797,00;SI
+SKU-0029;Pastas Lucchetti F4;abarrotes;Pastas;Lucchetti;Lucchetti;482;$767;1
+SKU-0030;Pastas Lucchetti F5;abarrotes;Pastas;Lucchetti;Lucchetti;481;$773;Sí
+SKU-0031;Gaseosas CCU F1;BEB;Gaseosas;CCU;CCU;963;1.503,00;1
+SKU-0032;Gaseosas CCU F2;Bebidas;Gaseosas;CCU;CCU;989;1.445;1
+SKU-0033;Gaseosas CCU F3;Bebidas;Gaseosas;CCU;CCU;1000;$1.516;SI
+SKU-0034;Gaseosas CCU F4;bebidas;Gaseosas;CCU;CCU;988;1.448,00;SI
+SKU-0035;Gaseosas CCU F5;BEB;Gaseosas;CCU;CCU;1.005;1.489,00;SI
+SKU-0036;Gaseosas Andina F1;Bebidas;Gaseosas;Andina;Andina;934;1.464,00;1
+SKU-0037;Gaseosas Andina F2;Bebidas;Gaseosas;Andina;Andina;955;1.412,00;si
+SKU-0038;Gaseosas Andina F3;Bebidas;Gaseosas;Andina;Andina;956;1.426,00;Sí
+SKU-0039;Gaseosas Andina F4;BEB;Gaseosas;Andina;Andina;922;1.442,00;1
+SKU-0040;Gaseosas Andina F5;Bebidas;Gaseosas;Andina;Andina;958;1.450,00;Sí
+SKU-0041;Aguas Cachantún F1;Bebidas;Aguas;Cachantún;Cachantún;566;890;Sí
+SKU-0042;Aguas Cachantún F2;bebidas;Aguas;Cachantún;Cachantún;572;893,00;1
+SKU-0043;Aguas Cachantún F3;bebidas;Aguas;Cachantún;Cachantún;555;$871;si
+SKU-0044;Aguas Cachantún F4;bebidas;Aguas;Cachantún;Cachantún;563;$891;Sí
+SKU-0045;Aguas Cachantún F5;Bebidas;Aguas;Cachantún;Cachantún;558;883,00;1
+SKU-0046;Aguas Vital F1;bebidas;Aguas;Vital;Vital;531;873;1
+SKU-0047;Aguas Vital F2;bebidas;Aguas;Vital;Vital;533;$849;1
+SKU-0048;Aguas Vital F3;bebidas;Aguas;Vital;Vital;554;$860;1
+SKU-0049;Aguas Vital F4;bebidas;Aguas;Vital;Vital;549;843,00;SI
+SKU-0050;Aguas Vital F5;BEB;Aguas;Vital;Vital;538;827;Sí
+SKU-0051;Jugos Watts F1;Bebidas;Jugos;Watts;Watts;722;$1.169;1
+SKU-0052;Jugos Watts F2;bebidas;Jugos;Watts;Watts;740;$1.166;SI
+SKU-0053;Jugos Watts F3;bebidas;Jugos;Watts;Watts;708;1.179;Sí
+SKU-0054;Jugos Watts F4;BEB;Jugos;Watts;Watts;725;$1.128;1
+SKU-0055;Jugos Watts F5;Bebidas;Jugos;Watts;Watts;706;1.178,00;si
+SKU-0056;Jugos Andina F1;bebidas;Jugos;Andina;Andina;708;$1.112;1
+SKU-0057;Jugos Andina F2;BEB;Jugos;Andina;Andina;691;$1.080;1
+SKU-0058;Jugos Andina F3;Bebidas;Jugos;Andina;Andina;684;$1.132;si
+SKU-0059;Jugos Andina F4;bebidas;Jugos;Andina;Andina;679;$1.086;SI
+SKU-0060;Jugos Andina F5;BEB;Jugos;Andina;Andina;696;1.076,00;Sí
+SKU-0061;Leches Soprole F1;Lácteos;Leches;Soprole;Soprole;865;$1.295;SI
+SKU-0062;Leches Soprole F2;Lácteos;Leches;Soprole;Soprole;899;1.261;si
+SKU-0063;Leches Soprole F3;Lácteos;Leches;Soprole;Soprole;892;1.276,00;1
+SKU-0064;Leches Soprole F4;LACT;Leches;Soprole;Soprole;877;1.309;Sí
+SKU-0065;Leches Soprole F5;LACT;Leches;Soprole;Soprole;885;$1.305;1
+SKU-0066;Leches Colun F1;lacteos;Leches;Colun;Colun;891;1.268;si
+SKU-0067;Leches Colun F2;lacteos;Leches;Colun;Colun;888;1.259;1
+SKU-0068;Leches Colun F3;lacteos;Leches;Colun;Colun;880;1.281;si
+SKU-0069;Leches Colun F4;lacteos;Leches;Colun;Colun;861;$1.267;SI
+SKU-0070;Leches Colun F5;LACT;Leches;Colun;Colun;871;1.266;si
+SKU-0071;Quesos Colun F1;lacteos;Quesos;Colun;Colun;6.830;8.828;1
+SKU-0072;Quesos Colun F2;LACT;Quesos;Colun;Colun;6762;$8.961;si
+SKU-0073;Quesos Colun F3;Lácteos;Quesos;Colun;Colun;6.850;$8.953;si
+SKU-0074;Quesos Colun F4;Lácteos;Quesos;Colun;Colun;6937;9.011;1
+SKU-0075;Quesos Colun F5;LACT;Quesos;Colun;Colun;7.002;$8.918;1
+SKU-0076;Quesos Soprole F1;LACT;Quesos;Soprole;Soprole;6882;8.964,00;SI
+SKU-0077;Quesos Soprole F2;Lácteos;Quesos;Soprole;Soprole;6872;$8.877;si
+SKU-0078;Quesos Soprole F3;LACT;Quesos;Soprole;Soprole;6516;8.656;si
+SKU-0079;Quesos Soprole F4;LACT;Quesos;Soprole;Soprole;6.693;$8.528;SI
+SKU-0080;Quesos Soprole F5;LACT;Quesos;Soprole;Soprole;6.525;$8.968;SI
+SKU-0081;Yogurt Soprole F1;lacteos;Yogurt;Soprole;Soprole;2239;3.045;SI
+SKU-0082;Yogurt Soprole F2;Lácteos;Yogurt;Soprole;Soprole;2183;2.993;SI
+SKU-0083;Yogurt Soprole F3;lacteos;Yogurt;Soprole;Soprole;2.168;2.904;si
+SKU-0084;Yogurt Soprole F4;Lácteos;Yogurt;Soprole;Soprole;2.253;$3.029;si
+SKU-0085;Yogurt Soprole F5;LACT;Yogurt;Soprole;Soprole;2179;2.978;si
+SKU-0086;Yogurt Danone F1;Lácteos;Yogurt;Danone;Danone;2.401;3.254;si
+SKU-0087;Yogurt Danone F2;Lácteos;Yogurt;Danone;Danone;2.420;3.218,00;si
+SKU-0088;Yogurt Danone F3;lacteos;Yogurt;Danone;Danone;2349;$3.116;Sí
+SKU-0089;Yogurt Danone F4;lacteos;Yogurt;Danone;Danone;2451;3.263,00;SI
+SKU-0090;Yogurt Danone F5;LACT;Yogurt;Danone;Danone;2406;3.212,00;si
+SKU-0091;Detergentes Omo F1;Limpieza;Detergentes;Omo;Omo;2370;3.486,00;1
+SKU-0092;Detergentes Omo F2;Limpieza;Detergentes;Omo;Omo;2.375;3.461;1
+SKU-0093;Detergentes Omo F3;limpieza;Detergentes;Omo;Omo;2.358;3.487;Sí
+SKU-0094;Detergentes Omo F4;ASEO;Detergentes;Omo;Omo;2.336;$3.493;SI
+SKU-0095;Detergentes Omo F5;ASEO;Detergentes;Omo;Omo;2.403;3.592;1
+SKU-0096;Detergentes Ariel F1;Limpieza;Detergentes;Ariel;Ariel;2619;3.773,00;si
+SKU-0097;Detergentes Ariel F2;Limpieza;Detergentes;Ariel;Ariel;2.642;$3.608;Sí
+SKU-0098;Detergentes Ariel F3;limpieza;Detergentes;Ariel;Ariel;2.640;$3.752;SI
+SKU-0099;Detergentes Ariel F4;Limpieza;Detergentes;Ariel;Ariel;2528;3.597,00;si
+SKU-0100;Detergentes Ariel F5;limpieza;Detergentes;Ariel;Ariel;2532;3.781;1
+SKU-0101;Aseo Cif F1;limpieza;Aseo baño;Cif;Cif;875;$1.408;Sí
+SKU-0102;Aseo Cif F2;Limpieza;Aseo baño;Cif;Cif;909;1.377;Sí
+SKU-0103;Aseo Cif F3;Limpieza;Aseo baño;Cif;Cif;907;1.354;SI
+SKU-0104;Aseo Cif F4;ASEO;Aseo baño;Cif;Cif;883;$1.407;1
+SKU-0105;Aseo Cif F5;limpieza;Aseo baño;Cif;Cif;885;1.365,00;Sí
+SKU-0106;Aseo Lysoform F1;Limpieza;Aseo baño;Lysoform;Lysoform;786;1.261;SI
+SKU-0107;Aseo Lysoform F2;Limpieza;Aseo baño;Lysoform;Lysoform;792;1.283;si
+SKU-0108;Aseo Lysoform F3;Limpieza;Aseo baño;Lysoform;Lysoform;777;1.270;SI
+SKU-0109;Aseo Lysoform F4;Limpieza;Aseo baño;Lysoform;Lysoform;790;1.243;Sí
+SKU-0110;Aseo Lysoform F5;limpieza;Aseo baño;Lysoform;Lysoform;781;$1.272;1
+SKU-0111;Papas Evercrisp F1;snacks;Papas fritas;Evercrisp;Evercrisp;1.270;2.000;SI
+SKU-0112;Papas Evercrisp F2;snacks;Papas fritas;Evercrisp;Evercrisp;1.263;2.017,00;1
+SKU-0113;Papas Evercrisp F3;Snacks;Papas fritas;Evercrisp;Evercrisp;1.271;1.944,00;si
+SKU-0114;Papas Evercrisp F4;Snacks;Papas fritas;Evercrisp;Evercrisp;1302;2.015;Sí
+SKU-0115;Papas Evercrisp F5;snacks;Papas fritas;Evercrisp;Evercrisp;1297;$1.953;1
+SKU-0116;Papas Marco Polo F1;snacks;Papas fritas;Marco Polo;Marco Polo;968;1.636;SI
+SKU-0117;Papas Marco Polo F2;SNK;Papas fritas;Marco Polo;Marco Polo;1010;$1.578;SI
+SKU-0118;Papas Marco Polo F3;SNK;Papas fritas;Marco Polo;Marco Polo;986;1.632;SI
+SKU-0119;Papas Marco Polo F4;snacks;Papas fritas;Marco Polo;Marco Polo;1006;1.546;si
+SKU-0120;Papas Marco Polo F5;SNK;Papas fritas;Marco Polo;Marco Polo;962;$1.600;Sí
+SKU-0121;Galletas Costa F1;snacks;Galletas;Costa;Costa;1458;$2.186;si
+SKU-0122;Galletas Costa F2;snacks;Galletas;Costa;Costa;1.487;$2.205;si
+SKU-0123;Galletas Costa F3;Snacks;Galletas;Costa;Costa;1487;2.179,00;si
+SKU-0124;Galletas Costa F4;snacks;Galletas;Costa;Costa;1529;2.159,00;SI
+SKU-0125;Galletas Costa F5;snacks;Galletas;Costa;Costa;1.486;$2.166;SI
+SKU-0126;Galletas McKay F1;Snacks;Galletas;McKay;McKay;1317;1.951;SI
+SKU-0127;Galletas McKay F2;SNK;Galletas;McKay;McKay;1316;$2.033;Sí
+SKU-0128;Galletas McKay F3;Snacks;Galletas;McKay;McKay;1252;$2.013;SI
+SKU-0129;Galletas McKay F4;snacks;Galletas;McKay;McKay;1306;1.944,00;si
+SKU-0130;Galletas McKay F5;SNK;Galletas;McKay;McKay;1.258;2.000;Sí
+SKU-0131;Chocolates Nestlé F1;Snacks;Chocolates;Nestlé;Nestlé;963;1.623;Sí
+SKU-0132;Chocolates Nestlé F2;snacks;Chocolates;Nestlé;Nestlé;998;1.575,00;1
+SKU-0133;Chocolates Nestlé F3;SNK;Chocolates;Nestlé;Nestlé;993;1.563,00;si
+SKU-0134;Chocolates Nestlé F4;snacks;Chocolates;Nestlé;Nestlé;966;$1.557;Sí
+SKU-0135;Chocolates Nestlé F5;SNK;Chocolates;Nestlé;Nestlé;990;1.599;SI
+SKU-0136;Chocolates Costa F1;SNK;Chocolates;Costa;Costa;893;1.443,00;Sí
+SKU-0137;Chocolates Costa F2;SNK;Chocolates;Costa;Costa;891;1.448;Sí
+SKU-0138;Chocolates Costa F3;SNK;Chocolates;Costa;Costa;903;$1.410;Sí
+SKU-0139;Chocolates Costa F4;snacks;Chocolates;Costa;Costa;898;$1.493;si
+SKU-0140;Chocolates Costa F5;Snacks;Chocolates;Costa;Costa;890;$1.466;Sí
+SKU-0141;Higiene Dove F1;perfumeria;Higiene;Dove;Dove;1966;3.067,00;Sí
+SKU-0142;Higiene Dove F2;PERF;Higiene;Dove;Dove;2.016;$2.901;1
+SKU-0143;Higiene Dove F3;PERF;Higiene;Dove;Dove;2.030;$3.015;si
+SKU-0144;Higiene Dove F4;Perfumería;Higiene;Dove;Dove;2.002;2.928,00;1
+SKU-0145;Higiene Dove F5;perfumeria;Higiene;Dove;Dove;1.991;3.002,00;SI
+SKU-0146;Higiene Nivea F1;perfumeria;Higiene;Nivea;Nivea;2183;3.228,00;1
+SKU-0147;Higiene Nivea F2;perfumeria;Higiene;Nivea;Nivea;2137;$3.279;Sí
+SKU-0148;Higiene Nivea F3;Perfumería;Higiene;Nivea;Nivea;2250;3.261,00;Sí
+SKU-0149;Higiene Nivea F4;PERF;Higiene;Nivea;Nivea;2.202;$3.219;Sí
+SKU-0150;Higiene Nivea F5;Perfumería;Higiene;Nivea;Nivea;2.159;$3.130;SI
+SKU-0151;Cuidado Sedal F1;PERF;Cuidado capilar;Sedal;Sedal;2.469;$3.689;si
+SKU-0152;Cuidado Sedal F2;Perfumería;Cuidado capilar;Sedal;Sedal;2.512;$3.696;1
+SKU-0153;Cuidado Sedal F3;PERF;Cuidado capilar;Sedal;Sedal;2474;3.686;Sí
+SKU-0154;Cuidado Sedal F4;Perfumería;Cuidado capilar;Sedal;Sedal;2530;3.649,00;si
+SKU-0155;Cuidado Sedal F5;Perfumería;Cuidado capilar;Sedal;Sedal;2429;3.559;SI
+SKU-0156;Cuidado Head&Shoulders F1;Perfumería;Cuidado capilar;Head&Shoulders;Head&Shoulders;2959;$4.209;SI
+SKU-0157;Cuidado Head&Shoulders F2;PERF;Cuidado capilar;Head&Shoulders;Head&Shoulders;2.937;4.332,00;1
+SKU-0158;Cuidado Head&Shoulders F3;perfumeria;Cuidado capilar;Head&Shoulders;Head&Shoulders;3038;4.345,00;1
+SKU-0159;Cuidado Head&Shoulders F4;PERF;Cuidado capilar;Head&Shoulders;Head&Shoulders;3003;4.314,00;Sí
+SKU-0160;Cuidado Head&Shoulders F5;perfumeria;Cuidado capilar;Head&Shoulders;Head&Shoulders;3.039;$4.391;1
+SKU-0161;Cecinas PF F1;CARN;Cecinas;PF;PF;2.992;4.342,00;1
+SKU-0162;Cecinas PF F2;carnes;Cecinas;PF;PF;2999;4.269;Sí
+SKU-0163;Cecinas PF F3;CARN;Cecinas;PF;PF;2.911;$4.383;si
+SKU-0164;Cecinas PF F4;carnes;Cecinas;PF;PF;2998;4.367;Sí
+SKU-0165;Cecinas PF F5;carnes;Cecinas;PF;PF;2.909;$4.258;Sí
+SKU-0166;Cecinas San Jorge F1;Carnes;Cecinas;San Jorge;San Jorge;2809;3.907,00;si
+SKU-0167;Cecinas San Jorge F2;Carnes;Cecinas;San Jorge;San Jorge;2763;$3.883;Sí
+SKU-0168;Cecinas San Jorge F3;CARN;Cecinas;San Jorge;San Jorge;2.834;$4.098;SI
+SKU-0169;Cecinas San Jorge F4;Carnes;Cecinas;San Jorge;San Jorge;2.840;4.028,00;SI
+SKU-0170;Cecinas San Jorge F5;carnes;Cecinas;San Jorge;San Jorge;2.760;$3.916;SI
+SKU-0171;Congelados Súper Pollo F1;carnes;Congelados;Súper Pollo;Súper Pollo;4062;$5.508;si
+SKU-0172;Congelados Súper Pollo F2;carnes;Congelados;Súper Pollo;Súper Pollo;3888;5.546;Sí
+SKU-0173;Congelados Súper Pollo F3;carnes;Congelados;Súper Pollo;Súper Pollo;4011;$5.414;1
+SKU-0174;Congelados Súper Pollo F4;Carnes;Congelados;Súper Pollo;Súper Pollo;4038;5.406,00;si
+SKU-0175;Congelados Súper Pollo F5;CARN;Congelados;Súper Pollo;Súper Pollo;4045;$5.357;SI
+SKU-0176;Congelados Ariztía F1;Carnes;Congelados;Ariztía;Ariztía;4220;6.014,00;SI
+SKU-0177;Congelados Ariztía F2;Carnes;Congelados;Ariztía;Ariztía;4349;$6.038;Sí
+SKU-0178;Congelados Ariztía F3;carnes;Congelados;Ariztía;Ariztía;4370;5.778,00;SI
+SKU-0179;Congelados Ariztía F4;carnes;Congelados;Ariztía;Ariztía;4190;$5.781;si
+SKU-0180;Congelados Ariztía F5;CARN;Congelados;Ariztía;Ariztía;4.259;5.987,00;Sí
+SKU-0181;Panificados Ideal F1;panaderia;Panificados;Ideal;Ideal;1260;1.838;SI
+SKU-0182;Panificados Ideal F2;panaderia;Panificados;Ideal;Ideal;1318;1.941;SI
+SKU-0183;Panificados Ideal F3;PAN;Panificados;Ideal;Ideal;1.310;1.876;si
+SKU-0184;Panificados Ideal F4;Panadería;Panificados;Ideal;Ideal;1270;1.896,00;1
+SKU-0185;Panificados Ideal F5;Panadería;Panificados;Ideal;Ideal;1.255;1.889;si
+SKU-0186;Panificados Bimbo F1;panaderia;Panificados;Bimbo;Bimbo;1447;2.131;1
+SKU-0187;Panificados Bimbo F2;PAN;Panificados;Bimbo;Bimbo;1533;2.222,00;1
+SKU-0188;Panificados Bimbo F3;panaderia;Panificados;Bimbo;Bimbo;1.499;2.250,00;si
+SKU-0189;Panificados Bimbo F4;PAN;Panificados;Bimbo;Bimbo;1450;2.231,00;si
+SKU-0190;Panificados Bimbo F5;Panadería;Panificados;Bimbo;Bimbo;1.519;2.232,00;Sí
+TOTAL;;;;;;;;

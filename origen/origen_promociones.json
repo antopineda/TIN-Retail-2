@@ -1,0 +1,55 @@
+{
+ "cadena": "Multitienda del Sur SpA",
+ "campanas": [
+  {
+   "campana_id": "CAMP-2025-09",
+   "nombre": "Septiembre Imperdible",
+   "tipo": "descuento_directo",
+   "fecha_ini": "2025-09-01T00:00:00",
+   "fecha_fin": "2025-09-30T23:59:59",
+   "descuento_pct": "25%",
+   "canales": [
+    "Presencial",
+    "Web"
+   ],
+   "skus": [
+    "SKU-0033",
+    "SKU-0036",
+    "SKU-0048",
+    "SKU-0050",
+    "SKU-0052",
+    "SKU-0054",
+    "SKU-0055",
+    "SKU-0056",
+    "SKU-0057",
+    "SKU-0111",
+    "SKU-0115",
+    "SKU-0123",
+    "SKU-0125",
+    "SKU-0127",
+    "SKU-0140",
+    "SKU-9001",
+    "SKU-9007"
+   ]
+  },
+  {
+   "campana_id": "CAMP-2025-05",
+   "nombre": "Otoño Lácteos",
+   "tipo": "2x1",
+   "fecha_ini": "2025-05-05T00:00:00",
+   "fecha_fin": "2025-05-20T23:59:59",
+   "descuento_pct": 50,
+   "canales": [
+    "Presencial"
+   ],
+   "skus": [
+    "SKU-0061",
+    "SKU-0062",
+    "SKU-0063",
+    "SKU-0064",
+    "SKU-0065",
+    "SKU-0066"
+   ]
+  }
+ ]
+}
