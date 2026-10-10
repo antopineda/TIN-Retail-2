@@ -1,0 +1,381 @@
+﻿sku_key,nombre,categoria,subcategoria,marca,proveedor,costo_unitario,precio_lista,activo,flag_costo_invalido,es_sin_maestro
+SKU-0001,Arroz Tucapel F1,Abarrotes,Arroz y legumbres,Tucapel,Tucapel,792.0,1200.0,True,False,False
+SKU-0002,Arroz Tucapel F2,Abarrotes,Arroz y legumbres,Tucapel,Tucapel,765.0,1202.0,True,False,False
+SKU-0003,Arroz Tucapel F3,Abarrotes,Arroz y legumbres,Tucapel,Tucapel,776.0,1215.0,True,False,False
+SKU-0004,Arroz Tucapel F4,Abarrotes,Arroz y legumbres,Tucapel,Tucapel,781.0,1168.0,True,False,False
+SKU-0005,Arroz Tucapel F5,Abarrotes,Arroz y legumbres,Tucapel,Tucapel,,1215.0,True,True,False
+SKU-0006,Arroz Miraflores F1,Abarrotes,Arroz y legumbres,Miraflores,Miraflores,654.0,979.0,True,False,False
+SKU-0007,Arroz Miraflores F2,Abarrotes,Arroz y legumbres,Miraflores,Miraflores,638.0,1002.0,True,False,False
+SKU-0008,Arroz Miraflores F3,Abarrotes,Arroz y legumbres,Miraflores,Miraflores,622.0,975.0,,False,False
+SKU-0009,Arroz Miraflores F4,Abarrotes,Arroz y legumbres,Miraflores,Miraflores,638.0,1011.0,True,False,False
+SKU-0010,Arroz Miraflores F5,Abarrotes,Arroz y legumbres,Miraflores,Miraflores,622.0,1013.0,True,False,False
+SKU-0011,Aceites Chef F1,Abarrotes,Aceites,Chef,Chef,1371.0,1934.0,True,False,False
+SKU-0012,Aceites Chef F2,Abarrotes,Aceites,Chef,Chef,1323.0,2039.0,True,False,False
+SKU-0013,Aceites Chef F3,Abarrotes,Aceites,Chef,Chef,1319.0,1956.0,True,False,False
+SKU-0014,Aceites Chef F4,Abarrotes,Aceites,Chef,Chef,1325.0,2047.0,True,False,False
+SKU-0015,Aceites Chef F5,Abarrotes,Aceites,Chef,Chef,1362.0,1953.0,True,False,False
+SKU-0016,Aceites Miraflores F1,Abarrotes,Aceites,Miraflores,Miraflores,1226.0,1843.0,True,False,False
+SKU-0017,Aceites Miraflores F2,Abarrotes,Aceites,Miraflores,Miraflores,1189.0,1742.0,True,False,False
+SKU-0018,Aceites Miraflores F3,Abarrotes,Aceites,Miraflores,Miraflores,1191.0,1792.0,True,False,False
+SKU-0019,Aceites Miraflores F4,Abarrotes,Aceites,Miraflores,Miraflores,1189.0,1753.0,True,False,False
+SKU-0020,Aceites Miraflores F5,Abarrotes,Aceites,Miraflores,Miraflores,1189.0,1773.0,True,False,False
+SKU-0021,Pastas Carozzi F1,Abarrotes,Pastas,Carozzi,Carozzi,522.0,825.0,True,False,False
+SKU-0022,Pastas Carozzi F2,Abarrotes,Pastas,Carozzi,Carozzi,534.0,844.0,True,False,False
+SKU-0023,Pastas Carozzi F3,Abarrotes,Pastas,Carozzi,Carozzi,507.0,871.0,True,False,False
+SKU-0024,Pastas Carozzi F4,Abarrotes,Pastas,Carozzi,Carozzi,531.0,859.0,True,False,False
+SKU-0025,Pastas Carozzi F5,Abarrotes,Pastas,Carozzi,Carozzi,513.0,857.0,True,False,False
+SKU-0026,Pastas Lucchetti F1,Abarrotes,Pastas,Lucchetti,Lucchetti,469.0,775.0,True,False,False
+SKU-0027,Pastas Lucchetti F2,Abarrotes,Pastas,Lucchetti,Lucchetti,469.0,768.0,True,False,False
+SKU-0028,Pastas Lucchetti F3,Abarrotes,Pastas,Lucchetti,Lucchetti,475.0,797.0,True,False,False
+SKU-0029,Pastas Lucchetti F4,Abarrotes,Pastas,Lucchetti,Lucchetti,482.0,767.0,True,False,False
+SKU-0030,Pastas Lucchetti F5,Abarrotes,Pastas,Lucchetti,Lucchetti,481.0,773.0,True,False,False
+SKU-0031,Gaseosas CCU F1,Bebidas,Gaseosas,CCU,CCU,963.0,1503.0,True,False,False
+SKU-0032,Gaseosas CCU F2,Bebidas,Gaseosas,CCU,CCU,989.0,1445.0,True,False,False
+SKU-0033,Gaseosas CCU F3,Bebidas,Gaseosas,CCU,CCU,1000.0,1516.0,True,False,False
+SKU-0034,Gaseosas CCU F4,Bebidas,Gaseosas,CCU,CCU,988.0,1448.0,True,False,False
+SKU-0035,Gaseosas CCU F5,Bebidas,Gaseosas,CCU,CCU,1005.0,1489.0,True,False,False
+SKU-0036,Gaseosas Andina F1,Bebidas,Gaseosas,Andina,Andina,934.0,1464.0,True,False,False
+SKU-0037,Gaseosas Andina F2,Bebidas,Gaseosas,Andina,Andina,955.0,1412.0,True,False,False
+SKU-0038,Gaseosas Andina F3,Bebidas,Gaseosas,Andina,Andina,956.0,1426.0,True,False,False
+SKU-0039,Gaseosas Andina F4,Bebidas,Gaseosas,Andina,Andina,922.0,1442.0,True,False,False
+SKU-0040,Gaseosas Andina F5,Bebidas,Gaseosas,Andina,Andina,958.0,1450.0,True,False,False
+SKU-0041,Aguas Cachantún F1,Bebidas,Aguas,Cachantún,Cachantún,566.0,890.0,True,False,False
+SKU-0042,Aguas Cachantún F2,Bebidas,Aguas,Cachantún,Cachantún,572.0,893.0,True,False,False
+SKU-0043,Aguas Cachantún F3,Bebidas,Aguas,Cachantún,Cachantún,555.0,871.0,True,False,False
+SKU-0044,Aguas Cachantún F4,Bebidas,Aguas,Cachantún,Cachantún,563.0,891.0,True,False,False
+SKU-0045,Aguas Cachantún F5,Bebidas,Aguas,Cachantún,Cachantún,558.0,883.0,True,False,False
+SKU-0046,Aguas Vital F1,Bebidas,Aguas,Vital,Vital,531.0,873.0,True,False,False
+SKU-0047,Aguas Vital F2,Bebidas,Aguas,Vital,Vital,533.0,849.0,True,False,False
+SKU-0048,Aguas Vital F3,Bebidas,Aguas,Vital,Vital,554.0,860.0,True,False,False
+SKU-0049,Aguas Vital F4,Bebidas,Aguas,Vital,Vital,549.0,843.0,True,False,False
+SKU-0050,Aguas Vital F5,Bebidas,Aguas,Vital,Vital,538.0,827.0,True,False,False
+SKU-0051,Jugos Watts F1,Bebidas,Jugos,Watts,Watts,722.0,1169.0,True,False,False
+SKU-0052,Jugos Watts F2,Bebidas,Jugos,Watts,Watts,740.0,1166.0,True,False,False
+SKU-0053,Jugos Watts F3,Bebidas,Jugos,Watts,Watts,708.0,1179.0,True,False,False
+SKU-0054,Jugos Watts F4,Bebidas,Jugos,Watts,Watts,725.0,1128.0,True,False,False
+SKU-0055,Jugos Watts F5,Bebidas,Jugos,Watts,Watts,706.0,1178.0,True,False,False
+SKU-0056,Jugos Andina F1,Bebidas,Jugos,Andina,Andina,708.0,1112.0,True,False,False
+SKU-0057,Jugos Andina F2,Bebidas,Jugos,Andina,Andina,691.0,1080.0,True,False,False
+SKU-0058,Jugos Andina F3,Bebidas,Jugos,Andina,Andina,684.0,1132.0,True,False,False
+SKU-0059,Jugos Andina F4,Bebidas,Jugos,Andina,Andina,679.0,1086.0,True,False,False
+SKU-0060,Jugos Andina F5,Bebidas,Jugos,Andina,Andina,696.0,1076.0,True,False,False
+SKU-0061,Leches Soprole F1,Lácteos,Leches,Soprole,Soprole,865.0,1295.0,True,False,False
+SKU-0062,Leches Soprole F2,Lácteos,Leches,Soprole,Soprole,899.0,1261.0,True,False,False
+SKU-0063,Leches Soprole F3,Lácteos,Leches,Soprole,Soprole,892.0,1276.0,True,False,False
+SKU-0064,Leches Soprole F4,Lácteos,Leches,Soprole,Soprole,877.0,1309.0,True,False,False
+SKU-0065,Leches Soprole F5,Lácteos,Leches,Soprole,Soprole,885.0,1305.0,True,False,False
+SKU-0066,Leches Colun F1,Lácteos,Leches,Colun,Colun,891.0,1268.0,True,False,False
+SKU-0067,Leches Colun F2,Lácteos,Leches,Colun,Colun,888.0,1259.0,True,False,False
+SKU-0068,Leches Colun F3,Lácteos,Leches,Colun,Colun,880.0,1281.0,True,False,False
+SKU-0069,Leches Colun F4,Lácteos,Leches,Colun,Colun,861.0,1267.0,True,False,False
+SKU-0070,Leches Colun F5,Lácteos,Leches,Colun,Colun,871.0,1266.0,True,False,False
+SKU-0071,Quesos Colun F1,Lácteos,Quesos,Colun,Colun,6830.0,8828.0,True,False,False
+SKU-0072,Quesos Colun F2,Lácteos,Quesos,Colun,Colun,6762.0,8961.0,True,False,False
+SKU-0073,Quesos Colun F3,Lácteos,Quesos,Colun,Colun,6850.0,8953.0,True,False,False
+SKU-0074,Quesos Colun F4,Lácteos,Quesos,Colun,Colun,6937.0,9011.0,True,False,False
+SKU-0075,Quesos Colun F5,Lácteos,Quesos,Colun,Colun,7002.0,8918.0,True,False,False
+SKU-0076,Quesos Soprole F1,Lácteos,Quesos,Soprole,Soprole,6882.0,8964.0,True,False,False
+SKU-0077,Quesos Soprole F2,Lácteos,Quesos,Soprole,Soprole,6872.0,8877.0,True,False,False
+SKU-0078,Quesos Soprole F3,Lácteos,Quesos,Soprole,Soprole,6516.0,8656.0,True,False,False
+SKU-0079,Quesos Soprole F4,Lácteos,Quesos,Soprole,Soprole,6693.0,8528.0,True,False,False
+SKU-0080,Quesos Soprole F5,Lácteos,Quesos,Soprole,Soprole,6525.0,8968.0,True,False,False
+SKU-0081,Yogurt Soprole F1,Lácteos,Yogurt,Soprole,Soprole,2239.0,3045.0,True,False,False
+SKU-0082,Yogurt Soprole F2,Lácteos,Yogurt,Soprole,Soprole,2183.0,2993.0,True,False,False
+SKU-0083,Yogurt Soprole F3,Lácteos,Yogurt,Soprole,Soprole,2168.0,2904.0,True,False,False
+SKU-0084,Yogurt Soprole F4,Lácteos,Yogurt,Soprole,Soprole,2253.0,3029.0,True,False,False
+SKU-0085,Yogurt Soprole F5,Lácteos,Yogurt,Soprole,Soprole,2179.0,2978.0,True,False,False
+SKU-0086,Yogurt Danone F1,Lácteos,Yogurt,Danone,Danone,2401.0,3254.0,True,False,False
+SKU-0087,Yogurt Danone F2,Lácteos,Yogurt,Danone,Danone,2420.0,3218.0,True,False,False
+SKU-0088,Yogurt Danone F3,Lácteos,Yogurt,Danone,Danone,2349.0,3116.0,True,False,False
+SKU-0089,Yogurt Danone F4,Lácteos,Yogurt,Danone,Danone,2451.0,3263.0,True,False,False
+SKU-0090,Yogurt Danone F5,Lácteos,Yogurt,Danone,Danone,2406.0,3212.0,True,False,False
+SKU-0091,Detergentes Omo F1,Limpieza,Detergentes,Omo,Omo,2370.0,3486.0,True,False,False
+SKU-0092,Detergentes Omo F2,Limpieza,Detergentes,Omo,Omo,2375.0,3461.0,True,False,False
+SKU-0093,Detergentes Omo F3,Limpieza,Detergentes,Omo,Omo,2358.0,3487.0,True,False,False
+SKU-0094,Detergentes Omo F4,Limpieza,Detergentes,Omo,Omo,2336.0,3493.0,True,False,False
+SKU-0095,Detergentes Omo F5,Limpieza,Detergentes,Omo,Omo,2403.0,3592.0,True,False,False
+SKU-0096,Detergentes Ariel F1,Limpieza,Detergentes,Ariel,Ariel,2619.0,3773.0,True,False,False
+SKU-0097,Detergentes Ariel F2,Limpieza,Detergentes,Ariel,Ariel,2642.0,3608.0,True,False,False
+SKU-0098,Detergentes Ariel F3,Limpieza,Detergentes,Ariel,Ariel,2640.0,3752.0,True,False,False
+SKU-0099,Detergentes Ariel F4,Limpieza,Detergentes,Ariel,Ariel,2528.0,3597.0,True,False,False
+SKU-0100,Detergentes Ariel F5,Limpieza,Detergentes,Ariel,Ariel,2532.0,3781.0,True,False,False
+SKU-0101,Aseo Cif F1,Limpieza,Aseo baño,Cif,Cif,875.0,1408.0,True,False,False
+SKU-0102,Aseo Cif F2,Limpieza,Aseo baño,Cif,Cif,909.0,1377.0,True,False,False
+SKU-0103,Aseo Cif F3,Limpieza,Aseo baño,Cif,Cif,907.0,1354.0,True,False,False
+SKU-0104,Aseo Cif F4,Limpieza,Aseo baño,Cif,Cif,883.0,1407.0,True,False,False
+SKU-0105,Aseo Cif F5,Limpieza,Aseo baño,Cif,Cif,885.0,1365.0,True,False,False
+SKU-0106,Aseo Lysoform F1,Limpieza,Aseo baño,Lysoform,Lysoform,786.0,1261.0,True,False,False
+SKU-0107,Aseo Lysoform F2,Limpieza,Aseo baño,Lysoform,Lysoform,792.0,1283.0,True,False,False
+SKU-0108,Aseo Lysoform F3,Limpieza,Aseo baño,Lysoform,Lysoform,777.0,1270.0,True,False,False
+SKU-0109,Aseo Lysoform F4,Limpieza,Aseo baño,Lysoform,Lysoform,790.0,1243.0,True,False,False
+SKU-0110,Aseo Lysoform F5,Limpieza,Aseo baño,Lysoform,Lysoform,781.0,1272.0,True,False,False
+SKU-0111,Papas Evercrisp F1,Snacks,Papas fritas,Evercrisp,Evercrisp,1270.0,2000.0,True,False,False
+SKU-0112,Papas Evercrisp F2,Snacks,Papas fritas,Evercrisp,Evercrisp,1263.0,2017.0,True,False,False
+SKU-0113,Papas Evercrisp F3,Snacks,Papas fritas,Evercrisp,Evercrisp,1271.0,1944.0,True,False,False
+SKU-0114,Papas Evercrisp F4,Snacks,Papas fritas,Evercrisp,Evercrisp,1302.0,2015.0,True,False,False
+SKU-0115,Papas Evercrisp F5,Snacks,Papas fritas,Evercrisp,Evercrisp,1297.0,1953.0,True,False,False
+SKU-0116,Papas Marco Polo F1,Snacks,Papas fritas,Marco Polo,Marco Polo,968.0,1636.0,True,False,False
+SKU-0117,Papas Marco Polo F2,Snacks,Papas fritas,Marco Polo,Marco Polo,1010.0,1578.0,True,False,False
+SKU-0118,Papas Marco Polo F3,Snacks,Papas fritas,Marco Polo,Marco Polo,986.0,1632.0,True,False,False
+SKU-0119,Papas Marco Polo F4,Snacks,Papas fritas,Marco Polo,Marco Polo,1006.0,1546.0,True,False,False
+SKU-0120,Papas Marco Polo F5,Snacks,Papas fritas,Marco Polo,Marco Polo,962.0,1600.0,True,False,False
+SKU-0121,Galletas Costa F1,Snacks,Galletas,Costa,Costa,1458.0,2186.0,True,False,False
+SKU-0122,Galletas Costa F2,Snacks,Galletas,Costa,Costa,1487.0,2205.0,True,False,False
+SKU-0123,Galletas Costa F3,Snacks,Galletas,Costa,Costa,1487.0,2179.0,True,False,False
+SKU-0124,Galletas Costa F4,Snacks,Galletas,Costa,Costa,1529.0,2159.0,True,False,False
+SKU-0125,Galletas Costa F5,Snacks,Galletas,Costa,Costa,1486.0,2166.0,True,False,False
+SKU-0126,Galletas McKay F1,Snacks,Galletas,McKay,McKay,1317.0,1951.0,True,False,False
+SKU-0127,Galletas McKay F2,Snacks,Galletas,McKay,McKay,1316.0,2033.0,True,False,False
+SKU-0128,Galletas McKay F3,Snacks,Galletas,McKay,McKay,1252.0,2013.0,True,False,False
+SKU-0129,Galletas McKay F4,Snacks,Galletas,McKay,McKay,1306.0,1944.0,True,False,False
+SKU-0130,Galletas McKay F5,Snacks,Galletas,McKay,McKay,1258.0,2000.0,True,False,False
+SKU-0131,Chocolates Nestlé F1,Snacks,Chocolates,Nestlé,Nestlé,963.0,1623.0,True,False,False
+SKU-0132,Chocolates Nestlé F2,Snacks,Chocolates,Nestlé,Nestlé,998.0,1575.0,True,False,False
+SKU-0133,Chocolates Nestlé F3,Snacks,Chocolates,Nestlé,Nestlé,993.0,1563.0,True,False,False
+SKU-0134,Chocolates Nestlé F4,Snacks,Chocolates,Nestlé,Nestlé,966.0,1557.0,True,False,False
+SKU-0135,Chocolates Nestlé F5,Snacks,Chocolates,Nestlé,Nestlé,990.0,1599.0,True,False,False
+SKU-0136,Chocolates Costa F1,Snacks,Chocolates,Costa,Costa,893.0,1443.0,True,False,False
+SKU-0137,Chocolates Costa F2,Snacks,Chocolates,Costa,Costa,891.0,1448.0,True,False,False
+SKU-0138,Chocolates Costa F3,Snacks,Chocolates,Costa,Costa,903.0,1410.0,True,False,False
+SKU-0139,Chocolates Costa F4,Snacks,Chocolates,Costa,Costa,898.0,1493.0,True,False,False
+SKU-0140,Chocolates Costa F5,Snacks,Chocolates,Costa,Costa,890.0,1466.0,True,False,False
+SKU-0141,Higiene Dove F1,Perfumería,Higiene,Dove,Dove,1966.0,3067.0,True,False,False
+SKU-0142,Higiene Dove F2,Perfumería,Higiene,Dove,Dove,2016.0,2901.0,True,False,False
+SKU-0143,Higiene Dove F3,Perfumería,Higiene,Dove,Dove,2030.0,3015.0,True,False,False
+SKU-0144,Higiene Dove F4,Perfumería,Higiene,Dove,Dove,2002.0,2928.0,True,False,False
+SKU-0145,Higiene Dove F5,Perfumería,Higiene,Dove,Dove,1991.0,3002.0,True,False,False
+SKU-0146,Higiene Nivea F1,Perfumería,Higiene,Nivea,Nivea,2183.0,3228.0,True,False,False
+SKU-0147,Higiene Nivea F2,Perfumería,Higiene,Nivea,Nivea,2137.0,3279.0,True,False,False
+SKU-0148,Higiene Nivea F3,Perfumería,Higiene,Nivea,Nivea,2250.0,3261.0,True,False,False
+SKU-0149,Higiene Nivea F4,Perfumería,Higiene,Nivea,Nivea,2202.0,3219.0,True,False,False
+SKU-0150,Higiene Nivea F5,Perfumería,Higiene,Nivea,Nivea,2159.0,3130.0,True,False,False
+SKU-0151,Cuidado Sedal F1,Perfumería,Cuidado capilar,Sedal,Sedal,2469.0,3689.0,True,False,False
+SKU-0152,Cuidado Sedal F2,Perfumería,Cuidado capilar,Sedal,Sedal,2512.0,3696.0,True,False,False
+SKU-0153,Cuidado Sedal F3,Perfumería,Cuidado capilar,Sedal,Sedal,2474.0,3686.0,True,False,False
+SKU-0154,Cuidado Sedal F4,Perfumería,Cuidado capilar,Sedal,Sedal,2530.0,3649.0,True,False,False
+SKU-0155,Cuidado Sedal F5,Perfumería,Cuidado capilar,Sedal,Sedal,2429.0,3559.0,True,False,False
+SKU-0156,Cuidado Head&Shoulders F1,Perfumería,Cuidado capilar,Head&Shoulders,Head&Shoulders,2959.0,4209.0,True,False,False
+SKU-0157,Cuidado Head&Shoulders F2,Perfumería,Cuidado capilar,Head&Shoulders,Head&Shoulders,2937.0,4332.0,True,False,False
+SKU-0158,Cuidado Head&Shoulders F3,Perfumería,Cuidado capilar,Head&Shoulders,Head&Shoulders,3038.0,4345.0,True,False,False
+SKU-0159,Cuidado Head&Shoulders F4,Perfumería,Cuidado capilar,Head&Shoulders,Head&Shoulders,3003.0,4314.0,True,False,False
+SKU-0160,Cuidado Head&Shoulders F5,Perfumería,Cuidado capilar,Head&Shoulders,Head&Shoulders,3039.0,4391.0,True,False,False
+SKU-0161,Cecinas PF F1,Carnes,Cecinas,PF,PF,2992.0,4342.0,True,False,False
+SKU-0162,Cecinas PF F2,Carnes,Cecinas,PF,PF,2999.0,4269.0,True,False,False
+SKU-0163,Cecinas PF F3,Carnes,Cecinas,PF,PF,2911.0,4383.0,True,False,False
+SKU-0164,Cecinas PF F4,Carnes,Cecinas,PF,PF,2998.0,4367.0,True,False,False
+SKU-0165,Cecinas PF F5,Carnes,Cecinas,PF,PF,2909.0,4258.0,True,False,False
+SKU-0166,Cecinas San Jorge F1,Carnes,Cecinas,San Jorge,San Jorge,2809.0,3907.0,True,False,False
+SKU-0167,Cecinas San Jorge F2,Carnes,Cecinas,San Jorge,San Jorge,2763.0,3883.0,True,False,False
+SKU-0168,Cecinas San Jorge F3,Carnes,Cecinas,San Jorge,San Jorge,2834.0,4098.0,True,False,False
+SKU-0169,Cecinas San Jorge F4,Carnes,Cecinas,San Jorge,San Jorge,2840.0,4028.0,True,False,False
+SKU-0170,Cecinas San Jorge F5,Carnes,Cecinas,San Jorge,San Jorge,2760.0,3916.0,True,False,False
+SKU-0171,Congelados Súper Pollo F1,Carnes,Congelados,Súper Pollo,Súper Pollo,4062.0,5508.0,True,False,False
+SKU-0172,Congelados Súper Pollo F2,Carnes,Congelados,Súper Pollo,Súper Pollo,3888.0,5546.0,True,False,False
+SKU-0173,Congelados Súper Pollo F3,Carnes,Congelados,Súper Pollo,Súper Pollo,4011.0,5414.0,True,False,False
+SKU-0174,Congelados Súper Pollo F4,Carnes,Congelados,Súper Pollo,Súper Pollo,4038.0,5406.0,True,False,False
+SKU-0175,Congelados Súper Pollo F5,Carnes,Congelados,Súper Pollo,Súper Pollo,4045.0,5357.0,True,False,False
+SKU-0176,Congelados Ariztía F1,Carnes,Congelados,Ariztía,Ariztía,4220.0,6014.0,True,False,False
+SKU-0177,Congelados Ariztía F2,Carnes,Congelados,Ariztía,Ariztía,4349.0,6038.0,True,False,False
+SKU-0178,Congelados Ariztía F3,Carnes,Congelados,Ariztía,Ariztía,4370.0,5778.0,True,False,False
+SKU-0179,Congelados Ariztía F4,Carnes,Congelados,Ariztía,Ariztía,4190.0,5781.0,True,False,False
+SKU-0180,Congelados Ariztía F5,Carnes,Congelados,Ariztía,Ariztía,4259.0,5987.0,True,False,False
+SKU-0181,Panificados Ideal F1,Panadería,Panificados,Ideal,Ideal,1260.0,1838.0,True,False,False
+SKU-0182,Panificados Ideal F2,Panadería,Panificados,Ideal,Ideal,1318.0,1941.0,True,False,False
+SKU-0183,Panificados Ideal F3,Panadería,Panificados,Ideal,Ideal,1310.0,1876.0,True,False,False
+SKU-0184,Panificados Ideal F4,Panadería,Panificados,Ideal,Ideal,1270.0,1896.0,True,False,False
+SKU-0185,Panificados Ideal F5,Panadería,Panificados,Ideal,Ideal,1255.0,1889.0,True,False,False
+SKU-0186,Panificados Bimbo F1,Panadería,Panificados,Bimbo,Bimbo,1447.0,2131.0,True,False,False
+SKU-0187,Panificados Bimbo F2,Panadería,Panificados,Bimbo,Bimbo,1533.0,2222.0,True,False,False
+SKU-0188,Panificados Bimbo F3,Panadería,Panificados,Bimbo,Bimbo,1499.0,2250.0,True,False,False
+SKU-0189,Panificados Bimbo F4,Panadería,Panificados,Bimbo,Bimbo,1450.0,2231.0,True,False,False
+SKU-0190,Panificados Bimbo F5,Panadería,Panificados,Bimbo,Bimbo,1519.0,2232.0,True,False,False
+SKU-9117,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9119,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9122,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9123,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9124,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9138,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9140,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9144,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9145,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9148,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9156,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9160,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9168,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9169,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9174,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9175,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9179,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9184,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9186,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9193,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9194,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9195,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9213,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9221,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9222,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9227,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9251,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9252,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9255,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9258,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9262,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9263,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9266,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9280,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9286,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9296,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9299,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9301,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9308,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9310,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9314,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9315,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9318,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9321,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9325,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9334,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9335,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9336,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9340,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9343,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9344,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9350,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9351,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9356,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9359,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9367,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9372,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9376,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9379,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9384,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9387,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9389,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9391,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9413,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9414,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9415,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9422,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9424,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9428,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9433,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9438,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9440,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9442,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9453,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9459,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9461,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9469,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9471,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9491,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9492,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9495,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9498,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9499,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9500,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9501,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9502,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9505,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9508,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9517,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9523,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9529,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9530,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9531,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9536,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9543,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9544,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9552,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9554,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9556,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9558,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9562,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9564,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9566,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9573,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9580,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9583,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9585,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9586,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9587,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9589,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9591,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9592,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9593,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9600,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9602,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9611,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9618,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9625,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9633,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9650,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9651,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9656,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9660,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9661,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9669,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9671,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9672,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9673,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9674,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9676,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9678,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9691,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9700,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9707,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9711,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9714,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9716,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9722,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9728,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9733,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9734,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9735,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9739,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9742,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9744,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9745,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9746,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9747,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9751,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9758,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9770,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9772,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9773,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9799,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9808,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9809,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9819,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9821,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9822,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9823,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9825,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9832,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9836,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9839,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9840,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9857,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9864,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9873,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9878,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9881,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9882,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9883,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9892,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9895,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9903,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9907,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9915,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9926,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9935,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9939,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9940,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9942,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9946,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9955,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9972,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9973,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9978,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9983,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9985,Producto sin maestro,No informada,No informada,,,,,,True,True
+SKU-9991,Producto sin maestro,No informada,No informada,,,,,,True,True

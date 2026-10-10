@@ -1,0 +1,250 @@
+
+========== 1. MONTO_LINEA vs cantidad*precio*(1-desc): ¿IVA? ==========
+discrepantes 719 de 14344 (5.01%)
+ratio redondeado (discrepantes):
+ 0.00     2
+1.05    12
+1.06    27
+1.07    40
+1.08    34
+1.09    28
+1.10    36
+1.11    22
+1.12    33
+1.13    40
+1.14    30
+1.15    42
+1.16    42
+1.17    46
+1.18    47
+1.19    45
+1.20    22
+1.21    13
+1.22     5
+1.23     7
+1.24     7
+1.25     6
+1.26    16
+1.27     9
+1.28     9
+1.29    11
+1.30    10
+1.31    14
+1.32    15
+1.33     8
+1.40     1
+1.41     1
+1.42     2
+1.43     1
+1.44     4
+1.45     2
+1.46     3
+1.47     3
+1.50     3
+1.51     4
+ratio en [1.185,1.195] (≈IVA 19%): 45
+ejemplos con "-.905":        boleta_id  linea       sku  cantidad precio_unitario descuento monto_linea
+6018      702521      3  SKU-0052        -1           1.207        25       -.905
+10528     704314      1  SKU-0047        -1             884         0       -.884
+discrepantes por formato monto_linea:
+ monto_linea
+miles con punto    364
+entero plano       353
+OTRO                 2
+discrepantes con cantidad<0: 14
+
+========== 2. DEVOLUCIONES (cantidad < 0) ==========
+líneas 143  boletas 143  monto -736892.789
+boletas con TODAS las líneas negativas: 12  mixtas: 131
+signo monto coincide con signo cantidad: 1.0
+devoluciones con cliente identificado: 137
+devoluciones con compra previa del mismo sku por el mismo cliente: 10 de 137
+
+========== 3. CANTIDADES GRANDES (10-40) Y CLIENTES TIPO EMPRESA ==========
+tipo_nombre
+negocio          754
+persona/hogar    446
+prefijos: {'Sra.': 164, 'Distribuidora': 163, 'Almacén': 163, 'Sr.': 156, 'Kiosco': 144, 'Botillería': 144, 'Comercial': 140, 'Familia': 126}
+líneas cantidad>=10 por tipo cliente: {'negocio': 35, 'persona/hogar': 19, 'anónimo': 4}  boletas 56
+cantidad>=10 por sku (top): {'SKU-0097': 3, 'SKU-0139': 3, 'SKU-0154': 2, 'SKU-0073': 2, 'SKU-0119': 2}
+boletas por tipo cliente: {'negocio': 3463, 'persona/hogar': 1969}
+segmento x tipo:
+ tipo_nombre  negocio  persona/hogar
+segmento                           
+Black            244            144
+Clásico          260            141
+Plus             250            161
+ticket promedio por tipo cliente:
+                   mean   median  count
+tipo_nombre                           
+negocio        13525.0  10627.0   3463
+persona/hogar  13332.0   9906.0   1969
+
+========== 4. DUPLICADOS DE (boleta_id, linea) EN DETALLE ==========
+filas involucradas 790  boletas 395
+       boleta_id  linea       sku  cantidad precio_unitario descuento monto_linea
+13147     705389      1  SKU-0151         1            3730         0       3.730
+13148     705389      1  SKU-0177         1            6106         0        6106
+13149     705390      1  SKU-0090         2            3239         0        6478
+13150     705390      1  SKU-0187         1           2.241         0        2241
+13151     705391      1  SKU-0184         1            1938         0        1938
+13152     705391      1  SKU-0075         2            9118         0       18236
+13153     705392      1  SKU-0183         1            1876         0        1876
+13154     705392      1  SKU-9389         1             860         0         860
+13155     705393      1  SKU-0088         1            3177         0       3.177
+13156     705393      1  SKU-0190         1           2.276         0       2.276
+13157     705394      1  SKU-0026         1             790         0         790
+13158     705394      1  SKU-0173         2           5.520         0       11040
+13160     705396      1  SKU-0138         1           1.438         0       1.438
+13161     705396      1  SKU-0173         1           5.520         0       5.520
+13162     705397      1  SKU-0122         1           2.261         0        2261
+13163     705397      1  SKU-0182         1            1990         0       1.990
+boleta_id duplicados en cabecera: 61  ¿de ellos con dup de líneas en detalle?: 6
+¿la cabecera duplicada es idéntica?: True
+grupos (boleta,linea) duplicados: con distinto sku 393  mismo sku y mismo monto parseado 1  total grupos 395
+líneas por boleta con dups: count    395.0
+mean       1.0
+std        0.0
+min        1.0
+25%        1.0
+50%        1.0
+75%        1.0
+max        1.0
+
+========== 5. COLUMNA mes vs FECHA ==========
+no coinciden 442 (7.1%)
+diferencia mes_col - mes_fecha:
+ -11     5
+-10     7
+-9      5
+-8     19
+-7     13
+-6     27
+-5     16
+-4     23
+-3     38
+-2     45
+-1     42
+ 1     38
+ 2     32
+ 3     22
+ 4     27
+ 5     30
+ 6     19
+ 7     12
+ 8      5
+ 9     10
+ 10     3
+ 11     4
+de estas, fecha en 2026: 34
+coincidencia en 2025 solamente: 0.9343
+boletas 2026: 37  formatos: {'dd-mm-yy': 16, 'ISO yyyy-mm-dd': 7, 'dd/mm/yyyy': 7, 'd-mmm-yyyy (mes en español)': 7}
+2026: mes columna vs mes fecha: [('2026-05-05', '7'), ('25/02/2026', '6'), ('4-mar-2026', '5'), ('08-04-26', '5'), ('04-01-26', '12'), ('2026-06-25', '12'), ('2026-03-23', '11'), ('6-may-2026', '9'), ('23-02-26', '11'), ('21-jun-2026', '11'), ('21/06/2026', '5'), ('17-03-26', '1'), ('12-ene-2026', '1'), ('17/06/2026', '12'), ('20/06/2026', '1'), ('26/06/2026', '4'), ('21-06-26', '8'), ('04-05-26', '11'), ('11-05-26', '8'), ('07/02/2026', '12')]
+2026 si fuera 2025 (restando 1 año) ¿coincide mes?: 0.08108108108108109
+2026: canal {'Presencial': 29, 'Web': 8}  clientes 33
+
+========== 6. REGION DE LA BOLETA ≠ REGION DE LA TIENDA ==========
+mismatch 897   de ellos región boleta == región del cliente: 164  anónimos: 135
+mismatch excluyendo Online: 782
+Online: region boleta vs region cliente coincide: 0.217
+Nota La Florida: tienda 4 comuna 4 -> region_id 9 (no existe). Region en tienda (via join): [{'nombre': 'Express La Florida', 'region': nan}]
+
+========== 7. FECHA_ALTA vs PRIMERA COMPRA ==========
+alta en 2024: 377  alta en 2025: 823
+primera compra ANTES del alta: 299  dif min -27  distribución dif<0: {'count': 299.0, 'mean': -11.1, 'std': 7.1, 'min': -27.0, '25%': -16.5, '50%': -10.0, '75%': -5.0, 'max': -1.0}
+alta == primera compra: 17
+alta 2024 -> primera compra observada (todas en 2025 por cobertura de datos): {2025: 376, 2026: 1}
+dif<0 por formato fecha_alta: {'ISO yyyy-mm-dd': 152, 'dd/mm/yyyy': 147}  total por formato: {'dd/mm/yyyy': 600, 'ISO yyyy-mm-dd': 600}
+fecha_alta dd/mm con día>12 (no ambigua): 342 de 600
+
+========== 8. RETENCIÓN — CIFRAS DE CONTEXTO (solo 2025, sin dups, identificados) ==========
+clientes 2025: 1197  boletas identificadas 2025: 5350  anónimas 2025: 803 (13.1%)
+clientes con 1 sola boleta en 2025: 455 (38.0%)
+  activos al 31-12-2025 ventana 30d: 377 (31.5%)
+  activos al 31-12-2025 ventana 60d: 536 (44.8%)
+  activos al 31-12-2025 ventana 90d: 680 (56.8%)
+  activos al 31-12-2025 ventana 180d: 974 (81.4%)
+intercompra (días) p50/p75/p80/p90/p95: [14.0, 38.0, 46.0, 74.0, 105.0]
+% intercompras <= 30d: 69.3  <= 90d: 92.8
+retención mes a mes (clientes mes m, que vuelven en m+1, %):
+   ('2025-01', 230, 125, 54.3)
+   ('2025-02', 230, 125, 54.3)
+   ('2025-03', 236, 97, 41.1)
+   ('2025-04', 212, 87, 41.0)
+   ('2025-05', 244, 108, 44.3)
+   ('2025-06', 261, 82, 31.4)
+   ('2025-07', 240, 88, 36.7)
+   ('2025-08', 256, 130, 50.8)
+   ('2025-09', 384, 131, 34.1)
+   ('2025-10', 302, 117, 38.7)
+   ('2025-11', 304, 145, 47.7)
+clientes activos mes / nuevos (primera compra observada):
+         activos  nuevos_obs
+m                           
+2025-01      230         230
+2025-02      230         105
+2025-03      236          69
+2025-04      212          74
+2025-05      244          79
+2025-06      261          71
+2025-07      240          78
+2025-08      256          77
+2025-09      384          83
+2025-10      302         106
+2025-11      304          89
+2025-12      377         136
+cohortes trimestrales (clientes únicos por trimestre):
+ q       2025Q1  2025Q2  2025Q3  2025Q4
+cq                                    
+2025Q1   404.0   259.0   228.0   139.0
+2025Q2     NaN   224.0   129.0   110.0
+2025Q3     NaN     NaN   238.0   105.0
+2025Q4     NaN     NaN     NaN   331.0
+ventas 2025 sin dups ($ nominal, líneas netas incl devoluciones): 77005550
+ventas 2025 H1 vs H2: 33469344 43536206
+
+========== 9. PRECIOS: precio_unitario/precio_lista por mes (señal inflación, P4) ==========
+f
+2025-01    1.0089
+2025-02    1.0121
+2025-03    1.0140
+2025-04    1.0178
+2025-05    1.0201
+2025-06    1.0234
+2025-07    1.0255
+2025-08    1.0280
+2025-09    1.0312
+2025-10    1.0349
+2025-11    1.0378
+2025-12    1.0402
+2026-01    1.0208
+2026-02    1.0334
+2026-03    1.0261
+2026-04    1.0252
+2026-05    1.0315
+2026-06    1.0337
+Freq: M
+variación mediana precio mismo SKU dic/ene -1: 3.04 %  (n skus con ambos meses: 191 )
+
+========== 10. PROMOCIONES — detalle ==========
+CAMP-2025-05 (2x1) líneas en ventana: 13  cantidades: {2: 8, 1: 2, 4: 2, -3: 1}  desc: {0.0: 10, 10.0: 3}
+ventas de SKUs lácteos campaña por quincena abr-jun: {Period('2025-03-31/2025-04-06', 'W-SUN'): 25, Period('2025-04-07/2025-04-13', 'W-SUN'): 3, Period('2025-04-14/2025-04-20', 'W-SUN'): 5, Period('2025-04-21/2025-04-27', 'W-SUN'): 13, Period('2025-04-28/2025-05-04', 'W-SUN'): 15, Period('2025-05-05/2025-05-11', 'W-SUN'): 13, Period('2025-05-12/2025-05-18', 'W-SUN'): 8, Period('2025-05-19/2025-05-25', 'W-SUN'): 14, Period('2025-05-26/2025-06-01', 'W-SUN'): 17, Period('2025-06-02/2025-06-08', 'W-SUN'): 17, Period('2025-06-09/2025-06-15', 'W-SUN'): 16, Period('2025-06-16/2025-06-22', 'W-SUN'): 12, Period('2025-06-23/2025-06-29', 'W-SUN'): 11}
+SKU-9001/9007 en detalle: 0
+SKUs 9xxx: líneas 215  skus 190  por mes {1: 11, 2: 19, 3: 21, 4: 13, 5: 15, 6: 16, 7: 15, 8: 15, 9: 17, 10: 21, 11: 22, 12: 30}  desc {0.0: 162, 10.0: 46, 25.0: 7}  precio mediano 2057.0
+descuento 10% fuera de campañas: líneas 3103  por mes {1: 212, 2: 215, 3: 243, 4: 178, 5: 246, 6: 321, 7: 224, 8: 201, 9: 201, 10: 297, 11: 297, 12: 468}
+desc 25% fuera de sept: 3
+Sept: líneas con desc 25 en SKUs NO campaña: 7
+Sept: canal de líneas con desc 25: {'Presencial': 476, 'Web': 179}
+
+========== 11. MAESTRO — filas especiales ==========
+          sku            nombre  categoria       subcategoria    marca  proveedor  costo_unitario  precio_lista  activo
+5    SKU-0005  Arroz Tucapel F5  abarrotes  Arroz y legumbres  Tucapel    Tucapel             N/A         1.215      Sí
+19        sku            nombre  categoria       subcategoria    marca  proveedor  costo_unitario  precio_lista  activo
+192     TOTAL                                                                                                          
+activo "No": [{'sku': 'SKU-0001', 'nombre': 'ARROZ TUCAPEL F1  '}]
+marca != proveedor: [{'sku': 'sku', 'marca': 'marca', 'proveedor': 'proveedor'}]
+nunca vendidos: []
+
+========== 12. MEDIO DE PAGO EN WEB y cliente-día ==========
+Web pagadas en Efectivo: 363
+App en Presencial: 1141

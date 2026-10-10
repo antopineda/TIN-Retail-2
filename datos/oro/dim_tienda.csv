@@ -1,0 +1,11 @@
+﻿tienda_key,nombre,formato,es_online,comuna,region,macrozona
+1,Express Providencia,Express,False,Providencia,Metropolitana,Metropolitana
+2,Súper Maipú,Supermercado,False,Maipú,Metropolitana,Metropolitana
+3,Híper Puente Alto,Híper,False,Puente Alto,Metropolitana,Metropolitana
+4,Express La Florida,Express,False,La Florida,Metropolitana,Metropolitana
+5,Súper Viña,Supermercado,False,Viña del Mar,Valparaíso,Centro sur
+6,Híper Concepción,Híper,False,Concepción,Biobío,Centro sur
+7,Súper Temuco,Supermercado,False,Temuco,Araucanía,Sur
+8,Express Puerto Montt,Express,False,Puerto Montt,Los Lagos,Sur
+9,Súper Osorno,Supermercado,False,Osorno,Los Lagos,Sur
+10,Tienda Online,Online,True,Providencia,Metropolitana,Metropolitana

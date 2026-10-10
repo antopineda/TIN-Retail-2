@@ -1,0 +1,23 @@
+﻿id,validacion,severidad,resultado,detalle
+V01,Boletas plata = bronce − duplicados,critica,OK,6251 − 61 − 0 = 6190; plata = 6190
+V02,boleta_id único en plata,critica,OK,
+V03,Ninguna línea de detalle se elimina,critica,OK,bronce 14344 / plata 14344
+V04,"(boleta_id, linea_seq) único",critica,OK,
+V05,Todas las fechas de boleta parseadas,critica,OK,nulas: 0
+V06,Montos y descuentos parseados sin nulos,critica,OK,"{'precio_unitario': 0, 'monto_linea': 0, 'descuento_pct': 0}"
+V07,"Descuentos en el dominio [0, 10, 25]",advertencia,OK,fuera de dominio: 0
+V08,Todas las tiendas tienen región y macrozona,critica,OK,[]
+V09,SKU único en productos,critica,OK,
+V10,Todas las categorías de producto mapeadas,advertencia,OK,
+V11,FK fact_venta_boleta -> dimensiones,critica,OK,"{'tienda_key': 0, 'medio_key': 0, 'cliente_key': 0, 'fecha': 0}"
+V12,FK fact_venta_linea -> boleta y producto,critica,OK,"{'boleta_id': 0, 'sku_key': 0}"
+V13,Llaves de dimensiones únicas,critica,OK,
+V14,Σ líneas = Σ boletas (oro),critica,OK,"77,376,751 vs 77,376,751"
+V15,Σ detalle plata = Σ líneas oro,critica,OK,"77,376,751 vs 77,376,751"
+V16,Venta registrada vs calculada 2025 difiere < 2% (sustento S02),advertencia,OK,0.81%
+V17,Oro sin RUT ni nombre de cliente (S15),critica,OK,[]
+V17b,Ningún valor de oro tiene forma de RUT,critica,OK,[]
+V18,Identidad de retención (A1 = ret + nuevos + react + prim.obs; A0 = ret + perdidos),critica,OK,
+V19,Activos al cierre de Q4 (mart_retencion) = activos al corte (RFM),critica,OK,"{30: (367, 367), 90: (674, 674), 180: (967, 967)}"
+V20,Cada corte reparte a todos los clientes (suma por corte = Total),advertencia,OK,
+V21,mart_cliente_mes = clientes × 12 meses,critica,OK,14304 filas

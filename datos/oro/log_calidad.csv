@@ -1,0 +1,47 @@
+﻿regla,tabla,columna,problema,accion,filas_afectadas
+R06,comunas,region_id,region_id inexistente (La Florida -> 9),corregido según config.CORRECCION_REGION_COMUNA,1
+R06b,tiendas,formato,"formato sin tilde (""Hiper"")","normalizado a ""Híper""",2
+R17,clientes,rut,"formatos mixtos (puntos, espacios, sin guion)",normalizado a 12345678-K,849
+R17b,clientes,rut,dígito verificador inválido,flag_rut_invalido (se conserva),16
+R17c,clientes,rut,RUT duplicado tras normalizar,revisión (no se fusiona),0
+R18,clientes,nombre,tipo de cliente implícito en el nombre,"tipo_cliente por prefijo: {'Negocio': 754, 'Persona/Hogar': 446}",754
+R19,clientes,fecha_alta,2 formatos de fecha,parseado a fecha ISO,600
+R19b,clientes,fecha_alta,fecha no parseable,queda nula,0
+R01,boletas,*,filas duplicadas exactas,eliminadas (se conserva 1),61
+R01b,boletas,boleta_id,boleta_id repetido con contenido distinto,se conserva la primera,0
+R02,boletas,fecha,4 formatos de fecha,parseado a fecha ISO,4656
+R02b,boletas,fecha,fecha no parseable,flag_fecha_invalida,0
+R03,boletas,fecha,fecha fuera de 2025,"flag_fuera_periodo (fuera de métricas, supuesto S01)",37
+R04,boletas,mes,no coincide con el mes de la fecha,columna descartada; mes se deriva de fecha,438
+R05,boletas,region,no coincide con la región de la tienda,columna descartada; región se deriva de la tienda,397
+R07b,boletas,cliente_id,cliente inexistente en clientes,tratado como anónimo,0
+R07,boletas,cliente_id,boleta anónima (nulo),cliente_key = -1 en oro,807
+R07c,boletas,tienda_id,llave foránea huérfana,revisión,0
+R07c,boletas,medio_id,llave foránea huérfana,revisión,0
+R20,productos,(archivo),"codificación latin-1, no UTF-8",leído como Latin-1 y escrito en UTF-8,84
+R21,productos,sku,"filas que no son productos: ['sku', 'TOTAL']",eliminadas,2
+R25b,productos,nombre,espacios extremos / MAYÚSCULAS,strip y formato título,1
+R23,productos,categoria,24 grafías distintas,mapeadas a 8 categorías canónicas,131
+R23b,productos,categoria,grafía sin mapeo,queda nula (agregar a config),0
+R23c,productos,categoria,categoría distinta a la del resto de su subcategoría,revisión,0
+R24,productos,costo_unitario,"formatos mixtos ($, punto de miles, coma decimal, N/A)",convertido a número,47
+R24,productos,precio_lista,"formatos mixtos ($, punto de miles, coma decimal, N/A)",convertido a número,184
+R24b,productos,costo_unitario,costo no numérico (N/A),nulo + flag_costo_invalido,1
+R25,productos,activo,variantes 1/Sí/si/SI/No/vacío,convertido a booleano,190
+R22,productos,sku,SKU duplicado: ['SKU-0001'],se conserva la fila activa,1
+R26,campanas,descuento_pct,"tipos mixtos (""25%"" texto / 50 número)",convertido a porcentaje numérico,1
+R26b,campana_sku,sku,SKU de campaña sin maestro,flag_sku_sin_maestro,2
+R27,ipc,valor,"la API entrega variación % mensual, no índice",índice encadenado base 2024-12=100 (API https://mindicador.cl/api/ipc/2025),12
+R08c,boleta_detalle,boleta_id,línea sin boleta,revisión,0
+R09,boleta_detalle,precio_unitario,texto con punto de miles,convertido a entero,6464
+R10,boleta_detalle,monto_linea,texto con punto de miles,convertido a entero,6931
+R10b,boleta_detalle,monto_linea,"valores mal formados (""-.905"")",reconstruidos (-905),2
+R11,boleta_detalle,descuento,"7 notaciones (10, 10%, 0,10 ...)",convertido a % entero,2465
+R11b,boleta_detalle,descuento,"fuera de [0, 10, 25]",flag,0
+R08,boleta_detalle,linea,"(boleta_id, linea) no es único",renumerado en linea_seq; no se borra,790
+R08b,boleta_detalle,linea,"misma boleta, línea, SKU y monto",flag_linea_posible_duplicada; se conserva,2
+R12,boleta_detalle,monto_linea,no cuadra con cantidad × precio × (1 − desc),se usa el registrado (S02); el calculado queda como control,717
+R13,boleta_detalle,cantidad,cantidad negativa,"es_devolucion (resta de la venta, S04)",143
+R14,boleta_detalle,cantidad,cantidad >= 10,flag; se conserva,57
+R15,boleta_detalle,sku,SKU sin maestro (190 SKU distintos),"se conserva como ""Sin maestro""",215
+R16,boleta_detalle,descuento,"origen del descuento: {'sin_descuento': 10583, 'beneficio_tarjeta': 3103, 'campana': 648, 'no_explicado': 10}","tipo_descuento (10% identificado = beneficio tarjeta, S05)",3103

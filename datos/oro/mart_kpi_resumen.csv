@@ -1,0 +1,26 @@
+﻿kpi,valor,unidad,definicion
+boletas_2025,6153.0,boletas,Boletas únicas con fecha 2025 (incluye solo-devolución)
+venta_neta_2025,77003763.0,CLP nominal,"Σ monto_linea registrado, neto de devoluciones (S02)"
+venta_real_2025,74989709.88702843,CLP de 2024-12,Venta deflactada con IPC (S16)
+pct_boletas_identificadas,0.8694945555013814,proporción,Boletas con tarjeta / boletas 2025
+pct_venta_identificada,0.9347358128459254,proporción,Venta con tarjeta / venta 2025
+clientes_con_compra_2025,1192.0,clientes,Clientes con al menos una compra válida en 2025
+pct_una_sola_vez,0.29942857142857143,proporción,"Clientes con 1 sola compra, entre los que tuvieron >= 90 días para volver"
+intercompra_mediana_dias,15.0,días,Mediana de días entre compras sucesivas del mismo cliente
+intercompra_p90_dias,74.0,días,Percentil 90 de días entre compras
+pct_recompras_dentro_30d,0.6912229516168247,proporción,Recompras que ocurren dentro de 30 días
+activos_30d_al_corte,367.0,clientes,Activos al 2025-12-31 con ventana 30 d
+pct_activos_30d_al_corte,0.30788590604026844,proporción,Activos 30 d / clientes 2025
+pct_recompras_dentro_90d,0.9277899343544858,proporción,Recompras que ocurren dentro de 90 días
+activos_90d_al_corte,674.0,clientes,Activos al 2025-12-31 con ventana 90 d
+pct_activos_90d_al_corte,0.5654362416107382,proporción,Activos 90 d / clientes 2025
+pct_recompras_dentro_180d,0.9914903963044007,proporción,Recompras que ocurren dentro de 180 días
+activos_180d_al_corte,967.0,clientes,Activos al 2025-12-31 con ventana 180 d
+pct_activos_180d_al_corte,0.8112416107382551,proporción,Activos 180 d / clientes 2025
+retencion_Q4_30d,0.33157894736842103,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=30)
+indice_reposicion_Q4_30d,0.7559055118110236,razón,Nuevos / perdidos en Q4 (W=30); <1 = no repone
+retencion_Q4_90d,0.5110732538330494,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=90)
+indice_reposicion_Q4_90d,1.0662020905923344,razón,Nuevos / perdidos en Q4 (W=90); <1 = no repone
+retencion_Q4_180d,0.8247694334650857,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=180)
+indice_reposicion_Q4_180d,2.338345864661654,razón,Nuevos / perdidos en Q4 (W=180); <1 = no repone
+cohorte_Q1_nuevos_activos_en_Q4,0.3185840707964602,proporción,Clientes nuevos que llegaron en Q1-2025 y compran en Q4-2025

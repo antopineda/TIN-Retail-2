@@ -1,0 +1,1193 @@
+﻿cliente_key,fecha_ultima_compra,fecha_primera_compra,frecuencia,monto,recencia_dias,r_score,f_score,m_score,segmento_rfm,una_compra_evaluable,es_una_sola_vez,activo_30d_al_corte,activo_90d_al_corte,activo_180d_al_corte,tipo_cliente,segmento,tipo_cohorte,tienda_principal,formato_principal
+1,2025-07-25,2025-07-25,1,18429.0,159,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+2,2025-08-02,2025-08-02,1,8579.0,151,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+3,2025-11-11,2025-08-01,6,65886.0,50,3,4,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+4,2025-09-14,2025-09-14,1,6860.0,108,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+5,2025-10-28,2025-10-08,12,250168.0,64,3,5,5,Leales,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+6,2025-12-04,2025-12-04,1,1345.0,27,4,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+7,2025-02-20,2025-02-20,1,1895.0,314,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+8,2025-12-08,2025-12-08,1,6838.0,23,4,1,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+9,2025-09-02,2025-09-02,1,2936.0,120,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+10,2025-03-17,2025-02-19,3,20800.0,289,1,2,3,Hibernando / perdidos,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+11,2025-12-28,2025-11-17,5,22332.0,3,5,3,3,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+12,2025-12-26,2025-12-03,5,49384.0,5,5,3,4,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+13,2025-10-27,2025-10-06,14,285527.0,65,3,5,5,Leales,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+14,2025-08-13,2025-08-13,1,16309.0,140,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+15,2025-08-20,2025-03-09,5,58208.0,133,2,3,4,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+16,2025-10-03,2025-10-03,1,8135.0,89,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+17,2025-10-27,2025-09-03,3,47349.0,65,3,2,4,Necesitan atención,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+18,2025-09-26,2025-01-21,7,37309.0,96,3,4,3,Leales,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+19,2025-10-03,2025-10-03,1,3296.0,89,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+20,2025-11-08,2025-03-23,3,30545.0,53,3,2,3,Necesitan atención,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+21,2025-08-09,2025-03-09,4,41244.0,144,2,3,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+22,2025-12-08,2025-12-08,1,3675.0,23,4,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+23,2025-12-23,2025-12-02,4,26086.0,8,5,3,3,Leales,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+24,2025-12-27,2025-12-05,3,22988.0,4,5,2,3,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+26,2025-12-24,2025-12-24,1,6161.0,7,5,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+27,2025-05-15,2025-05-15,1,15587.0,230,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+28,2025-12-19,2025-02-22,5,70348.0,12,5,3,4,Leales,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+29,2025-11-05,2025-11-05,1,1246.0,56,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+30,2025-02-08,2025-02-08,1,15454.0,326,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+31,2025-06-25,2025-04-07,13,259577.0,189,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+32,2025-11-05,2025-05-20,4,22089.0,56,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+33,2025-09-07,2025-02-25,6,64045.0,115,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+34,2025-03-03,2025-03-03,1,13417.0,303,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Híper Puente Alto,Híper
+35,2025-11-08,2025-09-10,3,19024.0,53,3,2,3,Necesitan atención,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+36,2025-08-27,2025-02-20,3,8952.0,126,2,2,2,Hibernando / perdidos,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+37,2025-11-26,2025-06-14,6,42250.0,35,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+38,2025-03-06,2025-03-06,1,8391.0,300,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+39,2025-08-22,2025-05-16,5,26038.0,131,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+40,2025-12-27,2025-11-10,6,64633.0,4,5,4,4,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+41,2025-04-27,2025-04-27,1,10315.0,248,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+42,2025-10-06,2025-05-04,5,52213.0,86,3,3,4,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+43,2025-09-13,2025-05-03,3,20815.0,109,2,2,3,Hibernando / perdidos,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+44,2025-06-15,2025-06-15,1,3517.0,199,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+45,2025-09-21,2025-01-24,6,19619.0,101,2,4,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+46,2025-03-09,2025-03-09,1,10668.0,297,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+47,2025-12-26,2025-10-04,3,38196.0,5,5,2,4,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+48,2025-09-07,2025-01-11,5,28601.0,115,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+49,2025-12-28,2025-12-04,6,34769.0,3,5,4,3,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+50,2025-12-26,2025-11-11,5,46238.0,5,5,3,4,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+51,2025-12-08,2025-06-05,5,19729.0,23,4,3,3,Leales,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Express La Florida,Express
+52,2025-12-11,2025-11-02,5,46460.0,20,4,3,4,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+53,2025-12-11,2025-12-11,1,1537.0,20,4,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+54,2025-10-05,2025-01-15,6,38409.0,87,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+55,2025-11-21,2025-09-07,3,10468.0,40,4,2,2,Recientes,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+56,2025-11-28,2025-10-09,3,10334.0,33,4,2,2,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+57,2025-12-20,2025-06-07,15,428015.0,11,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+58,2025-06-27,2025-01-01,10,220743.0,187,1,5,5,En riesgo,True,False,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+59,2025-12-21,2025-12-21,1,93240.0,10,5,1,5,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+60,2025-12-23,2025-12-02,6,38607.0,8,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+61,2025-12-21,2025-09-05,4,23600.0,10,5,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+62,2025-09-28,2025-01-28,6,25405.0,94,3,4,3,Leales,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+63,2025-10-28,2025-10-28,1,4514.0,64,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+64,2025-09-13,2025-07-23,3,11805.0,109,2,2,2,Hibernando / perdidos,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+65,2025-12-22,2025-04-14,4,11386.0,9,5,3,2,Leales,True,False,True,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+66,2025-12-21,2025-07-04,6,69117.0,10,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+67,2025-08-08,2025-02-07,3,12218.0,145,2,2,2,Hibernando / perdidos,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+68,2025-09-09,2025-01-04,14,373800.0,113,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+69,2025-10-28,2025-10-06,13,237201.0,64,3,5,5,Leales,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+70,2025-05-25,2025-05-25,1,1418.0,220,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+71,2025-12-23,2025-09-03,8,103062.0,8,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+72,2025-12-27,2025-07-19,6,40379.0,4,5,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+73,2025-12-28,2025-12-28,1,3255.0,3,5,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+74,2025-01-10,2025-01-10,1,11761.0,355,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+75,2025-03-22,2025-01-15,3,20668.0,284,1,2,3,Hibernando / perdidos,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+76,2025-02-03,2025-02-03,1,2764.0,331,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Express La Florida,Express
+77,2025-12-22,2025-10-04,6,43718.0,9,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+78,2025-11-06,2025-11-06,1,4574.0,55,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Puente Alto,Híper
+79,2025-10-14,2025-10-14,1,2588.0,78,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+80,2025-07-23,2025-01-21,5,16103.0,161,2,3,2,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+81,2025-03-28,2025-01-14,4,35857.0,278,1,3,3,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+82,2025-11-24,2025-09-02,9,230472.0,37,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+83,2025-12-23,2025-12-01,5,35810.0,8,5,3,3,Leales,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+84,2025-11-09,2025-07-15,9,108703.0,52,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+85,2025-11-15,2025-01-21,5,33103.0,46,4,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+86,2025-10-27,2025-08-24,6,47012.0,65,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+87,2025-09-17,2025-01-22,5,22965.0,105,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+88,2025-12-28,2025-09-15,5,20952.0,3,5,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+89,2025-12-25,2025-11-01,6,42624.0,6,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+90,2025-12-21,2025-08-20,9,186903.0,10,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+91,2025-09-07,2025-09-07,1,7088.0,115,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+92,2025-07-18,2025-01-09,5,40849.0,166,2,3,4,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+93,2025-08-01,2025-08-01,1,7922.0,152,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+94,2025-12-01,2025-12-01,1,5685.0,30,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+95,2025-02-01,2025-02-01,1,8238.0,333,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+96,2025-04-12,2025-04-12,1,4042.0,263,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+97,2025-12-25,2025-02-16,5,20096.0,6,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+98,2025-12-03,2025-05-19,5,34150.0,28,4,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+99,2025-09-18,2025-05-26,7,30722.0,104,2,4,3,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+100,2025-12-03,2025-08-01,9,188819.0,28,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+101,2025-09-20,2025-09-20,1,5406.0,102,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+102,2025-03-23,2025-01-04,5,52739.0,283,1,3,4,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+103,2025-11-25,2025-07-28,5,34837.0,36,4,3,3,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+104,2025-04-04,2025-04-04,1,8022.0,271,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+105,2025-07-09,2025-07-09,1,21296.0,175,1,1,3,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+106,2025-10-18,2025-01-09,12,163388.0,74,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+107,2025-11-22,2025-11-22,1,20271.0,39,4,1,3,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+108,2025-12-21,2025-01-03,6,65183.0,10,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+109,2025-11-18,2025-11-18,1,3022.0,43,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+110,2025-12-12,2025-01-06,15,241306.0,19,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+111,2025-11-25,2025-01-16,5,30616.0,36,4,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+112,2025-08-15,2025-05-01,9,152141.0,138,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+113,2025-07-14,2025-01-02,3,58614.0,170,2,2,4,Hibernando / perdidos,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+114,2025-01-13,2025-01-13,1,17567.0,352,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+115,2025-10-17,2025-04-03,10,165031.0,75,3,5,5,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+116,2025-11-13,2025-11-13,1,5046.0,48,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+117,2025-10-01,2025-10-01,1,10583.0,91,3,1,2,Necesitan atención,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+118,2025-10-20,2025-04-27,6,43745.0,72,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Osorno,Supermercado
+119,2025-09-28,2025-01-19,5,39873.0,94,3,3,4,Leales,True,False,False,False,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+120,2025-12-15,2025-08-09,12,200121.0,16,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+121,2025-05-05,2025-05-05,1,12192.0,240,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+122,2025-12-24,2025-09-06,14,270855.0,7,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+123,2025-11-26,2025-11-26,1,8560.0,35,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+124,2025-07-23,2025-01-09,6,43200.0,161,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+125,2025-10-05,2025-01-08,10,213832.0,87,3,5,5,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+126,2025-11-25,2025-11-03,9,122298.0,36,4,5,5,Campeones,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+127,2025-12-23,2025-10-17,6,54918.0,8,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+128,2025-09-27,2025-09-27,1,6194.0,95,3,1,1,Necesitan atención,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+129,2025-08-11,2025-06-04,3,13732.0,142,2,2,2,Hibernando / perdidos,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+130,2025-04-05,2025-04-05,1,3136.0,270,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+131,2025-10-11,2025-10-11,1,37245.0,81,3,1,3,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+132,2025-05-23,2025-05-23,1,3668.0,222,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+133,2025-12-22,2025-11-08,10,301456.0,9,5,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+134,2025-04-12,2025-04-12,1,1574.0,263,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+135,2025-12-21,2025-12-03,4,44970.0,10,5,3,4,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+136,2025-12-12,2025-06-02,5,48675.0,19,4,3,4,Leales,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+137,2025-10-03,2025-03-13,6,50252.0,89,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+138,2025-12-10,2025-01-11,11,245795.0,21,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+139,2025-11-06,2025-11-06,1,19778.0,55,3,1,3,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+140,2025-08-22,2025-08-22,1,8996.0,131,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+141,2025-06-20,2025-06-20,1,10831.0,194,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+142,2025-10-02,2025-04-02,2,9469.0,90,3,2,2,Necesitan atención,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+143,2025-06-13,2025-06-13,1,3070.0,201,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Híper Puente Alto,Híper
+144,2025-12-13,2025-06-12,6,41160.0,18,4,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+145,2025-12-07,2025-02-10,7,51409.0,24,4,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+146,2025-12-27,2025-10-15,12,274412.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+147,2025-12-27,2025-10-06,12,147927.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+148,2025-10-04,2025-10-04,1,7702.0,88,3,1,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+149,2025-07-01,2025-07-01,1,3312.0,183,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+150,2025-11-24,2025-01-13,4,38981.0,37,4,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+151,2025-12-15,2025-09-22,5,8385.0,16,5,3,2,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+152,2025-11-16,2025-01-06,5,45525.0,45,4,3,4,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+153,2025-08-19,2025-08-19,1,1551.0,134,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+154,2025-12-26,2025-06-23,8,137440.0,5,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+155,2025-01-25,2025-01-25,1,2870.0,340,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+156,2025-08-15,2025-01-04,9,139006.0,138,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+157,2025-10-21,2025-10-21,1,1130.0,71,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+158,2025-07-22,2025-07-22,1,6572.0,162,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Híper Puente Alto,Híper
+159,2025-09-16,2025-02-14,5,24633.0,106,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+160,2025-10-14,2025-10-14,1,12096.0,78,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+161,2025-06-27,2025-03-27,3,25664.0,187,1,2,3,Hibernando / perdidos,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+162,2025-11-20,2025-10-04,3,14608.0,41,4,2,2,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+163,2025-10-05,2025-10-05,1,10324.0,87,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+164,2025-12-15,2025-11-14,4,34596.0,16,5,3,3,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+165,2025-09-11,2025-02-13,4,24212.0,111,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+166,2025-10-16,2025-01-11,6,30950.0,76,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+167,2025-07-25,2025-07-02,10,233816.0,159,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+168,2025-03-03,2025-03-03,1,1186.0,303,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+169,2025-07-05,2025-06-08,3,26179.0,179,1,2,3,Hibernando / perdidos,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+170,2025-07-23,2025-07-23,1,6055.0,161,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+171,2025-09-16,2025-09-16,1,3760.0,106,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+172,2025-11-12,2025-11-12,1,6395.0,49,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+173,2025-12-09,2025-12-09,1,7944.0,22,4,1,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+174,2025-12-21,2025-12-21,1,8289.0,10,5,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+175,2025-09-20,2025-01-06,5,22080.0,102,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Maipú,Supermercado
+176,2025-07-09,2025-07-09,1,4716.0,175,1,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+177,2025-01-14,2025-01-14,1,2004.0,351,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+178,2025-10-01,2025-10-01,1,3084.0,91,3,1,1,Necesitan atención,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+179,2025-01-19,2025-01-19,1,9454.0,346,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+180,2025-06-25,2025-02-10,9,169436.0,189,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+181,2025-08-27,2025-01-08,5,28292.0,126,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+182,2025-05-01,2025-05-01,1,5921.0,244,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+183,2025-09-20,2025-09-20,1,3357.0,102,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+184,2025-12-21,2025-01-23,6,32274.0,10,5,4,3,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+185,2025-09-12,2025-01-01,15,246901.0,110,2,5,5,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+186,2025-10-17,2025-10-17,1,5979.0,75,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+187,2025-12-02,2025-09-27,3,24165.0,29,4,2,3,Recientes,True,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+188,2025-05-07,2025-01-24,4,26986.0,238,1,3,3,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+189,2025-12-15,2025-09-23,6,49198.0,16,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+190,2025-09-21,2025-01-14,4,23904.0,101,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+191,2025-06-27,2025-03-23,3,22262.0,187,1,2,3,Hibernando / perdidos,True,False,False,False,False,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+192,2025-09-24,2025-02-28,4,22801.0,98,3,3,3,Leales,True,False,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+193,2025-12-20,2025-05-26,6,83073.0,11,5,4,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+194,2025-12-12,2025-12-12,1,8782.0,19,4,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+195,2025-11-17,2025-11-17,1,10678.0,44,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+196,2025-12-16,2025-11-21,5,30489.0,15,5,3,3,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+197,2025-11-27,2025-04-01,3,26811.0,34,4,2,3,Recientes,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+199,2025-11-02,2025-03-25,7,60382.0,59,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+200,2025-09-18,2025-03-16,5,19426.0,104,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+201,2025-12-04,2025-01-23,6,39600.0,27,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+202,2025-10-04,2025-05-01,6,34594.0,88,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+203,2025-07-24,2025-07-24,1,4618.0,160,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+204,2025-12-17,2025-09-04,10,225125.0,14,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+205,2025-08-21,2025-04-16,3,39095.0,132,2,2,4,Hibernando / perdidos,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+206,2025-10-01,2025-05-14,3,30363.0,91,3,2,3,Necesitan atención,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+207,2025-11-22,2025-11-22,1,8358.0,39,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+208,2025-07-04,2025-03-14,4,33950.0,180,1,3,3,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+209,2025-11-10,2025-11-10,1,5366.0,51,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+210,2025-12-20,2025-12-20,1,5668.0,11,5,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+211,2025-12-27,2025-12-02,13,203481.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+212,2025-09-04,2025-02-26,6,35868.0,118,2,4,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+213,2025-12-23,2025-02-27,4,49351.0,8,5,3,4,Leales,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+214,2025-09-23,2025-09-23,1,6522.0,99,3,1,1,Necesitan atención,True,True,False,False,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+215,2025-06-18,2025-06-18,1,15984.0,196,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+216,2025-09-23,2025-02-04,9,219162.0,99,3,5,5,Leales,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+217,2025-11-24,2025-03-02,11,216601.0,37,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+218,2025-07-16,2025-07-16,1,13770.0,168,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+219,2025-06-25,2025-01-01,11,244443.0,189,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+220,2025-12-18,2025-07-04,5,27374.0,13,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+221,2025-11-20,2025-09-02,3,13703.0,41,4,3,2,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+222,2025-05-06,2025-05-06,1,2722.0,239,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+223,2025-11-21,2025-01-09,10,244558.0,40,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+224,2025-09-22,2025-04-17,11,239574.0,100,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+225,2025-09-11,2025-09-11,1,1027.0,111,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+226,2025-12-26,2025-12-01,8,182051.0,5,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+227,2025-09-02,2025-01-18,4,30613.0,120,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+228,2025-11-03,2025-04-28,12,217690.0,58,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+230,2025-03-08,2025-03-08,1,3432.0,298,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+231,2025-07-15,2025-07-15,1,7117.0,169,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+232,2025-12-27,2025-10-05,6,63312.0,4,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+233,2025-08-17,2025-08-17,1,13527.0,136,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+234,2025-06-14,2025-05-04,9,210602.0,200,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+235,2025-12-23,2025-01-02,6,61928.0,8,5,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+236,2025-12-09,2025-10-07,6,63035.0,22,4,4,4,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+237,2025-12-08,2025-12-08,1,7699.0,23,4,1,2,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+238,2025-01-01,2025-01-01,1,13753.0,364,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+239,2025-10-06,2025-10-06,1,7311.0,86,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+240,2025-12-20,2025-11-01,9,236462.0,11,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+241,2025-07-22,2025-07-22,1,6641.0,162,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+242,2025-12-17,2025-12-02,5,24266.0,14,5,3,3,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+243,2025-12-07,2025-06-19,4,47196.0,24,4,3,4,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+244,2025-12-15,2025-12-15,1,21065.0,16,5,1,3,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+245,2025-12-17,2025-09-18,8,149467.0,14,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+246,2025-10-13,2025-02-01,7,33040.0,79,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+247,2025-12-25,2025-03-15,4,34794.0,6,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+248,2025-08-19,2025-08-19,1,29031.0,134,2,1,3,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+249,2025-12-28,2025-12-06,10,211685.0,3,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+250,2025-12-27,2025-05-11,11,256882.0,4,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+251,2025-04-21,2025-04-21,1,5012.0,254,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+253,2025-12-12,2025-10-06,5,61624.0,19,4,3,4,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+254,2025-10-14,2025-06-01,3,25854.0,78,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+255,2025-12-28,2025-11-21,3,18806.0,3,5,3,2,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+256,2025-11-23,2025-09-13,3,12221.0,38,4,3,2,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+257,2025-10-26,2025-08-03,3,19305.0,66,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+258,2025-10-23,2025-06-18,12,212554.0,69,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+259,2025-03-10,2025-03-10,1,12976.0,296,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+260,2025-08-18,2025-08-18,1,3110.0,135,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+261,2025-11-01,2025-07-21,4,60314.0,60,3,3,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+262,2025-08-20,2025-08-20,1,2297.0,133,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+263,2025-12-28,2025-12-09,8,255494.0,3,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+264,2025-12-28,2025-10-11,10,163620.0,3,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+265,2025-02-09,2025-02-09,1,12131.0,325,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+266,2025-12-25,2025-12-25,1,5044.0,6,5,1,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+267,2025-12-12,2025-04-12,12,192527.0,19,4,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+268,2025-08-15,2025-01-11,12,193956.0,138,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+269,2025-09-01,2025-09-01,1,18187.0,121,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+270,2025-11-21,2025-08-05,6,61644.0,40,4,4,4,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Puente Alto,Híper
+271,2025-11-19,2025-02-02,4,18111.0,42,4,3,2,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+272,2025-12-20,2025-12-02,3,22399.0,11,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+273,2025-05-28,2025-01-08,4,28010.0,217,1,3,3,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+274,2025-12-26,2025-02-11,14,268598.0,5,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+275,2025-03-14,2025-01-26,3,37368.0,292,1,3,4,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+276,2025-08-18,2025-01-23,6,54534.0,135,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+277,2025-11-07,2025-11-07,1,3983.0,54,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+278,2025-11-25,2025-04-16,7,54942.0,36,4,4,4,Campeones,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+279,2025-10-28,2025-10-01,14,322991.0,64,3,5,5,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+280,2025-11-15,2025-11-15,1,12760.0,46,4,1,2,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+281,2025-12-23,2025-12-23,1,15188.0,8,5,1,2,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+282,2025-11-26,2025-05-16,4,29869.0,35,4,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+283,2025-05-10,2025-05-10,1,9023.0,235,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+284,2025-03-05,2025-03-05,1,2079.0,301,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+285,2025-10-27,2025-10-27,1,19750.0,65,3,1,3,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+286,2025-10-12,2025-10-12,1,10154.0,80,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+287,2025-09-28,2025-05-10,6,59712.0,94,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+288,2025-07-11,2025-07-11,1,2321.0,173,1,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+289,2025-03-02,2025-03-02,1,1926.0,304,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+290,2025-08-22,2025-02-16,4,43145.0,131,2,3,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+291,2025-12-27,2025-09-01,11,210254.0,4,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+292,2025-11-21,2025-03-01,5,39394.0,40,4,3,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+293,2025-07-07,2025-01-10,6,35660.0,177,1,4,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+294,2025-12-16,2025-11-05,4,25148.0,15,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+295,2025-10-09,2025-01-11,5,55176.0,83,3,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+296,2025-12-19,2025-12-19,1,1517.0,12,5,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+297,2025-07-19,2025-07-19,1,17938.0,165,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+298,2025-06-10,2025-02-09,8,228703.0,204,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+299,2025-02-09,2025-02-09,1,10119.0,325,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+300,2025-01-25,2025-01-25,1,21847.0,340,1,1,3,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Express La Florida,Express
+301,2025-02-17,2025-02-17,1,6201.0,317,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+302,2025-05-03,2025-05-03,1,5870.0,242,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Híper Puente Alto,Híper
+303,2025-10-20,2025-10-20,1,9726.0,72,3,1,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+304,2025-08-25,2025-01-06,8,172133.0,128,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+305,2025-12-13,2025-11-05,4,25623.0,18,4,3,3,Leales,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+306,2025-12-28,2025-12-03,11,258349.0,3,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+307,2025-09-28,2025-01-11,7,45477.0,94,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+308,2025-10-20,2025-10-20,1,8107.0,72,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+309,2025-08-22,2025-08-22,1,3353.0,131,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+310,2025-09-16,2025-04-12,9,264841.0,106,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+311,2025-09-11,2025-09-11,1,4975.0,111,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+312,2025-12-13,2025-12-13,1,9130.0,18,4,1,2,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+313,2025-12-08,2025-12-08,1,17432.0,23,4,1,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+314,2025-12-18,2025-04-21,13,247618.0,13,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+315,2025-12-14,2025-06-02,6,52593.0,17,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+316,2025-12-25,2025-02-02,3,20480.0,6,5,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+317,2025-10-13,2025-04-14,7,72594.0,79,3,4,5,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+318,2025-09-17,2025-01-09,5,62570.0,105,2,3,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+319,2025-09-08,2025-09-08,1,4394.0,114,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+320,2025-05-03,2025-05-03,1,1200.0,242,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+321,2025-12-20,2025-11-05,6,47349.0,11,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+323,2025-12-09,2025-10-02,3,24194.0,22,4,3,3,Leales,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+324,2025-12-07,2025-01-11,6,64285.0,24,4,4,4,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+325,2025-12-16,2025-05-08,13,225618.0,15,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+326,2025-07-23,2025-07-23,1,7198.0,161,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+327,2025-11-13,2025-11-13,1,4230.0,48,4,1,1,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+328,2025-12-18,2025-11-15,5,28320.0,13,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+329,2025-08-07,2025-08-07,1,9143.0,146,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+330,2025-06-24,2025-06-01,9,156444.0,190,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Tienda Online,Online
+331,2025-04-21,2025-04-21,1,8678.0,254,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Express La Florida,Express
+332,2025-11-08,2025-02-27,4,54268.0,53,3,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+333,2025-10-20,2025-01-13,5,38581.0,72,3,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+334,2025-10-27,2025-08-01,5,39293.0,65,3,3,4,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+335,2025-12-07,2025-12-07,1,2192.0,24,4,1,1,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+336,2025-06-18,2025-01-04,10,322691.0,196,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+337,2025-12-25,2025-12-01,6,53345.0,6,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+338,2025-08-01,2025-08-01,1,3882.0,152,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+339,2025-09-14,2025-01-15,5,58007.0,108,2,3,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+340,2025-06-22,2025-03-02,10,134255.0,192,1,5,5,En riesgo,True,False,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+341,2025-09-02,2025-02-03,6,32095.0,120,2,4,3,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+342,2025-12-24,2025-12-02,4,34573.0,7,5,3,3,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+343,2025-11-02,2025-07-16,4,90055.0,59,3,3,5,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+344,2025-12-09,2025-09-02,4,25602.0,22,4,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+345,2025-10-26,2025-05-10,5,36575.0,66,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+346,2025-06-06,2025-01-14,4,26140.0,208,1,3,3,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+347,2025-12-16,2025-09-10,5,33068.0,15,5,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+348,2025-04-19,2025-04-19,1,11386.0,256,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+349,2025-12-26,2025-01-03,10,161182.0,5,5,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+350,2025-12-19,2025-09-04,4,19369.0,12,5,3,3,Leales,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+351,2025-10-27,2025-10-27,1,1998.0,65,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+352,2025-11-03,2025-04-07,3,42296.0,58,3,3,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Temuco,Supermercado
+353,2025-08-19,2025-03-04,4,18158.0,134,2,3,2,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+354,2025-12-13,2025-01-08,13,255133.0,18,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express La Florida,Express
+355,2025-11-26,2025-10-03,4,29483.0,35,4,3,3,Leales,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+356,2025-12-28,2025-12-11,5,61601.0,3,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+357,2025-11-11,2025-11-11,1,5816.0,50,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+358,2025-01-02,2025-01-02,1,14172.0,363,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+359,2025-01-07,2025-01-07,1,12989.0,358,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+360,2025-12-06,2025-09-01,4,43194.0,25,4,3,4,Leales,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+361,2025-01-07,2025-01-07,1,7215.0,358,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+362,2025-12-08,2025-01-05,6,41850.0,23,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+363,2025-09-25,2025-02-24,7,51383.0,97,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+364,2025-10-23,2025-01-17,6,72886.0,69,3,4,5,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+365,2025-11-11,2025-05-10,4,18347.0,50,3,3,2,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+366,2025-09-28,2025-01-12,5,49550.0,94,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+367,2025-12-26,2025-12-01,11,251781.0,5,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+368,2025-12-25,2025-10-02,6,74930.0,6,5,4,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+369,2025-10-22,2025-01-21,5,29560.0,70,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+370,2025-06-24,2025-01-05,5,31642.0,190,1,4,3,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+371,2025-11-03,2025-01-19,4,33101.0,58,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+372,2025-12-27,2025-11-17,6,35735.0,4,5,4,3,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+373,2025-09-19,2025-05-16,4,50704.0,103,2,3,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+374,2025-05-15,2025-05-15,1,16122.0,230,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+375,2025-06-13,2025-02-06,12,266666.0,201,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+376,2025-11-21,2025-03-08,6,37481.0,40,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+377,2025-08-03,2025-01-16,6,84336.0,150,2,4,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+378,2025-12-08,2025-10-22,3,11487.0,23,4,3,2,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+379,2025-08-26,2025-06-11,3,29981.0,127,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+380,2025-09-17,2025-09-17,1,2277.0,105,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+381,2025-08-02,2025-01-13,12,232855.0,151,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+382,2025-12-20,2025-09-17,3,14073.0,11,5,3,2,Leales,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+383,2025-12-10,2025-03-23,6,68682.0,21,4,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Maipú,Supermercado
+384,2025-12-16,2025-12-16,1,1696.0,15,5,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+385,2025-05-12,2025-05-12,1,14428.0,233,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+386,2025-11-09,2025-06-19,4,24579.0,52,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Osorno,Supermercado
+387,2025-06-04,2025-01-19,3,25814.0,210,1,3,3,En riesgo,True,False,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+388,2025-08-18,2025-08-18,1,5894.0,135,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+389,2025-11-12,2025-08-04,4,24257.0,49,3,3,3,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+390,2025-06-15,2025-03-13,10,203975.0,199,1,5,5,En riesgo,True,False,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+391,2025-12-05,2025-03-16,6,146853.0,26,4,4,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+392,2025-09-17,2025-09-17,1,4544.0,105,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+393,2025-10-19,2025-06-23,6,55362.0,73,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+394,2025-11-23,2025-02-24,5,34541.0,38,4,4,3,Campeones,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+395,2025-05-02,2025-05-02,1,13214.0,243,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+396,2025-12-27,2025-12-04,9,184674.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+397,2025-10-11,2025-01-13,7,52800.0,81,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+398,2025-12-01,2025-05-03,12,233276.0,30,4,5,5,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+399,2025-12-06,2025-01-11,5,97453.0,25,4,4,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+400,2025-11-14,2025-07-03,7,56382.0,47,4,4,4,Campeones,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+401,2025-12-04,2025-12-04,1,7797.0,27,4,1,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+402,2025-10-02,2025-10-02,1,6126.0,90,3,1,1,Necesitan atención,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+403,2025-12-23,2025-10-14,6,61768.0,8,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+404,2025-09-11,2025-02-16,4,26446.0,111,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+405,2025-08-16,2025-08-16,1,3851.0,137,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+406,2025-10-26,2025-10-03,14,262836.0,66,3,5,5,Leales,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+407,2025-12-26,2025-12-12,3,38642.0,5,5,3,4,Leales,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+408,2025-06-09,2025-06-09,1,7411.0,205,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+409,2025-07-23,2025-07-23,1,8690.0,161,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+410,2025-10-17,2025-06-04,13,357741.0,75,3,5,5,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+411,2025-11-18,2025-11-18,1,1027.0,43,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+412,2025-12-09,2025-06-06,9,173275.0,22,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+413,2025-06-13,2025-06-13,1,14118.0,201,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+414,2025-06-05,2025-02-18,4,38097.0,209,1,3,4,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+415,2025-11-25,2025-07-13,4,41613.0,36,4,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+416,2025-12-15,2025-01-03,10,125853.0,16,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+417,2025-11-09,2025-04-09,3,29610.0,52,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+418,2025-12-25,2025-11-06,4,27193.0,6,5,3,3,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+419,2025-07-17,2025-07-17,1,15205.0,167,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+420,2025-12-04,2025-11-04,6,36325.0,27,4,4,3,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+421,2025-08-08,2025-08-08,1,4933.0,145,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+422,2025-02-19,2025-02-19,1,3508.0,315,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+423,2025-04-27,2025-04-27,1,9582.0,248,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+424,2025-02-02,2025-02-02,1,14787.0,332,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+425,2025-12-27,2025-12-03,8,188233.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+426,2025-08-22,2025-05-10,3,22630.0,131,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+427,2025-07-11,2025-07-11,1,4632.0,173,1,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+428,2025-11-23,2025-08-27,3,17867.0,38,4,3,2,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+429,2025-12-05,2025-09-02,6,58526.0,26,4,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+430,2025-01-05,2025-01-05,1,25347.0,360,1,1,3,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+431,2025-07-12,2025-07-12,1,11112.0,172,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+432,2025-09-12,2025-01-04,13,241689.0,110,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+433,2025-02-23,2025-02-23,1,6036.0,311,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+435,2025-11-17,2025-01-17,4,21574.0,44,4,3,3,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+436,2025-05-01,2025-01-19,4,33455.0,244,1,3,3,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Express La Florida,Express
+437,2025-12-27,2025-07-10,12,233742.0,4,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+438,2025-11-14,2025-11-14,1,7394.0,47,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+439,2025-09-26,2025-08-01,4,29869.0,96,3,3,3,Leales,True,False,False,False,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+440,2025-06-18,2025-05-03,9,192867.0,196,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+441,2025-12-02,2025-03-11,6,21483.0,29,4,4,3,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+442,2025-02-05,2025-02-05,1,23994.0,329,1,1,3,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+443,2025-11-20,2025-01-27,12,231263.0,41,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+444,2025-08-16,2025-08-16,1,4562.0,137,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+445,2025-12-17,2025-05-07,4,17209.0,14,5,3,2,Leales,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+446,2025-11-01,2025-02-05,5,62906.0,60,3,4,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+447,2025-10-03,2025-10-03,1,2022.0,89,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+448,2025-10-25,2025-10-25,1,8253.0,67,3,1,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+449,2025-01-05,2025-01-05,1,8274.0,360,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+450,2025-03-28,2025-03-28,1,2919.0,278,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+451,2025-12-01,2025-12-01,1,22248.0,30,4,1,3,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+452,2025-11-07,2025-02-14,5,57006.0,54,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+453,2025-10-05,2025-10-05,1,4816.0,87,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+454,2025-12-22,2025-03-18,3,21158.0,9,5,3,3,Leales,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+455,2025-07-26,2025-07-03,11,191334.0,158,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+456,2025-10-27,2025-01-03,5,33248.0,65,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+457,2025-06-28,2025-01-03,4,45976.0,186,1,3,4,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+458,2025-08-23,2025-01-24,5,38146.0,130,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+459,2025-05-18,2025-05-18,1,1596.0,227,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+460,2025-12-22,2025-01-28,5,33885.0,9,5,4,3,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+461,2025-12-13,2025-10-24,4,53120.0,18,4,3,4,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+462,2025-12-06,2025-12-06,1,8365.0,25,4,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+463,2025-01-03,2025-01-03,1,6082.0,362,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+464,2025-12-28,2025-10-07,3,18765.0,3,5,3,2,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+465,2025-07-13,2025-07-13,1,18454.0,171,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+466,2025-12-12,2025-12-06,2,14126.0,19,4,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+467,2025-10-23,2025-07-14,5,18834.0,69,3,4,2,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+468,2025-12-25,2025-12-25,1,10418.0,6,5,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+469,2025-12-22,2025-08-28,6,73667.0,9,5,4,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+470,2025-07-10,2025-04-18,3,25914.0,174,1,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+471,2025-11-22,2025-11-22,1,12745.0,39,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+472,2025-12-06,2025-12-06,1,4448.0,25,4,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+473,2025-12-27,2025-12-02,5,50842.0,4,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+474,2025-03-17,2025-03-17,1,3970.0,289,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+475,2025-12-28,2025-12-04,3,16347.0,3,5,3,2,Leales,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+476,2025-06-19,2025-04-13,3,25338.0,195,1,3,3,En riesgo,True,False,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+477,2025-08-27,2025-01-04,6,57910.0,126,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+478,2025-12-03,2025-06-02,10,234064.0,28,4,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+479,2025-10-11,2025-04-21,5,34349.0,81,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Osorno,Supermercado
+480,2025-07-08,2025-01-24,4,18569.0,176,1,3,2,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+481,2025-09-15,2025-05-28,7,59829.0,107,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+482,2025-10-27,2025-10-27,1,4663.0,65,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+483,2025-12-19,2025-12-19,1,9919.0,12,5,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+484,2025-09-26,2025-03-18,4,44730.0,96,3,3,4,Leales,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+485,2025-12-04,2025-04-07,5,45041.0,27,4,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+486,2025-03-02,2025-03-02,1,13723.0,304,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+487,2025-12-27,2025-12-10,3,37334.0,4,5,3,4,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+488,2025-08-02,2025-08-02,1,3222.0,151,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+489,2025-04-10,2025-01-16,4,22361.0,265,1,3,3,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+490,2025-10-19,2025-01-23,12,211065.0,73,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+491,2025-11-21,2025-11-21,1,7042.0,40,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+492,2025-10-19,2025-01-04,5,32477.0,73,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+493,2025-08-13,2025-08-13,1,13402.0,140,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+494,2025-12-26,2025-12-12,3,25792.0,5,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+495,2025-11-17,2025-01-04,5,57558.0,44,4,4,4,Campeones,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+496,2025-05-11,2025-03-13,5,48012.0,234,1,4,4,En riesgo,True,False,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+497,2025-09-11,2025-02-07,6,60663.0,111,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+498,2025-06-24,2025-06-24,1,11016.0,190,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Tienda Online,Online
+499,2025-12-19,2025-11-04,11,198366.0,12,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+500,2025-10-03,2025-10-03,1,22218.0,89,3,1,3,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+501,2025-12-19,2025-12-19,1,1363.0,12,5,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+502,2025-04-20,2025-04-20,1,8049.0,255,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+503,2025-11-28,2025-06-02,5,38236.0,33,4,4,4,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+504,2025-06-23,2025-06-23,1,10044.0,191,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+505,2025-09-26,2025-08-20,5,92111.0,96,3,4,5,Leales,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+506,2025-10-01,2025-10-01,1,17473.0,91,3,1,2,Necesitan atención,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+507,2025-01-11,2025-01-11,1,10565.0,354,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+509,2025-11-11,2025-11-11,1,11670.0,50,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+510,2025-08-14,2025-08-14,1,1550.0,139,2,1,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+511,2025-10-23,2025-01-12,3,25551.0,69,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Express La Florida,Express
+512,2025-04-01,2025-04-01,1,20577.0,274,1,1,3,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+513,2025-07-11,2025-07-11,1,15571.0,173,1,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+514,2025-11-15,2025-11-15,1,11439.0,46,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+515,2025-12-17,2025-11-07,5,38452.0,14,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+516,2025-12-02,2025-09-11,6,59857.0,29,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+517,2025-08-17,2025-01-05,4,25845.0,136,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+518,2025-05-20,2025-03-03,5,53626.0,225,1,4,4,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+519,2025-01-08,2025-01-08,1,7860.0,357,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+520,2025-10-28,2025-02-14,6,37546.0,64,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+521,2025-10-26,2025-02-14,4,14729.0,66,3,3,2,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+522,2025-12-28,2025-12-03,6,36088.0,3,5,4,3,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+523,2025-09-11,2025-01-19,5,50982.0,111,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+524,2025-12-08,2025-09-04,4,33510.0,23,4,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+525,2025-12-17,2025-08-12,11,292195.0,14,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+526,2025-09-14,2025-01-10,6,42484.0,108,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+527,2025-09-20,2025-02-18,7,79631.0,102,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+528,2025-05-28,2025-01-03,14,358283.0,217,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+529,2025-11-05,2025-02-03,3,12848.0,56,3,3,2,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+530,2025-09-25,2025-02-24,6,59115.0,97,3,4,4,Leales,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+531,2025-12-23,2025-05-04,6,37642.0,8,5,4,4,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+532,2025-09-06,2025-01-01,13,238054.0,116,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+533,2025-12-17,2025-10-12,6,50712.0,14,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+534,2025-05-27,2025-01-06,10,219041.0,218,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Tienda Online,Online
+535,2025-09-25,2025-01-06,6,45370.0,97,3,4,4,Leales,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+536,2025-01-28,2025-01-28,1,18270.0,337,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+537,2025-09-20,2025-09-20,1,1801.0,102,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+538,2025-07-20,2025-02-10,3,18955.0,164,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+539,2025-08-26,2025-01-22,6,49891.0,127,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+540,2025-12-11,2025-12-11,1,11585.0,20,4,1,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+541,2025-12-10,2025-12-10,1,4089.0,21,4,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+542,2025-04-24,2025-02-09,4,26827.0,251,1,3,3,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+543,2025-06-28,2025-06-08,13,190327.0,186,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+544,2025-09-13,2025-02-03,4,26712.0,109,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+545,2025-10-20,2025-01-11,4,64076.0,72,3,3,4,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+546,2025-11-27,2025-11-02,11,177913.0,34,4,5,5,Campeones,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+547,2025-12-25,2025-11-21,3,47196.0,6,5,3,4,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+548,2025-09-21,2025-02-20,4,35042.0,101,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+549,2025-09-08,2025-02-25,5,31032.0,114,2,4,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+550,2025-09-16,2025-02-21,5,32528.0,106,2,4,3,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+551,2025-12-17,2025-12-17,1,12116.0,14,5,1,2,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+552,2025-12-17,2025-02-15,3,19588.0,14,5,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+553,2025-12-23,2025-05-20,6,29484.0,8,5,4,3,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+554,2025-07-23,2025-01-05,2,20734.0,161,2,2,3,Hibernando / perdidos,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+555,2025-08-13,2025-08-13,1,17994.0,140,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+556,2025-01-09,2025-01-09,1,3758.0,356,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+557,2025-10-07,2025-10-07,1,10364.0,85,3,1,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+558,2025-12-14,2025-12-14,1,10157.0,17,5,1,2,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+559,2025-11-25,2025-11-25,1,23140.0,36,4,1,3,Recientes,False,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+560,2025-06-09,2025-01-16,6,41758.0,205,1,4,4,En riesgo,True,False,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+561,2025-12-22,2025-12-11,4,47590.0,9,5,3,4,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+562,2025-10-22,2025-02-13,5,35847.0,70,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+563,2025-12-15,2025-12-02,6,55279.0,16,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+564,2025-12-11,2025-12-01,3,11714.0,20,4,3,2,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+565,2025-12-23,2025-12-23,1,19653.0,8,5,1,3,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+566,2025-06-27,2025-06-02,4,34268.0,187,1,3,3,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+567,2025-12-19,2025-10-05,13,240636.0,12,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+568,2025-12-10,2025-09-20,3,19222.0,21,4,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+569,2025-10-26,2025-10-26,1,9566.0,66,3,1,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+570,2025-09-16,2025-08-03,5,51600.0,106,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+571,2025-08-04,2025-01-20,5,42373.0,149,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+572,2025-10-18,2025-10-05,4,59651.0,74,3,3,4,Leales,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+573,2025-04-20,2025-04-20,1,12595.0,255,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+574,2025-06-23,2025-01-06,3,21447.0,191,1,3,3,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+575,2025-06-21,2025-06-21,1,1540.0,193,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+576,2025-10-05,2025-10-05,1,4066.0,87,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+577,2025-09-21,2025-01-11,11,249546.0,101,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+578,2025-11-14,2025-06-27,6,46391.0,47,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+579,2025-12-19,2025-12-19,1,10674.0,12,5,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+580,2025-12-21,2025-02-07,8,171363.0,10,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+581,2025-08-27,2025-08-27,1,9411.0,126,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+582,2025-04-05,2025-04-05,1,21268.0,270,1,1,3,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+583,2025-04-20,2025-04-20,1,1320.0,255,1,1,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+584,2025-12-16,2025-12-16,1,6794.0,15,5,1,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+585,2025-01-19,2025-01-19,1,2709.0,346,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+586,2025-12-15,2025-01-25,6,52937.0,16,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+587,2025-09-05,2025-05-09,5,58089.0,117,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+588,2025-12-20,2025-06-03,11,190284.0,11,5,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+589,2025-02-12,2025-02-12,1,9816.0,322,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+590,2025-10-21,2025-10-21,1,1210.0,71,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+591,2025-08-28,2025-08-07,13,312894.0,125,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+592,2025-12-10,2025-12-10,1,9698.0,21,4,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+593,2025-06-05,2025-01-26,10,210114.0,209,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+594,2025-11-15,2025-05-18,3,15940.0,46,4,3,2,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+595,2025-10-26,2025-01-14,6,43733.0,66,3,4,4,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+596,2025-12-04,2025-12-04,1,11771.0,27,4,1,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+597,2025-04-17,2025-04-17,1,13036.0,258,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Tienda Online,Online
+598,2025-09-28,2025-05-15,6,39054.0,94,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+599,2025-07-06,2025-07-06,1,14478.0,178,1,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+600,2025-10-20,2025-01-06,10,159439.0,72,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+601,2025-12-14,2025-07-25,4,20152.0,17,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+602,2025-03-18,2025-03-18,1,9428.0,288,1,1,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Express Providencia,Express
+603,2025-08-27,2025-08-27,1,1730.0,126,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Express La Florida,Express
+604,2025-11-15,2025-11-15,1,4882.0,46,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+605,2025-08-03,2025-08-03,1,8801.0,150,2,1,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+606,2025-11-11,2025-07-23,7,62369.0,50,3,5,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+607,2025-08-27,2025-01-14,6,43333.0,126,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+608,2025-07-28,2025-07-06,10,236904.0,156,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+609,2025-11-10,2025-01-19,6,45868.0,51,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+610,2025-07-07,2025-07-07,1,5105.0,177,1,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+611,2025-09-11,2025-07-10,4,30552.0,111,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+612,2025-08-17,2025-07-27,3,14301.0,136,2,3,2,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+613,2025-12-15,2025-05-06,14,196489.0,16,5,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+614,2025-10-12,2025-10-12,1,5933.0,80,3,1,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+615,2025-08-15,2025-08-15,1,3474.0,138,2,1,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+616,2025-09-28,2025-01-05,12,274130.0,94,3,5,5,Leales,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+617,2025-06-21,2025-01-11,14,196305.0,193,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+618,2025-09-21,2025-06-08,4,16161.0,101,2,3,2,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+619,2025-10-11,2025-10-11,1,3349.0,81,3,1,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+620,2025-11-20,2025-11-20,1,12391.0,41,4,1,2,Recientes,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+621,2025-11-15,2025-11-15,1,4660.0,46,4,1,1,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+622,2025-12-28,2025-08-01,9,166539.0,3,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+623,2025-01-24,2025-01-24,1,3160.0,341,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+624,2025-11-14,2025-09-07,6,42489.0,47,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+625,2025-05-16,2025-05-16,1,1338.0,229,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+626,2025-02-16,2025-02-16,1,15162.0,318,1,1,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+627,2025-12-24,2025-12-24,1,7545.0,7,5,1,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+628,2025-04-04,2025-04-04,1,3437.0,271,1,1,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+629,2025-09-19,2025-09-19,1,7355.0,103,2,1,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+630,2025-08-21,2025-01-03,6,45231.0,132,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+631,2025-12-07,2025-12-07,1,6616.0,24,4,1,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+632,2025-11-27,2025-11-27,1,8215.0,34,4,2,2,Recientes,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+633,2025-09-21,2025-01-24,5,37469.0,101,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+634,2025-11-13,2025-02-03,10,133017.0,48,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+635,2025-07-03,2025-01-15,3,56422.0,181,1,3,4,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Express La Florida,Express
+636,2025-12-25,2025-12-05,12,241711.0,6,5,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+637,2025-12-17,2025-12-17,1,16121.0,14,5,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+638,2025-07-15,2025-07-15,1,9154.0,169,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+639,2025-08-12,2025-01-27,8,182947.0,141,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+640,2025-08-02,2025-08-02,1,19652.0,151,2,2,3,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+641,2025-12-24,2025-06-02,15,358835.0,7,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+642,2025-08-09,2025-08-09,1,11988.0,144,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+643,2025-10-24,2025-03-22,6,44594.0,68,3,4,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+644,2025-12-02,2025-04-04,4,26076.0,29,4,3,3,Leales,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+645,2025-07-19,2025-07-19,1,6158.0,165,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+646,2025-09-08,2025-07-05,3,25539.0,114,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+647,2025-12-24,2025-06-20,6,47458.0,7,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+648,2025-12-04,2025-09-02,3,12106.0,27,4,3,2,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+649,2025-01-27,2025-01-10,3,15238.0,338,1,3,2,En riesgo,True,False,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+650,2025-12-05,2025-01-12,11,198926.0,26,4,5,5,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+651,2025-12-26,2025-09-26,4,39790.0,5,5,3,4,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+652,2025-12-24,2025-11-06,3,29907.0,7,5,3,3,Leales,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+653,2025-10-28,2025-10-28,1,5336.0,64,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+654,2025-12-23,2025-09-07,5,33680.0,8,5,4,3,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+655,2025-09-11,2025-09-11,1,2448.0,111,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+656,2025-12-20,2025-11-01,13,254110.0,11,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+657,2025-10-05,2025-02-23,6,49473.0,87,3,4,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+658,2025-03-27,2025-03-27,1,4876.0,279,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+659,2025-10-02,2025-10-02,1,6549.0,90,3,2,1,Necesitan atención,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+660,2025-04-24,2025-04-24,1,23149.0,251,1,2,3,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+661,2025-12-20,2025-05-20,11,232092.0,11,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+662,2025-11-19,2025-01-15,12,222374.0,42,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Híper Puente Alto,Híper
+663,2025-07-23,2025-07-01,9,209420.0,161,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+664,2025-12-17,2025-11-09,4,46348.0,14,5,3,4,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+665,2025-11-28,2025-01-10,8,163993.0,33,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+666,2025-12-12,2025-09-04,4,21307.0,19,4,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+667,2025-10-06,2025-04-14,5,19932.0,86,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+668,2025-09-25,2025-09-04,10,177439.0,97,3,5,5,Leales,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+669,2025-12-27,2025-12-02,6,40155.0,4,5,4,4,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+670,2025-12-15,2025-11-03,3,44312.0,16,5,3,4,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+671,2025-02-25,2025-02-25,1,40942.0,309,1,2,4,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+672,2025-12-21,2025-12-21,1,14911.0,10,5,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+673,2025-11-04,2025-01-25,4,27589.0,57,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+674,2025-08-24,2025-01-03,6,51761.0,129,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+675,2025-12-15,2025-09-09,3,19981.0,16,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+676,2025-10-23,2025-02-27,6,62883.0,69,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+677,2025-11-03,2025-04-02,4,34851.0,58,3,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+678,2025-12-13,2025-12-13,1,4618.0,18,4,2,1,Recientes,False,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+679,2025-12-25,2025-05-06,12,289030.0,6,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+680,2025-11-28,2025-07-06,7,58772.0,33,4,5,4,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+681,2025-12-05,2025-12-05,1,8442.0,26,4,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+682,2025-05-25,2025-05-25,1,6325.0,220,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Híper Concepción,Híper
+683,2025-08-19,2025-08-19,1,14078.0,134,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+684,2025-10-08,2025-10-08,1,6970.0,84,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+685,2025-10-01,2025-04-06,4,187294.0,91,3,3,5,Leales,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+686,2025-11-19,2025-05-13,11,307095.0,42,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+687,2025-09-09,2025-01-06,7,67980.0,113,2,5,4,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+688,2025-09-15,2025-05-19,4,15527.0,107,2,3,2,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+689,2025-06-25,2025-06-25,1,3151.0,189,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+690,2025-12-22,2025-07-07,6,44263.0,9,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+691,2025-12-18,2025-08-05,5,26906.0,13,5,4,3,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+692,2025-05-14,2025-03-22,4,19201.0,231,1,3,3,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+693,2025-09-11,2025-01-04,14,289312.0,111,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+694,2025-11-24,2025-08-08,6,42462.0,37,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+695,2025-09-23,2025-01-11,7,36837.0,99,3,5,3,Leales,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+696,2025-12-07,2025-08-20,6,48845.0,24,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+697,2025-12-15,2025-12-15,1,5394.0,16,5,2,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+698,2025-11-23,2025-01-08,12,230397.0,38,4,5,5,Campeones,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Súper Viña,Supermercado
+699,2025-12-20,2025-12-10,3,10033.0,11,5,3,2,Leales,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+700,2025-10-27,2025-06-09,4,39060.0,65,3,3,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+701,2025-12-23,2025-12-04,6,77859.0,8,5,4,5,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+702,2025-11-21,2025-09-14,4,45818.0,40,4,3,4,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+703,2025-12-19,2025-12-05,3,11571.0,12,5,3,2,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+704,2025-12-10,2025-12-10,1,2218.0,21,4,2,1,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+705,2025-12-09,2025-10-06,5,44191.0,22,4,4,4,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+706,2025-05-10,2025-01-03,4,44758.0,235,1,3,4,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Express La Florida,Express
+707,2025-09-02,2025-01-25,7,36497.0,120,2,5,3,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Maipú,Supermercado
+708,2025-02-10,2025-02-10,1,2634.0,324,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+709,2025-10-25,2025-10-04,13,237586.0,67,3,5,5,Leales,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+710,2025-01-22,2025-01-22,1,9403.0,343,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+711,2025-07-07,2025-07-07,1,7234.0,177,1,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+712,2025-05-06,2025-02-01,8,178713.0,239,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+713,2025-12-13,2025-06-19,6,52048.0,18,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+714,2025-10-17,2025-05-20,6,39928.0,75,3,4,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+715,2025-11-12,2025-11-12,1,5558.0,49,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+716,2025-09-27,2025-01-09,5,14363.0,95,3,4,2,Leales,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+717,2025-11-06,2025-08-24,5,37734.0,55,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Osorno,Supermercado
+718,2025-11-17,2025-11-17,1,4276.0,44,4,2,1,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+719,2025-06-27,2025-06-06,12,232630.0,187,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+720,2025-11-19,2025-11-19,1,3766.0,42,4,2,1,Recientes,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+721,2025-10-27,2025-10-27,1,18170.0,65,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+722,2025-11-20,2025-11-20,1,9102.0,41,4,2,2,Recientes,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+723,2025-09-24,2025-01-22,6,59445.0,98,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+724,2025-09-06,2025-01-19,5,17505.0,116,2,4,2,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+725,2025-12-22,2025-12-15,3,31099.0,9,5,3,3,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+726,2025-12-10,2025-04-24,5,38063.0,21,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+727,2025-07-06,2025-07-06,1,4808.0,178,1,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+728,2025-12-11,2025-10-01,5,27924.0,20,4,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+729,2025-08-26,2025-08-09,8,110799.0,127,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+730,2025-04-22,2025-04-22,1,12524.0,253,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+731,2025-12-10,2025-09-06,4,32615.0,21,4,3,3,Leales,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+732,2025-01-20,2025-01-20,1,11733.0,345,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+733,2025-06-11,2025-06-11,1,7821.0,203,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+734,2025-10-13,2025-10-13,1,9108.0,79,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+735,2025-07-23,2025-07-23,1,1186.0,161,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+736,2025-12-19,2025-08-16,9,198256.0,12,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+737,2025-06-24,2025-01-10,13,268127.0,190,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+738,2025-09-26,2025-09-06,12,188111.0,96,3,5,5,Leales,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+739,2025-05-24,2025-05-24,1,7820.0,221,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+740,2025-09-05,2025-02-15,5,25216.0,117,2,4,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+741,2025-12-19,2025-12-19,1,6025.0,12,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+742,2025-10-12,2025-10-12,1,804.0,80,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+743,2025-09-07,2025-09-07,1,6752.0,115,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+744,2025-07-21,2025-07-21,1,3732.0,163,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+745,2025-11-09,2025-11-09,1,15971.0,52,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+746,2025-08-23,2025-08-23,1,3273.0,130,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+747,2025-12-27,2025-11-01,11,251143.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+748,2025-02-11,2025-02-11,1,17911.0,323,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+749,2025-09-08,2025-01-09,5,44959.0,114,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+750,2025-11-25,2025-11-25,1,17083.0,36,4,2,2,Recientes,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+751,2025-08-26,2025-02-03,4,35017.0,127,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+752,2025-10-19,2025-01-07,3,32675.0,73,3,3,3,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+753,2025-09-03,2025-09-03,1,3450.0,119,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+754,2025-10-23,2025-01-23,12,164275.0,69,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+755,2025-10-06,2025-05-10,3,14629.0,86,3,3,2,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+756,2025-10-21,2025-10-21,1,7906.0,71,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+757,2025-12-03,2025-12-03,1,5670.0,28,4,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+758,2025-03-23,2025-03-23,1,6854.0,283,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+759,2025-12-17,2025-12-17,1,11859.0,14,5,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+760,2025-10-06,2025-08-06,3,33039.0,86,3,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+761,2025-02-10,2025-02-10,1,6968.0,324,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+762,2025-12-26,2025-03-01,10,260494.0,5,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+763,2025-11-18,2025-05-18,4,27125.0,43,4,3,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+764,2025-05-15,2025-05-15,1,10310.0,230,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+765,2025-11-06,2025-01-05,5,49249.0,55,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+766,2025-12-27,2025-12-07,3,32005.0,4,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+767,2025-11-02,2025-11-02,1,18930.0,59,3,2,3,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+768,2025-10-19,2025-10-19,1,2843.0,73,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+769,2025-12-24,2025-10-09,4,56387.0,7,5,3,4,Leales,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+770,2025-12-15,2025-03-02,11,163685.0,16,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+771,2025-12-25,2025-12-01,6,59592.0,6,5,4,4,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+772,2025-12-01,2025-09-06,4,34291.0,30,4,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+773,2025-11-05,2025-11-05,1,12486.0,56,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+774,2025-07-14,2025-07-14,1,9653.0,170,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+775,2025-06-28,2025-06-04,11,248723.0,186,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+776,2025-10-10,2025-10-10,1,710.0,82,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+777,2025-07-01,2025-07-01,1,6072.0,183,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+778,2025-11-25,2025-05-06,6,66596.0,36,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+779,2025-12-19,2025-10-02,4,34755.0,12,5,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+780,2025-12-27,2025-12-27,1,2255.0,4,5,2,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+781,2025-10-12,2025-01-15,13,269107.0,80,3,5,5,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+782,2025-12-20,2025-08-24,5,45502.0,11,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+783,2025-08-17,2025-04-13,4,30889.0,136,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+784,2025-12-21,2025-12-09,3,28940.0,10,5,3,3,Leales,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+785,2025-12-02,2025-12-02,1,5859.0,29,4,2,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+786,2025-09-26,2025-03-19,4,30993.0,96,3,3,3,Leales,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+787,2025-10-13,2025-03-20,5,45330.0,79,3,4,4,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+788,2025-12-02,2025-01-14,9,196621.0,29,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+789,2025-11-27,2025-07-08,3,28445.0,34,4,3,3,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+790,2025-09-17,2025-03-25,4,30221.0,105,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+791,2025-10-14,2025-03-27,5,51327.0,78,3,4,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+792,2025-01-26,2025-01-26,1,4818.0,339,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+793,2025-09-20,2025-02-02,4,14490.0,102,2,3,2,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+794,2025-09-20,2025-01-10,8,173728.0,102,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+795,2025-09-07,2025-03-09,4,41136.0,115,2,3,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+796,2025-08-08,2025-08-08,1,1286.0,145,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+797,2025-11-24,2025-11-24,1,10821.0,37,4,2,2,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+798,2025-04-10,2025-02-03,5,45372.0,265,1,4,4,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+799,2025-07-05,2025-04-11,5,62185.0,179,1,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+800,2025-09-19,2025-01-20,3,34191.0,103,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+801,2025-11-11,2025-01-13,15,246281.0,50,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+802,2025-08-10,2025-08-10,1,10549.0,143,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+803,2025-11-07,2025-11-07,1,2943.0,54,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+804,2025-06-22,2025-06-22,1,11355.0,192,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+805,2025-09-25,2025-04-04,4,24200.0,97,3,3,3,Leales,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+806,2025-12-24,2025-12-24,1,3706.0,7,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+807,2025-12-09,2025-01-19,6,51928.0,22,4,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+808,2025-06-28,2025-06-01,8,220619.0,186,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+809,2025-11-21,2025-11-21,1,10495.0,40,4,2,2,Recientes,False,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+810,2025-12-12,2025-01-16,9,179023.0,19,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+811,2025-12-11,2025-12-11,1,2989.0,20,4,2,1,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+812,2025-11-20,2025-01-03,8,95652.0,41,4,5,5,Campeones,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+813,2025-11-06,2025-01-09,5,31953.0,55,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+814,2025-10-21,2025-05-03,3,20848.0,71,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+815,2025-09-21,2025-01-13,10,254870.0,101,2,5,5,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+816,2025-12-25,2025-12-25,1,3988.0,6,5,2,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+817,2025-09-17,2025-09-17,1,3330.0,105,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+818,2025-09-23,2025-01-07,11,235370.0,99,3,5,5,Leales,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+819,2025-12-19,2025-01-08,7,44247.0,12,5,5,4,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+820,2025-12-09,2025-12-09,1,16071.0,22,4,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+821,2025-12-27,2025-01-21,12,191696.0,4,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+822,2025-11-26,2025-04-19,5,28898.0,35,4,4,3,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+823,2025-12-06,2025-07-12,3,30126.0,25,4,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+824,2025-03-09,2025-03-09,1,3845.0,297,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+825,2025-12-02,2025-08-24,4,44389.0,29,4,3,4,Leales,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+826,2025-12-07,2025-05-24,3,36949.0,24,4,3,3,Leales,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+827,2025-11-01,2025-11-01,1,4928.0,60,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+828,2025-12-27,2025-05-20,9,190238.0,4,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+829,2025-12-15,2025-08-01,9,239641.0,16,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+830,2025-12-05,2025-01-22,10,156137.0,26,4,5,5,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+831,2025-12-28,2025-10-04,14,334601.0,3,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+832,2025-12-25,2025-09-02,7,34458.0,6,5,5,3,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+833,2025-06-23,2025-06-23,1,4579.0,191,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+834,2025-12-19,2025-12-19,1,9788.0,12,5,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+835,2025-12-26,2025-05-09,3,20230.0,5,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Puerto Montt,Express
+836,2025-12-18,2025-09-20,5,31538.0,13,5,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+837,2025-12-04,2025-01-06,13,262473.0,27,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+838,2025-09-10,2025-01-10,7,36249.0,112,2,5,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Híper Concepción,Híper
+839,2025-10-11,2025-10-11,1,1343.0,81,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+840,2025-08-13,2025-01-08,5,53344.0,140,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+841,2025-12-10,2025-05-17,6,62180.0,21,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+842,2025-12-02,2025-10-22,5,107019.0,29,4,4,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+843,2025-12-06,2025-10-03,5,23913.0,25,4,4,3,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+844,2025-12-13,2025-12-13,1,15787.0,18,4,2,2,Recientes,False,False,True,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+845,2025-12-04,2025-11-03,4,26887.0,27,4,3,3,Leales,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+846,2025-09-04,2025-01-25,6,87190.0,118,2,4,5,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+847,2025-12-10,2025-09-01,9,177125.0,21,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+848,2025-12-17,2025-06-13,7,43712.0,14,5,5,4,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+849,2025-12-14,2025-12-14,1,14253.0,17,5,2,2,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+850,2025-09-23,2025-01-10,7,24135.0,99,2,5,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Súper Viña,Supermercado
+851,2025-12-07,2025-12-07,1,8603.0,24,4,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+852,2025-05-04,2025-05-04,1,8192.0,241,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+853,2025-11-04,2025-05-10,4,37443.0,57,3,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+854,2025-10-24,2025-03-07,5,18654.0,68,3,4,2,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+855,2025-12-07,2025-10-07,8,158481.0,24,4,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+856,2025-05-14,2025-02-01,8,170686.0,231,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+857,2025-09-16,2025-01-16,5,50902.0,106,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Maipú,Supermercado
+858,2025-06-15,2025-01-03,14,301263.0,199,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+859,2025-12-15,2025-06-25,6,44175.0,16,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+860,2025-12-06,2025-04-18,5,35587.0,25,4,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+861,2025-10-13,2025-10-13,1,12422.0,79,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+862,2025-09-17,2025-09-17,1,6250.0,105,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+863,2025-09-10,2025-01-04,14,279217.0,112,2,5,5,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Express Providencia,Express
+864,2025-09-18,2025-09-18,1,2921.0,104,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+865,2025-12-17,2025-12-17,1,11557.0,14,5,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+866,2025-03-14,2025-03-14,1,3173.0,292,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+867,2025-12-14,2025-08-25,5,42378.0,17,5,4,4,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+868,2025-12-25,2025-01-07,10,222999.0,6,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+869,2025-10-18,2025-02-11,5,38456.0,74,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+870,2025-11-27,2025-02-03,11,226910.0,34,4,5,5,Campeones,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+871,2025-11-07,2025-08-16,3,21262.0,54,3,3,3,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+872,2025-11-27,2025-06-06,5,52532.0,34,4,4,4,Campeones,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+873,2025-12-26,2025-07-16,11,278493.0,5,5,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+874,2025-02-23,2025-01-03,4,36296.0,311,1,3,3,En riesgo,True,False,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+875,2025-02-14,2025-02-14,1,3609.0,320,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+876,2025-12-09,2025-12-09,1,6962.0,22,4,2,1,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+877,2025-06-14,2025-06-14,1,2681.0,200,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+878,2025-11-19,2025-07-13,7,71392.0,42,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+879,2025-12-26,2025-11-05,13,237212.0,5,5,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Providencia,Express
+880,2025-11-27,2025-09-21,6,27385.0,34,4,4,3,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+881,2025-07-25,2025-07-25,1,6296.0,159,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+882,2025-12-05,2025-01-03,11,289337.0,26,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Temuco,Supermercado
+883,2025-12-13,2025-12-13,1,8630.0,18,4,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+884,2025-08-22,2025-01-23,6,58006.0,131,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+885,2025-08-25,2025-08-25,1,1608.0,128,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+886,2025-08-27,2025-08-27,1,10924.0,126,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+887,2025-06-24,2025-01-10,10,227215.0,190,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Nuevo 2025,Express La Florida,Express
+888,2025-12-26,2025-07-11,14,328089.0,5,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+889,2025-07-12,2025-07-12,1,5016.0,172,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+890,2025-04-24,2025-04-24,1,10922.0,251,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+891,2025-08-10,2025-08-10,1,10989.0,143,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express La Florida,Express
+892,2025-09-28,2025-01-05,9,185071.0,94,3,5,5,Leales,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+893,2025-09-09,2025-02-03,6,36515.0,113,2,4,3,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+894,2025-06-23,2025-06-23,1,4419.0,191,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+895,2025-08-04,2025-01-02,9,206615.0,149,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+896,2025-01-10,2025-01-10,1,10264.0,355,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Maipú,Supermercado
+897,2025-02-24,2025-02-24,1,2776.0,310,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express La Florida,Express
+898,2025-05-22,2025-01-13,4,36975.0,223,1,3,3,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+899,2025-10-12,2025-01-03,4,42770.0,80,3,3,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+900,2025-09-10,2025-01-04,13,200756.0,112,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+901,2025-07-24,2025-07-07,10,196638.0,160,2,5,5,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+902,2025-12-23,2025-06-07,5,29600.0,8,5,4,3,Campeones,True,False,True,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Osorno,Supermercado
+903,2025-10-15,2025-03-12,4,31760.0,77,3,3,3,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+904,2025-12-01,2025-10-20,6,50063.0,30,4,4,4,Campeones,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+905,2025-09-19,2025-08-01,4,50235.0,103,2,3,4,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+906,2025-03-16,2025-03-16,1,6132.0,290,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+907,2025-08-01,2025-05-17,3,21483.0,152,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+908,2025-12-26,2025-12-01,14,247189.0,5,5,5,5,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+909,2025-12-16,2025-02-16,6,52164.0,15,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+910,2025-02-13,2025-02-13,1,14824.0,321,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+911,2025-02-03,2025-02-03,1,15912.0,331,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Híper Puente Alto,Híper
+912,2025-09-20,2025-09-20,1,18461.0,102,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+913,2025-09-25,2025-01-24,4,39978.0,97,3,3,4,Leales,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Súper Viña,Supermercado
+914,2025-12-01,2025-10-01,6,71134.0,30,4,4,4,Campeones,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+915,2025-02-21,2025-02-21,1,7971.0,313,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+916,2025-10-26,2025-04-20,9,327670.0,66,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+917,2025-11-09,2025-11-09,1,11239.0,52,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+918,2025-02-04,2025-02-04,1,7833.0,330,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+919,2025-11-27,2025-01-05,11,248068.0,34,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+920,2025-11-05,2025-11-05,1,4705.0,56,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+921,2025-09-11,2025-02-04,4,26559.0,111,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+922,2025-01-19,2025-01-19,1,14016.0,346,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Providencia,Express
+923,2025-09-27,2025-01-08,10,189850.0,95,3,5,5,Leales,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+924,2025-12-05,2025-09-16,7,73571.0,26,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+925,2025-04-22,2025-01-03,8,168812.0,253,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+926,2025-03-22,2025-03-22,1,8778.0,284,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+927,2025-12-11,2025-07-15,6,35907.0,20,4,4,3,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+928,2025-05-20,2025-05-20,1,2991.0,225,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Nuevo 2025,Express La Florida,Express
+929,2025-07-23,2025-07-02,14,317602.0,161,2,5,5,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+930,2025-09-09,2025-04-02,6,36720.0,113,2,4,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+931,2025-05-11,2025-05-11,1,4053.0,234,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+932,2025-10-19,2025-10-19,1,8274.0,73,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+933,2025-06-06,2025-01-04,13,282920.0,208,1,5,5,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+934,2025-12-27,2025-11-18,14,268970.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+935,2025-09-09,2025-01-20,5,36727.0,113,2,4,3,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+936,2025-05-21,2025-01-23,5,40731.0,224,1,4,4,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+937,2025-08-11,2025-02-10,6,30108.0,142,2,4,3,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+938,2025-10-23,2025-10-23,1,2303.0,69,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+939,2025-09-25,2025-01-04,7,66676.0,97,3,5,4,Leales,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+940,2025-09-08,2025-09-08,1,1786.0,114,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+941,2025-11-14,2025-05-22,6,40982.0,47,4,4,4,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+942,2025-12-03,2025-04-24,10,135574.0,28,4,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+943,2025-10-26,2025-10-26,1,8576.0,66,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+944,2025-08-12,2025-08-12,1,10623.0,141,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+945,2025-05-01,2025-05-01,1,5806.0,244,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Súper Temuco,Supermercado
+946,2025-09-10,2025-09-10,1,1732.0,112,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+947,2025-03-09,2025-03-09,1,6940.0,297,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+948,2025-11-15,2025-02-09,9,134237.0,46,4,5,5,Campeones,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Osorno,Supermercado
+949,2025-09-02,2025-02-28,4,18215.0,120,2,3,2,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+950,2025-12-09,2025-12-09,1,2706.0,22,4,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+951,2025-12-20,2025-06-18,5,61171.0,11,5,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+952,2025-12-28,2025-12-28,1,3677.0,3,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+953,2025-08-26,2025-08-01,10,200686.0,127,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+954,2025-09-08,2025-09-08,1,8369.0,114,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+955,2025-11-25,2025-02-13,5,30642.0,36,4,4,3,Campeones,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+956,2025-11-21,2025-11-21,1,4324.0,40,4,2,1,Recientes,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+957,2025-11-01,2025-11-01,1,15024.0,60,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+958,2025-12-26,2025-09-12,4,34288.0,5,5,3,3,Leales,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+959,2025-09-19,2025-02-18,6,65676.0,103,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+960,2025-09-20,2025-04-21,3,21003.0,102,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+961,2025-11-08,2025-11-08,1,9131.0,53,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+962,2025-12-23,2025-11-04,12,189292.0,8,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+963,2025-12-22,2025-12-03,5,41427.0,9,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+964,2025-03-22,2025-03-22,1,8836.0,284,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+965,2025-12-03,2025-12-03,1,37811.0,28,4,2,4,Recientes,False,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+966,2025-04-08,2025-01-01,3,51046.0,267,1,3,4,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+967,2025-11-05,2025-11-05,1,4600.0,56,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+968,2025-09-22,2025-02-02,6,58138.0,100,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+969,2025-06-09,2025-01-04,13,281555.0,205,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+970,2025-12-26,2025-12-26,1,6511.0,5,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+971,2025-11-13,2025-03-05,7,74288.0,48,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+972,2025-11-12,2025-09-11,4,23877.0,49,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+973,2025-12-17,2025-01-18,11,201637.0,14,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+974,2025-06-24,2025-01-07,3,17332.0,190,1,3,2,En riesgo,True,False,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Express Providencia,Express
+975,2025-12-10,2025-05-17,5,73205.0,21,4,4,5,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+976,2025-09-08,2025-09-08,1,6255.0,114,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+977,2025-12-22,2025-12-22,1,18951.0,9,5,2,3,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+978,2025-12-27,2025-12-03,3,14560.0,4,5,3,2,Leales,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+979,2025-10-04,2025-10-04,1,2634.0,88,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+980,2025-04-22,2025-04-22,1,5448.0,253,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+981,2025-01-16,2025-01-16,1,8678.0,349,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+982,2025-04-08,2025-04-08,1,2156.0,267,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+983,2025-12-04,2025-10-12,3,31607.0,27,4,3,3,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+984,2025-04-15,2025-04-15,1,19864.0,260,1,2,3,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+985,2025-09-05,2025-09-05,1,1753.0,117,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+986,2025-11-03,2025-04-24,5,28403.0,58,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+987,2025-12-11,2025-07-01,3,22218.0,20,4,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+988,2025-09-19,2025-06-07,6,41613.0,103,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+989,2025-12-12,2025-12-12,1,5426.0,19,4,2,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+990,2025-12-09,2025-08-26,7,64629.0,22,4,5,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Osorno,Supermercado
+991,2025-12-15,2025-07-21,6,47958.0,16,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+992,2025-09-21,2025-03-17,4,18899.0,101,2,3,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+993,2025-12-19,2025-12-02,5,41534.0,12,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Temuco,Supermercado
+994,2025-09-15,2025-09-15,1,10140.0,107,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+995,2025-12-14,2025-11-02,4,16630.0,17,5,3,2,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+996,2025-08-12,2025-08-12,1,5961.0,141,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+997,2025-12-10,2025-04-14,7,81899.0,21,4,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+998,2025-12-12,2025-06-05,7,29134.0,19,4,5,3,Campeones,True,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+999,2025-10-28,2025-07-16,3,43989.0,64,3,3,4,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1000,2025-10-22,2025-10-22,1,903.0,70,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+1001,2025-12-17,2025-11-06,6,58319.0,14,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Express Puerto Montt,Express
+1002,2025-10-10,2025-06-26,6,46940.0,82,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+1003,2025-11-08,2025-02-20,13,222324.0,53,3,5,5,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1004,2025-09-18,2025-03-12,5,37864.0,104,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1005,2025-08-13,2025-08-13,1,24019.0,140,2,2,3,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+1006,2025-10-26,2025-06-14,9,117868.0,66,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+1007,2025-12-04,2025-05-13,12,269036.0,27,4,5,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+1008,2025-10-13,2025-06-14,3,26770.0,79,3,3,3,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Express Providencia,Express
+1009,2025-10-06,2025-10-06,1,4514.0,86,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1010,2025-12-26,2025-12-02,5,53030.0,5,5,4,4,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1011,2025-12-24,2025-01-15,6,47885.0,7,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1012,2025-12-19,2025-12-11,3,22385.0,12,5,3,3,Leales,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+1013,2025-10-22,2025-10-22,1,3759.0,70,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+1014,2025-10-25,2025-05-02,9,175187.0,67,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Puerto Montt,Express
+1015,2025-08-14,2025-08-14,1,7972.0,139,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+1016,2025-01-12,2025-01-12,1,9493.0,353,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+1017,2025-10-09,2025-10-09,1,1105.0,83,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+1018,2025-10-22,2025-10-22,1,7902.0,70,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1019,2025-12-26,2025-11-24,3,26604.0,5,5,3,3,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+1020,2025-12-28,2025-11-02,10,157197.0,3,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1021,2025-05-05,2025-05-05,1,6168.0,240,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+1022,2025-12-06,2025-01-13,13,204079.0,25,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1023,2025-04-15,2025-02-15,3,28435.0,260,1,3,3,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+1024,2025-07-16,2025-07-16,1,8439.0,168,2,2,2,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+1025,2025-11-12,2025-11-12,1,13756.0,49,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+1026,2025-01-12,2025-01-12,1,7220.0,353,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Súper Osorno,Supermercado
+1027,2025-12-24,2025-06-12,4,17635.0,7,5,3,2,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+1028,2025-06-08,2025-01-21,6,53637.0,206,1,4,4,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+1029,2025-12-27,2025-12-11,5,44664.0,4,5,4,4,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+1030,2025-12-18,2025-12-18,1,7340.0,13,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1031,2025-12-06,2025-03-02,5,56386.0,25,4,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1032,2025-04-18,2025-04-18,1,9684.0,257,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+1033,2025-04-02,2025-04-02,1,3219.0,273,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1034,2025-06-25,2025-06-02,13,259643.0,189,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1035,2025-09-05,2025-04-06,7,34940.0,117,2,5,3,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+1036,2025-12-16,2025-12-16,1,11260.0,15,5,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+1037,2025-11-28,2025-11-28,1,10229.0,33,4,2,2,Recientes,False,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Providencia,Express
+1038,2025-09-13,2025-02-09,7,85468.0,109,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+1039,2025-12-23,2025-12-01,12,221100.0,8,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1040,2025-10-22,2025-05-03,3,30849.0,70,3,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+1041,2025-04-06,2025-04-06,1,3475.0,269,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+1042,2025-06-02,2025-06-02,1,5906.0,212,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1043,2025-09-24,2025-03-19,6,66190.0,98,3,4,4,Leales,True,False,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+1044,2025-10-17,2025-10-17,1,13861.0,75,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+1045,2025-12-05,2025-03-07,5,29812.0,26,4,4,3,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1046,2025-10-18,2025-03-17,4,29351.0,74,3,3,3,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1047,2025-09-22,2025-07-24,4,25052.0,100,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+1048,2025-09-08,2025-01-14,7,37574.0,114,2,5,4,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+1049,2025-12-22,2025-02-19,6,56529.0,9,5,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Viña,Supermercado
+1050,2025-12-14,2025-07-15,5,36623.0,17,5,4,3,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Temuco,Supermercado
+1051,2025-11-19,2025-11-19,1,9599.0,42,4,2,2,Recientes,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+1052,2025-12-23,2025-10-02,13,289956.0,8,5,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1053,2025-12-17,2025-04-15,12,226614.0,14,5,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1054,2025-11-26,2025-11-26,1,4892.0,35,4,2,1,Recientes,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+1055,2025-01-07,2025-01-07,1,1161.0,358,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1056,2025-09-28,2025-09-03,14,286265.0,94,3,5,5,Leales,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1057,2025-09-10,2025-09-10,1,4620.0,112,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1058,2025-12-23,2025-12-02,6,48460.0,8,5,4,4,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1059,2025-01-24,2025-01-24,1,6888.0,341,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1060,2025-03-28,2025-03-28,1,4417.0,278,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+1061,2025-06-25,2025-01-17,11,251959.0,189,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1062,2025-12-01,2025-06-02,14,305045.0,30,4,5,5,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1063,2025-11-22,2025-06-10,4,28375.0,39,4,3,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+1064,2025-12-11,2025-12-11,1,2220.0,20,4,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+1065,2025-11-24,2025-10-05,11,160643.0,37,4,5,5,Campeones,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+1066,2025-11-20,2025-04-08,7,42653.0,41,4,5,4,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+1067,2025-12-20,2025-03-06,6,16487.0,11,5,4,2,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+1068,2025-11-13,2025-04-11,10,236992.0,48,4,5,5,Campeones,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1069,2025-10-25,2025-02-17,6,39535.0,67,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+1070,2025-11-21,2025-04-14,10,177571.0,40,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Súper Osorno,Supermercado
+1071,2025-01-02,2025-01-02,1,7784.0,363,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Concepción,Híper
+1072,2025-10-19,2025-10-19,1,6818.0,73,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Híper Concepción,Híper
+1073,2025-10-25,2025-10-25,1,37560.0,67,3,2,4,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+1074,2025-09-18,2025-04-09,4,21568.0,104,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+1075,2025-09-15,2025-07-03,6,39420.0,107,2,4,4,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1076,2025-12-23,2025-08-08,5,32676.0,8,5,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1077,2025-08-01,2025-08-01,1,13408.0,152,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1078,2025-12-02,2025-05-10,11,262098.0,29,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Osorno,Supermercado
+1079,2025-12-04,2025-04-09,5,75178.0,27,4,4,5,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1080,2025-03-14,2025-03-14,1,13588.0,292,1,2,2,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1081,2025-12-23,2025-08-07,5,98521.0,8,5,4,5,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1082,2025-12-27,2025-12-27,1,5763.0,4,5,2,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+1083,2025-10-24,2025-10-24,1,4800.0,68,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+1084,2025-12-02,2025-07-09,4,28572.0,29,4,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+1085,2025-10-20,2025-10-20,1,16998.0,72,3,2,2,Necesitan atención,False,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+1086,2025-12-27,2025-12-03,8,241435.0,4,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1087,2025-10-09,2025-02-21,5,36540.0,83,3,4,3,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1088,2025-12-16,2025-04-23,6,38672.0,15,5,4,4,Campeones,True,False,True,True,True,Negocio,Plus,Nuevo 2025,Híper Concepción,Híper
+1089,2025-11-24,2025-11-24,1,6674.0,37,4,2,1,Recientes,False,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+1090,2025-10-23,2025-02-10,6,57707.0,69,3,4,4,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+1091,2025-12-09,2025-12-09,1,13421.0,22,4,2,2,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Maipú,Supermercado
+1092,2025-11-26,2025-01-05,3,19795.0,35,4,3,3,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+1093,2025-11-04,2025-11-04,1,7589.0,57,3,2,2,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1094,2025-05-10,2025-05-10,1,9014.0,235,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+1095,2025-10-10,2025-03-18,8,145093.0,82,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+1096,2025-11-04,2025-11-04,1,3817.0,57,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+1097,2025-10-09,2025-01-05,11,218772.0,83,3,5,5,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1098,2025-10-19,2025-10-19,1,2926.0,73,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express Providencia,Express
+1099,2025-12-28,2025-10-05,4,42325.0,3,5,3,4,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express La Florida,Express
+1100,2025-09-04,2025-01-15,10,200398.0,118,2,5,5,En riesgo,True,False,False,False,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express La Florida,Express
+1101,2025-02-25,2025-02-25,1,2390.0,309,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Puerto Montt,Express
+1102,2025-12-09,2025-12-09,1,3657.0,22,4,2,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Osorno,Supermercado
+1103,2025-12-17,2025-12-17,1,3061.0,14,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express La Florida,Express
+1104,2025-07-19,2025-01-11,6,51280.0,165,2,4,4,En riesgo,True,False,False,False,True,Negocio,Black,Previo (alta antes de 2025),Tienda Online,Online
+1105,2025-07-14,2025-07-14,1,2070.0,170,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Tienda Online,Online
+1106,2025-12-03,2025-07-02,3,29169.0,28,4,3,3,Leales,True,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+1107,2025-12-27,2025-12-18,3,9238.0,4,5,3,2,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+1108,2025-03-27,2025-03-27,1,5861.0,279,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1109,2025-10-26,2025-01-14,6,34544.0,66,3,4,3,Leales,True,False,False,True,True,Negocio,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1110,2025-12-28,2025-12-04,6,50576.0,3,5,4,4,Campeones,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1111,2025-12-19,2025-12-09,3,28207.0,12,5,3,3,Leales,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1112,2025-12-25,2025-12-25,1,7964.0,6,5,2,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+1113,2025-06-14,2025-01-01,11,195485.0,200,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Híper Concepción,Híper
+1114,2025-05-20,2025-01-06,9,199574.0,225,1,5,5,En riesgo,True,False,False,False,False,Negocio,Black,Previo (alta antes de 2025),Súper Maipú,Supermercado
+1115,2025-01-08,2025-01-08,1,4164.0,357,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1116,2025-09-02,2025-09-02,1,5260.0,120,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Súper Maipú,Supermercado
+1117,2025-06-13,2025-01-07,11,195522.0,201,1,5,5,En riesgo,True,False,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1118,2025-12-10,2025-06-09,4,48114.0,21,4,3,4,Leales,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1119,2025-12-01,2025-09-06,3,24921.0,30,4,3,3,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1120,2025-04-06,2025-04-06,1,11514.0,269,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1121,2025-12-09,2025-01-02,9,274045.0,22,4,5,5,Campeones,True,False,True,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1122,2025-12-21,2025-05-08,7,55622.0,10,5,5,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1123,2025-11-15,2025-06-18,10,231615.0,46,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1124,2025-12-12,2025-01-13,3,21497.0,19,4,3,3,Leales,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1125,2025-07-20,2025-07-20,1,7637.0,164,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Express Providencia,Express
+1126,2025-02-24,2025-02-24,1,3344.0,310,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+1127,2025-05-15,2025-04-28,2,12884.0,230,1,2,2,Hibernando / perdidos,True,False,False,False,False,Persona/Hogar,Black,Nuevo 2025,Súper Maipú,Supermercado
+1128,2025-12-24,2025-10-27,6,36892.0,7,5,4,3,Campeones,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+1129,2025-10-17,2025-03-24,4,15753.0,75,3,3,2,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1130,2025-12-28,2025-12-28,1,14205.0,3,5,2,2,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Express Providencia,Express
+1131,2025-12-07,2025-12-07,1,4983.0,24,4,2,1,Recientes,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1132,2025-11-05,2025-01-12,6,48227.0,56,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Express Puerto Montt,Express
+1133,2025-12-09,2025-08-11,5,49627.0,22,4,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Híper Puente Alto,Híper
+1134,2025-12-04,2025-10-06,4,41203.0,27,4,3,4,Leales,False,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1135,2025-11-23,2025-09-11,6,46361.0,38,4,4,4,Campeones,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Tienda Online,Online
+1136,2025-06-19,2025-05-02,8,151068.0,195,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1137,2025-06-15,2025-06-15,1,3580.0,199,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+1138,2025-08-15,2025-08-15,1,2986.0,138,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+1139,2025-11-22,2025-07-18,6,42616.0,39,4,4,4,Campeones,True,False,False,True,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1140,2025-10-13,2025-01-16,6,74966.0,79,3,4,5,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1141,2025-11-27,2025-06-10,6,33891.0,34,4,4,3,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Temuco,Supermercado
+1142,2025-10-20,2025-07-25,4,27327.0,72,3,3,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Express Puerto Montt,Express
+1143,2025-09-10,2025-09-10,1,1173.0,112,2,2,1,Hibernando / perdidos,True,True,False,False,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1144,2025-10-13,2025-02-15,10,157034.0,79,3,5,5,Leales,True,False,False,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1145,2025-10-20,2025-01-04,9,157301.0,72,3,5,5,Leales,True,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Súper Maipú,Supermercado
+1147,2025-12-10,2025-02-08,6,43183.0,21,4,4,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1148,2025-11-04,2025-09-02,7,20861.0,57,3,5,3,Leales,True,False,False,True,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+1149,2025-11-17,2025-01-15,13,225133.0,44,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1150,2025-11-19,2025-09-07,5,30226.0,42,4,4,3,Campeones,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online
+1151,2025-10-10,2025-01-05,5,61784.0,82,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Express Providencia,Express
+1152,2025-08-27,2025-08-02,8,148796.0,126,2,5,5,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Express La Florida,Express
+1153,2025-11-19,2025-05-04,5,56130.0,42,4,4,4,Campeones,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+1154,2025-09-01,2025-09-01,1,6286.0,121,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Clásico,Nuevo 2025,Híper Concepción,Híper
+1155,2025-06-24,2025-04-05,12,268272.0,190,1,5,5,En riesgo,True,False,False,False,False,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+1156,2025-12-16,2025-11-03,8,174665.0,15,5,5,5,Campeones,False,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1157,2025-11-18,2025-10-04,6,53528.0,43,4,4,4,Campeones,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Súper Viña,Supermercado
+1158,2025-11-25,2025-11-25,1,5598.0,36,4,2,1,Recientes,False,False,False,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+1159,2025-12-27,2025-11-19,5,16555.0,4,5,4,2,Campeones,False,False,True,True,True,Negocio,Black,Nuevo 2025,Súper Maipú,Supermercado
+1160,2025-06-28,2025-01-06,9,155451.0,186,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1161,2025-12-16,2025-12-16,1,3755.0,15,5,2,1,Recientes,False,False,True,True,True,Persona/Hogar,Clásico,Nuevo 2025,Express Providencia,Express
+1162,2025-06-19,2025-05-06,13,241236.0,195,1,5,5,En riesgo,True,False,False,False,False,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1163,2025-12-03,2025-07-14,10,218503.0,28,4,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1164,2025-03-13,2025-03-13,1,3252.0,293,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1165,2025-09-12,2025-02-23,5,66477.0,110,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Híper Concepción,Híper
+1166,2025-12-16,2025-10-06,6,65487.0,15,5,4,4,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1167,2025-07-18,2025-07-18,1,3153.0,166,2,2,1,Hibernando / perdidos,True,True,False,False,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1168,2025-12-13,2025-12-13,1,2052.0,18,4,2,1,Recientes,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1169,2025-09-06,2025-02-23,3,26850.0,116,2,3,3,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1170,2025-11-05,2025-06-10,5,60257.0,56,3,4,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Nuevo 2025,Híper Puente Alto,Híper
+1171,2025-10-17,2025-10-17,1,1835.0,75,3,2,1,Necesitan atención,False,False,False,True,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1172,2025-01-17,2025-01-17,1,5380.0,348,1,2,1,Hibernando / perdidos,True,True,False,False,False,Negocio,Clásico,Previo (alta antes de 2025),Súper Osorno,Supermercado
+1173,2025-08-01,2025-03-07,4,38746.0,152,2,3,4,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Híper Concepción,Híper
+1174,2025-01-10,2025-01-10,1,10396.0,355,1,2,2,Hibernando / perdidos,True,True,False,False,False,Negocio,Plus,Previo (alta antes de 2025),Súper Temuco,Supermercado
+1175,2025-12-25,2025-08-11,15,414944.0,6,5,5,5,Campeones,True,False,True,True,True,Negocio,Black,Nuevo 2025,Tienda Online,Online
+1176,2025-02-10,2025-02-10,1,3194.0,324,1,2,1,Hibernando / perdidos,True,True,False,False,False,Persona/Hogar,Clásico,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1177,2025-08-15,2025-08-15,1,14650.0,138,2,2,2,Hibernando / perdidos,True,True,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1178,2025-09-16,2025-06-02,4,27839.0,106,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Híper Puente Alto,Híper
+1179,2025-11-26,2025-02-05,12,378754.0,35,4,5,5,Campeones,True,False,False,True,True,Persona/Hogar,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1180,2025-10-11,2025-01-11,6,68219.0,81,3,4,4,Leales,True,False,False,True,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1181,2025-09-12,2025-01-13,13,305419.0,110,2,5,5,En riesgo,True,False,False,False,True,Negocio,Plus,Previo (alta antes de 2025),Tienda Online,Online
+1182,2025-10-28,2025-10-07,11,222529.0,64,3,5,5,Leales,False,False,False,True,True,Negocio,Black,Nuevo 2025,Súper Temuco,Supermercado
+1183,2025-10-12,2025-01-25,7,53908.0,80,3,5,4,Leales,True,False,False,True,True,Persona/Hogar,Black,Previo (alta antes de 2025),Híper Puente Alto,Híper
+1184,2025-12-20,2025-04-14,5,22819.0,11,5,4,3,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1185,2025-09-08,2025-06-18,3,15732.0,114,2,3,2,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Súper Viña,Supermercado
+1186,2025-09-15,2025-02-01,3,23685.0,107,2,3,3,En riesgo,True,False,False,False,True,Persona/Hogar,Black,Previo (alta antes de 2025),Express Puerto Montt,Express
+1187,2025-12-26,2025-12-26,1,9267.0,5,5,2,2,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Súper Maipú,Supermercado
+1188,2025-12-13,2025-06-28,5,44822.0,18,4,4,4,Campeones,True,False,True,True,True,Negocio,Clásico,Nuevo 2025,Tienda Online,Online
+1189,2025-12-25,2025-12-01,13,355621.0,6,5,5,5,Campeones,False,False,True,True,True,Negocio,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1190,2025-08-28,2025-04-03,6,51891.0,125,2,4,4,En riesgo,True,False,False,False,True,Negocio,Clásico,Nuevo 2025,Súper Viña,Supermercado
+1191,2025-09-13,2025-05-05,3,21451.0,109,2,3,3,En riesgo,True,False,False,False,True,Negocio,Black,Nuevo 2025,Express Puerto Montt,Express
+1192,2025-09-27,2025-01-21,5,65232.0,95,3,4,4,Leales,True,False,False,False,True,Negocio,Clásico,Previo (alta antes de 2025),Tienda Online,Online
+1193,2025-12-08,2025-09-01,10,217677.0,23,4,5,5,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Tienda Online,Online
+1194,2025-09-17,2025-02-19,6,78122.0,105,2,4,5,En riesgo,True,False,False,False,True,Negocio,Plus,Nuevo 2025,Tienda Online,Online
+1195,2025-10-20,2025-10-20,1,1943.0,72,3,2,1,Necesitan atención,False,False,False,True,True,Persona/Hogar,Plus,Nuevo 2025,Express La Florida,Express
+1196,2025-10-08,2025-05-25,5,31759.0,84,3,4,3,Leales,True,False,False,True,True,Negocio,Plus,Nuevo 2025,Express La Florida,Express
+1197,2025-12-15,2025-01-03,7,42584.0,16,5,5,4,Campeones,True,False,True,True,True,Persona/Hogar,Plus,Nuevo 2025,Súper Viña,Supermercado
+1198,2025-08-27,2025-02-04,5,38464.0,126,2,4,4,En riesgo,True,False,False,False,True,Persona/Hogar,Clásico,Nuevo 2025,Súper Temuco,Supermercado
+1199,2025-12-22,2025-12-22,1,6940.0,9,5,2,1,Recientes,False,False,True,True,True,Negocio,Plus,Nuevo 2025,Express Puerto Montt,Express
+1200,2025-12-03,2025-12-03,1,13072.0,28,4,2,2,Recientes,False,False,True,True,True,Persona/Hogar,Black,Nuevo 2025,Tienda Online,Online

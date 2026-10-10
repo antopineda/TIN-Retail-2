@@ -1,0 +1,17 @@
+﻿id,tema,supuesto,origen
+S01,Período de análisis,Enero–diciembre 2025. Las 37 boletas con fecha 2026 se conservan con flag_fuera_periodo=1 y quedan fuera de las métricas.,Decisión del equipo
+S02,Monto de venta,"Venta de una boleta = suma de monto_linea registrado. El monto recalculado (cantidad × precio × (1 − desc)) queda como columna de control. Diferencia total 2025: 0,81%.",Pregunta descartada; grano boleta
+S03,IVA,Precios y montos con IVA incluido (precio de góndola).,Sin respuesta
+S04,Devoluciones,"Líneas con cantidad negativa restan de la venta. Una boleta con venta neta <= 0 (solo devoluciones, o devolución mayor que la compra) no cuenta como compra para la retención.",Sin respuesta
+S05,Descuento 10% sin campaña,Se trata como beneficio permanente de la tarjeta (solo ocurre en compras identificadas).,Sin respuesta
+S06,Fecha de alta,"Registra la inscripción, no la primera compra. Cliente previo = alta anterior a 2025; cliente nuevo = alta en 2025 (su primera compra observada define la cohorte).",Pregunta 1 sin respuesta
+S07,Tipo de cliente,Se reportan dos cortes: segmento de la tarjeta y persona/hogar vs. negocio (inferido del prefijo del nombre).,Pregunta 2 sin respuesta
+S08,Canal Online,"Se incluye como un local más (tienda 10), con es_online para filtrarlo.",Pregunta 3 sin respuesta
+S09,Local de un cliente,Local principal = tienda con más compras válidas en 2025; empate -> la de la compra más reciente.,Decisión del equipo
+S10,Cliente,cliente_id = tarjeta del hogar (acta). No se intenta separar personas.,Acta
+S11,Ventana de inactividad,90 días como principal; 30 (creencia de la empresa) y 180 como sensibilidad.,Informe + datos
+S12,Duplicados,"Las 61 boletas idénticas se eliminan. Pares (boleta, línea) repetidos con SKU distinto son productos distintos: se renumeran, no se borran.",Decisión del equipo
+S13,Columnas mes y region de boletas,Se descartan; mes y región se derivan de la fecha y de la tienda.,Decisión del equipo
+S14,Productos,"SKU-9xxx sin maestro se conservan como ""Sin maestro"". SKU-0001 duplicado: se conserva la fila activa. ASEO = Limpieza (mismas subcategorías).",Decisión del equipo
+S15,Datos personales,"RUT y nombre solo existen en plata (uso interno). Oro no contiene identificadores directos (minimización, Ley 21.719).",Criterio más restrictivo
+S16,Deflactor,"IPC general de mindicador.cl, índice base dic-2024 = 100.",Fuente obligatoria del caso
