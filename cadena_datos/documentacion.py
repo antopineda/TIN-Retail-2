@@ -156,7 +156,8 @@ def resumen_hallazgos(oro, val):
            f'Recompras dentro de 30 d: {_pct(k.pct_recompras_dentro_30d)}; dentro de 90 d: {_pct(k.pct_recompras_dentro_90d)}.',
            '- Clientes activos al 31-12-2025: ' + ' · '.join(f'{_pct(k[f"pct_activos_{v}d_al_corte"])} ({v} d)' for v in config.VENTANAS)
            + '. **La definición de "activo" cambia la cifra drásticamente.** Con 365 d todos quedan activos: con 12 meses de datos esa ventana no discrimina.',
-           f'- Compradores de una sola vez (con al menos {w} días para volver): {_pct(k.pct_una_sola_vez)}.',
+           f'- Compradores de una sola vez: {_pct(k.pct_una_sola_vez)}, calculado solo sobre los clientes que tuvieron al menos {w} días '
+           f'para volver (primera compra hasta {(config.FECHA_CORTE - pd.Timedelta(days=w)).strftime("%d-%m-%Y")}).',
            f'- Retención trimestral (W={w} d, base confiable desde Q2): ' + ' · '.join(
                f'{p}: {_pct(r.tasa_retencion)}' for p, r in q.iterrows() if r.base_confiable) + '.',
            f'- Q4 con W={w} d: {_num(q.loc["2025Q4"].perdidos)} clientes perdidos vs. {_num(q.loc["2025Q4"].nuevos)} nuevos '
