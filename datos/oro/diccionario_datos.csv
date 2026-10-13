@@ -18,7 +18,7 @@ dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,nombre,object,
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,formato,object,"Express, Supermercado, Híper u Online",0,10
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,es_online,bool,True si la compra/tienda es del canal Online (tienda 10),0,10
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,comuna,object,Comuna,0,10
-dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,region,object,Región (derivada de la comuna; La Florida corregida a Metropolitana),0,10
+dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,region,object,"Región (derivada de la comuna; La Florida corregida a Metropolitana). Para la Tienda Online es la región donde está registrada (Providencia), no donde están sus clientes: para cortes geográficos usar macrozona",0,10
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,macrozona,object,"Metropolitana, Centro sur o Sur (README); la Tienda Online tiene macrozona ""Online"" porque vende a toda la cadena (S08)",0,10
 dim_medio_pago,Medios de pago. Grano: 1 medio.,medio_key,int64,Llave de medio de pago,0,4
 dim_medio_pago,Medios de pago. Grano: 1 medio.,medio,object,"Efectivo, Débito, Crédito o App",0,4

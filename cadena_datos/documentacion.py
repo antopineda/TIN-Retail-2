@@ -40,7 +40,7 @@ COLUMNAS = {
     'ipc_indice': f'Índice IPC encadenado, base {config.IPC_BASE} = 100',
     # dim_tienda / medio / producto / campaña
     'nombre': 'Nombre de la tienda / producto / campaña', 'formato': 'Express, Supermercado, Híper u Online', 'comuna': 'Comuna',
-    'region': 'Región (derivada de la comuna; La Florida corregida a Metropolitana)', 'macrozona': 'Metropolitana, Centro sur o Sur (README); la Tienda Online tiene macrozona "Online" porque vende a toda la cadena (S08)',
+    'region': 'Región (derivada de la comuna; La Florida corregida a Metropolitana). Para la Tienda Online es la región donde está registrada (Providencia), no donde están sus clientes: para cortes geográficos usar macrozona', 'macrozona': 'Metropolitana, Centro sur o Sur (README); la Tienda Online tiene macrozona "Online" porque vende a toda la cadena (S08)',
     'medio': 'Efectivo, Débito, Crédito o App', 'categoria': 'Categoría canónica (8) o "No informada"', 'subcategoria': 'Subcategoría',
     'marca': 'Marca', 'proveedor': 'Proveedor', 'costo_unitario': 'Costo unitario del maestro (CLP; supuesto sin IVA)',
     'precio_lista': 'Precio de lista del maestro (CLP)', 'activo': 'Producto activo en el maestro',
