@@ -22,9 +22,7 @@ TIN-Retail-2/
 │   ├── bronce/   (no se sube: tiene RUT y nombres; se regenera)
 │   ├── plata/    (no se sube: tiene RUT y nombres; se regenera)
 │   └── oro/      ← tablas finales para reportería (sin datos personales)
-├── exploracion/             scripts del diagnóstico inicial (solo lectura) y sus salidas
-└── reportes/
-    └── diagnostico_retail_set2.html  diagnóstico de calidad de datos + plan de trabajo (abrir en el navegador)
+└── exploracion/             scripts del diagnóstico inicial (solo lectura) y sus salidas
 ```
 
 ## Cómo correrlo
@@ -57,8 +55,7 @@ python -m pytest cadena_datos/tests -q
 ### Paso 1 — Diagnóstico de los datos
 
 Antes de limpiar nada, perfilamos cada tabla para medir sus problemas reales: nulos, duplicados, formatos,
-llaves que no cruzan y valores imposibles. Los scripts están en `exploracion/` y el informe completo en
-`reportes/diagnostico_retail_set2.html`, que incluye:
+llaves que no cruzan y valores imposibles. Los scripts y sus salidas están en `exploracion/`. El diagnóstico incluyó:
 
 - el entendimiento del caso y la "prueba ácida" de cada pregunta de negocio,
 - el perfilamiento tabla por tabla, con cada hallazgo etiquetado como **verbalizado** (lo dijo la contraparte),

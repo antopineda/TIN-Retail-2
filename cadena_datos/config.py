@@ -112,7 +112,7 @@ SUPUESTOS = [
      'decidio': 'Contraparte (correo)', 'fecha': '13-10-2026'},
     {'id': 'S09', 'tema': 'Local de un cliente',
      'supuesto': 'Local principal = tienda con más compras válidas en 2025; empate -> la de la compra más reciente.',
-     'por_que': 'La contraparte pidió la retención por local y 706 clientes compran en más de un local: hay que asignarlos a uno para no contarlos dos veces.',
+     'por_que': 'La contraparte pidió la retención por local y 704 clientes compran en más de una tienda física: hay que asignarlos a uno para no contarlos dos veces.',
      'efecto_si_falso': 'Con otra asignación (por ejemplo, el local de la primera compra) cambian las tasas por local, no el total.',
      'decidio': 'Equipo', 'fecha': '09-10-2026'},
     {'id': 'S10', 'tema': 'Cliente = hogar',
@@ -124,7 +124,7 @@ SUPUESTOS = [
      'supuesto': '90 días como ventana principal; 30, 180 y 365 días como sensibilidad.',
      'por_que': 'No hay ventana oficial. El 92,8% de las recompras ocurre dentro de 90 días (p90 = 74 días); 30 es la creencia de la empresa; '
                 '365 es una alternativa del enunciado, pero con 12 meses de datos no discrimina.',
-     'efecto_si_falso': 'La retención Q4 cambia según la ventana (ver mart_kpi_resumen: retencion_Q4_*). La conclusión depende de la definición.',
+     'efecto_si_falso': 'La retención de Q4 cambia según la ventana: 33,2% (30 días), 51,1% (90), 82,5% (180) y 100% (365). La conclusión depende de la definición.',
      'decidio': 'Equipo', 'fecha': '09-10-2026'},
     {'id': 'S12', 'tema': 'Duplicados y anónimos',
      'supuesto': 'Las 61 boletas idénticas cuentan una vez. Las boletas sin cliente quedan fuera de la retención, sin repartirlas.',
