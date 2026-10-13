@@ -1,0 +1,7 @@
+# Bronce y plata contienen datos personales (RUT, nombres): no se suben (Ley 21.719, minimización).
+# Se regeneran con: python cadena_datos/run_pipeline.py
+datos/bronce/
+datos/plata/
+__pycache__/
+.pytest_cache/
+.DS_Store

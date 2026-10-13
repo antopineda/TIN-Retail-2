@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico Retail Set 2</title>
+<style>
+:root{
+  --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f1efe9; --text:#1f2328; --muted:#5b616b; --border:#dcd8cf;
+  --accent:#1f4e79; --accent-soft:#e3ecf6;
+  --v:#7a4b00; --v-bg:#fbeccc; --m:#0b5d3b; --m-bg:#d7f0e3; --i:#5a2d82; --i-bg:#ece1f7;
+  --hi:#a4262c; --hi-bg:#fbe3e4; --me:#8a5a00; --me-bg:#fff1cf; --lo:#3b5b7a; --lo-bg:#e3edf6;
+  --code:#f0eee8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181c; --surface:#1e2127; --surface-2:#252930; --text:#e6e6e3; --muted:#a3a8b0; --border:#353a42;
+    --accent:#8db8e6; --accent-soft:#233447;
+    --v:#f3c472; --v-bg:#3d2f12; --m:#7fd8a9; --m-bg:#16372a; --i:#cda8f0; --i-bg:#2f2240;
+    --hi:#f2959a; --hi-bg:#44191c; --me:#f1c46b; --me-bg:#3b2d10; --lo:#9cc3e8; --lo-bg:#1f3043;
+    --code:#2a2e35;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#16181c; --surface:#1e2127; --surface-2:#252930; --text:#e6e6e3; --muted:#a3a8b0; --border:#353a42;
+    --accent:#8db8e6; --accent-soft:#233447;
+    --v:#f3c472; --v-bg:#3d2f12; --m:#7fd8a9; --m-bg:#16372a; --i:#cda8f0; --i-bg:#2f2240;
+    --hi:#f2959a; --hi-bg:#44191c; --me:#f1c46b; --me-bg:#3b2d10; --lo:#9cc3e8; --lo-bg:#1f3043;
+    --code:#2a2e35;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1120px;margin:0 auto;padding:32px 16px 80px}
+header.cover{border-bottom:3px solid var(--accent);padding-bottom:16px;margin-bottom:24px}
+header.cover h1{margin:0 0 6px;font-size:28px;color:var(--accent)}
+header.cover p{margin:2px 0;color:var(--muted)}
+h2{font-size:22px;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:6px;margin-top:48px;scroll-margin-top:12px}
+h3{font-size:17px;margin-top:28px;scroll-margin-top:12px}
+h4{font-size:15px;margin:20px 0 6px}
+a{color:var(--accent)}
+code,kbd{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;font-family:Consolas,"Cascadia Mono",monospace}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 20px}
+.toc ol{margin:6px 0;padding-left:22px}
+.toc li{margin:3px 0}
+.toc ol ol{list-style:lower-alpha}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:14px 0}
+.exec{border-left:5px solid var(--accent)}
+.exec ul{margin:6px 0;padding-left:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.kpi b{display:block;font-size:22px;color:var(--accent)}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.tw{overflow-x:auto;margin:10px 0 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left}
+th{background:var(--surface-2);font-weight:600;position:sticky;top:0}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;padding:1px 7px;border-radius:999px;white-space:nowrap}
+.V{color:var(--v);background:var(--v-bg)} .M{color:var(--m);background:var(--m-bg)} .I{color:var(--i);background:var(--i-bg)}
+.alta{color:var(--hi);background:var(--hi-bg)} .media{color:var(--me);background:var(--me-bg)} .baja{color:var(--lo);background:var(--lo-bg)}
+.ok{color:var(--m);background:var(--m-bg)} .vacia{color:var(--hi);background:var(--hi-bg)} .debil{color:var(--me);background:var(--me-bg)}
+.legend{font-size:13px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.warn{border-left:4px solid var(--hi);background:var(--hi-bg);padding:10px 14px;border-radius:6px;margin:12px 0}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:6px;margin:12px 0}
+pre.send{white-space:pre-wrap;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;font:14px/1.55 "Segoe UI",system-ui,sans-serif;max-height:none}
+button.copy{background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:7px 14px;font-weight:600;cursor:pointer}
+.small{font-size:12.5px}
+ul.tight li{margin:2px 0}
+.phase{border-left:5px solid var(--border);padding-left:14px;margin:18px 0}
+.phase.bronce{border-color:#b0793a} .phase.plata{border-color:#9aa3ad} .phase.oro{border-color:#d4a72c}
+@media print{.toc,button.copy{display:none} body{background:#fff} h2{page-break-before:always}}
+</style>
+</head>
+<body>
+<main>
+
+<header class="cover">
+  <h1>Diagnóstico de datos y plan de trabajo — Multitienda del Sur SpA (Set 2)</h1>
+  <p>Proyecto semestral IIC3752 · Caso Retail · Grupo 2 · Subgrupo de inspección, limpieza e integración</p>
+  <p>Fecha de elaboración: 28 de septiembre de 2026 · Fase: <b>diagnóstico y planificación (no se modificó ningún archivo original)</b></p>
+</header>
+
+<nav class="toc" aria-label="Índice">
+  <b>Índice</b>
+  <ol>
+    <li><a href="#s1">Resumen ejecutivo</a></li>
+    <li><a href="#s2">Entendimiento del caso</a>
+      <ol><li><a href="#s2a">Empresa y problema</a></li><li><a href="#s2b">Preguntas y prueba ácida</a></li></ol></li>
+    <li><a href="#s3">Diagnóstico de datos</a>
+      <ol><li><a href="#s3a">Inventario y estructura</a></li><li><a href="#s3b">boletas</a></li><li><a href="#s3c">boleta_detalle</a></li><li><a href="#s3d">clientes</a></li><li><a href="#s3e">Tablas maestras chicas</a></li><li><a href="#s3f">Maestro de productos (CSV)</a></li><li><a href="#s3g">Promociones (JSON) e IPC (API)</a></li><li><a href="#s3h">Claves e integración</a></li><li><a href="#s3i">Datos personales (Ley 21.719)</a></li><li><a href="#s3j">Acta vs. datos</a></li><li><a href="#s3k">Primeras cifras de retención (contexto)</a></li></ol></li>
+    <li><a href="#s4">Estado del informe</a></li>
+    <li><a href="#s5">Plan de trabajo</a>
+      <ol><li><a href="#s5a">Bronce</a></li><li><a href="#s5b">Plata: reglas de limpieza</a></li><li><a href="#s5c">Oro: tablas para reportería</a></li><li><a href="#s5d">Diccionario de métricas</a></li><li><a href="#s5e">Esfuerzo y división del trabajo</a></li><li><a href="#s5f">Entregas al subgrupo de reportería</a></li><li><a href="#s5g">Riesgos</a></li></ol></li>
+    <li><a href="#s6">Decisiones pendientes del equipo</a></li>
+    <li><a href="#s7">Preguntas para la contraparte</a>
+      <ol><li><a href="#s7a">Las 3 preguntas</a></li><li><a href="#s7b">Versión lista para enviar</a></li><li><a href="#s7c">Temas resueltos con supuestos</a></li></ol></li>
+    <li><a href="#s8">Anexo: archivos revisados y supuestos</a></li>
+  </ol>
+  <p class="legend">Etiquetas de evidencia: <span class="tag V">VERBALIZADO</span> lo dijo la contraparte (acta) · <span class="tag M">MEDIDO</span> lo contamos en los datos · <span class="tag I">INFERIDO</span> conclusión nuestra cruzando evidencia.</p>
+</nav>
+
+<!-- ============================ 1 ============================ -->
+<h2 id="s1">1. Resumen ejecutivo</h2>
+<div class="card exec">
+<div class="callout"><b>Actualización 09-10-2026:</b> la contraparte no respondió las preguntas. La cadena se ejecutó bajo los supuestos S01–S16 (ver <code>cadena_datos/config.py</code> y <code>datos/oro/supuestos.csv</code>). Se corre con <code>python cadena_datos/run_pipeline.py</code>; las tablas para reportería quedan en <code>datos/oro/</code> y las cifras principales en <code>datos/oro/resumen_hallazgos.md</code>. En el repositorio del grupo las fuentes están en <code>origen/</code> (contenido idéntico a <code>grupo_2</code>); las rutas del anexo corresponden a la copia de trabajo original.</div>
+<p>El set 2 (<code>grupo_2</code>) se puede integrar completo: todas las llaves de boletas, detalle, clientes, tiendas y medios de pago cruzan sin huérfanos. Pero trae <b>errores de formato y consistencia en casi todas las columnas</b>, y varios son de los que cambian la cifra de retención si no se tratan. Lo más crítico:</p>
+<ul>
+  <li><span class="tag M">MEDIDO</span> <b>61 boletas duplicadas</b> en la cabecera. Si se une sin deduplicar, el detalle queda inflado en 141 líneas y $821.974. Además hay <b>37 boletas con fecha de ene–jun 2026</b>, fuera del período del caso.</li>
+  <li><span class="tag M">MEDIDO</span> Fechas de boleta en <b>4 formatos distintos</b>. Las columnas redundantes <code>mes</code> y <code>region</code> contradicen a la fecha y a la tienda en el 7,1% y el 6,4% de las filas.</li>
+  <li><span class="tag M">MEDIDO</span> En el 5,0% de las líneas (719), el <code>monto_linea</code> <b>no cuadra</b> con cantidad × precio × (1 − descuento): está entre 5% y 51% por encima. A nivel total, la venta registrada y la calculada difieren solo 0,81%, así que se usa el total registrado por boleta como supuesto.</li>
+  <li><span class="tag M">MEDIDO</span> El <b>63% de los "clientes" tiene nombre de negocio</b> (Distribuidora, Almacén, Kiosco, Botillería, Comercial). "Tipo de cliente" puede no ser el segmento Clásico/Plus/Black.</li>
+  <li><span class="tag M">MEDIDO</span> Contra lo dicho en el acta, la <b>fecha de alta no es la primera compra</b>: coinciden solo 17 de 1.200 clientes, y 299 compraron antes de su alta. El canal Online <b>no es reciente</b>: tiene boletas desde el 1-ene-2025 y es el 24,8% de las boletas.</li>
+  <li><span class="tag M">MEDIDO</span> La ventana de inactividad cambia el resultado. Al 31-12-2025 hay 31,5% de clientes activos con ventana de 30 días, 56,8% con 90 días y 81,4% con 180 días. El 92,8% de las recompras ocurre dentro de 90 días, lo que respalda la ventana de 90 días del informe.</li>
+</ul>
+<p><b>Estado del informe:</b> "Mandato" y "Modelo dimensional" están redactados. "Cadena de datos ejecutable", "Ficha de la métrica", "Evidencia y recomendación" y "Anexos" están <b>vacías</b>. Además, el modelo excluye Online y lista medios de pago que no calzan con los datos.</p>
+<p><b>Plan:</b> ~41 h entre dos personas (≈20 h cada una), en bronce → plata (27 reglas) → oro (5 dimensiones, 2 hechos y 4 marts de retención). El 30-sep se entrega a reportería un "contrato de datos" con esquemas vacíos para que no queden bloqueados. <b>Urgente:</b> enviar antes del 30-sep las <a href="#s7b">3 preguntas de la sección 7</a> (significado de la fecha de alta, qué es "tipo de cliente", desde cuándo opera Online). El resto se resuelve con supuestos declarados.</p>
+</div>
+
+<!-- ============================ 2 ============================ -->
+<h2 id="s2">2. Entendimiento del caso</h2>
+<h3 id="s2a">2.a Empresa y problema de negocio</h3>
+<div class="card">
+<p><b>Multitienda del Sur SpA</b> es una cadena chilena de supermercados de tamaño medio. Tiene 9 locales físicos en tres macrozonas: Metropolitana (Providencia, Maipú, Puente Alto, La Florida), centro-sur (Viña del Mar, Concepción) y sur (Temuco, Puerto Montt, Osorno). Opera en tres formatos (Express, Supermercado, Híper) y tiene un canal Online que despacha desde Providencia. Su programa de fidelización con tarjeta cubre a la mayoría de los clientes frecuentes, pero una parte de las compras sigue siendo anónima.</p>
+<p><b>El problema:</b> las ventas de 2025 se ven planas y el directorio no sabe si eso es estabilidad o un estancamiento interno, es decir, si pierde a sus buenos clientes y los reemplaza con compradores ocasionales. Los reportes de hoy cortan por tienda y categoría, no por cliente en el tiempo. La tasa de retención actual la calcula Marketing como una "caja negra" a partir de una descarga del ERP <span class="tag V">VERBALIZADO</span>. La contraparte también pidió una "biblia del dato" con definiciones comunes <span class="tag V">VERBALIZADO</span>.</p>
+<p><b>Alcance acordado para la Entrega 1 (acta):</b> P1, retención vs. reposición. Se reporta con al menos dos definiciones de ventana de inactividad y la diferencia cuantificada. Quedan fuera: RFM completo, canibalización de promociones, nominal vs. real, desagregación por los 9 locales, canastas, corrección de SKU duplicados y modelado de segmentos. El IPC entra a la cadena como fuente obligatoria, pero no es el eje de la pregunta.</p>
+</div>
+
+<h3 id="s2b">2.b Preguntas de la gerencia y prueba ácida</h3>
+<p class="note">Prueba ácida: ¿qué decisión habilita la respuesta, quién la toma y cada cuánto? Si alguno de los tres no está respaldado por el acta, la pregunta se marca como candidata a consulta.</p>
+<div class="tw"><table>
+<tr><th>#</th><th>Pregunta</th><th>Decisión que habilitaría</th><th>Quién decide</th><th>Frecuencia</th><th>¿Decisión clara?</th></tr>
+<tr><td>P1</td><td>¿Retiene a sus clientes o los repone con compradores de una sola vez? <b>(elegida)</b></td><td>Dónde poner el esfuerzo de fidelización: reactivación vs. captación, y en qué locales o tipos de cliente. Además, fijar la definición oficial de "cliente activo".</td><td>Gerencia comercial, con Marketing como ejecutor (inferido; el acta no nombra un dueño)</td><td>Mensual (seguimiento); la definición se fija una vez</td><td><span class="tag debil">PARCIAL</span> Piden desagregar por tipo de cliente y local, pero no nombran qué acción concreta cambiaría con la cifra → <a href="#q-supuestos">supuesto 7.c</a></td></tr>
+<tr><td>P2</td><td>¿Quiénes son los más valiosos y cuántos se están volviendo inactivos?</td><td>Lista de clientes de alto valor en riesgo para acciones de retención dirigidas; revisar beneficios por segmento</td><td>Marketing / CRM (supuesto)</td><td>Mensual</td><td><span class="tag vacia">NO</span> Solo sabemos que la variable más valorada es la frecuencia <span class="tag V">VERBALIZADO</span> → <a href="#q-supuestos">supuesto 7.c</a>; segmento → <a href="#q2">pregunta 2</a></td></tr>
+<tr><td>P3</td><td>¿La promoción sumó ventas y clientes nuevos o solo adelantó compras?</td><td>Repetir, rediseñar o eliminar campañas como "Septiembre Imperdible"</td><td>Gerencia comercial + Marketing (supuesto)</td><td>Por campaña (≈2 al año según el JSON)</td><td><span class="tag vacia">NO</span> No se conversó en el acta. Además, la campaña 2x1 no deja rastro en el POS → <a href="#q-supuestos">supuesto 7.c</a></td></tr>
+<tr><td>P4</td><td>¿Cuánto del alza de precios es crecimiento real y cuánto inflación?</td><td>Cambiar el deflactor fijo de 3% por el IPC real en los reportes y revisar la política de precios</td><td>Gerencia comercial / Finanzas (supuesto)</td><td>Mensual</td><td><span class="tag debil">PARCIAL</span> Dicen que les es "más fácil implementar cambios", pero no qué cambios → <a href="#q-supuestos">supuesto 7.c</a></td></tr>
+</table></div>
+
+<!-- ============================ 3 ============================ -->
+<h2 id="s3">3. Diagnóstico de datos (perfilamiento real)</h2>
+<p class="note">Todas las cifras salen de ejecutar <code>exploracion/01_perfilamiento.py</code>, <code>02_profundizacion.py</code> y <code>03_chequeos_extra.py</code> (solo lectura; la SQLite se abrió en modo <code>ro</code>). Las salidas completas están en <code>exploracion/salida_*.txt</code>.</p>
+
+<h3 id="s3a">3.a Inventario y estructura</h3>
+<div class="tw"><table>
+<tr><th>Fuente / tabla</th><th class="n">Filas</th><th class="n">Cols</th><th>Grano (qué es una fila)</th><th>Rango de fechas</th><th>Tipos detectados vs esperados</th></tr>
+<tr><td><code>origen_pos.sqlite</code> · boletas</td><td class="n">6.251</td><td class="n">8</td><td>Cabecera de boleta (6.190 únicas)</td><td>01-01-2025 → 26-06-2026</td><td><code>fecha</code> TEXT (esperado DATE), <code>mes</code> TEXT (redundante), <code>cliente_id</code> leído como float por los nulos</td></tr>
+<tr><td>· boleta_detalle</td><td class="n">14.344</td><td class="n">7</td><td>Línea de boleta (1 SKU)</td><td>(vía boleta)</td><td><code>precio_unitario</code>, <code>descuento</code>, <code>monto_linea</code> TEXT (esperado numérico)</td></tr>
+<tr><td>· clientes</td><td class="n">1.200</td><td class="n">6</td><td>Cliente / tarjeta (hogar según acta)</td><td>alta 01-01-2024 → 28-12-2025</td><td><code>fecha_alta</code> TEXT, en 2 formatos</td></tr>
+<tr><td>· tiendas</td><td class="n">10</td><td class="n">4</td><td>Local (9 físicos + "Tienda Online")</td><td>—</td><td>OK</td></tr>
+<tr><td>· comunas</td><td class="n">12</td><td class="n">3</td><td>Comuna</td><td>—</td><td>OK (1 FK rota)</td></tr>
+<tr><td>· regiones</td><td class="n">5</td><td class="n">2</td><td>Región</td><td>—</td><td>OK; no trae la macrozona</td></tr>
+<tr><td>· medios_pago</td><td class="n">4</td><td class="n">2</td><td>Medio (Efectivo, Débito, Crédito, App)</td><td>—</td><td>OK</td></tr>
+<tr><td><code>origen_maestro_productos.csv</code></td><td class="n">193</td><td class="n">9</td><td>SKU (191 productos reales + header repetido + fila TOTAL)</td><td>—</td><td>Todo texto; separador <code>;</code>; <b>codificación Latin-1</b> (no UTF-8)</td></tr>
+<tr><td><code>origen_promociones.json</code></td><td class="n">2</td><td class="n">7</td><td>Campaña (con lista de SKUs)</td><td>05-05-2025 → 30-09-2025</td><td><code>descuento_pct</code> mezcla tipos: <code>"25%"</code> (texto) y <code>50</code> (número)</td></tr>
+<tr><td>API IPC <code>mindicador.cl/api/ipc/2025</code></td><td class="n">12</td><td class="n">2</td><td>Mes (variación % mensual, no índice)</td><td>ene–dic 2025</td><td>Respondió el 28-09-2026; acumulado 2025 ≈ 3,44%</td></tr>
+</table></div>
+
+<h3 id="s3b">3.b Tabla <code>boletas</code></h3>
+<div class="tw"><table>
+<tr><th>Columna</th><th class="n">% nulos</th><th>Hallazgo</th><th class="n">Registros</th><th>Evidencia</th></tr>
+<tr><td>(fila completa)</td><td class="n">—</td><td>Duplicados exactos (mismo <code>boleta_id</code> y todas las columnas)</td><td class="n">61</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td>(fila)</td><td class="n">—</td><td>Duplicados probables tras quitar los exactos (mismo cliente + fecha + tienda): 22 pares, <b>ninguno</b> con el mismo total ni los mismos productos → son compras distintas, no duplicados</td><td class="n">44</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>fecha</code></td><td class="n">0</td><td>4 formatos: <code>d-mmm-yyyy</code> con mes en español (1.612), ISO <code>yyyy-mm-dd</code> (1.552), <code>dd-mm-yy</code> (1.548), <code>dd/mm/yyyy</code> (1.539). Validamos que la barra es día/mes y no mes/día: leída como dd/mm coincide con <code>mes</code> en el 91,9% de los casos; leída como mm/dd, solo en el 3,3%</td><td class="n">6.251</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>fecha</code></td><td class="n">—</td><td>Fechas entre ene y jun 2026, fuera del año del caso. En esas filas el mes de la columna <code>mes</code> tampoco coincide (8%)</td><td class="n">37</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>mes</code></td><td class="n">0</td><td>No coincide con el mes de <code>fecha</code>; las diferencias van de −11 a +11 meses, sin patrón. Es una columna redundante y poco confiable</td><td class="n">442 (7,1%)</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>region</code></td><td class="n">0</td><td>No coincide con la región de la tienda (tienda → comuna → región). Solo 63 de esos casos coinciden con la región del cliente, así que tampoco es "región del cliente". Redundante. <i>Corregido el 09-10: el diagnóstico inicial decía 897 (14,3%) porque las 527 boletas de La Florida quedaban sin región por la FK rota.</i></td><td class="n">397 (6,4%)</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>cliente_id</code></td><td class="n">13,1</td><td>Nulo = boleta anónima (el 6,5% de la venta). Ticket mediano anónimo $4.765 vs. identificado $10.269. Entre tiendas, el % anónimo va de 10,4% a 15,1%</td><td class="n">819</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>canal</code> / <code>tienda_id</code></td><td class="n">0</td><td>Web ⇔ tienda 10 "Tienda Online" (relación 1:1 exacta). Online tiene boletas <b>todos los meses desde el 01-01-2025</b> y es el 24,8% de las boletas de 2025</td><td class="n">1.552</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>medio_id</code></td><td class="n">0</td><td>363 boletas Web pagadas en Efectivo y 1.141 presenciales pagadas con "App". Puede ser válido (pago contra entrega), pero hay que confirmarlo</td><td class="n">363 / 1.141</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>boleta_id</code></td><td class="n">0</td><td>Correlativo 700001–706190 sin saltos. Todas las boletas tienen detalle</td><td class="n">—</td><td><span class="tag M">MEDIDO</span></td></tr>
+</table></div>
+
+<h3 id="s3c">3.c Tabla <code>boleta_detalle</code></h3>
+<div class="tw"><table>
+<tr><th>Columna</th><th class="n">% nulos</th><th>Hallazgo</th><th class="n">Registros</th><th>Evidencia</th></tr>
+<tr><td>(<code>boleta_id</code>, <code>linea</code>)</td><td class="n">0</td><td>La llave natural <b>no es única</b>: hay 395 pares repetidos (790 filas). En 393 el SKU es distinto, así que son dos productos numerados ambos como "línea 1", <b>no duplicados</b>. Todos están en el tramo final de boletas (705389–706189): 395 de las 802 boletas de ese tramo</td><td class="n">790</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>precio_unitario</code></td><td class="n">0</td><td>Texto en 2 formatos: entero plano (7.880) y miles con punto (6.464). Rango $752–$9.585, sin valores ≤ 0</td><td class="n">6.464</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>monto_linea</code></td><td class="n">0</td><td>2 formatos (7.413 plano / 6.929 con punto) y 2 valores mal formados: <code>-.905</code> y <code>-.884</code>, que deberían ser −905 y −884 (verificado contra cant. × precio)</td><td class="n">6.931</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>monto_linea</code></td><td class="n">—</td><td><b>No cuadra</b> con cant. × precio × (1 − desc) (diferencia &gt; $2). La razón registrado/calculado va de 1,05 a 1,51, con mediana 1,16. Solo 45 casos están en ≈1,19, así que <b>no se explica por el IVA</b></td><td class="n">719 (5,0%)</td><td><span class="tag M">MEDIDO</span> <span class="tag I">INFERIDO</span> sin regla conocida</td></tr>
+<tr><td><code>descuento</code></td><td class="n">0</td><td>7 notaciones para 3 valores: <code>0</code> · <code>10</code>, <code>10%</code>, <code>0,10</code> · <code>25</code>, <code>25%</code>, <code>0,25</code>. Normalizado: 0% = 10.583, 10% = 3.103, 25% = 658</td><td class="n">3.761</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>descuento</code> = 10%</td><td class="n">—</td><td>Aparece <b>todos los meses</b> y en todas las tiendas y segmentos (~23% de las líneas de clientes identificados), pero en <b>0% de las anónimas</b>. Ninguna campaña del JSON lo explica</td><td class="n">3.103</td><td><span class="tag M">MEDIDO</span> → <span class="tag I">INFERIDO</span> beneficio de la tarjeta</td></tr>
+<tr><td><code>cantidad</code></td><td class="n">0</td><td>Valores negativos (−1 a −4), que parecen devoluciones: 143 líneas en 143 boletas, por −$736.893. 131 están mezcladas con ventas en la misma boleta y 12 boletas son solo devolución. Solo 10 de 137 tienen una compra previa del mismo SKU por el mismo cliente</td><td class="n">143</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>cantidad</code></td><td class="n">—</td><td>Valores de 10, 20, 30 y 40 (el resto está entre 1 y 4). Son mayormente de clientes con nombre de negocio (35 de 58 filas unidas)</td><td class="n">57</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>monto_linea</code></td><td class="n">—</td><td>Outliers sobre Q3 + 3·IQR: 278 líneas, máximo $153.480. Explicados por las cantidades grandes</td><td class="n">278</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>sku</code></td><td class="n">0</td><td>380 SKU distintos. <b>190 SKU "SKU-9xxx"</b> no existen en el maestro (215 líneas, 1,5%)</td><td class="n">215</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>precio_unitario</code> vs lista</td><td class="n">—</td><td>El precio cobrado sobre el precio de lista sube de forma lineal de 1,009 (ene) a 1,040 (dic). El mismo SKU sube 3,04% (mediana) entre enero y diciembre</td><td class="n">14.129</td><td><span class="tag M">MEDIDO</span></td></tr>
+</table></div>
+
+<h3 id="s3d">3.d Tabla <code>clientes</code></h3>
+<div class="tw"><table>
+<tr><th>Columna</th><th class="n">% nulos</th><th>Hallazgo</th><th class="n">Registros</th><th>Evidencia</th></tr>
+<tr><td><code>cliente_id</code></td><td class="n">0</td><td>PK válida (1–1.200, únicos). Los 1.200 clientes tienen al menos una boleta</td><td class="n">—</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>rut</code></td><td class="n">0</td><td>Formatos mezclados: 482 con puntos, 218 sin guion, 326 con espacios al inicio o al final y 241 con espacios internos. Una vez normalizado no hay RUT duplicados. <b>16 con dígito verificador inválido</b></td><td class="n">16 inválidos</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>nombre</code></td><td class="n">0</td><td>Solo 144 nombres distintos para 1.200 clientes, así que el nombre no sirve para deduplicar. <b>754 (62,8%) tienen nombre de negocio</b>: Distribuidora 163, Almacén 163, Kiosco 144, Botillería 144, Comercial 140. Los otros 446 son personas u hogares: Sra. 164, Sr. 156, Familia 126</td><td class="n">754</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>fecha_alta</code></td><td class="n">0</td><td>2 formatos (600 ISO / 600 dd/mm/yyyy). 377 altas son de 2024 y 823 de 2025</td><td class="n">1.200</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>fecha_alta</code> vs 1ª compra</td><td class="n">—</td><td>Solo <b>17</b> coinciden. <b>299 (24,9%) compran entre 1 y 27 días antes de su alta</b> (mediana 10 días) y 884 compran después. Las 377 altas de 2024 no tienen compras de 2024 en los datos</td><td class="n">299</td><td><span class="tag M">MEDIDO</span> contradice lo <span class="tag V">VERBALIZADO</span></td></tr>
+<tr><td><code>segmento</code></td><td class="n">0</td><td>Plus 411 · Clásico 401 · Black 388. El segmento <b>no discrimina</b>: el ticket medio va de $13,0 mil a $14,0 mil y la frecuencia de 4,2 a 4,7 boletas/cliente en los tres. Sin historial, porque se sobrescribe <span class="tag V">VERBALIZADO</span></td><td class="n">—</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>comuna_id</code></td><td class="n">0</td><td>Sin huérfanos. Cada cliente tiene una comuna, pero 706 clientes compran en más de un local físico</td><td class="n">706</td><td><span class="tag M">MEDIDO</span></td></tr>
+</table></div>
+
+<h3 id="s3e">3.e Tablas maestras chicas (tiendas, comunas, regiones, medios)</h3>
+<ul class="tight">
+<li><span class="tag M">MEDIDO</span> La comuna <b>La Florida (id 4) apunta a <code>region_id = 9</code>, que no existe</b>. Al unir, "Express La Florida" (527 boletas) queda sin región. Lo correcto es 1 (Metropolitana).</li>
+<li><span class="tag M">MEDIDO</span> La tabla <code>regiones</code> no trae macrozona; hay que derivarla (Metropolitana / centro-sur = Valparaíso + Biobío / sur = Araucanía + Los Lagos, según el README).</li>
+<li><span class="tag M">MEDIDO</span> Formato <code>Hiper</code> sin tilde, mientras los nombres de tienda usan "Híper" y "Súper". Hay un formato adicional <code>Online</code> que el README no nombra como formato.</li>
+<li><span class="tag M">MEDIDO</span> Las comunas Talcahuano (8), Valparaíso (6) y Villarrica (10) no tienen tienda; solo aparecen como comuna de clientes.</li>
+</ul>
+
+<h3 id="s3f">3.f Maestro de productos (<code>origen_maestro_productos.csv</code>)</h3>
+<div class="tw"><table>
+<tr><th>Columna</th><th>Hallazgo</th><th class="n">Registros</th><th>Evidencia</th></tr>
+<tr><td>(archivo)</td><td>Codificación <b>Latin-1</b>: 84 líneas con tildes no son UTF-8 válido. Si se lee como UTF-8, falla o sale "Lï¿½cteos"</td><td class="n">84</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td>(filas)</td><td>Línea 21 del archivo = <b>encabezado repetido</b>; última fila = <code>TOTAL</code>, vacía</td><td class="n">2</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>sku</code></td><td><b>SKU-0001 duplicado</b>: "Arroz Tucapel F1", ABARR, costo 792, lista $1.200, activo=1 vs. "ARROZ TUCAPEL F1␣␣", abarrotes, costo 800, lista 1.190,00, activo=No. Es el <b>único</b> SKU duplicado</td><td class="n">2</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>categoria</code></td><td><b>26 grafías para ~8 categorías</b>: p. ej. abarrotes / ABARR / Abarrotes; Lácteos / lacteos / LACT; SNK / snacks / Snacks; Limpieza / limpieza / ASEO; PERF / perfumeria / Perfumería; CARN; PAN; BEB. Las 19 subcategorías están limpias (10 SKU cada una)</td><td class="n">191</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>costo_unitario</code></td><td>2 formatos (144 planos, 46 con punto de miles). <code>N/A</code> en SKU-0005</td><td class="n">1 inválido</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>precio_lista</code></td><td>4 formatos: <code>$1.200</code> (71), <code>1.202,00</code> (63), <code>1.215</code> (50) y <code>979</code> (7)</td><td class="n">191</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>activo</code></td><td>6 valores: 1 (51), Sí (47), si (46), SI (45), No (1), vacío (1)</td><td class="n">191</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td>margen de lista</td><td>(precio − costo)/precio entre 21,5% y 41,8% (media 32,9%). Ningún caso con costo ≥ precio</td><td class="n">190</td><td><span class="tag M">MEDIDO</span></td></tr>
+<tr><td><code>nombre</code></td><td>1 con espacios al final y 2 en MAYÚSCULAS. 1 vacío (la fila TOTAL)</td><td class="n">3</td><td><span class="tag M">MEDIDO</span></td></tr>
+</table></div>
+
+<h3 id="s3g">3.g Promociones (JSON) e IPC (API)</h3>
+<ul class="tight">
+<li><span class="tag M">MEDIDO</span> <b>CAMP-2025-09 "Septiembre Imperdible"</b> (descuento directo del 25%, Presencial + Web, 17 SKU): se ve con claridad en el POS. De 665 líneas de esos SKU en septiembre, 659 tienen 25%. Incluye <b>SKU-9001 y SKU-9007</b>, que no están en el maestro ni tienen ventas. Hay 7 líneas con 25% en SKU fuera de la campaña y 3 con 25% fuera de la ventana.</li>
+<li><span class="tag M">MEDIDO</span> <b>CAMP-2025-05 "Otoño Lácteos"</b> (2x1, 5 al 20 de mayo, solo Presencial): <b>no deja rastro</b>. Hay 13 líneas en la ventana, ninguna con descuento de 50% ni con cantidades pares sistemáticas, y el volumen semanal no sube.</li>
+<li><span class="tag M">MEDIDO</span> <code>descuento_pct</code> viene como <code>"25%"</code> (texto) en una campaña y <code>50</code> (número) en la otra. Las fechas traen hora (<code>T23:59:59</code>).</li>
+<li><span class="tag M">MEDIDO</span> La API del IPC entrega <b>variación % mensual</b>, no un índice: ene 1,1 · feb 0,4 · mar 0,5 · abr 0,2 · may 0,2 · jun −0,4 · jul 0,9 · ago 0,0 · sep 0,4 · oct 0,0 · nov 0,3 · dic −0,2. El acumulado compuesto de 2025 es ≈ 3,44%, frente al 3% fijo que usa la empresa <span class="tag V">VERBALIZADO</span>. Como es una fuente externa, conviene guardar un snapshot en bronce.</li>
+</ul>
+
+<h3 id="s3h">3.h Claves e integración</h3>
+<div class="tw"><table>
+<tr><th>Relación</th><th>Llave</th><th>Resultado del cruce</th><th>Huérfanos</th></tr>
+<tr><td>boletas → clientes</td><td><code>cliente_id</code></td><td>OK (nulo = anónimo)</td><td class="n">0 (819 nulos esperados)</td></tr>
+<tr><td>boletas → tiendas / medios_pago</td><td><code>tienda_id</code>, <code>medio_id</code></td><td>OK</td><td class="n">0</td></tr>
+<tr><td>detalle → boletas</td><td><code>boleta_id</code></td><td>OK, pero la cabecera duplicada infla el join en +141 líneas y +$821.974</td><td class="n">0</td></tr>
+<tr><td>detalle → maestro</td><td><code>sku</code></td><td>Parcial</td><td class="n">215 líneas / 190 SKU-9xxx</td></tr>
+<tr><td>promociones → maestro</td><td><code>skus[]</code></td><td>Parcial</td><td class="n">2 SKU (9001, 9007)</td></tr>
+<tr><td>tiendas → comunas</td><td><code>comuna_id</code></td><td>OK</td><td class="n">0</td></tr>
+<tr><td>comunas → regiones</td><td><code>region_id</code></td><td>Roto para La Florida</td><td class="n">1 comuna (→ 527 boletas sin región)</td></tr>
+<tr><td>clientes → comunas</td><td><code>comuna_id</code></td><td>OK</td><td class="n">0</td></tr>
+<tr><td>boletas → IPC</td><td>año-mes de <code>fecha</code></td><td>OK para 2025. Las 37 boletas de 2026 no tienen IPC (la API consultada es la de 2025)</td><td class="n">37</td></tr>
+</table></div>
+<p class="note">PK propuestas: <code>boletas.boleta_id</code> (tras deduplicar) · <code>boleta_detalle</code>: llave sustituta <code>(boleta_id, linea_seq)</code> renumerada · <code>clientes.cliente_id</code> · <code>maestro.sku</code> (tras resolver SKU-0001) · <code>campana_id</code>.</p>
+
+<h3 id="s3i">3.i Datos personales (Ley 21.719, vigente desde el 1-dic-2026)</h3>
+<div class="tw"><table>
+<tr><th>Columna</th><th>Tipo de dato</th><th>¿Se necesita para P1?</th><th>Propuesta</th></tr>
+<tr><td><code>clientes.rut</code></td><td>Identificador directo (persona natural o jurídica)</td><td>No: el <code>cliente_id</code> ya es una llave sustituta y el RUT no tiene duplicados</td><td>Usarlo solo en plata para validar el DV y detectar duplicados. <b>Descartarlo en oro.</b> Si hace falta trazabilidad, guardar un hash con sal (SHA-256 + sal secreta fuera del repo)</td></tr>
+<tr><td><code>clientes.nombre</code></td><td>Identificador directo (en "Sra. Vega" o "Familia Díaz" es de persona natural)</td><td>Solo para derivar el tipo de cliente</td><td>Derivar <code>tipo_cliente</code> (persona/hogar vs. negocio) y <b>descartar</b> el nombre</td></tr>
+<tr><td><code>clientes.comuna_id</code></td><td>Cuasi-identificador</td><td>Sí, a nivel agregado</td><td>Mantenerla en la dimensión y publicar solo agregados con n ≥ 10 clientes (umbral de supresión)</td></tr>
+<tr><td><code>clientes.fecha_alta</code>, historial de compras</td><td>Datos de comportamiento vinculados a una persona</td><td>Sí</td><td>Mantener con <code>cliente_key</code> seudónimo. El dashboard no muestra filas de cliente individual</td></tr>
+<tr><td><code>boletas.medio_id</code></td><td>Dato financiero (tipo, sin número)</td><td>No para P1</td><td>Mantener (no identifica)</td></tr>
+</table></div>
+<p><span class="tag I">INFERIDO</span> Principio de minimización: las tablas oro que recibe reportería <b>no llevan RUT ni nombre</b>. Los CSV con PII (bronce) no se suben al repositorio público. Hoy el <code>.gitignore</code> del repo del curso incluye los datos de origen; conviene confirmar que nuestras carpetas <code>plata/</code> y <code>oro/</code> no suban RUT por error. Como no alcanza a entrar en las 3 preguntas permitidas, se adopta el criterio más restrictivo (<a href="#q-supuestos">supuesto 7.c</a>).</p>
+
+<h3 id="s3j">3.j Cruce acta ↔ datos</h3>
+<div class="tw"><table>
+<tr><th>Lo que dijo la contraparte</th><th>Lo que muestran los datos</th><th>Conclusión</th></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> "La fecha de alta es su primera compra"</td><td><span class="tag M">MEDIDO</span> Coincide en 17 de 1.200. 299 compran antes del alta y 884 después</td><td><span class="tag I">INFERIDO</span> El alta es otro evento (¿inscripción?). "Cliente nuevo" no puede definirse por alta sin validarlo</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> "El canal online opera solo desde Providencia y partió hace poco"</td><td><span class="tag M">MEDIDO</span> La tienda Online está en la comuna de Providencia (✓), pero tiene boletas desde el 01-01-2025 y es el 24,8% de las boletas</td><td><span class="tag I">INFERIDO</span> Excluir Online, como propone el informe, dejaría fuera 1/4 de las transacciones. Hay que reconsiderarlo</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> ERP y POS no comparten fuente de verdad de productos</td><td><span class="tag M">MEDIDO</span> 190 SKU vendidos no están en el maestro, y 2 SKU de campaña tampoco</td><td>Confirmado</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> Hay compras anónimas</td><td><span class="tag M">MEDIDO</span> 13,1% de las boletas, pero solo 6,5% de la venta</td><td><span class="tag I">INFERIDO</span> La cobertura de la retención en venta es alta (93,5%)</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> Un cliente pasa a inactivo si "no nos compra en un mes"</td><td><span class="tag M">MEDIDO</span> Solo el 69,3% de las recompras ocurre en ≤30 días (p50 = 14 d, p90 = 74 d, 92,8% ≤ 90 d)</td><td><span class="tag I">INFERIDO</span> Con 30 días, se declararía inactivo a quien solo tiene un ciclo largo</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> Se deflacta con 3% fijo</td><td><span class="tag M">MEDIDO</span> IPC 2025 acumulado ≈ 3,44%. Precio del mismo SKU +3,04% dic/ene</td><td>Diferencia chica en el total, pero el perfil mensual es distinto (junio y diciembre negativos)</td></tr>
+<tr><td><span class="tag V">VERBALIZADO</span> La tarjeta opera por hogar</td><td><span class="tag M">MEDIDO</span> 706 de 1.200 clientes compran en más de un local físico</td><td><span class="tag I">INFERIDO</span> Coherente con una tarjeta compartida, o bien con clientes que no tienen un local "propio". La retención por local requiere definir un "local principal"</td></tr>
+<tr><td>README: "ventas totales del año se ven planas"</td><td><span class="tag M">MEDIDO</span> Venta nominal 2S-2025 = $43,5 M vs. 1S = $33,5 M (+30%). Diciembre: $11,6 M</td><td><span class="tag I">INFERIDO</span> "Planas" debe ser respecto de 2024, que no fue entregado → <a href="#q-supuestos">supuesto 7.c</a></td></tr>
+<tr><td>— (no mencionado)</td><td><span class="tag M">MEDIDO</span> 63% de clientes con nombre de negocio. Duplicados de boleta, fechas de 2026, <code>mes</code>/<code>region</code> inconsistentes, <code>monto_linea</code> que no cuadra, descuento 10% sin campaña, devoluciones sin trazabilidad, 2x1 invisible, maestro en Latin-1</td><td>Problemas que la contraparte no mencionó → se preguntan agrupados o se resuelven con supuestos en la <a href="#s7">sección 7</a></td></tr>
+</table></div>
+
+<h3 id="s3k">3.k Primeras cifras de retención (solo contexto; no son la métrica final)</h3>
+<p class="note">Base: boletas de 2025 sin duplicados (6.153), identificadas (5.350), clientes que compran en 2025 (1.197). Montos = suma de <code>monto_linea</code> registrado.</p>
+<div class="grid">
+  <div class="kpi"><b>38,0%</b><span>clientes con una sola boleta en 2025 (455)</span></div>
+  <div class="kpi"><b>14 días</b><span>mediana entre compras (p90 = 74 d)</span></div>
+  <div class="kpi"><b>31,5% · 56,8% · 81,4%</b><span>activos al 31-12 con ventana de 30 · 90 · 180 días</span></div>
+  <div class="kpi"><b>31–54%</b><span>clientes de un mes que vuelven el mes siguiente</span></div>
+  <div class="kpi"><b>34,4%</b><span>de la "cohorte" Q1 (404) sigue comprando en Q4 (139)</span></div>
+  <div class="kpi"><b>$77,0 M</b><span>venta nominal 2025 (neta de devoluciones)</span></div>
+</div>
+<p><span class="tag I">INFERIDO</span> <b>Censura a la izquierda:</b> los 230 clientes de enero aparecen todos como "nuevos" porque no hay datos de 2024, aunque 377 clientes tienen alta en 2024. La cohorte Q1 mezcla nuevos con antiguos. <b>Censura a la derecha:</b> quien compró por primera vez en diciembre no tuvo tiempo de volver. Las dos cosas deben tratarse en la definición de "comprador de una sola vez".</p>
+
+<!-- ============================ 4 ============================ -->
+<h2 id="s4">4. Estado del informe (<code>docs grupo/Informe 1 TIN.docx</code>)</h2>
+<p class="note">El README del caso no trae una pauta formal de secciones. Comparamos contra la estructura que el propio informe declara y contra lo que exige el README general: un modelo estrella que integre las fuentes y respuestas con evidencia.</p>
+<div class="tw"><table>
+<tr><th>Sección</th><th>Estado</th><th>Comentario</th></tr>
+<tr><td>Portada</td><td><span class="tag debil">CASI</span></td><td>Falta el <b>enlace al repositorio</b> (el campo está vacío)</td></tr>
+<tr><td>1. Mandato acordado (pregunta, por qué, definición no cerrada)</td><td><span class="tag ok">COMPLETA</span></td><td>Bien argumentada y etiquetada. Fija una ventana de 90 días con sensibilidad a 180, que nuestros datos respaldan (p90 = 74 d; 92,8% de recompras ≤ 90 d). Menciona un "correo posterior a la reunión" que <b>no está en el repositorio</b>. Sugerencia: agregar 30 días como tercera ventana, porque es la creencia de la empresa</td></tr>
+<tr><td>2. Cadena de datos ejecutable</td><td><span class="tag vacia">VACÍA</span></td><td>Solo tiene el título. Es la sección que <b>nos toca a nosotras</b>: bronce/plata/oro, reglas, conteos y log de calidad</td></tr>
+<tr><td>3. Modelo dimensional (diagrama, grano, SCD, exclusiones)</td><td><span class="tag debil">REDACTADA, CON INCONSISTENCIAS</span></td><td>
+<ul class="tight small">
+<li>Excluye Online por "poca historia", pero los datos lo muestran desde enero con el 24,8% de las boletas.</li>
+<li>La dimensión Medio de Pago dice "débito, crédito, efectivo, otro"; en los datos el cuarto valor es <b>App</b>.</li>
+<li>La dimensión Tiempo incluye <code>es_feriado</code>, pero ninguna fuente trae feriados (hay que agregar un calendario externo).</li>
+<li>La dimensión Cliente usa <code>fecha_alta</code> como si fuera confiable, y la dimensión Tienda usa macrozona, que no existe en la fuente.</li>
+<li>Falta <code>tipo_cliente</code> (persona vs. negocio).</li>
+<li>Las medidas <code>monto_neto</code> y <code>descuento_total</code> no están definidas (¿con IVA?, ¿neto de devoluciones?) y dependen del detalle, que el informe deja fuera.</li>
+<li>Dice que hay "SKU duplicados bajo categorías distintas" identificados por la empresa: en el set 2 hay <b>un solo</b> SKU duplicado, y su categoría es la misma escrita distinto.</li>
+<li>La figura referencia "§C.4", que no existe en el documento.</li>
+</ul></td></tr>
+<tr><td>4. Ficha de la métrica</td><td><span class="tag vacia">VACÍA</span></td><td>Debe tomar el diccionario de la <a href="#s5d">sección 5.d</a> (retención, cliente activo, sensibilidad 30/90/180)</td></tr>
+<tr><td>5. Evidencia, caso de negocio y recomendación</td><td><span class="tag vacia">VACÍA</span></td><td>Depende de las tablas oro (reportería)</td></tr>
+<tr><td>Anexos</td><td><span class="tag vacia">VACÍA</span></td><td>Sugerencia: log de calidad, diccionario de datos y reglas de limpieza con conteos</td></tr>
+<tr><td>Integración del IPC</td><td><span class="tag vacia">AUSENTE</span></td><td>El acta dice que entra "como fuente obligatoria", y el informe no la menciona</td></tr>
+</table></div>
+
+<!-- ============================ 5 ============================ -->
+<h2 id="s5">5. Plan de trabajo propuesto</h2>
+
+<h3 id="s5a">5.a Bronce — datos crudos, sin tocar</h3>
+<div class="phase bronce">
+<ul class="tight">
+<li>Copiar las fuentes de <code>grupo_2</code> a <code>datos/bronce/</code> sin modificarlas. Registrar el hash SHA-256 de cada archivo y la fecha de carga.</li>
+<li>Exportar cada tabla de la SQLite a CSV UTF-8 tal cual (todo como texto), para no perder formatos originales.</li>
+<li>Guardar un snapshot de la API del IPC: <code>ipc_2025_raw.json</code> con la fecha de consulta. Así el resultado es reproducible aunque la API cambie o no responda.</li>
+<li>Agregar como fuente externa un calendario de feriados de Chile 2025, si se mantiene <code>es_feriado</code>.</li>
+</ul>
+</div>
+
+<h3 id="s5b">5.b Plata — reglas de limpieza (una por una)</h3>
+<p class="note">Principio general: <b>marcar antes que borrar</b>. Solo se eliminan filas cuya invalidez es inequívoca (duplicados exactos, filas basura del CSV). Todo lo demás se conserva con una columna <code>flag_*</code> y queda en el log de calidad.</p>
+<div class="tw"><table>
+<tr><th>ID</th><th>Tabla.columna</th><th>Problema</th><th>Regla propuesta</th><th class="n">Afecta</th></tr>
+<tr><td>R01</td><td>boletas.*</td><td>Duplicados exactos</td><td>Eliminar la copia (conservar 1). Registrar los <code>boleta_id</code> eliminados</td><td class="n">61</td></tr>
+<tr><td>R02</td><td>boletas.fecha</td><td>4 formatos de fecha</td><td>Parser explícito por patrón: ISO, dd/mm/yyyy, dd-mm-yy (siglo 20xx) y d-mmm-yyyy (diccionario ene…dic) → <code>DATE</code>. Cualquier fecha no parseable → flag y cuarentena (hoy hay 0)</td><td class="n">6.251</td></tr>
+<tr><td>R03</td><td>boletas.fecha</td><td>Fechas en 2026</td><td><code>flag_fuera_periodo = 1</code>. Excluidas de las métricas 2025 (<a href="#q-supuestos">supuesto 7.c</a>)</td><td class="n">37</td></tr>
+<tr><td>R04</td><td>boletas.mes</td><td>Contradice la fecha</td><td>Descartar la columna y derivar el mes de <code>fecha</code></td><td class="n">442</td></tr>
+<tr><td>R05</td><td>boletas.region</td><td>Contradice la tienda</td><td>Descartar la columna y derivar la región con tienda → comuna → región</td><td class="n">397</td></tr>
+<tr><td>R06</td><td>comunas.region_id</td><td>La Florida → 9 (inexistente)</td><td>Corregir a 1 (Metropolitana) y documentar la corrección</td><td class="n">1 (527 boletas)</td></tr>
+<tr><td>R07</td><td>boletas.cliente_id</td><td>Nulos (anónimos)</td><td>Asignar <code>cliente_key = -1</code> ("Anónimo") y <code>es_identificada = 0</code>. No imputar</td><td class="n">819 (807 sin dups)</td></tr>
+<tr><td>R08</td><td>boleta_detalle.linea</td><td>(boleta, línea) no es único</td><td>Crear <code>linea_seq</code> = número de fila dentro de la boleta (ordenado por <code>linea</code> y luego <code>sku</code>). No borrar. Revisar a mano el único par con el mismo SKU y el mismo monto</td><td class="n">790</td></tr>
+<tr><td>R09</td><td>detalle.precio_unitario</td><td>Texto con punto de miles</td><td>Quitar los puntos y convertir a entero (CLP)</td><td class="n">6.464</td></tr>
+<tr><td>R10</td><td>detalle.monto_linea</td><td>Texto con punto de miles y valores mal formados</td><td>Igual que R09. Además <code>-.905</code> → −905 y <code>-.884</code> → −884</td><td class="n">6.931</td></tr>
+<tr><td>R11</td><td>detalle.descuento</td><td>7 notaciones</td><td>Normalizar a porcentaje entero: si termina en %, se quita el signo; si tiene coma, ×100; si no, se deja igual. Dominio válido {0, 10, 25}</td><td class="n">3.761</td></tr>
+<tr><td>R12</td><td>detalle.monto_linea</td><td>No cuadra con cant. × precio × (1 − desc)</td><td>Calcular <code>monto_calculado</code> y mantener también el registrado, con <code>flag_monto_inconsistente</code>. La métrica oficial usa el <b>registrado</b>, sumado por boleta (decisión <a href="#d3">D3</a>); el calculado queda como control</td><td class="n">719</td></tr>
+<tr><td>R13</td><td>detalle.cantidad</td><td>Cantidades negativas</td><td><code>es_devolucion = 1</code>; se conservan con signo en la venta neta. Una boleta con solo devoluciones no cuenta como compra para la retención</td><td class="n">143 líneas (12 boletas)</td></tr>
+<tr><td>R14</td><td>detalle.cantidad</td><td>10–40 unidades</td><td><code>flag_volumen_mayorista = 1</code>; se conservan</td><td class="n">57</td></tr>
+<tr><td>R15</td><td>detalle.sku</td><td>SKU-9xxx sin maestro</td><td>Se conservan. En la dimensión Producto se crea un miembro "Sin maestro" (categoría = "No informada") y <code>flag_sku_sin_maestro</code></td><td class="n">215 (190 SKU)</td></tr>
+<tr><td>R16</td><td>detalle.descuento=10</td><td>Descuento sin campaña</td><td><code>tipo_descuento</code> = 'campaña' si la fecha y el SKU calzan con una campaña; si no, 'no_explicado' (hipótesis: tarjeta, <a href="#q-supuestos">supuesto 7.c</a>)</td><td class="n">3.103</td></tr>
+<tr><td>R17</td><td>clientes.rut</td><td>Formatos y DV inválidos</td><td>Normalizar (sin espacios ni puntos, con guion y K mayúscula) y validar módulo 11 → <code>flag_rut_invalido</code>. <b>El RUT no pasa a oro</b></td><td class="n">1.200 (16 inválidos)</td></tr>
+<tr><td>R18</td><td>clientes.nombre</td><td>PII y tipo de cliente implícito</td><td><code>tipo_cliente</code> según prefijo: Sr./Sra./Familia → "Persona/Hogar"; Distribuidora/Almacén/Kiosco/Botillería/Comercial → "Negocio". Luego se descarta el nombre</td><td class="n">1.200 (754 / 446)</td></tr>
+<tr><td>R19</td><td>clientes.fecha_alta</td><td>2 formatos; alta posterior a la compra</td><td>Parsear. <code>fecha_primera_compra_obs</code> = mín. de las boletas. <code>flag_alta_posterior_compra</code>. <code>es_cliente_previo_2025</code> = alta &lt; 2025-01-01</td><td class="n">1.200 (299 flag)</td></tr>
+<tr><td>R20</td><td>maestro (archivo)</td><td>Latin-1</td><td>Leer con <code>encoding='latin-1'</code> y escribir en UTF-8</td><td class="n">84 filas con tildes</td></tr>
+<tr><td>R21</td><td>maestro (filas)</td><td>Encabezado repetido y fila TOTAL</td><td>Eliminarlas (no son productos)</td><td class="n">2</td></tr>
+<tr><td>R22</td><td>maestro.sku</td><td>SKU-0001 duplicado</td><td>Conservar la fila con <code>activo</code> = 1 (Arroz Tucapel F1, costo 792, lista 1.200). No se consulta; queda como supuesto declarado (<a href="#q-supuestos">7.c</a>)</td><td class="n">1</td></tr>
+<tr><td>R23</td><td>maestro.categoria</td><td>26 grafías</td><td>Tabla de mapeo explícita (CSV versionado) hacia 8 categorías canónicas. ASEO → Limpieza (supuesto)</td><td class="n">191</td></tr>
+<tr><td>R24</td><td>maestro.costo / precio</td><td>4 formatos, <code>$</code>, <code>N/A</code></td><td>Quitar <code>$</code> y los puntos de miles, y tomar la coma como decimal → entero. <code>N/A</code> → nulo + flag</td><td class="n">191 (1 N/A)</td></tr>
+<tr><td>R25</td><td>maestro.activo, nombre</td><td>6 variantes; espacios y mayúsculas</td><td>{1, Sí, si, SI} → true; {No} → false; vacío → nulo. <code>strip</code> + formato título en el nombre</td><td class="n">191</td></tr>
+<tr><td>R26</td><td>promociones</td><td>Tipos mixtos; SKU inexistentes</td><td>Aplanar a campaña × SKU. <code>descuento_pct</code> → entero. Fechas → DATE. Marcar SKU-9001/9007 con <code>flag_sku_sin_maestro</code></td><td class="n">23 filas</td></tr>
+<tr><td>R27</td><td>IPC</td><td>Viene como variación, no índice</td><td>Construir índice base dic-2024 = 100 encadenando las variaciones → <code>ipc_indice</code> y <code>factor_deflactor</code> por mes</td><td class="n">12</td></tr>
+</table></div>
+<p class="note">Cada regla se implementa como una función con prueba automática (conteo antes/después), y el resultado alimenta <code>oro/log_calidad.csv</code>.</p>
+
+<h3 id="s5c">5.c Oro — tablas para el subgrupo de reportería</h3>
+<div class="phase oro">
+<div class="tw"><table>
+<tr><th>Tabla</th><th>Grano</th><th>Columnas principales</th><th>Uso</th></tr>
+<tr><td><code>fact_venta_boleta</code></td><td>1 boleta válida (sin dups; incluye 2026 con flag)</td><td>boleta_id, fecha, tienda_key, cliente_key, medio_key, canal, n_lineas, unidades, venta_lista, descuento_monto, <b>venta_neta</b>, venta_neta_registrada, monto_devolucion, es_identificada, es_solo_devolucion, tiene_linea_campana, flag_fuera_periodo, flag_monto_inconsistente</td><td>P1 (grano del informe)</td></tr>
+<tr><td><code>fact_venta_linea</code></td><td>1 línea de boleta</td><td>boleta_id, linea_seq, sku_key, cantidad, precio_unitario, descuento_pct, tipo_descuento, campana_id, monto_calculado, monto_registrado, costo_unitario, flags</td><td>Entregas siguientes (P2–P4). Se deja lista</td></tr>
+<tr><td><code>dim_cliente</code></td><td>1 cliente (+ fila −1 "Anónimo")</td><td>cliente_key, tipo_cliente, segmento (SCD1), comuna, region, macrozona, fecha_alta, fecha_primera_compra_obs, es_cliente_previo_2025, cohorte_trimestre, tienda_principal, flag_rut_invalido, flag_alta_posterior_compra — <b>sin RUT ni nombre</b></td><td>Cortes por tipo y local</td></tr>
+<tr><td><code>dim_tienda</code></td><td>1 local (10)</td><td>tienda_key, nombre, formato (Express / Supermercado / Híper / Online), comuna, region, macrozona, es_online</td><td>Cortes</td></tr>
+<tr><td><code>dim_tiempo</code></td><td>1 día (2025-01-01 → 2026-06-30)</td><td>fecha, año, mes, año_mes, trimestre, semana ISO, día_semana, es_fin_de_semana, es_feriado, en_campana_09, en_campana_05, ipc_var_mensual, ipc_indice</td><td>Series</td></tr>
+<tr><td><code>dim_medio_pago</code>, <code>dim_producto</code>, <code>dim_campana</code></td><td>catálogos</td><td>Limpios, con miembro "No informado"</td><td>Cortes / siguientes preguntas</td></tr>
+<tr><td><code>mart_cliente_mes</code></td><td>cliente × mes (2025)</td><td>n_boletas, venta_neta, compro_en_mes, dias_desde_ultima, activo_30 / 60 / 90 / 180, estado_90 (nuevo / recurrente / reactivado / inactivo / perdido)</td><td>Motor de la retención</td></tr>
+<tr><td><code>mart_retencion</code></td><td>mes × dimensión de corte (total, tienda_principal, formato, macrozona, tipo_cliente, segmento) × ventana (30 / 90 / 180)</td><td>activos_inicio, retenidos, nuevos, reactivados, perdidos, tasa_retencion, tasa_churn, indice_reposicion</td><td>Gráfico principal P1 + sensibilidad</td></tr>
+<tr><td><code>mart_cohortes</code></td><td>cohorte trimestral × trimestre relativo</td><td>clientes_cohorte, clientes_activos, % retenido, venta_neta. Separa "previos 2025" de "nuevos 2025"</td><td>Curvas de cohorte</td></tr>
+<tr><td><code>mart_rfm_cliente</code></td><td>1 cliente (corte 31-12-2025)</td><td>recencia_dias, frecuencia, monto, quintiles R/F/M, segmento_rfm, es_una_sola_vez</td><td>P1 (una sola vez) y P2</td></tr>
+<tr><td><code>log_calidad</code> + <code>diccionario_datos</code></td><td>1 regla / 1 columna</td><td>regla, tabla, columna, filas_afectadas, acción · nombre, tipo, definición, fuente</td><td>Anexo del informe y "biblia del dato"</td></tr>
+</table></div>
+</div>
+
+<h3 id="s5d">5.d Diccionario de métricas (propuesto)</h3>
+<div class="tw"><table>
+<tr><th>Métrica</th><th>Definición de negocio</th><th>Fórmula exacta</th><th>Supuestos</th></tr>
+<tr><td><b>Venta neta</b></td><td>Lo que efectivamente pagó el cliente, descontadas promociones y devoluciones</td><td>Σ<sub>líneas de la boleta</sub> <code>monto_linea</code> (registrado)</td><td>CLP nominales, <b>IVA incluido</b> (precio de góndola; <a href="#q-supuestos">supuesto 7.c</a>). Usa el monto registrado, sumado por boleta (<a href="#q-supuestos">supuesto 7.c</a>). Excluye duplicados y 2026</td></tr>
+<tr><td>Venta real</td><td>Venta neta expresada en pesos de dic-2024</td><td>venta_neta<sub>m</sub> × 100 / ipc_indice<sub>m</sub></td><td>IPC general de mindicador; base dic-2024 = 100</td></tr>
+<tr><td>Boleta válida (compra)</td><td>Una visita de compra</td><td>Boleta única con venta_neta &gt; 0 (excluye las 12 de solo devolución)</td><td>Varias boletas del mismo cliente el mismo día cuentan como compras distintas (no son duplicados; verificado)</td></tr>
+<tr><td>Ticket promedio</td><td>Gasto medio por visita</td><td>venta_neta / n° boletas válidas</td><td>Reportar también la mediana, porque las compras mayoristas sesgan el promedio</td></tr>
+<tr><td>Cobertura de identificación</td><td>Qué parte del negocio podemos seguir por cliente</td><td>boletas identificadas / boletas válidas (y lo mismo en venta)</td><td>Hoy: 86,9% de las boletas y 93,5% de la venta</td></tr>
+<tr><td><b>Cliente activo (W)</b></td><td>Cliente que compró recientemente</td><td>activo(c, t) = 1 si hay una boleta válida de c en (t − W, t]</td><td><b>W = 90 días</b> como principal (p90 de intercompra = 74 d; 92,8% ≤ 90 d). Sensibilidad con 30 d (creencia de la empresa) y 180 d. Cliente = tarjeta (hogar)</td></tr>
+<tr><td><b>Tasa de retención (período)</b></td><td>De los clientes que tenía al inicio, qué parte sigue comprando</td><td>|activos al inicio de P ∩ con compra dentro de P| / |activos al inicio de P|</td><td>P = mes (tablero) o trimestre (informe). Solo identificados</td></tr>
+<tr><td>Tasa de churn</td><td>Clientes que se pierden</td><td>1 − tasa de retención</td><td>Un cliente "perdido" es el que pasa W días sin comprar</td></tr>
+<tr><td>Cliente nuevo</td><td>Primera compra observada en el período, sin alta previa a 2025</td><td>primera_boleta ∈ P y fecha_alta ≥ 2025-01-01</td><td>Corrige la censura a la izquierda. Los clientes con alta en 2024 son "previos". Depende de la <a href="#q1">pregunta 1</a></td></tr>
+<tr><td>Cliente reactivado</td><td>Vuelve después de estar inactivo</td><td>compra en P y días desde la compra anterior &gt; W</td><td>—</td></tr>
+<tr><td><b>Índice de reposición</b></td><td>¿Se reemplazan los perdidos con nuevos?</td><td>nuevos<sub>P</sub> / perdidos<sub>P</sub></td><td>≈1 con retención baja = crecimiento "frágil"</td></tr>
+<tr><td><b>Comprador de una sola vez</b></td><td>Cliente que no volvió</td><td>n° boletas válidas en 2025 = 1 y primera compra ≤ 2025-10-02 (90 días antes del corte)</td><td>Excluye a los que no tuvieron tiempo de volver (censura a la derecha)</td></tr>
+<tr><td>Tasa de recompra</td><td>Proporción que vuelve al menos una vez</td><td>clientes con ≥2 boletas / clientes con ≥1</td><td>Misma exclusión por censura</td></tr>
+<tr><td>Frecuencia / intercompra</td><td>Cada cuánto vuelve (la variable que más valora la empresa)</td><td>boletas válidas / cliente / período; mediana de días entre boletas consecutivas</td><td>Tarjeta por hogar: la frecuencia es del hogar</td></tr>
+<tr><td>Recencia, Frecuencia, Monto</td><td>Base RFM</td><td>días desde la última boleta al 31-12-2025; n° de boletas; Σ venta_neta</td><td>Quintiles</td></tr>
+<tr><td>Retención de cohorte</td><td>¿Cada grupo de ingreso sigue comprando?</td><td>activos de la cohorte k en el trimestre k+j / tamaño de la cohorte k</td><td>La cohorte Q1 se separa en previos / nuevos</td></tr>
+<tr><td>Margen bruto (siguientes entregas)</td><td>Ganancia antes de gastos</td><td>venta_neta / 1,19 − cantidad × costo_unitario</td><td>Supone precio con IVA y costo sin IVA (<a href="#q-supuestos">supuesto 7.c</a>). Costo del maestro vigente (no histórico)</td></tr>
+</table></div>
+
+<h3 id="s5e">5.e Estimación de esfuerzo y división del trabajo</h3>
+<p class="note">Integrante A = eje <b>transacciones</b> (boletas, detalle, hechos, marts). Integrante B = eje <b>entidades</b> (clientes, productos, promos, IPC, dimensiones, documentación). Revisión cruzada: cada una revisa las reglas de la otra.</p>
+<div class="tw"><table>
+<tr><th>#</th><th>Tarea</th><th class="n">Horas</th><th>Responsable</th><th>Depende de</th></tr>
+<tr><td>1</td><td>Revisar este plan con el grupo y enviar las preguntas a la contraparte</td><td class="n">2</td><td>A + B</td><td>—</td></tr>
+<tr><td>2</td><td>Estructura del repo, bronce (copia + hashes + export SQLite + snapshot IPC)</td><td class="n">2</td><td>B</td><td>—</td></tr>
+<tr><td>3</td><td>Contrato de datos: esquemas oro vacíos + diccionario v0 para reportería</td><td class="n">2</td><td>B</td><td>1</td></tr>
+<tr><td>4</td><td>Plata boletas (R01–R07)</td><td class="n">4</td><td>A</td><td>2</td></tr>
+<tr><td>5</td><td>Plata detalle (R08–R16)</td><td class="n">5</td><td>A</td><td>4</td></tr>
+<tr><td>6</td><td>Plata clientes (R17–R19)</td><td class="n">3</td><td>B</td><td>2</td></tr>
+<tr><td>7</td><td>Plata maestro + promociones + IPC (R20–R27)</td><td class="n">4</td><td>B</td><td>2</td></tr>
+<tr><td>8</td><td>Pruebas de calidad automáticas + log_calidad</td><td class="n">3</td><td>A</td><td>4–7</td></tr>
+<tr><td>9</td><td>Oro: dimensiones y hechos</td><td class="n">4</td><td>B</td><td>4–7</td></tr>
+<tr><td>10</td><td>Oro: mart_cliente_mes, mart_retencion (3 ventanas), cohortes, RFM</td><td class="n">6</td><td>A</td><td>9</td></tr>
+<tr><td>11</td><td>Validación cruzada (totales bronce = plata = oro; recálculo manual de 3 clientes)</td><td class="n">2</td><td>A + B</td><td>10</td></tr>
+<tr><td>12</td><td>Incorporar las respuestas de la contraparte (ajuste de reglas)</td><td class="n">2</td><td>A + B</td><td>respuestas</td></tr>
+<tr><td>13</td><td>Redactar "Cadena de datos ejecutable" + "Ficha de la métrica" + anexos + corregir inconsistencias del modelo</td><td class="n">5</td><td>B (redacción), A (cifras)</td><td>10</td></tr>
+<tr><td>14</td><td>Hallazgos clave para reportería (nota de 1 página con 5–8 cifras y su lectura)</td><td class="n">2</td><td>A</td><td>11</td></tr>
+<tr><td></td><td><b>Total</b></td><td class="n"><b>≈ 41 h</b></td><td>A ≈ 20,5 h · B ≈ 20,5 h</td><td></td></tr>
+</table></div>
+
+<h3 id="s5f">5.f Qué le entregamos a reportería y cuándo</h3>
+<p class="note">La fecha de entrega del informe no está en el repositorio: las fechas son una propuesta desde hoy (lun 28-sep) y hay que ajustarlas al calendario real.</p>
+<div class="tw"><table>
+<tr><th>Cuándo</th><th>Entregable</th><th>Formato</th><th>Para qué les sirve</th></tr>
+<tr><td>Mié 30-sep</td><td><b>Contrato de datos</b>: nombres de tablas, columnas, tipos y definiciones v0 + 20 filas de ejemplo por tabla</td><td>CSV + <code>diccionario_datos.xlsx</code></td><td>Empezar el diseño del dashboard y la estructura del PPT sin esperar los datos finales</td></tr>
+<tr><td>Vie 2-oct</td><td><b>Oro v0</b> con los supuestos declarados (antes de las respuestas)</td><td>CSV UTF-8 en <code>datos/oro/</code></td><td>Conectar el dashboard y probar los gráficos</td></tr>
+<tr><td>Lun 5-oct</td><td><b>Oro v1</b> con las respuestas incorporadas + <code>log_calidad</code></td><td>CSV + log</td><td>Cifras casi finales</td></tr>
+<tr><td>Mié 7-oct</td><td><b>Oro final</b> + nota de hallazgos + secciones del informe redactadas</td><td>CSV + .md/.docx</td><td>Narrativa del PPT y evidencia</td></tr>
+</table></div>
+<div class="callout">Regla de estabilidad: después del contrato del 30-sep, <b>no se renombran columnas</b>. Si hace falta cambiar algo, se agregan columnas nuevas y se avisa por el canal del grupo.</div>
+
+<h3 id="s5g">5.g Riesgos del plan y mitigación</h3>
+<div class="tw"><table>
+<tr><th>Riesgo</th><th>Impacto</th><th>Mitigación</th></tr>
+<tr><td>La contraparte no responde antes del cierre</td><td>Reglas R03, R12, R13 y R16 sin validar</td><td>Cada pregunta tiene un supuesto por defecto (sección 7). Las reglas se parametrizan (<code>config.yaml</code>) para cambiarlas sin reescribir código</td></tr>
+<tr><td>El monto correcto resulta ser el calculado y no el registrado</td><td>La venta total 2025 cambia 0,81% ($77,0 M vs. $76,4 M); la retención no cambia (depende de si hay compra, no del monto)</td><td>Guardar ambas columnas en los hechos y declarar el supuesto en el informe</td></tr>
+<tr><td>Las fechas también tienen ruido (no solo <code>mes</code>)</td><td>Intercompras mal medidas</td><td>No hay otra fuente para validarlas. Declarar el supuesto "la fecha es la verdad" y mostrar que los resultados son robustos a W</td></tr>
+<tr><td>Censura izquierda/derecha</td><td>Sobrestimar clientes nuevos en enero y compradores de una vez en diciembre</td><td>Definiciones de la sección 5.d (alta 2024 = previo; corte a 90 días)</td></tr>
+<tr><td>El informe excluye Online, y los datos dicen que pesa 25%</td><td>Cifras que no calzan entre subgrupos</td><td>Llevarlo a la reunión del grupo (decisión <a href="#d6">D6</a>) antes del contrato de datos</td></tr>
+<tr><td>Filtración de PII (RUT o nombres) en el repo o el dashboard</td><td>Incumplimiento de la Ley 21.719 y de la ética del curso</td><td>RUT y nombre nunca salen de plata. <code>.gitignore</code> para bronce/plata. Umbral n ≥ 10 en los cortes</td></tr>
+<tr><td>Reportería bloqueada esperándonos</td><td>Retraso de todo el grupo</td><td>Contrato de datos y oro v0 temprano. Nada de renombres después del 30-sep</td></tr>
+<tr><td>Trabajo no reproducible (limpieza a mano en Excel)</td><td>No se puede defender la "cadena ejecutable"</td><td>Todo en scripts versionados que corren de punta a punta con un solo comando</td></tr>
+</table></div>
+
+<!-- ============================ 6 ============================ -->
+<h2 id="s6">6. Decisiones pendientes del equipo</h2>
+<div class="tw"><table>
+<tr><th>ID</th><th>Decisión</th><th>Opciones</th><th>Pros / contras</th><th>Recomendación</th></tr>
+<tr id="d1"><td>D1</td><td>Herramienta</td><td>(a) Python + pandas/DuckDB · (b) Excel / Power Query · (c) mixto</td><td>(a) Reproducible, versionable, maneja 4 formatos de fecha con reglas explícitas; exige saber Python. (b) Es visual y conecta directo con Power BI, pero cuesta auditarlo y es frágil con formatos mixtos. (c) Duplica la lógica</td><td><b>(a)</b> Scripts <code>.py</code> + un notebook de demostración. La "cadena ejecutable" corre con un solo comando</td></tr>
+<tr id="d2"><td>D2</td><td>Formato de entrega</td><td>CSV · Parquet · XLSX · DuckDB/SQLite</td><td>El CSV lo lee cualquier herramienta, pero pierde los tipos. Parquet conserva los tipos, pero Excel no lo abre. XLSX tiene límite de filas y formatos implícitos</td><td><b>CSV UTF-8</b>, separador coma, decimal punto, fechas ISO, más un diccionario XLSX. Si usan Power BI, también sirve una SQLite oro</td></tr>
+<tr id="d3"><td>D3</td><td>Monto oficial de venta</td><td>(a) calculado · (b) registrado · (c) registrado, excepto cuando difiere</td><td>(a) es consistente con el precio y el descuento y es auditable; puede subestimar si el registrado incluye cargos reales. (b) es "lo que dice el sistema", pero con 719 inconsistencias sin regla</td><td><b>(b)</b> Total registrado por boleta. El grano del modelo es la boleta y la retención depende de si hubo compra, no del monto. La diferencia total entre (a) y (b) es de 0,81% en 2025. Se guarda también el calculado como control</td></tr>
+<tr id="d4"><td>D4</td><td>Nulos de cliente</td><td>Eliminar · imputar · miembro "Anónimo"</td><td>Eliminar sesga la venta total. Imputar un cliente es inventar datos</td><td><b>Miembro −1 "Anónimo"</b>: entra en la venta y queda fuera de la retención</td></tr>
+<tr id="d5"><td>D5</td><td>Outliers (cantidades 10–40, montos altos)</td><td>Eliminar · winsorizar · marcar</td><td>Son ventas plausibles (clientes negocio). Eliminarlos cambia la venta y el ticket</td><td><b>Marcar</b> y reportar el ticket en mediana además del promedio</td></tr>
+<tr id="d6"><td>D6</td><td>Canal Online</td><td>Excluir (como dice el informe) · incluir como local · incluir con corte</td><td>Excluirlo deja fuera 24,8% de las boletas; incluirlo contradice el texto actual del informe</td><td><b>Incluir</b>, con <code>es_online</code> para filtrar, y corregir el texto del informe</td></tr>
+<tr id="d7"><td>D7</td><td>Boletas de 2026 (37)</td><td>Excluir · incluir · cuarentena</td><td>Son 0,6% de las boletas. Incluirlas extiende el período sin IPC</td><td><b>Cuarentena</b> (flag) y fuera de las métricas 2025</td></tr>
+<tr id="d8"><td>D8</td><td>Duplicados de SKU y categorías</td><td>Resolver ahora · dejar para después (según acta)</td><td>Solo 1 SKU duplicado y 26 grafías; resolverlo cuesta ~1 h</td><td><b>Resolverlo ahora</b> en plata: es barato y evita rehacerlo para P2/P3</td></tr>
+<tr id="d9"><td>D9</td><td>Grano de los hechos</td><td>Solo boleta (informe) · boleta + línea</td><td>La línea permite descuentos, devoluciones y P2–P4; es más trabajo</td><td><b>Ambas</b>: <code>fact_venta_boleta</code> para P1 y <code>fact_venta_linea</code> lista para después (la boleta se agrega desde la línea)</td></tr>
+<tr id="d10"><td>D10</td><td>Ventanas de inactividad a reportar</td><td>90 + 180 (informe) · 30 + 90 + 180</td><td>Agregar 30 muestra en cifras el costo de la creencia de la empresa</td><td><b>30 / 90 / 180</b>, con 90 como principal</td></tr>
+<tr id="d11"><td>D11</td><td>"Tipo de cliente"</td><td>Segmento · derivado del nombre · ambos</td><td>El segmento no discrimina en los datos. El derivado del nombre es heurístico, pero separa hogares de negocios</td><td><b>Ambos</b> como cortes, advirtiendo que <code>tipo_cliente</code> es una inferencia</td></tr>
+<tr id="d12"><td>D12</td><td>Local de un cliente (retención por local)</td><td>Local donde más compra · local de la primera compra · se cuenta en cada local donde compra</td><td>706 clientes usan más de un local. Contarlos en cada uno duplica clientes</td><td><b>Local principal</b> = moda de las boletas 2025 (empate → la más reciente)</td></tr>
+<tr id="d13"><td>D13</td><td>Frecuencia de retención</td><td>Mensual · trimestral</td><td>Con una mediana de 14 d el mes es sensible; el trimestre es más estable para el informe</td><td>Trimestral en el informe, mensual en el tablero</td></tr>
+</table></div>
+
+<!-- ============================ 7 ============================ -->
+<h2 id="s7">7. Preguntas para la contraparte</h2>
+<div class="callout"><b>Actualización 13-10-2026 — respuesta de la contraparte:</b> (1) la fecha de alta no es la primera compra ni una inscripción; el cliente nuevo lo define el equipo (alta en 2025 y primera compra en el período); (2) "tipo de cliente" = segmento de la tarjeta y local, no persona/negocio; (3) Online es un décimo punto de venta y se incluye en el cálculo principal. La cadena se ajustó en consecuencia (ver README del repositorio, sección "Respuesta de la contraparte").</div>
+<div class="callout"><b>Actualización 09-10-2026:</b> la contraparte no respondió las preguntas. La cadena se ejecutó bajo los supuestos S01–S16 (ver <code>cadena_datos/config.py</code> y <code>datos/oro/supuestos.csv</code>). Se corre con <code>python cadena_datos/run_pipeline.py</code>; las tablas para reportería quedan en <code>datos/oro/</code> y las cifras principales en <code>datos/oro/resumen_hallazgos.md</code>. En el repositorio del grupo las fuentes están en <code>origen/</code> (contenido idéntico a <code>grupo_2</code>); las rutas del anexo corresponden a la copia de trabajo original.</div>
+<p class="note"><b>Restricción: se pueden enviar como máximo 3 preguntas.</b> Redactamos 3 preguntas concretas, cada una seguida de un ejemplo real de los datos y la magnitud del problema, priorizando (1) lo que bloquea el cálculo de la retención y (2) lo que el acta no respondió o lo que los datos contradicen. No se repite nada que ya esté respondido en el acta (definición de inactivo, frecuencia como variable más valorada, segmento sobrescrito, 3% fijo, tarjeta por hogar, retención calculada por Marketing, ERP y POS sin maestro común). Todo lo que no entra en las 3 preguntas se resuelve con un supuesto declarado (<a href="#s7c">7.c</a>).</p>
+
+<h3 id="s7a">7.a Las 3 preguntas</h3>
+<p class="note">Formato: <b>una pregunta concreta</b>, seguida de <b>un ejemplo real de los datos</b> y la magnitud del problema. La pregunta sobre el monto de las líneas <b>no se envía</b>: el grano del modelo es la boleta y la retención depende de si hubo compra, no del monto, así que se resuelve con un supuesto (<a href="#q-supuestos">7.c</a>). En su lugar entra la del canal Online, porque el informe lo excluye y los datos dicen otra cosa.</p>
+<div class="tw"><table>
+<tr><th>#</th><th>Pregunta</th><th>Ejemplo y magnitud (evidencia)</th><th>Para qué sirve en el informe / presentación</th><th>Supuesto si no responden</th></tr>
+<tr id="q1"><td><b>1</b><br><span class="tag alta">ALTA</span></td><td><b>Si un cliente compra antes de su fecha de alta, ¿qué registra esa fecha y cómo debemos identificar cuándo un cliente es nuevo?</b></td><td><span class="tag V">VERBALIZADO</span> "la fecha de alta es su primera compra" vs. <span class="tag M">MEDIDO</span> el cliente 202 tiene alta el 28-05-2025, pero compró el 01-05 y el 27-05. La fecha de alta coincide con la primera compra en solo 17 de 1.200 clientes; 299 (25%) compran entre 1 y 27 días antes de su alta</td><td>Ficha de la métrica: definición de cliente nuevo, cohortes e índice de reposición. Atributo <code>fecha_alta</code> de la dimensión Cliente</td><td>Alta = inscripción. Alta anterior a 2025 = cliente previo; nuevo = primera compra y alta en 2025</td></tr>
+<tr id="q2"><td><b>2</b><br><span class="tag alta">ALTA</span></td><td><b>En la reunión nos pidieron medir la retención "por tipo de cliente". ¿A qué tipos se refieren: al segmento de la tarjeta (Clásico, Plus, Black) o a distinguir entre personas y negocios?</b></td><td><span class="tag M">MEDIDO</span> 754 de 1.200 clientes (63%) tienen nombre de negocio ("Distribuidora", "Almacén", "Kiosco"). Los tres segmentos se comportan casi igual: $13–14 mil por compra y entre 4 y 5 compras en el año</td><td>Evidencia y recomendación: define el corte principal de los gráficos de retención y a quién se dirige la recomendación</td><td>Se reportan los dos cortes (segmento y persona/negocio inferido del nombre)</td></tr>
+<tr id="q3"><td><b>3</b><br><span class="tag alta">ALTA</span></td><td><b>¿Desde cuándo opera el canal Online, y debemos incluir sus compras al calcular la retención?</b></td><td><span class="tag V">VERBALIZADO</span> "partió hace poco" vs. <span class="tag M">MEDIDO</span> la Tienda Online registra ventas desde el 01-01-2025 (114 boletas solo en enero) y concentra 1.526 de las 6.153 boletas de 2025 (24,8%). 709 de los 1.197 clientes compraron alguna vez por este canal</td><td>Modelo dimensional: el informe hoy deja Online fuera por "poca historia" (sección "Qué quedó fuera del modelo"). Según la respuesta, esa exclusión se mantiene o se corrige, y cambia la cifra de retención</td><td>Se incluye, con filtro <code>es_online</code>, y se corrige el texto del informe</td></tr>
+</table></div>
+
+<h3 id="s7b">7.b Versión lista para enviar</h3>
+<p><button class="copy" onclick="copiar()">Copiar texto</button> <span id="ok" class="note"></span></p>
+<pre class="send" id="correo">Asunto: Multitienda del Sur – Consultas sobre los datos (Grupo 2 Retail)
+
+Estimado/a:
+
+Junto con saludar, y en el marco del análisis de retención de clientes acordado en la reunión del 4 de septiembre, le enviamos tres consultas surgidas de la revisión de los datos. Para el análisis consideraremos el período enero–diciembre de 2025.
+
+1. Si un cliente compra antes de su fecha de alta, ¿qué registra esa fecha y cómo debemos identificar cuándo un cliente es nuevo?
+En la reunión se nos indicó que la fecha de alta corresponde a la primera compra. Sin embargo, por ejemplo, el cliente 202 tiene fecha de alta el 28 de mayo de 2025, pero registra compras el 1 y el 27 de mayo. La fecha de alta coincide con la primera compra en solo 17 de los 1.200 clientes, y 299 (25%) compran entre 1 y 27 días antes de su alta.
+
+2. En la reunión nos pidieron medir la retención "por tipo de cliente". ¿A qué tipos se refieren: al segmento de la tarjeta (Clásico, Plus, Black) o a distinguir entre personas y negocios?
+Nos surge la duda porque el 63% de los clientes inscritos (754 de 1.200) tiene nombre de negocio (por ejemplo, "Distribuidora", "Almacén" o "Kiosco"), mientras que los tres segmentos se comportan casi igual: gastan entre $13 y $14 mil por compra y compran entre 4 y 5 veces en el año.
+
+3. ¿Desde cuándo opera el canal Online, y debemos incluir sus compras al calcular la retención?
+En la reunión se nos indicó que este canal partió hace poco. Sin embargo, en los datos la Tienda Online registra ventas desde el 1 de enero de 2025 (114 boletas solo en ese mes) y concentra cerca de un cuarto de las boletas del año (1.526 de 6.153). Además, 709 de los 1.197 clientes han comprado alguna vez por este canal.
+
+Agradecemos de antemano su tiempo. Quedamos atentas a sus comentarios.
+
+Saludos cordiales,
+Grupo 2 – Caso Retail
+Javiera Donoso, Xaviera Jorquera, Denisse Kozma, Aracely Paillal y Antonia Pineda</pre>
+
+<h3 id="s7c">7.c Temas que no se preguntan: supuesto que tomaremos</h3>
+<p class="note">Son de menor impacto en la retención o se pueden resolver con criterio propio. Cada supuesto se declara en el informe (anexo) para que la contraparte pueda objetarlo.</p>
+<div class="tw" id="q-supuestos"><table>
+<tr><th>Tema</th><th>Supuesto</th><th>Riesgo si el supuesto es incorrecto</th></tr>
+<tr><td>Monto de venta: en 719 líneas (5%), <code>monto_linea</code> no cuadra con cantidad × precio − descuento</td><td>Se usa el total registrado por boleta (suma de <code>monto_linea</code>). La tabla de boletas no trae un total propio, así que el total se obtiene sumando sus líneas</td><td>Bajo: 0,81% de diferencia en la venta 2025 y ningún efecto en la retención</td></tr>
+<tr><td>Decisiones que se tomarán con la retención, quién las toma y dueño de la definición (prueba ácida)</td><td>La gerencia comercial decide mensualmente las acciones de reactivación y es dueña de la definición. Presentación orientada a la gerencia, con anexo metodológico</td><td>Medio: la recomendación puede quedar genérica. Se plantea como propuesta en el informe</td></tr>
+<tr><td>IVA en precios y montos</td><td>Precios de góndola con IVA incluido</td><td>Bajo para la retención; afecta el margen (siguiente entrega)</td></tr>
+<tr><td>Devoluciones (143 líneas con cantidad negativa)</td><td>Restan de la venta neta; una boleta con solo devoluciones no cuenta como compra</td><td>Bajo: 12 boletas</td></tr>
+<tr><td>Descuento de 10% sin campaña (3.103 líneas, solo con tarjeta)</td><td>Beneficio permanente del programa de fidelización</td><td>Bajo para la retención</td></tr>
+<tr><td>Historial de 2024</td><td>No está disponible: la censura a la izquierda se trata con la fecha de alta</td><td>Medio: depende de la respuesta a la pregunta 2</td></tr>
+<tr><td>Boletas con fecha de 2026</td><td>Período = ene–dic 2025 (se informa en el correo, sin preguntarlo); las de 2026 van a cuarentena</td><td>Bajo: son 37 boletas (0,6%)</td></tr>
+<tr><td>Asignación de un cliente a un local (706 compran en más de uno)</td><td>Local principal = el que más boletas tiene en 2025</td><td>Bajo: el retail usa este criterio habitualmente</td></tr>
+<tr><td>Tasa de retención actual de Marketing</td><td>No se compara con nuestra cifra; se documenta nuestra fórmula</td><td>Medio: no podremos explicar diferencias con la cifra interna</td></tr>
+<tr><td>"Ventas planas" (en los datos, el 2S supera en ~30% al 1S)</td><td>La comparación es contra 2024, que no fue entregado; se declara como limitación</td><td>Medio: afecta la narrativa, no la métrica</td></tr>
+<tr><td>Columnas <code>mes</code> y <code>region</code> de boletas no coinciden con la fecha ni con la tienda</td><td>Son redundantes y con errores: se descartan y se derivan de la fecha y de la tienda</td><td>Bajo: tienen errores sin patrón</td></tr>
+<tr><td>61 boletas duplicadas exactas</td><td>Error de extracción: se eliminan</td><td>Bajo</td></tr>
+<tr><td>Cantidades de 10 a 40 unidades</td><td>Ventas mayoristas válidas; se marcan con flag</td><td>Bajo (ticket en mediana)</td></tr>
+<tr><td>Medios de pago: "App" en tienda y efectivo en compras web</td><td>Son válidos (pago con app / contra entrega)</td><td>Nulo para P1</td></tr>
+<tr><td>Campaña 2x1 "Otoño Lácteos" sin rastro en el POS</td><td>No es trazable; se documenta como limitación (P3 está fuera de esta entrega)</td><td>Nulo para P1</td></tr>
+<tr><td>190 SKU-9xxx sin maestro; SKU-9001/9007 en la campaña</td><td>Miembro "Producto sin maestro"</td><td>Nulo para P1 (el grano es la boleta)</td></tr>
+<tr><td>SKU-0001 duplicado; ASEO vs. Limpieza</td><td>Se conserva la fila activa; ASEO = Limpieza</td><td>Nulo para P1</td></tr>
+<tr><td>Fuente oficial cuando POS y maestro no coinciden</td><td>El POS manda en montos y el maestro en atributos</td><td>Bajo</td></tr>
+<tr><td>Restricciones sobre datos personales</td><td>Criterio más conservador: no usar RUT ni nombre, y solo mostrar agregados de n ≥ 10 (Ley 21.719, minimización)</td><td>Nulo: es el escenario más restrictivo</td></tr>
+<tr><td>Cambios de tiendas o códigos durante 2025</td><td>No hubo; si la serie de algún local se quiebra, se señala</td><td>Bajo</td></tr>
+<tr><td>¿Los datos son una muestra?</td><td>Muestra representativa: se reportan tasas, no totales</td><td>Bajo para las tasas</td></tr>
+<tr><td>Estacionalidad y eventos 2025</td><td>Calendario comercial chileno estándar (Fiestas Patrias, Cyber, Navidad)</td><td>Bajo</td></tr>
+<tr><td>Formatos, público objetivo y competidores</td><td>Información pública del rubro, citada como contexto</td><td>Bajo</td></tr>
+<tr><td>Alcance por local en esta entrega</td><td>Retención total + corte por formato; los 9 locales quedan para la siguiente entrega (como dice el acta)</td><td>Medio: la contraparte lo pidió; se deja el mart listo</td></tr>
+<tr><td>Frecuencia de monitoreo y formato de la "biblia del dato"</td><td>Mensual en el tablero, trimestral en el informe; glosario anexo + planilla</td><td>Bajo</td></tr>
+<tr><td>Deflactor</td><td>IPC general de mindicador.cl, base dic-2024 = 100</td><td>Bajo (P4 está fuera de esta entrega)</td></tr>
+</table></div>
+
+<!-- ============================ 8 ============================ -->
+<h2 id="s8">8. Anexo: archivos revisados y supuestos tomados</h2>
+<h3>Archivos usados (rutas exactas)</h3>
+<div class="tw"><table>
+<tr><th>Archivo</th><th>Uso</th></tr>
+<tr><td><code>IIC3752-2026-2-Proyecto-Semestral/README.md</code></td><td>Contexto general del proyecto</td></tr>
+<tr><td><code>IIC3752-2026-2-Proyecto-Semestral/casos/retail_multitienda/README_caso.md</code></td><td>Caso, empresa, preguntas, fuentes</td></tr>
+<tr><td><code>IIC3752-2026-2-Proyecto-Semestral/casos/retail_multitienda/grupo_2/origen_pos.sqlite</code></td><td>Perfilamiento (7 tablas, solo lectura)</td></tr>
+<tr><td><code>IIC3752-2026-2-Proyecto-Semestral/casos/retail_multitienda/grupo_2/origen_maestro_productos.csv</code></td><td>Perfilamiento</td></tr>
+<tr><td><code>IIC3752-2026-2-Proyecto-Semestral/casos/retail_multitienda/grupo_2/origen_promociones.json</code></td><td>Perfilamiento</td></tr>
+<tr><td><code>https://mindicador.cl/api/ipc/2025</code></td><td>Consultada el 28-09-2026 (12 meses)</td></tr>
+<tr><td><code>docs grupo/Acta Reunión.docx</code></td><td>Acta de levantamiento (4-sep-2026)</td></tr>
+<tr><td><code>docs grupo/Informe 1 TIN.docx</code></td><td>Avance del informe (texto + figura del modelo estrella)</td></tr>
+<tr><td><code>exploracion/00_leer_docx.py</code>, <code>01_perfilamiento.py</code>, <code>02_profundizacion.py</code>, <code>03_chequeos_extra.py</code> y <code>salida_*.txt</code></td><td>Scripts de solo lectura creados para este diagnóstico, con sus salidas</td></tr>
+</table></div>
+
+<h3>Ambigüedades y supuestos de la revisión</h3>
+<ul class="tight">
+<li><b>"Set de datos 2":</b> el repositorio no tiene una carpeta llamada "set 2". Las fuentes están en <code>grupo_1/</code>, <code>grupo_2/</code> y <code>grupo_3/</code>. Asumimos que <b>set 2 = <code>grupo_2</code></b>, porque el acta y el informe se identifican como "Retail Grupo 2". Los otros grupos de retail tienen archivos del mismo nombre y tamaño parecido; <b>no los usamos</b>.</li>
+<li><b>Carpeta de documentos:</b> no existe una carpeta "Docs"; la de documentos es <code>docs grupo/</code>. Hay <b>una sola acta</b>.</li>
+<li>El informe menciona un <b>"correo posterior a la reunión"</b> que no está en el repositorio. No pudimos verificar su contenido.</li>
+<li>El set 2 tiene <b>un solo CSV</b> (el maestro). El grueso de los datos está en la SQLite.</li>
+<li>El README del caso no trae una pauta del informe; el estado del informe se evaluó contra su propia estructura.</li>
+<li>El formato <code>dd-mm-yy</code> se interpretó como siglo 20xx. El formato con barra se validó como día/mes, porque coincide con la columna <code>mes</code> en el 91,9% de los casos, frente al 3,3% si se lee como mes/día. <b>No se pudo verificar</b> cuál es la fecha "verdadera" cuando <code>fecha</code> y <code>mes</code> no coinciden; asumimos que manda <code>fecha</code>.</li>
+<li>La clasificación persona vs. negocio es una <b>heurística por prefijo del nombre</b>, no un dato de la fuente.</li>
+<li>Las cifras de retención de la sección 3.k usan el <code>monto_linea</code> registrado y una definición preliminar. Son de contexto, no el resultado final.</li>
+<li>La Ley 21.719 se consideró según lo indicado (vigencia desde el 1-dic-2026). Esto no es una opinión legal.</li>
+<li>No se modificó, limpió ni sobrescribió ningún archivo de datos ni del informe. Los únicos archivos nuevos están en <code>exploracion/</code> y <code>reportes/</code>.</li>
+</ul>
+
+</main>
+<script>
+function copiar(){
+  var t=document.getElementById('correo').innerText, ok=document.getElementById('ok');
+  function done(){ok.textContent='Copiado ✓';setTimeout(function(){ok.textContent='';},2500);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback);}else{fallback();}
+  function fallback(){try{var r=document.createRange();r.selectNodeContents(document.getElementById('correo'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');done();}catch(e){ok.textContent='Selecciona el texto y copia manualmente';}}
+}
+</script>
+</body>
+</html>
