@@ -68,7 +68,7 @@ Los hallazgos principales fueron:
 - Columnas de mes y región que contradicen a la fecha y a la tienda.
 - Montos guardados como texto, con separadores mezclados, y descuentos escritos de 7 formas.
 - La fecha de alta del cliente no corresponde a su primera compra, contrario a lo que se dijo en la reunión (coincide en solo 17 de 1.200 clientes); la contraparte lo confirmó después por correo.
-- El canal Online existe desde enero y concentra el 25% de las boletas, aunque en la reunión se dijo que había partido hace poco.
+- El canal Online vende desde la primera boleta del año y concentra el 25% de las boletas. En la reunión se dijo que "partió hace poco"; la contraparte aclaró después que lo decía en comparación con las tiendas físicas, no como una apertura dentro de 2025.
 
 ### Paso 2 — Arquitectura bronce → plata → oro
 
