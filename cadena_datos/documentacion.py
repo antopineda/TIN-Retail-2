@@ -21,7 +21,9 @@ TABLAS = {
     'mart_cohortes': 'Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.',
     'mart_rfm_cliente': 'Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.',
     'mart_venta_mensual': 'Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.',
-    'mart_kpi_resumen': 'KPIs de cabecera para el dashboard y la presentación. Grano: 1 KPI.',
+    'mart_cobertura': 'Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.',
+    'mart_valor_riesgo': 'Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.',
+    'mart_kpi_resumen': 'KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.',
 }
 
 COLUMNAS = {
@@ -74,7 +76,7 @@ COLUMNAS = {
     # marts
     'n_compras': 'Compras válidas en el mes', 'compro_en_mes': 'Tuvo al menos una compra válida en el mes',
     'dias_desde_ultima_compra': 'Días desde la última compra al cierre del mes', 'activo_30d': 'Activo al cierre del mes (ventana 30 d)',
-    'activo_90d': 'Activo al cierre del mes (ventana 90 d)', 'activo_180d': 'Activo al cierre del mes (ventana 180 d)',
+    'activo_90d': 'Activo al cierre del mes (ventana 90 d)', 'activo_180d': 'Activo al cierre del mes (ventana 180 d)', 'activo_365d': 'Activo al cierre del mes (ventana 365 d)',
     'estado_90d': 'aun_sin_compras, nuevo, primera_obs_previo, reactivado, recurrente, activo_sin_compra o inactivo (ventana 90 d)',
     'corte': 'Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)', 'valor': 'Valor del corte',
     'periodo_tipo': 'mes o trimestre', 'periodo': 'Período (AAAA-MM o AAAAQn)', 'ventana_dias': 'Ventana de inactividad W (días)',
@@ -94,7 +96,14 @@ COLUMNAS = {
     'segmento_rfm': 'Campeones, Leales, Recientes, En riesgo, Hibernando / perdidos, Necesitan atención',
     'una_compra_evaluable': f'Primera compra <= {config.VENTANA_PRINCIPAL} días antes del corte (tuvo tiempo de volver)',
     'es_una_sola_vez': 'Una sola compra y evaluable', 'activo_30d_al_corte': 'Activo al 31-12-2025 (30 d)',
-    'activo_90d_al_corte': 'Activo al 31-12-2025 (90 d)', 'activo_180d_al_corte': 'Activo al 31-12-2025 (180 d)',
+    'activo_90d_al_corte': 'Activo al 31-12-2025 (90 d)', 'activo_180d_al_corte': 'Activo al 31-12-2025 (180 d)', 'activo_365d_al_corte': 'Activo al 31-12-2025 (365 d)',
+    'paso': 'Orden del paso en el embudo', 'motivo': 'Motivo de exclusión (o total)', 'boletas_restantes': 'Boletas que siguen después del paso',
+    'pct_del_origen': 'boletas del paso / boletas del origen', 'pct_venta_2025': 'venta del paso / venta 2025',
+    'perdidos_q4': 'Clientes activos al 1-oct que ya no lo están al 31-dic', 'gasto_trimestral_perdidos': 'Σ gasto trimestral de los perdidos (venta 2025 / trimestres entre su primera y última compra)',
+    'venta_anual_en_riesgo': 'gasto_trimestral_perdidos × 4 (supone que el gasto se habría mantenido)', 'activos_inicio_q4': 'Clientes activos al 1-oct-2025',
+    'gasto_trimestral_promedio_activo': 'Gasto trimestral promedio de los activos al 1-oct (misma definición)', 'valor_anual_1pp_retencion': '1% × activos_inicio_q4 × gasto trimestral × 4',
+    'tema': 'Tema del supuesto', 'supuesto': 'Qué se asume', 'por_que': 'Por qué se tomó', 'efecto_si_falso': 'Qué pasaría con el resultado si fuera falso',
+    'decidio': 'Quién lo decidió', 'id': 'Identificador del supuesto',
     'boletas': 'Boletas', 'boletas_identificadas': 'Boletas con tarjeta', 'clientes_unicos': 'Clientes distintos',
     'venta_identificada': 'Venta de boletas con tarjeta', 'ticket_promedio': 'Promedio de venta por compra válida',
     'ticket_mediano': 'Mediana de venta por compra válida', 'pct_boletas_identificadas': 'boletas_identificadas / boletas',
@@ -114,7 +123,7 @@ def diccionario(oro):
 
 
 def supuestos():
-    return pd.DataFrame(config.SUPUESTOS, columns=['id', 'tema', 'supuesto', 'origen'])
+    return pd.DataFrame(config.SUPUESTOS, columns=['id', 'tema', 'supuesto', 'por_que', 'efecto_si_falso', 'decidio', 'fecha'])
 
 
 def _pct(x):
@@ -145,14 +154,18 @@ def resumen_hallazgos(oro, val):
            '## Retención (pregunta 1)', '',
            f'- Mediana entre compras: {k.intercompra_mediana_dias:.0f} días; p90: {k.intercompra_p90_dias:.0f} días. '
            f'Recompras dentro de 30 d: {_pct(k.pct_recompras_dentro_30d)}; dentro de 90 d: {_pct(k.pct_recompras_dentro_90d)}.',
-           f'- Clientes activos al 31-12-2025: {_pct(k.pct_activos_30d_al_corte)} (30 d) · {_pct(k.pct_activos_90d_al_corte)} (90 d) · '
-           f'{_pct(k.pct_activos_180d_al_corte)} (180 d). **La definición de "activo" cambia la cifra drásticamente.**',
+           '- Clientes activos al 31-12-2025: ' + ' · '.join(f'{_pct(k[f"pct_activos_{v}d_al_corte"])} ({v} d)' for v in config.VENTANAS)
+           + '. **La definición de "activo" cambia la cifra drásticamente.** Con 365 d todos quedan activos: con 12 meses de datos esa ventana no discrimina.',
            f'- Compradores de una sola vez (con al menos {w} días para volver): {_pct(k.pct_una_sola_vez)}.',
            f'- Retención trimestral (W={w} d, base confiable desde Q2): ' + ' · '.join(
                f'{p}: {_pct(r.tasa_retencion)}' for p, r in q.iterrows() if r.base_confiable) + '.',
            f'- Q4 con W={w} d: {_num(q.loc["2025Q4"].perdidos)} clientes perdidos vs. {_num(q.loc["2025Q4"].nuevos)} nuevos '
            f'(índice de reposición {_dec(q.loc["2025Q4"].indice_reposicion)}) y {_num(q.loc["2025Q4"].reactivados)} reactivados.',
-           f'- Sensibilidad Q4: retención {_pct(k.retencion_Q4_30d)} (30 d) · {_pct(k.retencion_Q4_90d)} (90 d) · {_pct(k.retencion_Q4_180d)} (180 d).',
+           '- Sensibilidad Q4: retención ' + ' · '.join(f'{_pct(k[f"retencion_Q4_{v}d"])} ({v} d)' for v in config.VENTANAS) + '.',
+           f'- **En pesos:** los clientes perdidos en Q4 compraban ${_num(k[f"venta_anual_en_riesgo_{w}d"])} al año '
+           f'(su gasto trimestral típico × 4). Cada punto de retención vale ${_num(k[f"valor_anual_1pp_retencion_{w}d"])} al año.',
+           f'- **Cobertura:** {_pct(k.pct_boletas_fuera_de_retencion)} de las boletas del origen queda fuera de la retención '
+           f'(duplicadas, 2026, anónimas o solo devolución; ver `mart_cobertura`). Las compras usadas cubren {_pct(k.pct_venta_2025_en_retencion)} de la venta 2025.',
            ]
     if 'cohorte_Q1_nuevos_activos_en_Q4' in k:
         lin.append(f'- De los clientes nuevos que llegaron en Q1-2025, {_pct(k.cohorte_Q1_nuevos_activos_en_Q4)} compra en Q4.')

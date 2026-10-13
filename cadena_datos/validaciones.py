@@ -78,4 +78,7 @@ def ejecutar(pl, oro, log):
     mcm = oro['mart_cliente_mes']
     chequear('V21', 'mart_cliente_mes = clientes × 12 meses', 'critica', len(mcm) == rfm.cliente_key.nunique() * 12,
              f'{len(mcm)} filas')
+    cob = oro['mart_cobertura']
+    chequear('V22', 'Embudo de cobertura cuadra: origen − exclusiones = compras usadas', 'critica',
+             cob.iloc[-2].boletas_restantes == cob.iloc[-1].boletas, f'{cob.iloc[-2].boletas_restantes} vs {cob.iloc[-1].boletas}')
     return pd.DataFrame(res)

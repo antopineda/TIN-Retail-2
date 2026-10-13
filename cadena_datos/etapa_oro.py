@@ -292,6 +292,63 @@ def kpi_resumen(fb, compras, rfm, mret, mcoh, fechas):
             'Clientes nuevos que llegaron en Q1-2025 y compran en Q4-2025')
     return pd.DataFrame(k)
 
+def mart_cobertura(n_origen, fb, compras):
+    """Embudo de cobertura: cuántas boletas del origen quedan fuera de la retención y por qué."""
+    p = fb[fb.en_periodo]
+    ident = p[p.es_identificada]
+    venta_2025 = p.venta_neta.sum()
+    pasos = [('Boletas en el origen (POS)', n_origen, None),
+             ('Duplicados exactos (se cuentan una vez)', -(n_origen - len(fb)), None),
+             ('Fecha fuera de 2025', -int((~fb.en_periodo).sum()), fb.loc[~fb.en_periodo, 'venta_neta'].sum()),
+             ('Anónimas, sin tarjeta (fuera de la retención de identificados)', -int((~p.es_identificada).sum()),
+              p.loc[~p.es_identificada, 'venta_neta'].sum()),
+             ('Venta neta <= 0: devoluciones sin compra neta (no es una compra)', -int((~ident.es_compra_valida).sum()),
+              ident.loc[~ident.es_compra_valida, 'venta_neta'].sum())]
+    filas, restante = [], 0
+    for paso, (motivo, n, venta) in enumerate(pasos, start=1):
+        restante = n if paso == 1 else restante + n
+        filas.append({'paso': paso, 'motivo': motivo, 'boletas': n, 'boletas_restantes': restante, 'venta_neta': venta})
+    filas.append({'paso': len(pasos) + 1, 'motivo': 'Compras usadas en la retención', 'boletas': len(compras),
+                  'boletas_restantes': len(compras), 'venta_neta': compras.venta_neta.sum()})
+    c = pd.DataFrame(filas)
+    c['pct_del_origen'] = c.boletas.abs() / n_origen
+    c['pct_venta_2025'] = c.venta_neta.abs() / venta_2025
+    return c
+
+
+def mart_valor_riesgo(estados, compras):
+    """Traduce la pérdida de clientes de Q4 a pesos: gasto trimestral de esos clientes mientras estuvieron activos, anualizado.
+    Gasto trimestral de un cliente = su venta 2025 / n° de trimestres entre su primera y su última compra (inclusive)."""
+    g = compras.groupby('cliente_id').agg(venta=('venta_neta', 'sum'), ini=('fecha', 'min'), fin=('fecha', 'max'))
+    trimestres = (g.fin.dt.to_period('Q') - g.ini.dt.to_period('Q')).apply(lambda x: x.n) + 1
+    gasto_q3 = g.venta / trimestres                               # gasto trimestral típico de cada cliente
+    filas = []
+    for w in config.VENTANAS:
+        e = estados[(estados.periodo == '2025Q4') & (estados.ventana_dias == w)]
+        perdidos, activos = e.loc[e.perdido, 'cliente_id'], e.loc[e.activo_inicio, 'cliente_id']
+        venta_perd = gasto_q3.reindex(perdidos).fillna(0).sum()
+        gasto_prom = gasto_q3.reindex(activos).fillna(0).mean() if len(activos) else np.nan
+        filas.append({'ventana_dias': w, 'perdidos_q4': len(perdidos), 'gasto_trimestral_perdidos': venta_perd,
+                      'venta_anual_en_riesgo': venta_perd * 4, 'activos_inicio_q4': len(activos),
+                      'gasto_trimestral_promedio_activo': gasto_prom,
+                      'valor_anual_1pp_retencion': 0.01 * len(activos) * gasto_prom * 4})
+    return pd.DataFrame(filas)
+
+
+def kpi_cobertura_riesgo(cob, rie):
+    k = []
+    add = lambda kpi, v, u, d: k.append({'kpi': kpi, 'valor': v, 'unidad': u, 'definicion': d})
+    usadas = cob.iloc[-1]
+    add('pct_boletas_fuera_de_retencion', 1 - usadas.boletas / cob.iloc[0].boletas, 'proporción',
+        'Boletas del origen que no entran a la retención (duplicadas, 2026, anónimas o solo devolución); ver mart_cobertura')
+    add('pct_venta_2025_en_retencion', usadas.pct_venta_2025, 'proporción', 'Venta 2025 cubierta por las compras usadas en la retención')
+    r = rie.set_index('ventana_dias').loc[config.VENTANA_PRINCIPAL]
+    add(f'venta_anual_en_riesgo_{config.VENTANA_PRINCIPAL}d', r.venta_anual_en_riesgo, 'CLP nominal / año',
+        'Gasto trimestral de los clientes perdidos en Q4 (mientras estuvieron activos) × 4; supone que su gasto se habría mantenido')
+    add(f'valor_anual_1pp_retencion_{config.VENTANA_PRINCIPAL}d', r.valor_anual_1pp_retencion, 'CLP nominal / año',
+        'Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4')
+    return pd.DataFrame(k)
+
 # ----------------------------------------------------------------- orquestación
 def ejecutar(pl):
     dt = dim_tiempo(pl['boletas'], pl['campanas'], pl['ipc_mensual'])
@@ -309,11 +366,13 @@ def ejecutar(pl):
     mcoh = mart_cohortes(compras, dcl)
     rfm = mart_rfm(fechas, compras, dcl)
     mvm = mart_venta_mensual(fb, dti)
-    kpi = kpi_resumen(fb, compras, rfm, mret, mcoh, fechas)
+    cob = mart_cobertura(pl['_n_bronce']['boletas'], fb, compras)
+    rie = mart_valor_riesgo(estados, compras)
+    kpi = pd.concat([kpi_resumen(fb, compras, rfm, mret, mcoh, fechas), kpi_cobertura_riesgo(cob, rie)], ignore_index=True)
     oro = {'dim_tiempo': dt, 'dim_tienda': dti, 'dim_medio_pago': dmp, 'dim_producto': dpr, 'dim_campana': dca,
            'dim_cliente': dcl, 'fact_venta_boleta': fb, 'fact_venta_linea': fl, 'mart_cliente_mes': mcm,
            'mart_retencion': mret, 'mart_cohortes': mcoh, 'mart_rfm_cliente': rfm, 'mart_venta_mensual': mvm,
-           'mart_kpi_resumen': kpi}
+           'mart_cobertura': cob, 'mart_valor_riesgo': rie, 'mart_kpi_resumen': kpi}
     for nombre, df in oro.items():
         L.escribir_csv(df, config.ORO / f'{nombre}.csv')
     oro['_estados'] = estados

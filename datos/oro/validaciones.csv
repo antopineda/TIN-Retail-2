@@ -18,6 +18,7 @@ V16,Venta registrada vs calculada 2025 difiere < 2% (sustento S02),advertencia,O
 V17,Oro sin RUT ni nombre de cliente (S15),critica,OK,[]
 V17b,Ningún valor de oro tiene forma de RUT,critica,OK,[]
 V18,Identidad de retención (A1 = ret + nuevos + react + prim.obs; A0 = ret + perdidos),critica,OK,
-V19,Activos al cierre de Q4 (mart_retencion) = activos al corte (RFM),critica,OK,"{30: (367, 367), 90: (674, 674), 180: (967, 967)}"
+V19,Activos al cierre de Q4 (mart_retencion) = activos al corte (RFM),critica,OK,"{30: (367, 367), 90: (674, 674), 180: (967, 967), 365: (1192, 1192)}"
 V20,Cada corte reparte a todos los clientes (suma por corte = Total),advertencia,OK,
 V21,mart_cliente_mes = clientes × 12 meses,critica,OK,14304 filas
+V22,Embudo de cobertura cuadra: origen − exclusiones = compras usadas,critica,OK,5305 vs 5305

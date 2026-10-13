@@ -1,0 +1,7 @@
+﻿paso,motivo,boletas,boletas_restantes,venta_neta,pct_del_origen,pct_venta_2025
+1,Boletas en el origen (POS),6251,6251,,1.0,
+2,Duplicados exactos (se cuentan una vez),-61,6190,,0.009758438649816029,
+3,Fecha fuera de 2025,-37,6153,372988.0,0.005919052951527755,0.004843763284659218
+4,"Anónimas, sin tarjeta (fuera de la retención de identificados)",-803,5350,5025588.0,0.12845944648856183,0.06526418715407453
+5,Venta neta <= 0: devoluciones sin compra neta (no es una compra),-45,5305,-157382.0,0.007198848184290513,0.0020438221960659246
+6,Compras usadas en la retención,5305,5305,72135557.0,0.8486642137258039,0.9367796350419914

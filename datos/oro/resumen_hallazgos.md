@@ -1,7 +1,7 @@
 # Resumen de hallazgos para reportería
 
-Generado automáticamente por la cadena el 13-10-2026 08:24. Todas las cifras salen de `datos/oro/`.
-Validaciones: 22 OK / 0 con falla (ver `validaciones.csv`).
+Generado automáticamente por la cadena el 13-10-2026 10:45. Todas las cifras salen de `datos/oro/`.
+Validaciones: 23 OK / 0 con falla (ver `validaciones.csv`).
 
 ## Contexto
 
@@ -11,11 +11,13 @@ Validaciones: 22 OK / 0 con falla (ver `validaciones.csv`).
 ## Retención (pregunta 1)
 
 - Mediana entre compras: 15 días; p90: 74 días. Recompras dentro de 30 d: 69,1%; dentro de 90 d: 92,8%.
-- Clientes activos al 31-12-2025: 30,8% (30 d) · 56,5% (90 d) · 81,1% (180 d). **La definición de "activo" cambia la cifra drásticamente.**
+- Clientes activos al 31-12-2025: 30,8% (30 d) · 56,5% (90 d) · 81,1% (180 d) · 100,0% (365 d). **La definición de "activo" cambia la cifra drásticamente.** Con 365 d todos quedan activos: con 12 meses de datos esa ventana no discrimina.
 - Compradores de una sola vez (con al menos 90 días para volver): 29,9%.
 - Retención trimestral (W=90 d, base confiable desde Q2): 2025Q2: 62,4% · 2025Q3: 63,7% · 2025Q4: 51,1%.
 - Q4 con W=90 d: 287 clientes perdidos vs. 306 nuevos (índice de reposición 1,07) y 50 reactivados.
-- Sensibilidad Q4: retención 33,2% (30 d) · 51,1% (90 d) · 82,5% (180 d).
+- Sensibilidad Q4: retención 33,2% (30 d) · 51,1% (90 d) · 82,5% (180 d) · 100,0% (365 d).
+- **En pesos:** los clientes perdidos en Q4 compraban $31.787.944 al año (su gasto trimestral típico × 4). Cada punto de retención vale $713.464 al año.
+- **Cobertura:** 15,1% de las boletas del origen queda fuera de la retención (duplicadas, 2026, anónimas o solo devolución; ver `mart_cobertura`). Las compras usadas cubren 93,7% de la venta 2025.
 - De los clientes nuevos que llegaron en Q1-2025, 31,9% compra en Q4.
 
 ## Retención por local (corte pedido por la contraparte, W=90 d)
