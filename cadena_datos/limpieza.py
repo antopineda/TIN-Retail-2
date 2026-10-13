@@ -140,11 +140,12 @@ def sin_tildes(s):
     return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
 
 
-def tipo_cliente(nombre):
+def clasificacion_nombre(nombre):
+    """Clasificación del equipo por prefijo del nombre (no es una categoría de la empresa)."""
     if es_nulo(nombre):
         return 'No determinado'
     n = str(nombre).strip()
-    for tipo, prefijos in config.PREFIJOS_TIPO_CLIENTE.items():
+    for tipo, prefijos in config.PREFIJOS_CLASIFICACION_NOMBRE.items():
         if any(n.startswith(p + ' ') or n == p for p in prefijos):
             return tipo
     return 'No determinado'

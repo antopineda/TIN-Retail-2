@@ -85,9 +85,9 @@ Todos los CSV están en UTF-8 (con BOM, para que Excel muestre bien las tildes),
 
 ## Supuestos
 
-El ayudante no respondió las preguntas, así que la cadena opera bajo los supuestos S01–S16 de `config.py` (también exportados a `oro/supuestos.csv`). Los más relevantes:
+La contraparte respondió el 13-10 (ver el README principal). La cadena opera bajo los supuestos S01–S16 de `config.py` (también exportados a `oro/supuestos.csv`). Los más relevantes:
 
 - **S02**: la venta es el `monto_linea` registrado, sumado por boleta. La diferencia con el monto recalculado es de 0,8% en 2025.
-- **S06**: la fecha de alta es la fecha de inscripción, no la de la primera compra.
-- **S07**: se reportan dos cortes de tipo de cliente: segmento de la tarjeta y persona/hogar vs. negocio (inferido del nombre).
-- **S08**: Online se incluye en el análisis, con filtro para excluirlo.
+- **S06** (confirmado 13-10): la fecha de alta no es la primera compra ni la inscripción; no se corrige. Nuevo = alta en 2025 y primera compra en el período.
+- **S07** (confirmado 13-10): tipo de cliente = segmento + local. Persona/negocio (`clasificacion_nombre`) es una clasificación del equipo, solo complementaria.
+- **S08** (confirmado 13-10): Online es un décimo punto de venta, se incluye en el cálculo principal y tiene macrozona "Online".

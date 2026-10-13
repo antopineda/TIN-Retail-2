@@ -38,7 +38,7 @@ COLUMNAS = {
     'ipc_indice': f'Índice IPC encadenado, base {config.IPC_BASE} = 100',
     # dim_tienda / medio / producto / campaña
     'nombre': 'Nombre de la tienda / producto / campaña', 'formato': 'Express, Supermercado, Híper u Online', 'comuna': 'Comuna',
-    'region': 'Región (derivada de la comuna; La Florida corregida a Metropolitana)', 'macrozona': 'Metropolitana, Centro sur o Sur (README)',
+    'region': 'Región (derivada de la comuna; La Florida corregida a Metropolitana)', 'macrozona': 'Metropolitana, Centro sur o Sur (README); la Tienda Online tiene macrozona "Online" porque vende a toda la cadena (S08)',
     'medio': 'Efectivo, Débito, Crédito o App', 'categoria': 'Categoría canónica (8) o "No informada"', 'subcategoria': 'Subcategoría',
     'marca': 'Marca', 'proveedor': 'Proveedor', 'costo_unitario': 'Costo unitario del maestro (CLP; supuesto sin IVA)',
     'precio_lista': 'Precio de lista del maestro (CLP)', 'activo': 'Producto activo en el maestro',
@@ -46,9 +46,9 @@ COLUMNAS = {
     'campana_id': 'Campaña que aplica a la línea (SKU + fecha + canal)', 'tipo': 'Tipo de campaña', 'fecha_ini': 'Inicio de campaña',
     'fecha_fin': 'Fin de campaña', 'descuento_pct': 'Descuento en %', 'canales': 'Canales habilitados (separados por |)',
     # dim_cliente
-    'tipo_cliente': 'Persona/Hogar, Negocio o No determinado (inferido del prefijo del nombre, S07)', 'segmento': 'Clásico, Plus o Black (valor actual, SCD1)',
+    'clasificacion_nombre': 'Persona/Hogar, Negocio o No determinado. Clasificación del equipo por prefijo del nombre, NO una categoría de la empresa (S07)', 'segmento': 'Clásico, Plus o Black (valor actual, SCD1)',
     'comuna_residencia': 'Comuna del cliente', 'region_residencia': 'Región del cliente', 'macrozona_residencia': 'Macrozona del cliente',
-    'fecha_alta': 'Fecha de alta en el programa (interpretada como inscripción, S06)', 'es_cliente_previo_2025': 'Alta anterior a 2025',
+    'fecha_alta': 'Fecha de alta del maestro, tal como viene. No es la primera compra ni una inscripción (S06); solo separa clientes previos (alta < 2025)', 'es_cliente_previo_2025': 'Alta anterior a 2025',
     'es_nuevo_2025': 'Alta en 2025 (S06)', 'tipo_cohorte': 'Nuevo 2025 / Previo (alta antes de 2025)',
     'fecha_primera_compra': 'Primera compra válida observada en 2025', 'fecha_ultima_compra': 'Última compra válida en 2025',
     'n_compras_2025': 'Compras válidas en 2025', 'cohorte_trimestre': 'Trimestre de la primera compra observada',
@@ -76,7 +76,7 @@ COLUMNAS = {
     'dias_desde_ultima_compra': 'Días desde la última compra al cierre del mes', 'activo_30d': 'Activo al cierre del mes (ventana 30 d)',
     'activo_90d': 'Activo al cierre del mes (ventana 90 d)', 'activo_180d': 'Activo al cierre del mes (ventana 180 d)',
     'estado_90d': 'aun_sin_compras, nuevo, primera_obs_previo, reactivado, recurrente, activo_sin_compra o inactivo (ventana 90 d)',
-    'corte': 'Dimensión de corte (Total, Tienda principal, Formato, Macrozona, Tipo de cliente, Segmento, Canal)', 'valor': 'Valor del corte',
+    'corte': 'Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)', 'valor': 'Valor del corte',
     'periodo_tipo': 'mes o trimestre', 'periodo': 'Período (AAAA-MM o AAAAQn)', 'ventana_dias': 'Ventana de inactividad W (días)',
     'activos_inicio': 'A0: activos al cierre del día anterior al período', 'activos_fin': 'A1: activos al cierre del período',
     'retenidos': 'A0 ∩ A1', 'perdidos': 'A0 − A1', 'nuevos': 'Entran a A1 con primera compra en el período y alta 2025',
@@ -86,7 +86,7 @@ COLUMNAS = {
     'tasa_churn': 'perdidos / activos_inicio', 'tasa_recompra_periodo': 'activos_inicio_que_compraron / activos_inicio',
     'indice_reposicion': 'nuevos / perdidos (<1: no alcanza a reponer)', 'indice_reposicion_total': '(nuevos + reactivados + primeras_obs_previos) / perdidos',
     'base_confiable': 'True si hay >= W días de historia antes del período (si no, A0 está subestimado por falta de datos 2024)',
-    'es_ventana_principal': f'ventana_dias == {config.VENTANA_PRINCIPAL}', 'n_suficiente': f'activos_inicio >= {config.UMBRAL_N_MIN}',
+    'es_ventana_principal': f'ventana_dias == {config.VENTANA_PRINCIPAL}', 'n_suficiente': f'activos_inicio >= {config.UMBRAL_N_MIN}', 'muestra_pequena': f'activos_inicio < {config.UMBRAL_MUESTRA_PEQUENA}: tasa volátil, mostrar con advertencia',
     'tamano_cohorte': 'Clientes de la cohorte', 'trimestre_actividad': 'Trimestre observado', 'trimestres_desde_ingreso': '0 = trimestre de ingreso',
     'clientes_activos': 'Clientes de la cohorte con compra en el trimestre', 'pct_activos': 'clientes_activos / tamano_cohorte', 'compras': 'Compras válidas',
     'recencia_dias': 'Días entre la última compra y el 31-12-2025', 'frecuencia': 'Compras válidas en 2025', 'monto': 'Σ venta_neta de compras válidas 2025',
@@ -133,9 +133,7 @@ def resumen_hallazgos(oro, val):
     k = oro['mart_kpi_resumen'].set_index('kpi').valor
     m = oro['mart_retencion']
     q = m[(m.corte == 'Total') & (m.periodo_tipo == 'trimestre') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('periodo')
-    tc = m[(m.corte == 'Tipo de cliente') & (m.periodo == '2025Q4') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('valor')
-    sg = m[(m.corte == 'Segmento') & (m.periodo == '2025Q4') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('valor')
-    fm = m[(m.corte == 'Formato principal') & (m.periodo == '2025Q4') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('valor')
+    corte_q4 = lambda nombre: m[(m.corte == nombre) & (m.periodo == '2025Q4') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('valor')
     w = config.VENTANA_PRINCIPAL
     lin = [f'# Resumen de hallazgos para reportería', '',
            f'Generado automáticamente por la cadena el {datetime.now():%d-%m-%Y %H:%M}. Todas las cifras salen de `datos/oro/`.',
@@ -158,10 +156,30 @@ def resumen_hallazgos(oro, val):
            ]
     if 'cohorte_Q1_nuevos_activos_en_Q4' in k:
         lin.append(f'- De los clientes nuevos que llegaron en Q1-2025, {_pct(k.cohorte_Q1_nuevos_activos_en_Q4)} compra en Q4.')
-    lin += ['', f'## Cortes en Q4 (W={w} d)', '', '| Corte | Valor | Activos inicio | Retención | Reposición |', '|---|---|---|---|---|']
-    for nombre, tab in [('Tipo de cliente', tc), ('Segmento', sg), ('Formato principal', fm)]:
-        for v, r in tab.iterrows():
+    # --- corte principal pedido por la contraparte: local
+    tri = m[(m.corte == 'Tienda principal') & (m.periodo_tipo == 'trimestre') & (m.ventana_dias == w) & m.base_confiable]
+    piv = tri.pivot(index='valor', columns='periodo', values='tasa_retencion').sort_values('2025Q4', ascending=False)
+    loc4 = corte_q4('Tienda principal')
+    lin += ['', f'## Retención por local (corte pedido por la contraparte, W={w} d)', '',
+            'Cada cliente se asigna a su local principal (S09). La Tienda Online es un décimo punto de venta (S08).', '',
+            '| Local | ' + ' | '.join(piv.columns) + ' | Activos inicio Q4 |', '|---|' + '---|' * (len(piv.columns) + 1)]
+    for v, r in piv.iterrows():
+        lin.append(f'| {v} | ' + ' | '.join(_pct(x) for x in r) + f' | {_num(loc4.loc[v].activos_inicio)} |')
+    peq = loc4[loc4.muestra_pequena]
+    if len(peq):
+        lin += ['', f'**Precaución:** {len(peq)} de {len(loc4)} locales parten Q4 con menos de {config.UMBRAL_MUESTRA_PEQUENA} clientes activos; '
+                    'sus tasas cambian mucho entre trimestres. Leer la tendencia junto con el total, no un trimestre aislado.']
+    # --- otros cortes
+    lin += ['', f'## Otros cortes en Q4 (W={w} d)', '', '| Corte | Valor | Activos inicio | Retención | Reposición |', '|---|---|---|---|---|']
+    for nombre in ['Formato principal', 'Macrozona principal', 'Segmento', config.CORTE_CLASIFICACION_NOMBRE]:
+        for v, r in corte_q4(nombre).iterrows():
             lin.append(f'| {nombre} | {v} | {_num(r.activos_inicio)} | {_pct(r.tasa_retencion)} | {_dec(r.indice_reposicion)} |')
+    sg, cn = corte_q4('Segmento'), corte_q4(config.CORTE_CLASIFICACION_NOMBRE)
+    lin += ['', f'- **Segmento** (pedido por la contraparte): la retención va de {_pct(sg.tasa_retencion.min())} a {_pct(sg.tasa_retencion.max())}. '
+                'Queda pareja, como anticipó la contraparte: el segmento hoy no separa al cliente frecuente del ocasional.',
+            f'- **Persona/negocio** (clasificación del equipo, no de la empresa): {_pct(cn.tasa_retencion.min())} a {_pct(cn.tasa_retencion.max())}. '
+                'No separa el comportamiento; se deja solo como dato complementario.',
+            '- **Macrozona "Online"**: clientes cuyo local principal es la Tienda Online, que viven en toda la cadena (S08).']
     lin += ['', '## Cómo leer las tablas', '',
             '- `mart_retencion`: filtrar `ventana_dias = 90` (principal) y `base_confiable = True`. Usar `corte`/`valor` para los cortes.',
             '- `mart_cohortes`: usar `tipo_cohorte = "Nuevo 2025"` para curvas de cohorte (la cohorte Q1 "Todos" mezcla clientes antiguos).',

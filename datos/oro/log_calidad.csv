@@ -1,10 +1,11 @@
 ﻿regla,tabla,columna,problema,accion,filas_afectadas
 R06,comunas,region_id,region_id inexistente (La Florida -> 9),corregido según config.CORRECCION_REGION_COMUNA,1
 R06b,tiendas,formato,"formato sin tilde (""Hiper"")","normalizado a ""Híper""",2
+R06c,tiendas,macrozona,Tienda Online registrada en Providencia pero vende a toda la cadena,"macrozona = ""Online"" (S08)",1
 R17,clientes,rut,"formatos mixtos (puntos, espacios, sin guion)",normalizado a 12345678-K,849
 R17b,clientes,rut,dígito verificador inválido,flag_rut_invalido (se conserva),16
 R17c,clientes,rut,RUT duplicado tras normalizar,revisión (no se fusiona),0
-R18,clientes,nombre,tipo de cliente implícito en el nombre,"tipo_cliente por prefijo: {'Negocio': 754, 'Persona/Hogar': 446}",754
+R18,clientes,nombre,nombre sugiere persona/hogar o negocio (no es campo de la empresa),"clasificacion_nombre del equipo: {'Negocio': 754, 'Persona/Hogar': 446}",754
 R19,clientes,fecha_alta,2 formatos de fecha,parseado a fecha ISO,600
 R19b,clientes,fecha_alta,fecha no parseable,queda nula,0
 R01,boletas,*,filas duplicadas exactas,eliminadas (se conserva 1),61

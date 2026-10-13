@@ -100,6 +100,7 @@ Todo lo demás se corrige o se marca con un flag, para no perder información.
 | boletas | Columna `region` que no coincide con la tienda | Se descarta; la región se saca de la tienda | 397 |
 | boletas | Boletas sin cliente (anónimas) | Se asignan al cliente "Anónimo" (−1); cuentan en ventas pero no en retención | 807 |
 | comunas | La Florida apunta a una región inexistente (9) | Se corrige a Metropolitana | 1 |
+| tiendas | La Tienda Online está registrada en Providencia, pero vende a clientes de toda la cadena | Se le asigna la macrozona "Online" para no inflar la Metropolitana | 1 tienda (401 clientes) |
 | detalle | Precios y montos guardados como texto (`1.940`, `-.905`) | Se convierten a número | 6.931 |
 | detalle | Descuento escrito de 7 formas (`10`, `10%`, `0,10`…) | Se convierte a porcentaje (0, 10 o 25) | 2.465 |
 | detalle | Dos productos con el mismo número de línea | Se renumeran las líneas; no se borra nada | 790 |
@@ -109,7 +110,7 @@ Todo lo demás se corrige o se marca con un flag, para no perder información.
 | detalle | Productos que no están en el maestro (SKU-9xxx) | Se conservan como "Producto sin maestro" | 215 |
 | detalle | Descuento de 10% sin campaña, solo con tarjeta | Se clasifica como beneficio de la tarjeta | 3.103 |
 | clientes | RUT en formatos mezclados; 16 con dígito verificador inválido | Se normalizan y se validan; el RUT **no pasa a oro** | 849 |
-| clientes | El tipo de cliente solo se deduce del nombre (Distribuidora, Kiosco, Sra., Familia…) | Se crea `tipo_cliente` (Negocio / Persona-Hogar) y el nombre **no pasa a oro** | 1.200 |
+| clientes | El nombre sugiere persona/hogar (Sr., Sra., Familia) o negocio (Distribuidora, Kiosco…) | Se crea `clasificacion_nombre`, una clasificación **del equipo** y no de la empresa; el nombre **no pasa a oro** | 1.200 |
 | clientes | Fecha de alta en 2 formatos | Se convierte a fecha | 600 |
 | productos | Archivo en codificación Latin-1 (tildes rotas en UTF-8) | Se lee correctamente y se guarda en UTF-8 | 84 |
 | productos | Encabezado repetido y fila "TOTAL" | Se eliminan | 2 |
@@ -133,7 +134,7 @@ Todo lo demás se corrige o se marca con un flag, para no perder información.
 
 | Tabla | Qué responde |
 |---|---|
-| `mart_retencion` | Por mes o trimestre: cuántos clientes estaban activos, cuántos se retuvieron, se perdieron, llegaron nuevos o volvieron. Incluye ventanas de 30, 90 y 180 días, con cortes por tienda, formato, macrozona, tipo de cliente y segmento. **Es la tabla principal para P1.** |
+| `mart_retencion` | Por mes o trimestre: cuántos clientes estaban activos, cuántos se retuvieron, se perdieron, llegaron nuevos o volvieron. Incluye ventanas de 30, 90 y 180 días, con cortes por **local** (9 tiendas + Online), formato, macrozona y segmento. **Es la tabla principal para P1.** |
 | `mart_cohortes` | De los clientes que llegaron en cada trimestre, qué porcentaje sigue comprando después. |
 | `mart_cliente_mes` | El estado de cada cliente mes a mes: nuevo, recurrente, reactivado o inactivo. |
 | `mart_rfm_cliente` | Recencia, frecuencia y monto de cada cliente al 31-12-2025, y si compró una sola vez. |
@@ -145,7 +146,9 @@ cada período se comparan los activos al inicio con los activos al final:
 
 - **retenidos** = activos al inicio que siguen activos al final → **tasa de retención** = retenidos / activos al inicio
 - **perdidos** = activos al inicio que ya no lo están al final
-- **nuevos** = llegaron por primera vez (alta en 2025) · **reactivados** = habían comprado antes, estaban inactivos y volvieron
+- **nuevos** = su primera compra cae en el período y su alta es de 2025 · **reactivados** = habían comprado antes, estaban inactivos y volvieron
+- **primeras compras de clientes previos** = clientes con alta en 2024 que vemos comprar por primera vez en el extracto. No se cuentan como nuevos,
+  porque pudieron comprar antes de 2025 (la contraparte lo pidió así)
 - **índice de reposición** = nuevos / perdidos (menor que 1 significa que no alcanza a reponer lo que pierde)
 
 Usamos 90 días porque el 92,8% de las recompras ocurre dentro de ese plazo. La empresa piensa en 30 días, así que
@@ -175,10 +178,22 @@ En cada corrida se regeneran, dentro de `datos/oro/`:
 
 ---
 
+## Respuesta de la contraparte (13-10-2026)
+
+Enviamos 3 preguntas y la contraparte respondió. Esto es lo que confirmó y cómo quedó en la cadena:
+
+| Tema | Lo que dijo la contraparte | Cómo quedó en la cadena |
+|---|---|---|
+| Fecha de alta | No es la primera compra ni una fecha de inscripción: no hay un evento detrás. No se debe corregir ni usar como primera compra. Las boletas anteriores al alta son compras. | La fecha de alta se deja tal cual y las boletas se conservan. Solo se usa para separar a los clientes que ya existían antes del extracto (alta en 2024). |
+| Cliente nuevo | No hay criterio oficial: lo definimos nosotras y lo dejamos escrito. Un cliente con alta en 2024 no es nuevo solo porque su primera boleta del extracto sea de 2025. | **Nuevo** = alta en 2025 y primera compra en el período. Los clientes con alta en 2024 quedan como "primera compra de cliente previo". |
+| Tipo de cliente | Significa el **segmento** de la tarjeta y el **local**, no persona/negocio. El segmento sale parejo: no insistir. | El corte principal pasa a ser el **local** (9 tiendas + Online). El segmento se muestra una vez. Persona/negocio queda como clasificación nuestra, complementaria. |
+| Canal Online | Es un décimo punto de venta, con ventas todo el año y clientes de toda la cadena. Sus compras se incluyen en el cálculo principal. | Online se incluye, y en los cortes geográficos tiene macrozona "Online" (antes inflaba la Metropolitana). |
+| Anónimos, duplicados y ventana | Las boletas sin cliente quedan fuera de la retención; los duplicados idénticos cuentan una vez; no hay ventana oficial. | Ya se hacía así. La ventana de 90 días queda documentada como decisión nuestra. |
+
 ## Supuestos
 
-Enviamos 3 preguntas a la contraparte y no hubo respuesta, así que la cadena trabaja bajo supuestos. Todos están en
-`cadena_datos/config.py`: si la empresa responde distinto, se cambia ese archivo y se vuelve a correr la cadena.
+Todo lo que la contraparte no definió queda como supuesto o decisión del equipo, en `cadena_datos/config.py`. Si algo
+cambia, se edita ese archivo y se vuelve a correr la cadena.
 
 | Id | Supuesto |
 |---|---|
@@ -187,24 +202,26 @@ Enviamos 3 preguntas a la contraparte y no hubo respuesta, así que la cadena tr
 | S03 | Los precios incluyen IVA. |
 | S04 | Las devoluciones restan; una boleta con venta neta ≤ 0 no cuenta como compra. |
 | S05 | El descuento de 10% sin campaña es un beneficio de la tarjeta. |
-| S06 | La fecha de alta es la inscripción. Nuevo = alta en 2025; previo = alta antes de 2025. |
-| S07 | Se reportan dos cortes de "tipo de cliente": el segmento de la tarjeta y persona/negocio. |
-| S08 | El canal Online se incluye, con un filtro para excluirlo si hace falta. |
-| S09 | El local de un cliente es donde más compra. |
+| S06 | **(Confirmado)** La fecha de alta no es la primera compra ni la inscripción; no se corrige. Nuevo = alta en 2025 y primera compra en el período; previo = alta antes de 2025. Limitación: 54 clientes con alta entre el 1 y el 27 de enero podrían haber comprado en diciembre de 2024. |
+| S07 | **(Confirmado)** "Tipo de cliente" = segmento + local. Persona/negocio es una clasificación del equipo y solo complementaria. |
+| S08 | **(Confirmado)** Online es un décimo punto de venta, se incluye en el cálculo principal y tiene macrozona "Online". |
+| S09 | El local de un cliente es donde más compra (corte pedido por la contraparte). |
 | S10 | Un cliente es una tarjeta, que corresponde a un hogar. |
-| S11 | Ventana principal de 90 días; 30 y 180 como sensibilidad. |
+| S11 | No hay ventana oficial: elegimos 90 días como principal, con 30 y 180 como sensibilidad. |
 | S12–S16 | Duplicados, columnas redundantes, productos sin maestro, datos personales y deflactor IPC (ver `supuestos.csv`). |
 
 ## Qué deja como resultado
 
 Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales están en
-`datos/oro/resumen_hallazgos.md`, que se regenera en cada corrida. Al 10-10-2026:
+`datos/oro/resumen_hallazgos.md`, que se regenera en cada corrida. Al 13-10-2026:
 
 - **La definición de "activo" cambia mucho la respuesta:** al 31-12-2025 hay 30,8% de clientes activos con ventana de 30 días, 56,5% con 90 días y 81,1% con 180 días.
 - La retención trimestral (90 días) es de 62–64% en Q2 y Q3 y **cae a 51,1% en Q4**.
 - En Q4 se perdieron 287 clientes y llegaron 306 nuevos (índice de reposición 1,07): la cadena **apenas repone lo que pierde**.
 - El 29,9% de los clientes compró una sola vez.
-- Ni el segmento (Clásico/Plus/Black) ni el tipo de cliente (persona/negocio) cambian la retención (todos entre 47% y 53%). El formato Híper es el más bajo (40%).
+- **Por local** (Q4, 90 días): Súper Viña (60,9%) y Súper Temuco (60,6%) retienen más; Híper Concepción (37,0%) y Súper Maipú (40,5%), menos. Ojo: 9 de las 10 tiendas parten Q4 con menos de 50 clientes activos, así que sus tasas cambian mucho entre trimestres.
+- **Por macrozona:** las tiendas físicas de la Metropolitana son las que peor retienen (44,4%), y el Sur el que mejor (55,9%). Antes de separar Online, la Metropolitana aparecía con 50,1% porque absorbía a los clientes Online.
+- El segmento (47,5%–53,1%) y la clasificación persona/negocio (50,1%–52,7%) **no separan** la retención, como anticipó la contraparte.
 
 ## Recomendaciones para después
 
@@ -213,27 +230,33 @@ Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales
 - Usar `mart_retencion` filtrando `ventana_dias = 90` y `base_confiable = True`. Antes de abril los datos no alcanzan para medir con 90 días, porque no hay información de 2024.
 - Un gráfico que vale la pena: la misma retención con 30, 90 y 180 días. Muestra por qué la empresa necesita una definición común.
 - Para las curvas de cohorte, usar `mart_cohortes` con `tipo_cohorte = "Nuevo 2025"`. La cohorte de Q1 "Todos" mezcla clientes antiguos.
-- Mostrar `tipo_cliente` como una inferencia a partir del nombre, no como un dato oficial.
+- El corte principal es el **local**. Mostrar las tasas por tienda junto a la tendencia (Q2–Q4) y con la advertencia de muestra pequeña (columna `muestra_pequena`).
+- El segmento se muestra una vez, como dato: no separa la retención.
+- `clasificacion_nombre` (persona/negocio) es una clasificación nuestra, no de la empresa. Si se muestra, debe decirlo así.
 
 **Para el informe**
 
 - La sección "Cadena de datos ejecutable" puede basarse en este README (pasos 2 a 7) y en `log_calidad.csv`.
 - La "Ficha de la métrica" puede tomar las definiciones de la sección "Cómo se mide la retención" y de `diccionario_datos.csv`.
-- Corregir en "Modelo dimensional" lo que los datos contradicen:
-  - El canal Online no es reciente (25% de las boletas).
+- Corregir en "Modelo dimensional" lo que los datos y la contraparte contradicen:
+  - El canal Online no se excluye: es un décimo punto de venta con el 25% de las boletas (confirmado 13-10).
+  - `fecha_alta` no es la primera compra ni la inscripción: no se usa para definir la primera compra (confirmado 13-10).
   - El cuarto medio de pago es "App", no "otro".
   - `es_feriado` viene de un calendario externo.
+- **Alcance:** el acta dejaba fuera la desagregación por los 9 locales, pero la contraparte la volvió a pedir (13-10) y la cadena ya la calcula. Hay que actualizar "Qué queda fuera de la Entrega 1".
+- **Ficha de la métrica:** escribir la definición de cliente nuevo (S06) e interpretar la diferencia entre las ventanas de 30, 90 y 180 días, como pide el acta.
 - Anexos: `supuestos.csv`, `log_calidad.csv` y `validaciones.csv`.
 
 **Para el análisis**
 
 - Investigar la caída de la retención en Q4. Una hipótesis a revisar: clientes que llegaron atraídos por la campaña de septiembre y no volvieron.
-- Validar los supuestos con la contraparte en la próxima instancia, sobre todo S06 (fecha de alta) y S07 (tipo de cliente), y pedir datos de 2024. Sin ellos no se pueden distinguir bien los clientes nuevos de los antiguos a comienzos de año.
+- Pedir datos de 2024 si hay otra instancia. Sin ellos, la retención de enero a marzo no se puede medir con 90 días y los clientes previos no se distinguen bien.
+- Opcional, como sugirió la contraparte: mostrar la retención por canal (presencial / online) **al lado** de la principal, sin sacar las compras online del cálculo principal.
+- Revisar qué pasa en las tiendas físicas de la Metropolitana (44,4%) y en Híper Concepción.
 - La cadena ya deja base para las otras preguntas:
   - `mart_rfm_cliente` para P2 (clientes más valiosos).
   - `fact_venta_linea` + `dim_campana` para P3 (promociones).
   - `venta_real_base` para P4 (inflación).
-  - Retención por los 9 locales: el corte "Tienda principal" ya viene en `mart_retencion`.
 
 **Sobre los datos personales**
 

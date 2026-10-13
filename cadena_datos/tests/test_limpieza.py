@@ -67,8 +67,8 @@ def test_rut_valido():
     ('Comercial Flores', 'Negocio'), ('Kiosco Torres', 'Negocio'), ('Botillería Díaz', 'Negocio'),
     ('Juan Pérez', 'No determinado'), ('Srta Pérez', 'No determinado'),
 ])
-def test_tipo_cliente(nombre, tipo):
-    assert L.tipo_cliente(nombre) == tipo
+def test_clasificacion_nombre(nombre, tipo):
+    assert L.clasificacion_nombre(nombre) == tipo
 
 
 @pytest.mark.parametrize('crudo, esperado', [

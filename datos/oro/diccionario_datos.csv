@@ -19,7 +19,7 @@ dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,formato,object
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,es_online,bool,True si la compra/tienda es del canal Online (tienda 10),0,10
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,comuna,object,Comuna,0,10
 dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,region,object,Región (derivada de la comuna; La Florida corregida a Metropolitana),0,10
-dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,macrozona,object,"Metropolitana, Centro sur o Sur (README)",0,10
+dim_tienda,Locales (9 físicos + Tienda Online). Grano: 1 tienda.,macrozona,object,"Metropolitana, Centro sur o Sur (README); la Tienda Online tiene macrozona ""Online"" porque vende a toda la cadena (S08)",0,10
 dim_medio_pago,Medios de pago. Grano: 1 medio.,medio_key,int64,Llave de medio de pago,0,4
 dim_medio_pago,Medios de pago. Grano: 1 medio.,medio,object,"Efectivo, Débito, Crédito o App",0,4
 dim_producto,Maestro de productos limpio + SKU vendidos sin maestro. Grano: 1 SKU.,sku_key,object,Código de producto (SKU),0,380
@@ -41,12 +41,12 @@ dim_campana,Campañas de marketing 2025. Grano: 1 campaña.,fecha_fin,datetime64
 dim_campana,Campañas de marketing 2025. Grano: 1 campaña.,descuento_pct,float64,Descuento en %,0,2
 dim_campana,Campañas de marketing 2025. Grano: 1 campaña.,canales,object,Canales habilitados (separados por |),0,2
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",cliente_key,int64,Llave de cliente (= cliente_id del POS; -1 = anónimo),0,1201
-dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",tipo_cliente,object,"Persona/Hogar, Negocio o No determinado (inferido del prefijo del nombre, S07)",0,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",segmento,object,"Clásico, Plus o Black (valor actual, SCD1)",0,1201
+dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",clasificacion_nombre,object,"Persona/Hogar, Negocio o No determinado. Clasificación del equipo por prefijo del nombre, NO una categoría de la empresa (S07)",0,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",comuna_residencia,object,Comuna del cliente,1,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",region_residencia,object,Región del cliente,1,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",macrozona_residencia,object,Macrozona del cliente,1,1201
-dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",fecha_alta,datetime64[ns],"Fecha de alta en el programa (interpretada como inscripción, S06)",1,1201
+dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",fecha_alta,datetime64[ns],"Fecha de alta del maestro, tal como viene. No es la primera compra ni una inscripción (S06); solo separa clientes previos (alta < 2025)",1,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",es_cliente_previo_2025,object,Alta anterior a 2025,1,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",es_nuevo_2025,object,Alta en 2025 (S06),1,1201
 dim_cliente,"Clientes del programa (sin RUT ni nombre) + miembro -1 ""Anónimo"". Grano: 1 tarjeta/hogar.",tipo_cohorte,object,Nuevo 2025 / Previo (alta antes de 2025),0,1201
@@ -116,29 +116,30 @@ mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: 
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_90d,bool,Activo al cierre del mes (ventana 90 d),0,14304
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_180d,bool,Activo al cierre del mes (ventana 180 d),0,14304
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",estado_90d,object,"aun_sin_compras, nuevo, primera_obs_previo, reactivado, recurrente, activo_sin_compra o inactivo (ventana 90 d)",0,14304
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",corte,object,"Dimensión de corte (Total, Tienda principal, Formato, Macrozona, Tipo de cliente, Segmento, Canal)",0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",valor,object,Valor del corte,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo_tipo,object,mes o trimestre,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo,object,Período (AAAA-MM o AAAAQn),0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio,int64,A0: activos al cierre del día anterior al período,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_fin,int64,A1: activos al cierre del período,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",retenidos,int64,A0 ∩ A1,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",perdidos,int64,A0 − A1,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos,int64,Entran a A1 con primera compra en el período y alta 2025,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",primeras_obs_previos,int64,Entran a A1 con primera compra observada en el período pero alta anterior a 2025,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",reactivados,int64,Entran a A1 tras estar inactivos (ya habían comprado antes),0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio_que_compraron,int64,"De A0, los que compraron dentro del período",0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",clientes_con_compra,int64,Clientes con compra en el período,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos_flujo,int64,Todos los clientes nuevos con primera compra en el período (aunque no sigan activos al cierre),0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_retencion,float64,retenidos / activos_inicio,138,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_churn,float64,perdidos / activos_inicio,138,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_recompra_periodo,float64,activos_inicio_que_compraron / activos_inicio,138,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion,float64,nuevos / perdidos (<1: no alcanza a reponer),313,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion_total,float64,(nuevos + reactivados + primeras_obs_previos) / perdidos,313,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",base_confiable,bool,"True si hay >= W días de historia antes del período (si no, A0 está subestimado por falta de datos 2024)",0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",es_ventana_principal,bool,ventana_dias == 90,0,1104
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",n_suficiente,bool,activos_inicio >= 10,0,1104
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",corte,object,"Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)",0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",valor,object,Valor del corte,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo_tipo,object,mes o trimestre,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo,object,Período (AAAA-MM o AAAAQn),0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio,int64,A0: activos al cierre del día anterior al período,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_fin,int64,A1: activos al cierre del período,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",retenidos,int64,A0 ∩ A1,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",perdidos,int64,A0 − A1,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos,int64,Entran a A1 con primera compra en el período y alta 2025,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",primeras_obs_previos,int64,Entran a A1 con primera compra observada en el período pero alta anterior a 2025,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",reactivados,int64,Entran a A1 tras estar inactivos (ya habían comprado antes),0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio_que_compraron,int64,"De A0, los que compraron dentro del período",0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",clientes_con_compra,int64,Clientes con compra en el período,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos_flujo,int64,Todos los clientes nuevos con primera compra en el período (aunque no sigan activos al cierre),0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_retencion,float64,retenidos / activos_inicio,144,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_churn,float64,perdidos / activos_inicio,144,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_recompra_periodo,float64,activos_inicio_que_compraron / activos_inicio,144,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion,float64,nuevos / perdidos (<1: no alcanza a reponer),327,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion_total,float64,(nuevos + reactivados + primeras_obs_previos) / perdidos,327,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",base_confiable,bool,"True si hay >= W días de historia antes del período (si no, A0 está subestimado por falta de datos 2024)",0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",es_ventana_principal,bool,ventana_dias == 90,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",n_suficiente,bool,activos_inicio >= 10,0,1152
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",muestra_pequena,bool,"activos_inicio < 50: tasa volátil, mostrar con advertencia",0,1152
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,tipo_cohorte,object,Nuevo 2025 / Previo (alta antes de 2025),0,29
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,cohorte_trimestre,object,Trimestre de la primera compra observada,0,29
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,tamano_cohorte,int64,Clientes de la cohorte,0,29
@@ -163,27 +164,27 @@ mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Gran
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_30d_al_corte,bool,Activo al 31-12-2025 (30 d),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_90d_al_corte,bool,Activo al 31-12-2025 (90 d),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_180d_al_corte,bool,Activo al 31-12-2025 (180 d),0,1192
-mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",tipo_cliente,object,"Persona/Hogar, Negocio o No determinado (inferido del prefijo del nombre, S07)",0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",segmento,object,"Clásico, Plus o Black (valor actual, SCD1)",0,1192
+mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",clasificacion_nombre,object,"Persona/Hogar, Negocio o No determinado. Clasificación del equipo por prefijo del nombre, NO una categoría de la empresa (S07)",0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",tipo_cohorte,object,Nuevo 2025 / Previo (alta antes de 2025),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",tienda_principal,object,Nombre de la tienda principal,0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",formato_principal,object,Formato de la tienda principal,0,1192
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,corte,object,"Dimensión de corte (Total, Tienda principal, Formato, Macrozona, Tipo de cliente, Segmento, Canal)",0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,valor,object,Valor del corte,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,anio_mes,object,Año-mes (AAAA-MM),0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,boletas,int64,Boletas,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,boletas_identificadas,int64,Boletas con tarjeta,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,clientes_unicos,int64,Clientes distintos,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_neta,float64,"Venta en CLP nominales con IVA: Σ monto_linea registrado, neto de devoluciones (S02, S03, S04)",0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_identificada,float64,Venta de boletas con tarjeta,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_real_base,float64,"venta_neta en pesos de 2024-12 (IPC, S16)",0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,descuento_monto,float64,venta_lista − monto calculado con descuento,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,monto_devolucion,float64,Σ monto de líneas de devolución (negativo),0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,unidades,int64,Unidades netas,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,ticket_promedio,float64,Promedio de venta por compra válida,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,ticket_mediano,float64,Mediana de venta por compra válida,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,pct_boletas_identificadas,float64,boletas_identificadas / boletas,0,240
-mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,pct_venta_identificada,float64,venta_identificada / venta_neta,0,240
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,corte,object,"Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)",0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,valor,object,Valor del corte,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,anio_mes,object,Año-mes (AAAA-MM),0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,boletas,int64,Boletas,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,boletas_identificadas,int64,Boletas con tarjeta,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,clientes_unicos,int64,Clientes distintos,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_neta,float64,"Venta en CLP nominales con IVA: Σ monto_linea registrado, neto de devoluciones (S02, S03, S04)",0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_identificada,float64,Venta de boletas con tarjeta,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,venta_real_base,float64,"venta_neta en pesos de 2024-12 (IPC, S16)",0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,descuento_monto,float64,venta_lista − monto calculado con descuento,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,monto_devolucion,float64,Σ monto de líneas de devolución (negativo),0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,unidades,int64,Unidades netas,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,ticket_promedio,float64,Promedio de venta por compra válida,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,ticket_mediano,float64,Mediana de venta por compra válida,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,pct_boletas_identificadas,float64,boletas_identificadas / boletas,0,252
+mart_venta_mensual,Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.,pct_venta_identificada,float64,venta_identificada / venta_neta,0,252
 mart_kpi_resumen,KPIs de cabecera para el dashboard y la presentación. Grano: 1 KPI.,kpi,object,Nombre del KPI,0,25
 mart_kpi_resumen,KPIs de cabecera para el dashboard y la presentación. Grano: 1 KPI.,valor,float64,Valor del corte,0,25
 mart_kpi_resumen,KPIs de cabecera para el dashboard y la presentación. Grano: 1 KPI.,unidad,object,Unidad,0,25

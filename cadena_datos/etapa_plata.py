@@ -38,7 +38,11 @@ def _tiendas(pos, geo, log):
     t['formato'] = t.formato.map(config.FORMATO_TIENDA).fillna(t.formato)
     log.registrar('R06b', 'tiendas', 'formato', 'formato sin tilde ("Hiper")', 'normalizado a "Híper"', cambia.sum())
     t['es_online'] = (t.tienda_id == config.TIENDA_ONLINE_ID) | (t.formato == 'Online')
-    return t.merge(geo, on='comuna_id', how='left')
+    t = t.merge(geo, on='comuna_id', how='left')
+    t.loc[t.es_online, 'macrozona'] = config.MACROZONA_ONLINE
+    log.registrar('R06c', 'tiendas', 'macrozona', 'Tienda Online registrada en Providencia pero vende a toda la cadena',
+                  f'macrozona = "{config.MACROZONA_ONLINE}" (S08)', t.es_online.sum())
+    return t
 
 # ----------------------------------------------------------------- clientes
 def _clientes(pos, log):
@@ -49,16 +53,16 @@ def _clientes(pos, log):
     log.registrar('R17', 'clientes', 'rut', 'formatos mixtos (puntos, espacios, sin guion)', 'normalizado a 12345678-K', reformateados)
     log.registrar('R17b', 'clientes', 'rut', 'dígito verificador inválido', 'flag_rut_invalido (se conserva)', c.flag_rut_invalido.sum())
     log.registrar('R17c', 'clientes', 'rut', 'RUT duplicado tras normalizar', 'revisión (no se fusiona)', c.rut_normalizado.duplicated(keep=False).sum())
-    c['tipo_cliente'] = c.nombre.map(L.tipo_cliente)
-    log.registrar('R18', 'clientes', 'nombre', 'tipo de cliente implícito en el nombre',
-                  f'tipo_cliente por prefijo: {c.tipo_cliente.value_counts().to_dict()}', (c.tipo_cliente == 'Negocio').sum())
+    c['clasificacion_nombre'] = c.nombre.map(L.clasificacion_nombre)
+    log.registrar('R18', 'clientes', 'nombre', 'nombre sugiere persona/hogar o negocio (no es campo de la empresa)',
+                  f'clasificacion_nombre del equipo: {c.clasificacion_nombre.value_counts().to_dict()}', (c.clasificacion_nombre == 'Negocio').sum())
     c['formato_fecha_alta'] = c.fecha_alta.map(L.formato_fecha)
     c['fecha_alta'] = c.fecha_alta.map(L.parse_fecha)
     log.registrar('R19', 'clientes', 'fecha_alta', '2 formatos de fecha', 'parseado a fecha ISO', (c.formato_fecha_alta != 'iso').sum())
     log.registrar('R19b', 'clientes', 'fecha_alta', 'fecha no parseable', 'queda nula', c.fecha_alta.isna().sum())
     c['segmento'] = c.segmento.astype(str).str.strip()
     c['es_cliente_previo_2025'] = c.fecha_alta < config.PERIODO_INI
-    return c[['cliente_id', 'rut_normalizado', 'flag_rut_invalido', 'nombre', 'tipo_cliente', 'fecha_alta',
+    return c[['cliente_id', 'rut_normalizado', 'flag_rut_invalido', 'nombre', 'clasificacion_nombre', 'fecha_alta',
               'es_cliente_previo_2025', 'comuna_id', 'segmento']]
 
 # ----------------------------------------------------------------- boletas

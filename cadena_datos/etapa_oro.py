@@ -122,12 +122,12 @@ def dim_cliente(clientes, geo, compras, tiendas):
     c['macrozona_principal'] = c.tienda_principal_key.map(ti.macrozona)
     c = c.rename(columns={'cliente_id': 'cliente_key', 'macrozona': 'macrozona_residencia', 'region': 'region_residencia',
                           'comuna': 'comuna_residencia'})
-    cols = ['cliente_key', 'tipo_cliente', 'segmento', 'comuna_residencia', 'region_residencia', 'macrozona_residencia',
+    cols = ['cliente_key', 'segmento', 'clasificacion_nombre', 'comuna_residencia', 'region_residencia', 'macrozona_residencia',
             'fecha_alta', 'es_cliente_previo_2025', 'es_nuevo_2025', 'tipo_cohorte', 'fecha_primera_compra',
             'fecha_ultima_compra', 'n_compras_2025', 'cohorte_trimestre', 'tienda_principal_key', 'tienda_principal',
             'formato_principal', 'macrozona_principal', 'flag_rut_invalido', 'flag_alta_posterior_compra',
             'dias_alta_a_primera_compra']
-    anon = pd.DataFrame([{'cliente_key': -1, 'tipo_cliente': 'Anónimo', 'segmento': 'Anónimo', 'tipo_cohorte': 'Anónimo',
+    anon = pd.DataFrame([{'cliente_key': -1, 'clasificacion_nombre': 'Anónimo', 'segmento': 'Anónimo', 'tipo_cohorte': 'Anónimo',
                           'n_compras_2025': 0}])
     return pd.concat([c[cols], anon], ignore_index=True)[cols]
 
@@ -164,8 +164,10 @@ def mart_cliente_mes(fechas, dimc, compras):
     return pd.DataFrame(filas)
 
 
+# Cortes pedidos por la contraparte (13-10): local y segmento. Persona/negocio es solo complementario (clasificación del equipo).
 CORTES = [('Total', None), ('Tienda principal', 'tienda_principal'), ('Formato principal', 'formato_principal'),
-          ('Macrozona principal', 'macrozona_principal'), ('Tipo de cliente', 'tipo_cliente'), ('Segmento', 'segmento')]
+          ('Macrozona principal', 'macrozona_principal'), ('Segmento', 'segmento'),
+          (config.CORTE_CLASIFICACION_NOMBRE, 'clasificacion_nombre')]
 
 
 def mart_retencion(fechas, dimc):
@@ -187,6 +189,7 @@ def mart_retencion(fechas, dimc):
     m = pd.concat(salida, ignore_index=True)
     m['es_ventana_principal'] = m.ventana_dias == config.VENTANA_PRINCIPAL
     m['n_suficiente'] = m.activos_inicio >= config.UMBRAL_N_MIN
+    m['muestra_pequena'] = m.activos_inicio < config.UMBRAL_MUESTRA_PEQUENA
     return m, est
 
 
@@ -233,7 +236,7 @@ def mart_rfm(fechas, compras, dimc):
     for w in config.VENTANAS:
         g[f'activo_{w}d_al_corte'] = [R.activo_en(fechas[c], corte, w) for c in g.index]
     g = g.reset_index().rename(columns={'cliente_id': 'cliente_key', 'ultima': 'fecha_ultima_compra', 'primera': 'fecha_primera_compra'})
-    return g.merge(dimc[['cliente_key', 'tipo_cliente', 'segmento', 'tipo_cohorte', 'tienda_principal', 'formato_principal']],
+    return g.merge(dimc[['cliente_key', 'segmento', 'clasificacion_nombre', 'tipo_cohorte', 'tienda_principal', 'formato_principal']],
                    on='cliente_key', how='left')
 
 
