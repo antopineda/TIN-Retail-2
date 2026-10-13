@@ -70,7 +70,7 @@ Los hallazgos principales fueron:
 - Fechas de boleta en 4 formatos distintos y 61 boletas duplicadas.
 - Columnas de mes y región que contradicen a la fecha y a la tienda.
 - Montos guardados como texto, con separadores mezclados, y descuentos escritos de 7 formas.
-- La fecha de alta del cliente no corresponde a su primera compra, como se dijo en la reunión.
+- La fecha de alta del cliente no corresponde a su primera compra, contrario a lo que se dijo en la reunión (coincide en solo 17 de 1.200 clientes); la contraparte lo confirmó después por correo.
 - El canal Online existe desde enero y concentra el 25% de las boletas, aunque en la reunión se dijo que había partido hace poco.
 
 ### Paso 2 — Arquitectura bronce → plata → oro
@@ -119,7 +119,7 @@ Todo lo demás se corrige o se marca con un flag, para no perder información.
 | clientes | Fecha de alta en 2 formatos | Se convierte a fecha | 600 |
 | productos | Archivo en codificación Latin-1 (tildes rotas en UTF-8) | Se lee correctamente y se guarda en UTF-8 | 84 |
 | productos | Encabezado repetido y fila "TOTAL" | Se eliminan | 2 |
-| productos | 26 formas de escribir 8 categorías (`ABARR`, `abarrotes`, `LACT`…) | Se unifican en 8 categorías | 131 |
+| productos | 24 formas de escribir 8 categorías (`ABARR`, `abarrotes`, `LACT`…) | Se unifican en 8 categorías | 131 |
 | productos | Precios con `$`, coma decimal o `N/A` | Se convierten a número | 184 |
 | productos | SKU-0001 duplicado | Se conserva la fila activa | 1 |
 | campañas | Descuento como `"25%"` en una campaña y `50` en otra | Se convierte a número | 1 |
@@ -237,7 +237,7 @@ Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales
 - **La definición de "activo" cambia mucho la respuesta:** al 31-12-2025 hay 30,8% de clientes activos con ventana de 30 días, 56,5% con 90 días y 81,1% con 180 días.
 - La retención trimestral (90 días) es de 62–64% en Q2 y Q3 y **cae a 51,1% en Q4**.
 - En Q4 se perdieron 287 clientes y llegaron 306 nuevos (índice de reposición 1,07): la cadena **apenas repone lo que pierde**.
-- El 29,9% de los clientes compró una sola vez.
+- El 29,9% de los clientes compró una sola vez (262 de 875). Se calcula **solo sobre los clientes que tuvieron al menos 90 días para volver**, es decir, cuya primera compra fue hasta el 2-10-2025. Sin ese filtro daría 37,8%, porque incluiría a quienes compraron por primera vez a fin de año y no alcanzaron a volver.
 - **En pesos:** los 287 clientes perdidos en Q4 compraban unos **$31,8 millones al año** (su gasto trimestral típico × 4). Cada punto porcentual de retención vale cerca de **$713 mil al año**.
 - **Cobertura:** el 15,1% de las boletas del origen queda fuera de la retención (61 duplicadas, 37 de 2026, 803 anónimas y 45 con venta neta ≤ 0). Las compras usadas cubren el 93,7% de la venta 2025.
 - **Por local** (Q4, 90 días): Súper Viña (60,9%) y Súper Temuco (60,6%) retienen más; Híper Concepción (37,0%) y Súper Maipú (40,5%), menos. Ojo: 9 de las 10 tiendas parten Q4 con menos de 50 clientes activos, así que sus tasas cambian mucho entre trimestres.

@@ -46,7 +46,7 @@ TIENDA_ONLINE_ID = 10
 MACROZONA_ONLINE = 'Online'           # Online vende a clientes de toda la cadena: no se asigna a la Metropolitana (contraparte 13-10)
 CORTE_CLASIFICACION_NOMBRE = 'Persona/negocio (clasificación del equipo)'
 
-CATEGORIA_CANONICA = {                # 26 grafías -> 8 categorías (validado contra subcategoría)
+CATEGORIA_CANONICA = {                # 24 grafías -> 8 categorías (validado contra subcategoría)
     'abarrotes': 'Abarrotes', 'abarr': 'Abarrotes',
     'bebidas': 'Bebidas', 'beb': 'Bebidas',
     'lacteos': 'Lácteos', 'lact': 'Lácteos',
