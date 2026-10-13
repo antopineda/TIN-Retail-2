@@ -17,10 +17,19 @@ pct_activos_90d_al_corte,0.5654362416107382,proporción,Activos 90 d / clientes 
 pct_recompras_dentro_180d,0.9914903963044007,proporción,Recompras que ocurren dentro de 180 días
 activos_180d_al_corte,967.0,clientes,Activos al 2025-12-31 con ventana 180 d
 pct_activos_180d_al_corte,0.8112416107382551,proporción,Activos 180 d / clientes 2025
+pct_recompras_dentro_365d,1.0,proporción,Recompras que ocurren dentro de 365 días
+activos_365d_al_corte,1192.0,clientes,Activos al 2025-12-31 con ventana 365 d
+pct_activos_365d_al_corte,1.0,proporción,Activos 365 d / clientes 2025
 retencion_Q4_30d,0.33157894736842103,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=30)
 indice_reposicion_Q4_30d,0.7559055118110236,razón,Nuevos / perdidos en Q4 (W=30); <1 = no repone
 retencion_Q4_90d,0.5110732538330494,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=90)
 indice_reposicion_Q4_90d,1.0662020905923344,razón,Nuevos / perdidos en Q4 (W=90); <1 = no repone
 retencion_Q4_180d,0.8247694334650857,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=180)
 indice_reposicion_Q4_180d,2.338345864661654,razón,Nuevos / perdidos en Q4 (W=180); <1 = no repone
+retencion_Q4_365d,1.0,proporción,Activos al inicio de Q4 que siguen activos al cierre (W=365)
+indice_reposicion_Q4_365d,,razón,Nuevos / perdidos en Q4 (W=365); <1 = no repone
 cohorte_Q1_nuevos_activos_en_Q4,0.3185840707964602,proporción,Clientes nuevos que llegaron en Q1-2025 y compran en Q4-2025
+pct_boletas_fuera_de_retencion,0.15133578627419608,proporción,"Boletas del origen que no entran a la retención (duplicadas, 2026, anónimas o solo devolución); ver mart_cobertura"
+pct_venta_2025_en_retencion,0.9367796350419914,proporción,Venta 2025 cubierta por las compras usadas en la retención
+venta_anual_en_riesgo_90d,31787944.0,CLP nominal / año,Gasto trimestral de los clientes perdidos en Q4 (mientras estuvieron activos) × 4; supone que su gasto se habría mantenido
+valor_anual_1pp_retencion_90d,713464.2000000001,CLP nominal / año,Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4

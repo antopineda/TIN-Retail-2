@@ -29,15 +29,20 @@ TIN-Retail-2/
 
 ## Cómo correrlo
 
-Requisitos: Python 3.10 o superior, con `pandas` y `numpy`.
+Requisitos: Python 3.10 o superior, con `pandas`, `numpy` y `matplotlib` (se instalan con el primer comando). Se necesita internet solo para consultar la API del IPC; si no hay conexión, la cadena usa un respaldo y lo avisa.
 
 ```bash
 pip install -r cadena_datos/requirements.txt
 python cadena_datos/run_pipeline.py
 ```
 
-Se corre desde la raíz del repositorio y tarda unos 10–20 segundos. Al final debe decir `Listo` y mostrar las
-validaciones en `OK`. Las tablas quedan en `datos/oro/`.
+Se corre desde la raíz del repositorio y tarda unos 20–30 segundos. **Qué se espera ver al final:**
+
+- 6 pasos numerados `[1/6]` a `[6/6]`, con las filas de cada tabla.
+- Las 23 validaciones en `OK`.
+- La lista de los 5 gráficos generados y la línea `Listo en … s`.
+
+Las tablas quedan en `datos/oro/`, los gráficos en `datos/oro/graficos/` y las cifras principales en `datos/oro/resumen_hallazgos.md`. **Todas las cifras y figuras del informe salen de esta corrida.**
 
 Para correr los tests de las reglas de limpieza y de la lógica de retención:
 
@@ -134,12 +139,22 @@ Todo lo demás se corrige o se marca con un flag, para no perder información.
 
 | Tabla | Qué responde |
 |---|---|
-| `mart_retencion` | Por mes o trimestre: cuántos clientes estaban activos, cuántos se retuvieron, se perdieron, llegaron nuevos o volvieron. Incluye ventanas de 30, 90 y 180 días, con cortes por **local** (9 tiendas + Online), formato, macrozona y segmento. **Es la tabla principal para P1.** |
+| `mart_retencion` | Por mes o trimestre: cuántos clientes estaban activos, cuántos se retuvieron, se perdieron, llegaron nuevos o volvieron. Incluye ventanas de 30, 90, 180 y 365 días, con cortes por **local** (9 tiendas + Online), formato, macrozona y segmento. **Es la tabla principal para P1.** |
 | `mart_cohortes` | De los clientes que llegaron en cada trimestre, qué porcentaje sigue comprando después. |
 | `mart_cliente_mes` | El estado de cada cliente mes a mes: nuevo, recurrente, reactivado o inactivo. |
 | `mart_rfm_cliente` | Recencia, frecuencia y monto de cada cliente al 31-12-2025, y si compró una sola vez. |
 | `mart_venta_mensual` | Venta nominal y real (con IPC) y porcentaje de ventas con tarjeta, por mes. |
-| `mart_kpi_resumen` | Las cifras de cabecera para el dashboard y la presentación. |
+| `mart_cobertura` | Qué porcentaje de boletas quedó fuera del análisis y por qué (anexo de cobertura). |
+| `mart_valor_riesgo` | Los clientes perdidos traducidos a pesos, para cada ventana. |
+| `mart_kpi_resumen` | Las cifras de cabecera para el informe y la presentación. |
+
+**Gráficos** (`datos/oro/graficos/`, componente E del enunciado; cada uno con su unidad en el título y su fuente al pie):
+
+1. `1_sensibilidad_ventana.png`: clientes activos y retención según la ventana (30 / 90 / 180 / 365 días).
+2. `2_retencion_trimestral.png`: retención trimestral, y clientes nuevos vs. perdidos vs. reactivados.
+3. `3_retencion_por_local.png`: retención Q4 por local, con el tamaño de muestra.
+4. `4_cohortes_nuevos.png`: qué porcentaje de los clientes nuevos sigue comprando, por trimestre de llegada.
+5. `5_composicion_mensual.png`: quiénes compran cada mes (recurrentes, nuevos, reactivados).
 
 **Cómo se mide la retención.** Un cliente está **activo** si compró en los últimos *W* días (principal: 90). Para
 cada período se comparan los activos al inicio con los activos al final:
@@ -152,11 +167,13 @@ cada período se comparan los activos al inicio con los activos al final:
 - **índice de reposición** = nuevos / perdidos (menor que 1 significa que no alcanza a reponer lo que pierde)
 
 Usamos 90 días porque el 92,8% de las recompras ocurre dentro de ese plazo. La empresa piensa en 30 días, así que
-también reportamos 30 y 180 días para mostrar cuánto cambia el resultado según la definición.
+también reportamos 30, 180 y 365 días para mostrar cuánto cambia el resultado según la definición. **365 días no
+discrimina con estos datos:** como el extracto cubre un solo año, todo cliente que compró en 2025 sigue "activo" al
+31-12 y la retención da 100% por construcción. Eso también es un hallazgo: con un año de datos, esa ventana no sirve.
 
 ### Paso 6 — Validaciones automáticas
 
-`cadena_datos/validaciones.py` revisa 22 condiciones en cada corrida. Si una crítica falla, la cadena termina con
+`cadena_datos/validaciones.py` revisa 23 condiciones en cada corrida. Si una crítica falla, la cadena termina con
 error y no entrega datos inconsistentes. Entre otras:
 
 - No se pierden líneas de detalle entre bronce y plata.
@@ -164,6 +181,7 @@ error y no entrega datos inconsistentes. Entre otras:
 - La suma de las líneas es igual a la suma de las boletas.
 - Oro no contiene RUT ni nombres.
 - Las cuentas de retención cuadran (activos al final = retenidos + nuevos + reactivados + primeras compras de clientes antiguos).
+- El embudo de cobertura cuadra: boletas del origen − exclusiones = compras usadas.
 
 El resultado queda en `datos/oro/validaciones.csv`.
 
@@ -172,9 +190,10 @@ El resultado queda en `datos/oro/validaciones.csv`.
 En cada corrida se regeneran, dentro de `datos/oro/`:
 
 - `diccionario_datos.csv`: qué significa cada columna de cada tabla (la "biblia del dato" que pidió la empresa).
-- `supuestos.csv`: los supuestos S01–S16.
+- `supuestos.csv`: la **bitácora de supuestos** (anexo obligatorio): cada supuesto con por qué se tomó, qué pasaría si fuera falso, y quién lo decidió y cuándo.
 - `log_calidad.csv`: cada regla de limpieza con su conteo.
 - `resumen_hallazgos.md`: las cifras principales, siempre actualizadas.
+- `graficos/`: las 5 visualizaciones del informe.
 
 ---
 
@@ -207,7 +226,7 @@ cambia, se edita ese archivo y se vuelve a correr la cadena.
 | S08 | **(Confirmado)** Online es un décimo punto de venta, se incluye en el cálculo principal y tiene macrozona "Online". |
 | S09 | El local de un cliente es donde más compra (corte pedido por la contraparte). |
 | S10 | Un cliente es una tarjeta, que corresponde a un hogar. |
-| S11 | No hay ventana oficial: elegimos 90 días como principal, con 30 y 180 como sensibilidad. |
+| S11 | No hay ventana oficial: elegimos 90 días como principal, con 30, 180 y 365 como sensibilidad. |
 | S12–S16 | Duplicados, columnas redundantes, productos sin maestro, datos personales y deflactor IPC (ver `supuestos.csv`). |
 
 ## Qué deja como resultado
@@ -219,6 +238,8 @@ Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales
 - La retención trimestral (90 días) es de 62–64% en Q2 y Q3 y **cae a 51,1% en Q4**.
 - En Q4 se perdieron 287 clientes y llegaron 306 nuevos (índice de reposición 1,07): la cadena **apenas repone lo que pierde**.
 - El 29,9% de los clientes compró una sola vez.
+- **En pesos:** los 287 clientes perdidos en Q4 compraban unos **$31,8 millones al año** (su gasto trimestral típico × 4). Cada punto porcentual de retención vale cerca de **$713 mil al año**.
+- **Cobertura:** el 15,1% de las boletas del origen queda fuera de la retención (61 duplicadas, 37 de 2026, 803 anónimas y 45 con venta neta ≤ 0). Las compras usadas cubren el 93,7% de la venta 2025.
 - **Por local** (Q4, 90 días): Súper Viña (60,9%) y Súper Temuco (60,6%) retienen más; Híper Concepción (37,0%) y Súper Maipú (40,5%), menos. Ojo: 9 de las 10 tiendas parten Q4 con menos de 50 clientes activos, así que sus tasas cambian mucho entre trimestres.
 - **Por macrozona:** las tiendas físicas de la Metropolitana son las que peor retienen (44,4%), y el Sur el que mejor (55,9%). Antes de separar Online, la Metropolitana aparecía con 50,1% porque absorbía a los clientes Online.
 - El segmento (47,5%–53,1%) y la clasificación persona/negocio (50,1%–52,7%) **no separan** la retención, como anticipó la contraparte.
@@ -228,7 +249,7 @@ Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales
 **Para reportería**
 
 - Usar `mart_retencion` filtrando `ventana_dias = 90` y `base_confiable = True`. Antes de abril los datos no alcanzan para medir con 90 días, porque no hay información de 2024.
-- Un gráfico que vale la pena: la misma retención con 30, 90 y 180 días. Muestra por qué la empresa necesita una definición común.
+- Los 5 gráficos de `datos/oro/graficos/` ya cumplen lo que pide el enunciado (unidad en el título y fuente al pie). Se pueden usar tal cual en el informe y en las láminas.
 - Para las curvas de cohorte, usar `mart_cohortes` con `tipo_cohorte = "Nuevo 2025"`. La cohorte de Q1 "Todos" mezcla clientes antiguos.
 - El corte principal es el **local**. Mostrar las tasas por tienda junto a la tendencia (Q2–Q4) y con la advertencia de muestra pequeña (columna `muestra_pequena`).
 - El segmento se muestra una vez, como dato: no separa la retención.
@@ -244,8 +265,10 @@ Las tablas de `datos/oro/` son lo que recibe reportería. Las cifras principales
   - El cuarto medio de pago es "App", no "otro".
   - `es_feriado` viene de un calendario externo.
 - **Alcance:** el acta dejaba fuera la desagregación por los 9 locales, pero la contraparte la volvió a pedir (13-10) y la cadena ya la calcula. Hay que actualizar "Qué queda fuera de la Entrega 1".
-- **Ficha de la métrica:** escribir la definición de cliente nuevo (S06) e interpretar la diferencia entre las ventanas de 30, 90 y 180 días, como pide el acta.
-- Anexos: `supuestos.csv`, `log_calidad.csv` y `validaciones.csv`.
+- **Ficha de la métrica:** escribir la definición de cliente nuevo (S06) e interpretar la diferencia entre las ventanas de 30, 90, 180 y 365 días, como pide el acta.
+- **Cobertura de datos** (pide "un número, no un párrafo"): 15,1% de las boletas quedó fuera de la retención; el detalle está en `mart_cobertura`.
+- **Caso de negocio en pesos:** usar `venta_anual_en_riesgo_90d` y `valor_anual_1pp_retencion_90d` de `mart_kpi_resumen`.
+- Anexos: bitácora (`supuestos.csv`), `log_calidad.csv`, `validaciones.csv`, el acta y la declaración de uso de IA.
 
 **Para el análisis**
 

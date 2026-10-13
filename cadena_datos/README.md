@@ -5,14 +5,14 @@ Lleva las fuentes del caso desde su estado crudo hasta tablas confiables para re
 
 ```
 origen/ ────────► BRONCE ──► PLATA ──► ORO ──► validaciones ──► documentación
-                    copia      limpieza  estrella   22 chequeos    diccionario, supuestos,
+                    copia      limpieza  estrella   23 chequeos    diccionario, bitácora,
                     + hash     R01–R27   + marts    (exit 1 si     log de calidad,
                     + IPC                           falla crítica) resumen de hallazgos
 ```
 
 ## Cómo correrla
 
-Requisitos: Python 3.10+ con `pandas` y `numpy` (`pip install -r cadena_datos/requirements.txt`).
+Requisitos: Python 3.10+ con `pandas`, `numpy` y `matplotlib` (`pip install -r cadena_datos/requirements.txt`).
 
 Desde la raíz del repositorio:
 
@@ -25,7 +25,7 @@ Opciones:
 - `--refrescar-ipc`: vuelve a consultar la API del IPC. Por defecto se usa el snapshot guardado en bronce, así la cadena es reproducible sin internet.
 - `--fuente RUTA`: usa otra carpeta de origen. Por defecto es `origen/`.
 
-La corrida completa toma unos 10 segundos. Termina con código 1 si falla alguna validación crítica.
+La corrida completa toma unos 20–30 segundos y además genera los 5 gráficos en `oro/graficos/`. Termina con código 1 si falla alguna validación crítica.
 
 Tests de las reglas de limpieza y de la lógica de retención:
 
@@ -69,7 +69,10 @@ Todos los CSV están en UTF-8 (con BOM, para que Excel muestre bien las tildes),
 | `mart_cliente_mes` | cliente × mes | Estado de cada cliente mes a mes (nuevo, recurrente, reactivado, inactivo…). |
 | `mart_rfm_cliente` | 1 cliente | Recencia, frecuencia, monto y actividad al 31-12-2025. |
 | `mart_venta_mensual` | corte × mes | Contexto: venta nominal/real y % identificado. |
-| `mart_kpi_resumen` | 1 KPI | Cifras de cabecera para el dashboard y el PPT. |
+| `mart_cobertura` | 1 paso del embudo | % de boletas excluidas y por qué. |
+| `mart_valor_riesgo` | 1 ventana | Clientes perdidos traducidos a pesos. |
+| `mart_kpi_resumen` | 1 KPI | Cifras de cabecera para el informe y el PPT. |
+| `graficos/*.png` | — | Las 5 visualizaciones del informe. |
 | `diccionario_datos.csv` | 1 columna | Definición de cada columna (la "biblia del dato"). |
 | `supuestos.csv`, `log_calidad.csv`, `validaciones.csv` | — | Anexos del informe. |
 | `resumen_hallazgos.md` | — | Hallazgos con cifras, regenerado en cada corrida. |
