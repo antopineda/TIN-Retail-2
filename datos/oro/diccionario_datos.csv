@@ -201,7 +201,7 @@ mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Gran
 mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",activos_inicio_q4,int64,Clientes activos al 1-oct-2025,0,4
 mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",gasto_trimestral_promedio_activo,float64,Gasto trimestral promedio de los activos al 1-oct (misma definición),0,4
 mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",valor_anual_1pp_retencion,float64,1% × activos_inicio_q4 × gasto trimestral × 4,0,4
-mart_kpi_resumen,KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.,kpi,object,Nombre del KPI,0,34
-mart_kpi_resumen,KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.,valor,float64,Valor del corte,1,34
-mart_kpi_resumen,KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.,unidad,object,Unidad,0,34
-mart_kpi_resumen,KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.,definicion,object,Definición,0,34
+mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,kpi,object,Nombre del KPI,0,34
+mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,valor,float64,Valor del corte,1,34
+mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,unidad,object,Unidad,0,34
+mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,definicion,object,Definición,0,34

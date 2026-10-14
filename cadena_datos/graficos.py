@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Visualizaciones de la Entrega 1 (componente E del enunciado), generadas desde las tablas oro.
+Visualizaciones del análisis, generadas desde las tablas oro.
 Cada gráfico lleva la unidad en el título y la fuente al pie. Se regeneran en cada corrida,
 así las cifras de las figuras siempre calzan con las de las tablas.
 Paleta: instancia de referencia validada para daltonismo (azul, naranjo, aqua, amarillo).

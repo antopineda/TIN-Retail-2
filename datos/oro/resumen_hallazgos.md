@@ -1,6 +1,6 @@
-# Resumen de hallazgos para reportería
+# Resumen de hallazgos
 
-Generado automáticamente por la cadena el 13-10-2026 19:56. Todas las cifras salen de `datos/oro/`.
+Generado automáticamente por la cadena el 14-10-2026 20:55. Todas las cifras salen de `datos/oro/`.
 Validaciones: 23 OK / 0 con falla (ver `validaciones.csv`).
 
 ## Contexto

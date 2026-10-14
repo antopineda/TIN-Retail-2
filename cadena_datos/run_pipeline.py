@@ -65,7 +65,7 @@ def main():
     if len(sin_desc):
         print(f'      AVISO: {len(sin_desc)} columnas sin descripción: {sin_desc.tabla.str.cat(sin_desc.columna, sep=".").tolist()}')
 
-    print('[6/6] Gráficos (componente E del informe)')
+    print('[6/6] Gráficos')
     for nombre in graficos.ejecutar(oro):
         print(f'      datos/oro/graficos/{nombre}')
 
