@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-ORO: modelo estrella + marts de retención listos para reportería.
+ORO: modelo estrella + marts de retención listos para el análisis.
 Sin identificadores directos (RUT, nombre): la llave del cliente es cliente_key (= cliente_id, -1 = anónimo).
 """
 import numpy as np

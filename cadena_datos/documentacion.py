@@ -23,7 +23,7 @@ TABLAS = {
     'mart_venta_mensual': 'Venta y cobertura de identificación por mes y corte. Grano: corte × valor × mes.',
     'mart_cobertura': 'Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.',
     'mart_valor_riesgo': 'Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.',
-    'mart_kpi_resumen': 'KPIs de cabecera para el informe y la presentación. Grano: 1 KPI.',
+    'mart_kpi_resumen': 'Cifras principales del análisis. Grano: 1 KPI.',
 }
 
 COLUMNAS = {
@@ -144,7 +144,7 @@ def resumen_hallazgos(oro, val):
     q = m[(m.corte == 'Total') & (m.periodo_tipo == 'trimestre') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('periodo')
     corte_q4 = lambda nombre: m[(m.corte == nombre) & (m.periodo == '2025Q4') & (m.ventana_dias == config.VENTANA_PRINCIPAL)].set_index('valor')
     w = config.VENTANA_PRINCIPAL
-    lin = [f'# Resumen de hallazgos para reportería', '',
+    lin = [f'# Resumen de hallazgos', '',
            f'Generado automáticamente por la cadena el {datetime.now():%d-%m-%Y %H:%M}. Todas las cifras salen de `datos/oro/`.',
            f'Validaciones: {(val.resultado == "OK").sum()} OK / {(val.resultado != "OK").sum()} con falla (ver `validaciones.csv`).', '',
            '## Contexto', '',
