@@ -32,6 +32,8 @@ TABLAS = {
     'estado_fuentes': 'Estado de cada fuente en la última corrida (ok / respaldo) con su huella SHA-256. Grano: 1 fuente.',
     'historial_corridas': 'Una fila por ejecución de la cadena: pruebas en verde, estado del IPC y cifra principal. Grano: 1 corrida.',
     'validaciones': 'Resultado de las pruebas de calidad de la última corrida. Grano: 1 prueba.',
+    'mart_una_sola_vez': 'Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.',
+    'fact_cliente_trimestre': 'Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.',
 }
 
 COLUMNAS = {
@@ -137,6 +139,15 @@ COLUMNAS = {
     'costo_total': 'contactados × costo de envío + (vuelven_solos + recuperados) × cupón (CLP sin IVA por año)',
     'margen_recuperado': 'tasa de recuperación × margen anual de los que se pierden (CLP sin IVA por año)', 'resultado_neto': 'margen_recuperado − costo_total (CLP por año)',
     'tasa_equilibrio': 'Tasa de recuperación mínima para que la acción no pierda plata',
+    'incorporados': 'nuevos + reactivados + primeras_obs_previos: los que entran a la base activa en el período',
+    'pct_base_retenida': 'retenidos / activos_fin: qué parte de la base activa al cierre ya estaba al inicio (regla S22)',
+    'veredicto': 'Regla S22: Retiene (pct_base_retenida >= 50%), Repone (si no, e incorporados >= perdidos) o Se achica',
+    'clientes_evaluables': 'Clientes cuya primera compra deja 90 días completos dentro de 2025', 'sin_segunda_compra': 'Clientes sin segunda compra dentro de 90 días',
+    'pct_una_sola_vez': 'sin_segunda_compra / clientes_evaluables', 'horizonte_dias': 'Días que se espera la segunda compra',
+    'activo_inicio': 'Activo al cierre del día anterior al trimestre (A0)', 'activo_fin': 'Activo al cierre del trimestre (A1)',
+    'compro_en_periodo': 'Compró dentro del trimestre', 'retenido': 'A0 y A1', 'perdido': 'A0 y no A1',
+    'nuevo': 'Entra a A1 con primera compra en el trimestre y alta 2025', 'primera_obs_previo': 'Entra a A1 con primera compra observada y alta anterior a 2025',
+    'reactivado': 'Entra a A1 tras estar inactivo', 'activo_inicio_y_compro': 'A0 y compró en el trimestre', 'nuevo_flujo': 'Primera compra en el trimestre y alta 2025',
     'accion_id': 'Identificador de la campaña o acción', 'accion': 'Nombre, descuento y tipo de la acción', 'ventana_ini': 'Inicio de la acción',
     'ventana_fin': 'Fin de la acción', 'seguimiento_hasta': 'Último día de la ventana de 90 días en que se mira si el cliente volvió', 'grupo': 'Usó la acción / compró en el período sin usarla',
     'clientes': 'Clientes identificados del grupo', 'volvieron_90d': 'Clientes del grupo con una compra válida en los 90 días siguientes al fin de la acción',
@@ -166,7 +177,9 @@ def metricas_df():
 
 
 def supuestos():
-    return pd.DataFrame(config.SUPUESTOS, columns=['id', 'tema', 'supuesto', 'por_que', 'efecto_si_falso', 'decidio', 'fecha'])
+    s = pd.DataFrame(config.SUPUESTOS, columns=['id', 'tema', 'supuesto', 'por_que', 'efecto_si_falso', 'decidio', 'fecha'])
+    s.insert(3, 'evidencia', s.id.map(config.EVIDENCIA_SUPUESTO))
+    return s
 
 
 def _pct(x):
@@ -205,7 +218,7 @@ def resumen_hallazgos(oro, val):
            f'- Mediana entre compras: {k.intercompra_mediana_dias:.0f} días; p90: {k.intercompra_p90_dias:.0f} días. '
            f'Recompras dentro de 30 d: {_pct(k.pct_recompras_dentro_30d)}; dentro de 90 d: {_pct(k.pct_recompras_dentro_90d)}.',
            '- Clientes activos al 31-12-2025: ' + ' · '.join(f'{_pct(k[f"pct_activos_{v}d_al_corte"])} ({v} d)' for v in config.VENTANAS)
-           + '. **La definición de "activo" cambia la cifra drásticamente.** Con 365 d todos quedan activos: con 12 meses de datos esa ventana no discrimina.',
+           + '. **La definición de "activo" cambia la cifra drásticamente.** (365 días se retiró: con un año de datos da 100% por construcción.)',
            f'- Compradores de una sola vez: {_pct(k.pct_una_sola_vez)}, calculado solo sobre los clientes que tuvieron al menos {w} días '
            f'para volver (primera compra hasta {(config.FECHA_CORTE - pd.Timedelta(days=w)).strftime("%d-%m-%Y")}).',
            f'- Retención trimestral (W={w} d, base confiable desde Q2): ' + ' · '.join(
@@ -221,19 +234,39 @@ def resumen_hallazgos(oro, val):
            ]
     if 'cohorte_Q1_nuevos_activos_en_Q4' in k:
         lin.append(f'- De los clientes nuevos que llegaron en Q1-2025, {_pct(k.cohorte_Q1_nuevos_activos_en_Q4)} compra en Q4.')
+    # --- regla retiene / repone bajo cada ventana (feedback E1 y P1)
+    lin += ['', '## ¿Retiene o repone? La misma regla bajo cada ventana (S22)', '', M.regla_veredicto(), '',
+            '| Ventana | Trimestre | Retención | Nuevos por perdido | Base al cierre que ya estaba | Veredicto |', '|---|---|---|---|---|---|']
+    vt = m[(m.corte == 'Total') & (m.periodo_tipo == 'trimestre') & m.base_confiable].sort_values(['ventana_dias', 'periodo'])
+    for r in vt.itertuples():
+        lin.append(f'| {r.ventana_dias} días | {r.periodo} | {_pct(r.tasa_retencion)} | {_dec(r.indice_reposicion)} | {_pct(r.pct_base_retenida)} | **{r.veredicto}** |')
+    lin += ['', '- La conclusión **no** es la misma con cualquier ventana, así que se presenta condicionada: con 90 días (oficial) la cadena pasó de '
+                '*retener* en Q3 a *reponer* en Q4; con 30 días pasó de *reponer* a *achicarse*; con 180 días *retiene* en ambos trimestres.',
+            '- Lo que sí se sostiene con 30 y 90 días: Q4 está un escalón peor que Q3. Con 180 días no se ve, porque esa ventana cuenta como activo a quien lleva hasta 6 meses sin comprar.']
+    u = oro['mart_una_sola_vez']
+    un = u[u.tipo_cohorte == 'Nuevo 2025'].set_index('cohorte_trimestre')
+    lin += ['', f'## Compradores de una sola vez (sin segunda compra en {config.HORIZONTE_SEGUNDA_COMPRA} días, horizonte fijo)', '',
+            '| Clientes nuevos que llegaron en | Evaluables | Sin segunda compra | IC 95% |', '|---|---|---|---|']
+    for coh, r in un.iterrows():
+        lin.append(f'| {coh} | {_num(r.clientes_evaluables)} | {_pct(r.pct_una_sola_vez)} | {_pct(r.ic95_inf)}–{_pct(r.ic95_sup)} |')
+    lin += ['', f'- {_pct(un.loc["Todo 2025"].pct_una_sola_vez)} de los clientes nuevos de 2025 no volvió a comprar en {config.HORIZONTE_SEGUNDA_COMPRA} días. '
+                f'Entre los que llegaron en Q3 fue {_pct(un.loc["2025Q3"].pct_una_sola_vez)}, contra {_pct(un.loc["2025Q1"].pct_una_sola_vez)} y '
+                f'{_pct(un.loc["2025Q2"].pct_una_sola_vez)} en Q1 y Q2: los clientes con que la cadena repone son cada vez más de una sola compra.',
+            '- La cohorte Q4 tiene muy pocos clientes evaluables (su primera compra debe ser hasta el 2-oct) y no se interpreta.']
     # --- corte principal pedido por la contraparte: local
     tri = m[(m.corte == 'Tienda principal') & (m.periodo_tipo == 'trimestre') & (m.ventana_dias == w) & m.base_confiable]
-    piv = tri.pivot(index='valor', columns='periodo', values='tasa_retencion').sort_values('2025Q4', ascending=False)
+    piv = tri.pivot(index='valor', columns='periodo', values='tasa_retencion').sort_index()   # orden alfabético: sin ranking (feedback E1)
     loc4 = corte_q4('Tienda principal')
     lin += ['', f'## Retención por local (corte pedido por la contraparte, W={w} d)', '',
             'Cada cliente se asigna a su local principal (S09). La Tienda Online es un décimo punto de venta (S08).', '',
-            '| Local | ' + ' | '.join(piv.columns) + ' | Activos inicio Q4 |', '|---|' + '---|' * (len(piv.columns) + 1)]
+            '| Local | ' + ' | '.join(piv.columns) + ' | IC 95% Q4 | Activos inicio Q4 |', '|---|' + '---|' * (len(piv.columns) + 2)]
     for v, r in piv.iterrows():
-        lin.append(f'| {v} | ' + ' | '.join(_pct(x) for x in r) + f' | {_num(loc4.loc[v].activos_inicio)} |')
+        lin.append(f'| {v} | ' + ' | '.join(_pct(x) for x in r) + f' | {_pct(loc4.loc[v].ic95_inf)}–{_pct(loc4.loc[v].ic95_sup)} | {_num(loc4.loc[v].activos_inicio)} |')
     peq = loc4[loc4.muestra_pequena]
     if len(peq):
         lin += ['', f'**Precaución:** {len(peq)} de {len(loc4)} locales parten Q4 con menos de {config.UMBRAL_MUESTRA_PEQUENA} clientes activos; '
-                    'sus tasas cambian mucho entre trimestres. Leer la tendencia junto con el total, no un trimestre aislado.']
+                    'sus tasas cambian mucho entre trimestres. Por eso la tabla va en orden alfabético y no como ranking: '
+                    'un local solo es distinto del total si su intervalo no incluye la retención de la cadena.']
     # --- otros cortes
     lin += ['', f'## Otros cortes en Q4 (W={w} d)', '', '| Corte | Valor | Activos inicio | Retención | Reposición |', '|---|---|---|---|---|']
     for nombre in ['Formato principal', 'Macrozona principal', 'Segmento', config.CORTE_CLASIFICACION_NOMBRE]:

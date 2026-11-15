@@ -59,3 +59,10 @@ def test_contactar_mas_tarde_desperdicia_menos_contactos():
 
 def test_regla_de_lectura_menciona_la_ventana():
     assert '90 días' in M.regla_lectura(90)
+
+
+def test_veredicto_regla_s22():
+    assert M.veredicto(60, 100, 40, 40, umbral=0.5) == 'Retiene'      # 60% de la base al cierre ya estaba
+    assert M.veredicto(45, 100, 50, 55, umbral=0.5) == 'Repone'       # entran 55 >= 50 perdidos
+    assert M.veredicto(34, 100, 70, 66, umbral=0.5) == 'Se achica'    # entran 66 < 70 perdidos
+    assert M.veredicto(0, 0, 0, 0) is None

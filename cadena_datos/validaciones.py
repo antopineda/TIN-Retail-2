@@ -130,12 +130,12 @@ def ejecutar(pl, oro, log):
     t = m.tasa_retencion.dropna()
     ic_ok = ((m.ic95_inf <= m.tasa_retencion + 1e-9) & (m.tasa_retencion <= m.ic95_sup + 1e-9)) | m.tasa_retencion.isna()
     chequear('M04', 'Tasas de retención entre 0 y 1, dentro de su intervalo de confianza', 'critica', t.between(0, 1).all() and ic_ok.all())
-    est = oro['_estados']
-    e = est[(est.periodo == '2025Q4') & (est.ventana_dias == config.VENTANA_PRINCIPAL)]
+    fct = oro['fact_cliente_trimestre']
+    e = fct[(fct.trimestre == '2025Q4') & (fct.ventana_dias == config.VENTANA_PRINCIPAL)]
     directa = e.retenido.sum() / e.activo_inicio.sum()
     oficial = Mt.retencion(m).tasa_retencion
-    chequear('M05', 'Cifra oficial (retención Q4, 90 d) = recálculo directo desde los estados de cada cliente', 'critica',
-             abs(directa - oficial) < 1e-12, f'{oficial:.4f}')
+    chequear('M05', 'Cifra oficial (retención Q4, 90 d) = recálculo directo desde fact_cliente_trimestre', 'critica',
+             abs(directa - oficial) < 1e-12 and fct.duplicated(['cliente_key', 'trimestre', 'ventana_dias']).sum() == 0, f'{oficial:.4f}')
     pv = fb[fb.en_periodo]
     pm = pv.margen_bruto.sum() / pv.venta_sin_iva.sum()
     chequear('M06', 'Margen bruto 2025 entre 0% y 60% de la venta sin IVA', 'critica', 0 < pm < 0.6, f'{pm:.1%}')

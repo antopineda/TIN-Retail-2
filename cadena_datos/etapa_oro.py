@@ -208,6 +208,9 @@ def mart_retencion(fechas, dimc):
     m['es_ventana_principal'] = m.ventana_dias == config.VENTANA_PRINCIPAL
     m['n_suficiente'] = m.activos_inicio >= config.UMBRAL_N_MIN
     m['muestra_pequena'] = m.activos_inicio < config.UMBRAL_MUESTRA_PEQUENA
+    m['incorporados'] = m.nuevos + m.reactivados + m.primeras_obs_previos
+    m['pct_base_retenida'] = np.where(m.activos_fin > 0, m.retenidos / m.activos_fin.where(m.activos_fin > 0), np.nan)
+    m['veredicto'] = [M.veredicto(r, a, p, i) for r, a, p, i in zip(m.retenidos, m.activos_fin, m.perdidos, m.incorporados)]
     ic = [M.wilson(k, n) for k, n in zip(m.retenidos, m.activos_inicio)]
     m['ic95_inf'], m['ic95_sup'] = [x[0] for x in ic], [x[1] for x in ic]
     m['se_puede_rankear'] = ~m.muestra_pequena
@@ -307,6 +310,7 @@ def kpi_resumen(fb, compras, rfm, mret, mcoh, fechas):
         q4 = tot[(tot.ventana_dias == w) & (tot.periodo == '2025Q4')].iloc[0]
         add(f'retencion_Q4_{w}d', q4.tasa_retencion, 'proporción', f'Activos al inicio de Q4 que siguen activos al cierre (W={w})')
         add(f'indice_reposicion_Q4_{w}d', q4.indice_reposicion, 'razón', f'Nuevos / perdidos en Q4 (W={w}); <1 = no repone')
+        add(f'pct_base_retenida_Q4_{w}d', q4.pct_base_retenida, 'proporción', f'Retenidos / activos al cierre de Q4 (W={w}); base de la regla S22')
     c = mcoh[(mcoh.tipo_cohorte == 'Nuevo 2025') & (mcoh.cohorte_trimestre == '2025Q1')]
     if len(c):
         add('cohorte_Q1_nuevos_activos_en_Q4', c.loc[c.trimestre_actividad == '2025Q4', 'pct_activos'].sum(), 'proporción',
@@ -382,6 +386,39 @@ def mart_episodios_inactividad(fechas, compras, dimc):
     return e
 
 
+def mart_una_sola_vez(fechas, dimc):
+    """Compradores de una sola vez con horizonte fijo: no vuelven a comprar dentro de HORIZONTE_SEGUNDA_COMPRA días desde su
+    primera compra. Solo se evalúan clientes cuya primera compra deja ese plazo completo dentro de 2025 (así las cohortes son comparables)."""
+    h = config.HORIZONTE_SEGUNDA_COMPRA
+    limite = np.datetime64((config.FECHA_CORTE - pd.Timedelta(days=h)).date(), 'D')
+    tipo = dimc.set_index('cliente_key').tipo_cohorte
+    filas = []
+    for c, f in fechas.items():
+        f = np.unique(f)
+        if f[0] > limite:
+            continue
+        segunda = f[1] if len(f) > 1 else None
+        filas.append({'cliente_key': c, 'tipo_cohorte': tipo.get(c), 'cohorte_trimestre': str(pd.Timestamp(f[0]).to_period('Q')),
+                      'una_sola_vez': segunda is None or int((segunda - f[0]).astype(int)) > h})
+    d = pd.DataFrame(filas)
+    salida = []
+    for (tc, coh), g in list(d.groupby(['tipo_cohorte', 'cohorte_trimestre'])) + \
+            [((t, 'Todo 2025'), g) for t, g in d.groupby('tipo_cohorte')] + [(('Todos', 'Todo 2025'), d)]:
+        lo, hi = M.wilson(g.una_sola_vez.sum(), len(g))
+        salida.append({'tipo_cohorte': tc, 'cohorte_trimestre': coh, 'clientes_evaluables': len(g),
+                       'sin_segunda_compra': int(g.una_sola_vez.sum()), 'pct_una_sola_vez': g.una_sola_vez.mean(),
+                       'ic95_inf': lo, 'ic95_sup': hi, 'horizonte_dias': h})
+    return pd.DataFrame(salida)
+
+
+def fact_cliente_trimestre(estados):
+    """Hecho donde se calcula la retención: una fila por cliente × trimestre × ventana con su estado (snapshot periódico).
+    mart_retencion es la suma de esta tabla por corte; la prueba M05 lo verifica."""
+    e = estados[estados.periodo_tipo == 'trimestre'].drop(columns='periodo_tipo').rename(
+        columns={'cliente_id': 'cliente_key', 'periodo': 'trimestre'})
+    return e.reset_index(drop=True)
+
+
 def mart_caso_contacto(episodios):
     """Caso de negocio con los supuestos por defecto (S18, S19) para varios días de contacto. El prototipo lo recalcula en vivo."""
     filas = [M.caso_contacto(episodios, dia_contacto=d) for d in (30, 45, 60, 75)]
@@ -446,7 +483,7 @@ def mart_perfil_local(mret, compras, dimc, estados):
     return pd.DataFrame(filas).sort_values('tasa_retencion_q4')
 
 
-def kpi_cobertura_riesgo(cob, rie, fl, fb, caso):
+def kpi_cobertura_riesgo(cob, rie, fl, fb, caso, usv):
     k = []
     add = lambda kpi, v, u, d: k.append({'kpi': kpi, 'valor': v, 'unidad': u, 'definicion': d})
     usadas = cob.iloc[-1]
@@ -470,6 +507,11 @@ def kpi_cobertura_riesgo(cob, rie, fl, fb, caso):
     add(f'margen_anual_1pp_retencion_{w}d', r.margen_anual_1pp_retencion, 'CLP nominal de margen bruto (sin IVA) / año',
         'Margen anual que significa retener 1 punto porcentual más de los activos al inicio de Q4')
     c = caso.set_index('dia_contacto').loc[config.CONTACTO_DIA_DEFECTO]
+    u = usv.set_index(['tipo_cohorte', 'cohorte_trimestre'])
+    add('pct_nuevos_una_sola_vez', u.loc[('Nuevo 2025', 'Todo 2025')].pct_una_sola_vez, 'proporción',
+        f'Clientes nuevos 2025 sin segunda compra dentro de {config.HORIZONTE_SEGUNDA_COMPRA} días (horizonte fijo)')
+    add('pct_previos_una_sola_vez', u.loc[('Previo (alta antes de 2025)', 'Todo 2025')].pct_una_sola_vez, 'proporción',
+        f'Clientes previos (alta antes de 2025) sin segunda compra dentro de {config.HORIZONTE_SEGUNDA_COMPRA} días de su primera compra observada')
     for col, u, d in [('contactados', 'contactos / año', 'Episodios que llegan al día de contacto sin comprar (2025)'),
                       ('costo_total', 'CLP sin IVA / año', 'Envíos + cupones (S18)'),
                       ('margen_recuperado', 'CLP de margen bruto / año', f'Tasa de recuperación supuesta ({config.CONTACTO_TASA_RECUPERACION:.0%}, S19) × margen anual de los que se pierden'),
@@ -498,16 +540,19 @@ def ejecutar(pl):
     cob = mart_cobertura(pl['_n_bronce']['boletas'], fb, compras)
     rie = mart_valor_riesgo(estados, compras)
     epi = mart_episodios_inactividad(fechas, compras, dcl)
+    usv = mart_una_sola_vez(fechas, dcl)
+    fct = fact_cliente_trimestre(estados)
     caso = mart_caso_contacto(epi)
     mca = mart_campanas(fb, fl, compras, pl['campanas'])
     mpl = mart_perfil_local(mret, compras, dcl, estados)
-    kpi = pd.concat([kpi_resumen(fb, compras, rfm, mret, mcoh, fechas), kpi_cobertura_riesgo(cob, rie, fl, fb, caso)],
+    kpi = pd.concat([kpi_resumen(fb, compras, rfm, mret, mcoh, fechas), kpi_cobertura_riesgo(cob, rie, fl, fb, caso, usv)],
                     ignore_index=True)
     oro = {'dim_tiempo': dt, 'dim_tienda': dti, 'dim_medio_pago': dmp, 'dim_producto': dpr, 'dim_campana': dca,
            'dim_cliente': dcl, 'fact_venta_boleta': fb, 'fact_venta_linea': fl, 'mart_cliente_mes': mcm,
            'mart_retencion': mret, 'mart_cohortes': mcoh, 'mart_rfm_cliente': rfm, 'mart_venta_mensual': mvm,
            'mart_cobertura': cob, 'mart_valor_riesgo': rie, 'mart_episodios_inactividad': epi, 'mart_caso_contacto': caso,
-           'mart_campanas': mca, 'mart_perfil_local': mpl, 'mart_kpi_resumen': kpi}
+           'mart_campanas': mca, 'mart_perfil_local': mpl, 'mart_una_sola_vez': usv, 'fact_cliente_trimestre': fct,
+           'mart_kpi_resumen': kpi}
     for nombre, df in oro.items():
         L.escribir_csv(df, config.ORO / f'{nombre}.csv')
     oro['_estados'] = estados

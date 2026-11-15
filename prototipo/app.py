@@ -17,8 +17,12 @@ import streamlit as st
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / 'cadena_datos'))
+import importlib  # noqa: E402
+
 import config  # noqa: E402
 import metricas as M  # noqa: E402
+
+config, M = importlib.reload(config), importlib.reload(M)   # si la definición cambia, la pantalla la toma sin reiniciar
 
 ORO = config.ORO
 VINO, GRIS, GRIS_CLARO = '#AD2C55', '#8A8A8A', '#D9D9D9'
@@ -52,7 +56,7 @@ def cargar(_marca):
     leer = lambda n, **kw: pd.read_csv(ORO / f'{n}.csv', encoding='utf-8-sig', **kw)
     return {n: leer(n) for n in ['mart_retencion', 'mart_valor_riesgo', 'mart_kpi_resumen', 'mart_episodios_inactividad',
                                   'mart_campanas', 'mart_perfil_local', 'mart_cobertura', 'validaciones', 'estado_fuentes',
-                                  'historial_corridas']}
+                                  'historial_corridas', 'mart_una_sola_vez']}
 
 
 faltan = [n for n in ['mart_retencion', 'validaciones', 'estado_fuentes'] if not (ORO / f'{n}.csv').exists()]
@@ -91,6 +95,9 @@ r_prev = M.retencion(mret, list(TRIMESTRES)[idx - 1], w) if idx > 0 else None
 
 # ----------------------------------------------------------------- cifra clave
 st.divider()
+if not r.base_confiable:
+    st.warning(f'Con {w} días, {TRIMESTRES[trimestre]} no tiene base confiable: harían falta {w} días de compras antes del trimestre '
+               'y no hay datos de 2024. La cifra de abajo no se debe leer.')
 k1, k2, k3, k4 = st.columns([1.3, 1, 1.2, 1])
 k1.metric(f'Retención {TRIMESTRES[trimestre][:7]} · {w} días', pct(r.tasa_retencion),
           delta=(f'{(r.tasa_retencion - r_prev.tasa_retencion) * 100:+.1f} pp vs trimestre anterior'.replace('.', ',')
@@ -111,6 +118,36 @@ k4.metric('Cobertura del análisis', pct(1 - kpi.pct_boletas_fuera_de_retencion)
 k4.caption(f'de las boletas del origen ({pct(kpi.pct_venta_2025_en_retencion)} de la venta 2025). '
            f'Quedan fuera las anónimas, duplicadas, de 2026 y solo devoluciones.')
 
+# ----------------------------------------------------------------- la regla bajo las tres ventanas (feedback E1 y P1)
+st.divider()
+st.markdown(f'**¿Retiene o repone? La misma regla bajo cada ventana · {TRIMESTRES[trimestre]}**')
+st.caption(M.regla_veredicto())
+COLOR_V = {'Retiene': '#2E7D32', 'Repone': '#B26A00', 'Se achica': VINO}
+cols = st.columns(len(VENTANAS) + 1)
+for col, ww in zip(cols, sorted(VENTANAS)):
+    rv = M.retencion(mret, trimestre, ww)
+    marca = ' ◀ elegida' if ww == w else ''
+    if not rv.base_confiable:
+        col.markdown(f"<div style='border:1px solid #ddd;border-radius:8px;padding:10px'><div style='font-size:0.85em;color:#666'>"
+                     f"{VENTANAS[ww]}{marca}</div><div style='font-size:1.2em;font-weight:700;color:#888'>Sin base</div>"
+                     f"<div style='font-size:0.85em'>Faltan {ww} días de historia antes del trimestre (no hay datos de 2024).</div></div>",
+                     unsafe_allow_html=True)
+        continue
+    col.markdown(f"<div style='border:1px solid #ddd;border-radius:8px;padding:10px'>"
+                 f"<div style='font-size:0.85em;color:#666'>{VENTANAS[ww]}{marca}</div>"
+                 f"<div style='font-size:1.5em;font-weight:700;color:{COLOR_V.get(rv.veredicto, '#333')}'>{rv.veredicto or '—'}</div>"
+                 f"<div style='font-size:0.85em'>Retención {pct(rv.tasa_retencion)} · {f'{rv.indice_reposicion:.2f}'.replace('.', ',')} nuevos por perdido<br>"
+                 f"{pct(rv.pct_base_retenida)} de los activos al cierre ya estaba al inicio</div></div>", unsafe_allow_html=True)
+usv = D['mart_una_sola_vez'].set_index(['tipo_cohorte', 'cohorte_trimestre']).pct_una_sola_vez
+cols[-1].markdown(f"<div style='border:1px solid #ddd;border-radius:8px;padding:10px'>"
+                  f"<div style='font-size:0.85em;color:#666'>Compradores de una sola vez</div>"
+                  f"<div style='font-size:1.5em;font-weight:700'>{pct(usv[('Nuevo 2025', 'Todo 2025')])}</div>"
+                  f"<div style='font-size:0.85em'>de los clientes nuevos 2025 no volvió en {config.HORIZONTE_SEGUNDA_COMPRA} días. "
+                  f"Llegados en Q3: {pct(usv[('Nuevo 2025', '2025Q3')])} vs {pct(usv[('Nuevo 2025', '2025Q2')])} en Q2.</div></div>",
+                  unsafe_allow_html=True)
+st.caption('La conclusión depende de la ventana, por eso se muestra bajo las tres. Con 30 y 90 días, Q4 queda un escalón peor que Q3; '
+           'con 180 días no se ve, porque esa ventana cuenta como activo a quien lleva hasta 6 meses sin comprar.')
+
 # ----------------------------------------------------------------- gráfico que explica la cifra
 st.divider()
 g1, g2 = st.columns([1, 1.15])
@@ -124,7 +161,7 @@ with g1:
         y=alt.Y('Retención:Q', axis=alt.Axis(format='%', title='% de clientes retenidos'), scale=alt.Scale(domain=[0, 1])))
     marca = base.transform_filter(alt.datum.periodo == trimestre).mark_point(size=160, filled=True, color=VINO).encode(y='Retención:Q')
     etiquetas = base.mark_text(dy=-14, color='#333').encode(y='Retención:Q', text=alt.Text('Retención:Q', format='.1%'))
-    st.altair_chart(linea + marca + etiquetas, use_container_width=True)
+    st.altair_chart(linea + marca + etiquetas, width='stretch')
 with g2:
     st.markdown('**Clientes que entran y salen por trimestre (n° de clientes)**')
     flujo = tri.melt(id_vars='Trimestre', value_vars=['nuevos', 'perdidos', 'reactivados'], var_name='Tipo', value_name='Clientes')
@@ -135,7 +172,7 @@ with g2:
         color=alt.Color('Tipo:N', scale=alt.Scale(domain=['Nuevos', 'Perdidos', 'Reactivados'], range=['#555555', VINO, GRIS_CLARO]),
                         legend=alt.Legend(orient='top', title=None)),
         tooltip=['Trimestre', 'Tipo', 'Clientes'])
-    st.altair_chart(barras + barras.mark_text(dy=-6, color='#333').encode(text='Clientes:Q'), use_container_width=True)
+    st.altair_chart(barras + barras.mark_text(dy=-6, color='#333').encode(text='Clientes:Q'), width='stretch')
 
 # ----------------------------------------------------------------- corte por la dimensión principal
 st.divider()
@@ -146,10 +183,10 @@ cx = mret[(mret.corte == corte) & (mret.periodo == trimestre) & (mret.ventana_di
 cx['Grupo'] = cx.valor
 cx['Lectura'] = cx.se_puede_rankear.map({True: f'{config.UMBRAL_MUESTRA_PEQUENA} o más clientes: comparable',
                                          False: f'Menos de {config.UMBRAL_MUESTRA_PEQUENA} clientes: no ordenar, mirar el intervalo'})
-cx = cx.sort_values('tasa_retencion')
+cx = cx.sort_values('valor')   # orden alfabético: no es un ranking (feedback E1)
 total = r.tasa_retencion
 alto = max(180, 34 * len(cx))
-y = alt.Y('Grupo:N', sort=cx.Grupo.tolist()[::-1], title=None, axis=alt.Axis(labelLimit=260))
+y = alt.Y('Grupo:N', sort=cx.Grupo.tolist(), title=None, axis=alt.Axis(labelLimit=260))
 puntos = alt.Chart(cx).mark_point(filled=True, size=110).encode(
     x=alt.X('tasa_retencion:Q', title='% de clientes retenidos', axis=alt.Axis(format='%'), scale=alt.Scale(domain=[0, 1])), y=y,
     color=alt.Color('Lectura:N', scale=alt.Scale(range=[VINO, GRIS]), legend=alt.Legend(orient='bottom', title=None, labelLimit=500)),
@@ -159,8 +196,8 @@ puntos = alt.Chart(cx).mark_point(filled=True, size=110).encode(
 ic = alt.Chart(cx).mark_rule(color=GRIS, strokeWidth=2).encode(x='ic95_inf:Q', x2='ic95_sup:Q', y=y)
 n_txt = alt.Chart(cx).mark_text(align='left', dx=6, color=GRIS).encode(x=alt.value(0), y=y, text=alt.Text('activos_inicio:Q'))
 ref = alt.Chart(pd.DataFrame({'x': [total]})).mark_rule(strokeDash=[4, 4], color='#333').encode(x='x:Q')
-st.altair_chart((ic + puntos + ref).properties(height=alto), use_container_width=True)
-st.caption(f'Línea punteada: total de la cadena ({pct(total)}). Barra gris: intervalo de confianza del 95% (Wilson). '
+st.altair_chart((ic + puntos + ref).properties(height=alto), width='stretch')
+st.caption(f'Orden alfabético, no ranking. Línea punteada: total de la cadena ({pct(total)}). Barra gris: intervalo de confianza del 95% (Wilson). '
            f'Un local con pocos clientes puede subir o bajar 15 puntos por azar: si su barra cruza la línea punteada, '
            f'no es distinto del total. Cada cliente cuenta en su local principal (donde más compró en 2025).')
 if corte.startswith('Compras'):
@@ -200,7 +237,7 @@ lin = alt.Chart(curva).mark_line(point=True, color=GRIS).encode(
              alt.Tooltip('tasa_equilibrio:Q', format='.1%', title='Tasa de equilibrio')])
 cero = alt.Chart(pd.DataFrame({'y': [0]})).mark_rule(color='#333').encode(y='y:Q')
 elegido = alt.Chart(pd.DataFrame({'x': [dia]})).mark_rule(color=VINO, strokeDash=[4, 4]).encode(x='x:Q')
-st.altair_chart((lin + cero + elegido).properties(height=220), use_container_width=True)
+st.altair_chart((lin + cero + elegido).properties(height=220), width='stretch')
 st.caption('Supuestos S18 (costo) y S19 (recuperación): no están medidos. La tasa de recuperación real solo se conoce con un piloto con grupo de control.')
 
 # ----------------------------------------------------------------- detalle
@@ -217,7 +254,7 @@ with st.expander('Detalle por local: quién retiene, cuántos clientes y por qu�
         'nuevos': 'Nuevos (n°)', 'reactivados': 'Reactivados (n°)', 'tasa_retencion': 'Retención (%)', 'ic95_inf': 'IC 95% desde',
         'ic95_sup': 'IC 95% hasta', 'pct_una_sola_compra_ene_sep': 'Una sola compra ene–sep (%)',
         'ticket_promedio_ene_sep': 'Ticket promedio ene–sep (CLP)', 'margen_ene_sep_por_cliente': 'Margen por cliente ene–sep (CLP)'}),
-        hide_index=True, use_container_width=True,
+        hide_index=True, width='stretch',
         column_config={c: st.column_config.NumberColumn(format='percent') for c in
                        ['Retención (%)', 'IC 95% desde', 'IC 95% hasta', 'Una sola compra ene–sep (%)']} |
                       {c: st.column_config.NumberColumn(format='localized') for c in
@@ -229,7 +266,7 @@ with st.expander('¿Las campañas de 2025 retuvieron clientes?', expanded=False)
     st.dataframe(ca[['accion', 'grupo', 'clientes', 'volvieron_90d', 'pct_volvio_90d', 'ic95_inf', 'ic95_sup', 'descuento_otorgado_sin_iva']].rename(columns={
         'accion': 'Acción', 'grupo': 'Grupo', 'clientes': 'Clientes (n°)', 'volvieron_90d': 'Volvieron en 90 días (n°)',
         'pct_volvio_90d': 'Volvieron (%)', 'ic95_inf': 'IC 95% desde', 'ic95_sup': 'IC 95% hasta',
-        'descuento_otorgado_sin_iva': 'Descuento entregado (CLP sin IVA)'}), hide_index=True, use_container_width=True,
+        'descuento_otorgado_sin_iva': 'Descuento entregado (CLP sin IVA)'}), hide_index=True, width='stretch',
         column_config={c: st.column_config.NumberColumn(format='percent') for c in ['Volvieron (%)', 'IC 95% desde', 'IC 95% hasta']} |
                       {'Descuento entregado (CLP sin IVA)': st.column_config.NumberColumn(format='localized')})
     st.caption('Comparación, no efecto causal: no hubo grupo de control y quien usa una promoción ya compra más seguido.')
@@ -237,10 +274,10 @@ with st.expander('¿Las campañas de 2025 retuvieron clientes?', expanded=False)
 with st.expander('Calidad de los datos de esta corrida', expanded=False):
     st.dataframe(val[['id', 'validacion', 'accion', 'resultado', 'detalle']].rename(columns={
         'id': 'Prueba', 'validacion': 'Qué verifica', 'accion': 'Si falla', 'resultado': 'Resultado', 'detalle': 'Detalle'}),
-        hide_index=True, use_container_width=True)
+        hide_index=True, width='stretch')
     st.dataframe(D['mart_cobertura'][['motivo', 'boletas', 'boletas_restantes', 'pct_del_origen']].rename(columns={
         'motivo': 'Paso', 'boletas': 'Boletas (n°)', 'boletas_restantes': 'Quedan (n°)', 'pct_del_origen': '% del origen'}),
-        hide_index=True, use_container_width=True, column_config={'% del origen': st.column_config.NumberColumn(format='percent')})
+        hide_index=True, width='stretch', column_config={'% del origen': st.column_config.NumberColumn(format='percent')})
 
 # ----------------------------------------------------------------- pie: fuente, actualización, dueño
 n_ok = int((val.resultado == 'OK').sum())

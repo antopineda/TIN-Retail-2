@@ -47,6 +47,64 @@ flowchart LR
 
 Bronce y plata contienen RUT y nombres: no se suben al repositorio (Ley 21.719, minimización) y se regeneran en cada corrida. Oro no tiene identificadores directos (pruebas V17 y V17b).
 
+## 1b. Modelo dimensional (corregido con el feedback de la E1)
+
+El feedback de la E1 pidió que el diagrama muestre la tabla donde se calcula la retención. Ahora hay dos hechos a dos granos, más la tabla cliente-mes:
+
+| Tabla | Grano: "una fila es…" | Para qué |
+|---|---|---|
+| `fact_venta_boleta` | una boleta única | Ventas, margen y qué compras cuentan para la retención |
+| `fact_cliente_trimestre` | un cliente en un trimestre bajo una ventana (snapshot periódico) | **Aquí se calcula la retención**: activo al inicio, activo al cierre, retenido, perdido, nuevo, reactivado |
+| `mart_cliente_mes` | un cliente en un mes | Estado mensual de cada cliente (recurrente, nuevo, reactivado, inactivo) |
+| `mart_retencion` | corte × valor × período × ventana | Suma de `fact_cliente_trimestre` por corte; la prueba M05 verifica que cuadra |
+
+```mermaid
+erDiagram
+  dim_cliente ||--o{ fact_venta_boleta : compra
+  dim_tienda ||--o{ fact_venta_boleta : vende
+  dim_tiempo ||--o{ fact_venta_boleta : fecha
+  dim_medio_pago ||--o{ fact_venta_boleta : paga
+  fact_venta_boleta ||--o{ fact_venta_linea : detalle
+  dim_producto ||--o{ fact_venta_linea : sku
+  dim_cliente ||--o{ fact_cliente_trimestre : estado
+  dim_cliente ||--o{ mart_cliente_mes : estado
+  fact_cliente_trimestre }o--|| mart_retencion : "se suma en"
+  fact_venta_boleta {
+    int boleta_id PK
+    date fecha FK
+    int cliente_key FK
+    int tienda_key FK
+    float venta_neta "CLP con IVA"
+    float margen_bruto "CLP sin IVA"
+    bool es_compra_valida
+  }
+  fact_cliente_trimestre {
+    int cliente_key FK
+    string trimestre
+    int ventana_dias
+    bool activo_inicio
+    bool activo_fin
+    bool retenido
+    bool perdido
+    bool nuevo
+    bool reactivado
+  }
+  mart_cliente_mes {
+    int cliente_key FK
+    string anio_mes
+    int n_compras
+    bool activo_90d
+    string estado_90d
+  }
+  dim_cliente {
+    int cliente_key PK
+    string segmento
+    string tienda_principal
+    string tramo_frecuencia_ene_sep
+    bool es_nuevo_2025
+  }
+```
+
 ## 2. Tres decisiones defendidas
 
 ### ETL, no ELT
@@ -79,7 +137,7 @@ Resultado de la última corrida: **36 de 36 en verde** (`datos/oro/validaciones.
 | Integridad bronce → plata → oro | V01–V22 (23 pruebas de la E1) | Que no se pierde ni se duplica nada, que los montos cuadran, llaves sin huérfanos, sin RUT en oro | Bloquean, salvo V07, V10, V16 y V20 que avisan |
 | Protegen la métrica | M01 clave del hecho única · M02 recarga sin duplicar · M03 fechas dentro de 2025 · M04 tasas entre 0 y 1 · M05 la cifra oficial coincide con un recálculo directo · M06 margen en rango · M07 cobertura de costo ≥ 95% · M08 completitud del acuerdo de servicio | Que el 51,1% y el margen en riesgo son reproducibles y están en rango | M01–M06 bloquean; M07 y M08 avisan |
 
-Las pruebas unitarias de la lógica (70, en `cadena_datos/tests/`) prueban casos sintéticos de resultado conocido: bordes de la ventana, estados de un cliente, intervalo de Wilson, margen e imputación, y el caso de contacto.
+Las pruebas unitarias de la lógica (71, en `cadena_datos/tests/`) prueban casos sintéticos de resultado conocido: bordes de la ventana, estados de un cliente, intervalo de Wilson, margen e imputación, y el caso de contacto.
 
 ## 4. Linaje de la métrica
 

@@ -28,7 +28,7 @@ origen/ ──► BRONCE ──► PLATA ──► ORO ──► pruebas ──�
 | `graficos.py` | Visualizaciones con su unidad en el título y su fuente al pie. |
 | `referencias/feriados_chile_2025.csv` | Calendario de feriados (fuente externa al caso). |
 | `referencias/ipc_2025_snapshot.json` | Última respuesta buena de la API del IPC (respaldo, S21). |
-| `tests/` | Pruebas unitarias de las reglas de limpieza, la lógica de retención y la capa semántica (70). |
+| `tests/` | Pruebas unitarias de las reglas de limpieza, la lógica de retención y la capa semántica (71). |
 
 ## Opciones de ejecución
 

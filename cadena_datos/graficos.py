@@ -45,24 +45,37 @@ def _grilla(ax, eje='y'):
 
 
 def sensibilidad_ventana(kpi, mret, ruta):
-    k = kpi.set_index('kpi').valor
+    """La misma regla (S22) bajo cada ventana: retención y nuevos por perdido de Q4, con el veredicto escrito."""
     q4 = mret[(mret.corte == 'Total') & (mret.periodo == '2025Q4')].set_index('ventana_dias')
-    etiqueta = {30: '30 días\n(creencia empresa)', 90: '90 días\n(principal)', 180: '180 días', 365: '365 días\n(no discrimina)'}
+    etiqueta = {30: '30 días\n(regla de un mes)', 90: '90 días\n(oficial)', 180: '180 días'}
     ws = config.VENTANAS
     colores = [AZUL if w == config.VENTANA_PRINCIPAL else AZUL_CLARO for w in ws]
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
-    series = [([k[f'pct_activos_{w}d_al_corte'] for w in ws], 'Clientes activos al 31-12-2025\n(% de los clientes con compra en 2025)'),
-              ([q4.loc[w].tasa_retencion for w in ws], 'Retención en Q4-2025\n(% de activos al 1-oct que siguen activos al 31-dic)')]
-    for ax, (vals, sub) in zip(axes, series):
-        barras = ax.bar(range(len(ws)), vals, color=colores, width=0.6, edgecolor=FONDO, linewidth=2)
-        for b, v in zip(barras, vals):
-            ax.text(b.get_x() + b.get_width() / 2, v + 0.02, _pct(v), ha='center', fontsize=11, color=TINTA, fontweight='bold')
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.8))
+    a1, a2 = axes
+    b = a1.bar(range(len(ws)), [q4.loc[w].tasa_retencion for w in ws], color=colores, width=0.6, edgecolor=FONDO, linewidth=2)
+    for bar, w in zip(b, ws):
+        v = q4.loc[w].tasa_retencion
+        a1.text(bar.get_x() + bar.get_width() / 2, v + 0.02, _pct(v), ha='center', fontsize=11, color=TINTA, fontweight='bold')
+    a1.set_ylim(0, 1.05)
+    a1.yaxis.set_major_formatter(lambda y, _: _pct(y, 0))
+    a1.set_title('Retención Q4-2025 (% de activos al 1-oct que siguen activos al 31-dic)', fontsize=10.5, color=TINTA_2, loc='left')
+    b = a2.bar(range(len(ws)), [q4.loc[w].indice_reposicion for w in ws], color=colores, width=0.6, edgecolor=FONDO, linewidth=2)
+    for bar, w in zip(b, ws):
+        r = q4.loc[w]
+        a2.text(bar.get_x() + bar.get_width() / 2, r.indice_reposicion + 0.06, f'{r.indice_reposicion:.2f}'.replace('.', ','),
+                ha='center', fontsize=11, color=TINTA, fontweight='bold')
+        a2.text(bar.get_x() + bar.get_width() / 2, r.indice_reposicion + 0.32, r.veredicto.upper(), ha='center', fontsize=10,
+                color=NARANJO, fontweight='bold')
+    a2.axhline(1, color=TINTA_2, linestyle='--', linewidth=1.2)
+    a2.text(1.5, 0.95, '1 nuevo\npor perdido', color=TINTA_2, fontsize=9, ha='center', va='top')
+    a2.set_ylim(0, max(q4.loc[w].indice_reposicion for w in ws) * 1.3)
+    a2.set_title('Clientes nuevos por cada perdido en Q4 (n°) y veredicto de la regla', fontsize=10.5, color=TINTA_2, loc='left')
+    for ax in axes:
         ax.set_xticks(range(len(ws)), [etiqueta.get(w, f'{w} días') for w in ws], fontsize=9.5)
-        ax.set_ylim(0, 1.12)
-        ax.yaxis.set_major_formatter(lambda y, _: _pct(y, 0))
-        ax.set_title(sub, fontsize=10.5, color=TINTA_2, loc='left')
         _grilla(ax)
-    _cerrar(fig, ruta, 'La definición de "cliente activo" cambia la respuesta (%)', 'mart_kpi_resumen, mart_retencion')
+    v = {w: q4.loc[w].veredicto.lower() for w in ws}
+    _cerrar(fig, ruta, f'Q4-2025: con 90 días la cadena {v[90]}, con 30 {v[30]} y con 180 {v[180]}',
+            'mart_retencion. Regla S22: retiene si >= 50% de los activos al cierre ya estaban al inicio; si no, repone si los que entran cubren a los perdidos')
 
 
 def retencion_trimestral(mret, ruta):
@@ -94,22 +107,44 @@ def retencion_trimestral(mret, ruta):
 
 
 def retencion_por_local(mret, ruta):
+    """Sin ranking (feedback E1): orden alfabético, cada tasa con su intervalo del 95% y la línea del total."""
     w = config.VENTANA_PRINCIPAL
-    loc = mret[(mret.corte == 'Tienda principal') & (mret.periodo == '2025Q4') & (mret.ventana_dias == w)].sort_values('tasa_retencion')
-    total = mret[(mret.corte == 'Total') & (mret.periodo == '2025Q4') & (mret.ventana_dias == w)].tasa_retencion.iloc[0]
+    loc = mret[(mret.corte == 'Tienda principal') & (mret.periodo == '2025Q4') & (mret.ventana_dias == w)].sort_values('valor', ascending=False)
+    total = mret[(mret.corte == 'Total') & (mret.periodo == '2025Q4') & (mret.ventana_dias == w)].iloc[0]
     fig, ax = plt.subplots(figsize=(11, 5.6))
-    barras = ax.barh(loc.valor, loc.tasa_retencion, color=AZUL, height=0.6, edgecolor=FONDO, linewidth=2)
-    for bar, (_, r) in zip(barras, loc.iterrows()):
-        ax.text(r.tasa_retencion + 0.01, bar.get_y() + bar.get_height() / 2,
-                f'{_pct(r.tasa_retencion)}  (n = {_num(r.activos_inicio)})', va='center', fontsize=9.5, color=TINTA,
-                bbox={'facecolor': FONDO, 'edgecolor': 'none', 'pad': 1.5}, zorder=4)
-    ax.axvline(total, color=TINTA_2, linestyle='--', linewidth=1.2, zorder=1)
-    ax.text(total, len(loc) - 0.35, f' Total cadena: {_pct(total)}', color=TINTA_2, fontsize=9.5, va='bottom')
-    ax.set_xlim(0, 0.85)
+    ys = range(len(loc))
+    ax.axvspan(total.ic95_inf, total.ic95_sup, color=GRILLA, alpha=0.6, zorder=0)
+    ax.axvline(total.tasa_retencion, color=TINTA_2, linestyle='--', linewidth=1.2, zorder=1)
+    ax.hlines(ys, loc.ic95_inf, loc.ic95_sup, color=AZUL_CLARO, linewidth=5, zorder=2)
+    ax.scatter(loc.tasa_retencion, ys, color=AZUL, s=60, zorder=3)
+    for y, (_, r) in zip(ys, loc.iterrows()):
+        ax.text(r.ic95_sup + 0.012, y, f'{_pct(r.tasa_retencion)}  (n = {_num(r.activos_inicio)})', va='center', fontsize=9.5, color=TINTA)
+    ax.set_yticks(list(ys), loc.valor)
+    ax.text(total.tasa_retencion, len(loc) - 0.4, f' Total cadena: {_pct(total.tasa_retencion)}', color=TINTA_2, fontsize=9.5, va='bottom')
+    ax.set_xlim(0, 1)
     ax.xaxis.set_major_formatter(lambda x, _: _pct(x, 0))
     _grilla(ax, 'x')
-    _cerrar(fig, ruta, f'Retención Q4-2025 por local principal (%), ventana {w} días',
-            'mart_retencion. n = clientes activos al inicio de Q4; con n < 50 la tasa es volátil')
+    fuera = loc[(loc.ic95_sup < total.tasa_retencion) | (loc.ic95_inf > total.tasa_retencion)]
+    titulo = (f'Retención Q4-2025 por local (%), ventana {w} días: ' +
+              ('ningún local es distinto del total con seguridad' if fuera.empty else f'{len(fuera)} local(es) distinto(s) del total'))
+    _cerrar(fig, ruta, titulo, 'mart_retencion. Punto = tasa; barra = intervalo de confianza del 95% (Wilson); n = clientes activos al 1-oct. Orden alfabético, no ranking')
+
+
+def una_sola_vez(usv, ruta):
+    u = usv[(usv.tipo_cohorte == 'Nuevo 2025') & usv.cohorte_trimestre.isin(['2025Q1', '2025Q2', '2025Q3'])].sort_values('cohorte_trimestre')
+    fig, ax = plt.subplots(figsize=(11, 4.6))
+    b = ax.bar(range(len(u)), u.pct_una_sola_vez, color=[AZUL_CLARO, AZUL_CLARO, NARANJO][:len(u)], width=0.55, edgecolor=FONDO, linewidth=2)
+    ax.errorbar(range(len(u)), u.pct_una_sola_vez, yerr=[u.pct_una_sola_vez - u.ic95_inf, u.ic95_sup - u.pct_una_sola_vez],
+                fmt='none', ecolor=TINTA_2, capsize=6, linewidth=1.2)
+    for bar, (_, r) in zip(b, u.iterrows()):
+        ax.text(bar.get_x() + bar.get_width() / 2 + 0.17, r.pct_una_sola_vez + 0.01, f'{_pct(r.pct_una_sola_vez)}\n(n = {_num(r.clientes_evaluables)})',
+                ha='left', fontsize=10, color=TINTA)
+    ax.set_xticks(range(len(u)), [f'Llegaron en {c}' for c in u.cohorte_trimestre])
+    ax.set_ylim(0, 0.65)
+    ax.yaxis.set_major_formatter(lambda y, _: _pct(y, 0))
+    _grilla(ax)
+    _cerrar(fig, ruta, f'Los clientes nuevos de Q3 son más a menudo de una sola compra (% sin segunda compra en {config.HORIZONTE_SEGUNDA_COMPRA} días)',
+            'mart_una_sola_vez, clientes con alta 2025. Horizonte fijo de 90 días desde la primera compra; barra = IC 95%')
 
 
 def cohortes_nuevos(mcoh, ruta):
@@ -168,6 +203,7 @@ def ejecutar(oro):
         '3_retencion_por_local.png': lambda r: retencion_por_local(oro['mart_retencion'], r),
         '4_cohortes_nuevos.png': lambda r: cohortes_nuevos(oro['mart_cohortes'], r),
         '5_composicion_mensual.png': lambda r: composicion_mensual(oro['mart_cliente_mes'], r),
+        '6_una_sola_vez.png': lambda r: una_sola_vez(oro['mart_una_sola_vez'], r),
     }
     for nombre, fn in figuras.items():
         fn(carpeta / nombre)

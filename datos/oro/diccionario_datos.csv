@@ -124,35 +124,37 @@ mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: 
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_30d,bool,Activo al cierre del mes (ventana 30 d),0,14304
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_90d,bool,Activo al cierre del mes (ventana 90 d),0,14304
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_180d,bool,Activo al cierre del mes (ventana 180 d),0,14304
-mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",activo_365d,bool,Activo al cierre del mes (ventana 365 d),0,14304
 mart_cliente_mes,"Estado de cada cliente con compras en 2025, mes a mes. Grano: cliente × mes.",estado_90d,str,"aun_sin_compras, nuevo, primera_obs_previo, reactivado, recurrente, activo_sin_compra o inactivo (ventana 90 d)",0,14304
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",corte,str,"Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)",0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",valor,str,Valor del corte,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo_tipo,str,mes o trimestre,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo,str,Período (AAAA-MM o AAAAQn),0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio,int64,A0: activos al cierre del día anterior al período,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_fin,int64,A1: activos al cierre del período,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",retenidos,int64,A0 ∩ A1,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",perdidos,int64,A0 − A1,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos,int64,Entran a A1 con primera compra en el período y alta 2025,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",primeras_obs_previos,int64,Entran a A1 con primera compra observada en el período pero alta anterior a 2025,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",reactivados,int64,Entran a A1 tras estar inactivos (ya habían comprado antes),0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio_que_compraron,int64,"De A0, los que compraron dentro del período",0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",clientes_con_compra,int64,Clientes con compra en el período,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos_flujo,int64,Todos los clientes nuevos con primera compra en el período (aunque no sigan activos al cierre),0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_retencion,float64,retenidos / activos_inicio,272,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_churn,float64,perdidos / activos_inicio,272,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_recompra_periodo,float64,activos_inicio_que_compraron / activos_inicio,272,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion,float64,nuevos / perdidos (<1: no alcanza a reponer),861,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion_total,float64,(nuevos + reactivados + primeras_obs_previos) / perdidos,861,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",base_confiable,bool,"True si hay >= W días de historia antes del período (si no, A0 está subestimado por falta de datos 2024)",0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",es_ventana_principal,bool,ventana_dias == 90,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",n_suficiente,bool,activos_inicio >= 10,0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",muestra_pequena,bool,"activos_inicio < 50: tasa volátil, mostrar con advertencia",0,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ic95_inf,float64,Límite inferior del intervalo de confianza del 95% de la tasa (Wilson),272,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ic95_sup,float64,Límite superior del intervalo de confianza del 95% de la tasa (Wilson),272,1792
-mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",se_puede_rankear,bool,"activos_inicio >= 50: la tasa se puede ordenar en un ranking; si no, mostrar con su intervalo",0,1792
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",corte,str,"Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)",0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",valor,str,Valor del corte,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo_tipo,str,mes o trimestre,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",periodo,str,Período (AAAA-MM o AAAAQn),0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio,int64,A0: activos al cierre del día anterior al período,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_fin,int64,A1: activos al cierre del período,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",retenidos,int64,A0 ∩ A1,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",perdidos,int64,A0 − A1,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos,int64,Entran a A1 con primera compra en el período y alta 2025,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",primeras_obs_previos,int64,Entran a A1 con primera compra observada en el período pero alta anterior a 2025,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",reactivados,int64,Entran a A1 tras estar inactivos (ya habían comprado antes),0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",activos_inicio_que_compraron,int64,"De A0, los que compraron dentro del período",0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",clientes_con_compra,int64,Clientes con compra en el período,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",nuevos_flujo,int64,Todos los clientes nuevos con primera compra en el período (aunque no sigan activos al cierre),0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_retencion,float64,retenidos / activos_inicio,204,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_churn,float64,perdidos / activos_inicio,204,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",tasa_recompra_periodo,float64,activos_inicio_que_compraron / activos_inicio,204,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion,float64,nuevos / perdidos (<1: no alcanza a reponer),413,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",indice_reposicion_total,float64,(nuevos + reactivados + primeras_obs_previos) / perdidos,413,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",base_confiable,bool,"True si hay >= W días de historia antes del período (si no, A0 está subestimado por falta de datos 2024)",0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",es_ventana_principal,bool,ventana_dias == 90,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",n_suficiente,bool,activos_inicio >= 10,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",muestra_pequena,bool,"activos_inicio < 50: tasa volátil, mostrar con advertencia",0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",incorporados,int64,nuevos + reactivados + primeras_obs_previos: los que entran a la base activa en el período,0,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",pct_base_retenida,float64,retenidos / activos_fin: qué parte de la base activa al cierre ya estaba al inicio (regla S22),36,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",veredicto,str,"Regla S22: Retiene (pct_base_retenida >= 50%), Repone (si no, e incorporados >= perdidos) o Se achica",36,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ic95_inf,float64,Límite inferior del intervalo de confianza del 95% de la tasa (Wilson),204,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",ic95_sup,float64,Límite superior del intervalo de confianza del 95% de la tasa (Wilson),204,1344
+mart_retencion,"Retención por período, ventana y corte. Grano: corte × valor × período × ventana.",se_puede_rankear,bool,"activos_inicio >= 50: la tasa se puede ordenar en un ranking; si no, mostrar con su intervalo",0,1344
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,tipo_cohorte,str,Nuevo 2025 / Previo (alta antes de 2025),0,29
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,cohorte_trimestre,str,Trimestre de la primera compra observada,0,29
 mart_cohortes,Actividad de cohortes trimestrales. Grano: tipo de cohorte × cohorte × trimestre de actividad.,tamano_cohorte,int64,Clientes de la cohorte,0,29
@@ -177,7 +179,6 @@ mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Gran
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_30d_al_corte,bool,Activo al 31-12-2025 (30 d),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_90d_al_corte,bool,Activo al 31-12-2025 (90 d),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_180d_al_corte,bool,Activo al 31-12-2025 (180 d),0,1192
-mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",activo_365d_al_corte,bool,Activo al 31-12-2025 (365 d),0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",segmento,str,"Clásico, Plus o Black (valor actual, SCD1)",0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",clasificacion_nombre,str,"Persona/Hogar, Negocio o No determinado. Clasificación del equipo por prefijo del nombre, NO una categoría de la empresa (S07)",0,1192
 mart_rfm_cliente,"Recencia, frecuencia, monto y estado al corte 31-12-2025. Grano: 1 cliente.",tipo_cohorte,str,Nuevo 2025 / Previo (alta antes de 2025),0,1192
@@ -206,17 +207,17 @@ mart_cobertura,Embudo de cobertura: boletas del origen que quedan fuera de la re
 mart_cobertura,Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.,venta_neta,float64,"Venta en CLP nominales con IVA: Σ monto_linea registrado, neto de devoluciones (S02, S03, S04)",2,6
 mart_cobertura,Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.,pct_del_origen,float64,boletas del paso / boletas del origen,0,6
 mart_cobertura,Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.,pct_venta_2025,float64,venta del paso / venta 2025,2,6
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",perdidos_q4,int64,Clientes activos al 1-oct que ya no lo están al 31-dic,0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",activos_inicio_q4,int64,Clientes activos al 1-oct-2025,0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",gasto_trimestral_perdidos,float64,Σ gasto trimestral de los perdidos (venta 2025 / trimestres entre su primera y última compra),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",venta_anual_en_riesgo,float64,gasto_trimestral_perdidos × 4 (supone que el gasto se habría mantenido),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_trimestral_perdidos,float64,Σ margen trimestral típico de los perdidos (CLP sin IVA),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_anual_en_riesgo,float64,"margen_trimestral_perdidos × 4 (CLP de margen bruto sin IVA por año, S20)",0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",gasto_trimestral_promedio_activo,float64,Gasto trimestral promedio de los activos al 1-oct (misma definición),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_trimestral_promedio_activo,float64,Margen trimestral promedio de los activos al 1-oct (CLP sin IVA),0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",valor_anual_1pp_retencion,float64,1% × activos_inicio_q4 × gasto trimestral × 4,0,4
-mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_anual_1pp_retencion,float64,1% × activos_inicio_q4 × margen trimestral × 4 (CLP sin IVA por año),0,4
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",ventana_dias,int64,Ventana de inactividad W (días),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",perdidos_q4,int64,Clientes activos al 1-oct que ya no lo están al 31-dic,0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",activos_inicio_q4,int64,Clientes activos al 1-oct-2025,0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",gasto_trimestral_perdidos,float64,Σ gasto trimestral de los perdidos (venta 2025 / trimestres entre su primera y última compra),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",venta_anual_en_riesgo,float64,gasto_trimestral_perdidos × 4 (supone que el gasto se habría mantenido),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_trimestral_perdidos,float64,Σ margen trimestral típico de los perdidos (CLP sin IVA),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_anual_en_riesgo,float64,"margen_trimestral_perdidos × 4 (CLP de margen bruto sin IVA por año, S20)",0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",gasto_trimestral_promedio_activo,float64,Gasto trimestral promedio de los activos al 1-oct (misma definición),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_trimestral_promedio_activo,float64,Margen trimestral promedio de los activos al 1-oct (CLP sin IVA),0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",valor_anual_1pp_retencion,float64,1% × activos_inicio_q4 × gasto trimestral × 4,0,3
+mart_valor_riesgo,"Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.",margen_anual_1pp_retencion,float64,1% × activos_inicio_q4 × margen trimestral × 4 (CLP sin IVA por año),0,3
 mart_episodios_inactividad,Base del caso de negocio: días desde cada compra hasta la siguiente (o hasta el 31-12-2025). Grano: 1 compra válida de un cliente.,cliente_key,int64,Llave de cliente (= cliente_id del POS; -1 = anónimo),0,5124
 mart_episodios_inactividad,Base del caso de negocio: días desde cada compra hasta la siguiente (o hasta el 31-12-2025). Grano: 1 compra válida de un cliente.,fecha_compra,datetime64[s],Fecha de la compra válida que abre el episodio,0,5124
 mart_episodios_inactividad,Base del caso de negocio: días desde cada compra hasta la siguiente (o hasta el 31-12-2025). Grano: 1 compra válida de un cliente.,dias_observados,int64,"Días hasta la siguiente compra o, si no hay, hasta el 31-12-2025",0,5124
@@ -265,7 +266,28 @@ mart_perfil_local,"Perfil de los clientes activos al 1-oct-2025 por local princi
 mart_perfil_local,"Perfil de los clientes activos al 1-oct-2025 por local principal, para explicar por qué unos retienen más. Grano: 1 local.",pct_clientes_multilocal,float64,Proporción de clientes que compró en más de un local,0,10
 mart_perfil_local,"Perfil de los clientes activos al 1-oct-2025 por local principal, para explicar por qué unos retienen más. Grano: 1 local.",pct_una_sola_compra_ene_sep,float64,Proporción de clientes con una sola compra entre enero y septiembre,0,10
 mart_perfil_local,"Perfil de los clientes activos al 1-oct-2025 por local principal, para explicar por qué unos retienen más. Grano: 1 local.",dias_entre_compras_mediana,float64,Mediana de días entre compras de los clientes del local,0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",tipo_cohorte,str,Nuevo 2025 / Previo (alta antes de 2025),0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",cohorte_trimestre,str,Trimestre de la primera compra observada,0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",clientes_evaluables,int64,Clientes cuya primera compra deja 90 días completos dentro de 2025,0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",sin_segunda_compra,int64,Clientes sin segunda compra dentro de 90 días,0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",pct_una_sola_vez,float64,sin_segunda_compra / clientes_evaluables,0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",ic95_inf,float64,Límite inferior del intervalo de confianza del 95% de la tasa (Wilson),0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",ic95_sup,float64,Límite superior del intervalo de confianza del 95% de la tasa (Wilson),0,10
+mart_una_sola_vez,"Clientes sin segunda compra dentro de 90 días desde la primera, por cohorte (horizonte fijo). Grano: tipo de cohorte × trimestre de llegada.",horizonte_dias,int64,Días que se espera la segunda compra,0,10
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,cliente_key,int64,Llave de cliente (= cliente_id del POS; -1 = anónimo),0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,trimestre,str,Trimestre (AAAAQn),0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,ventana_dias,int64,Ventana de inactividad W (días),0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,activo_inicio,bool,Activo al cierre del día anterior al trimestre (A0),0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,activo_fin,bool,Activo al cierre del trimestre (A1),0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,compro_en_periodo,bool,Compró dentro del trimestre,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,retenido,bool,A0 y A1,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,perdido,bool,A0 y no A1,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,nuevo,bool,Entra a A1 con primera compra en el trimestre y alta 2025,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,primera_obs_previo,bool,Entra a A1 con primera compra observada y alta anterior a 2025,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,reactivado,bool,Entra a A1 tras estar inactivo,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,activo_inicio_y_compro,bool,A0 y compró en el trimestre,0,14304
+fact_cliente_trimestre,Hecho donde se calcula la retención (snapshot periódico): estado de cada cliente en cada trimestre y ventana. Grano: cliente × trimestre × ventana.,nuevo_flujo,bool,Primera compra en el trimestre y alta 2025,0,14304
 mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,kpi,str,Nombre del KPI,0,44
-mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,valor,float64,Valor del corte,1,44
+mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,valor,float64,Valor del corte,0,44
 mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,unidad,str,Unidad,0,44
 mart_kpi_resumen,Cifras principales del análisis. Grano: 1 KPI.,definicion,str,Definición,0,44

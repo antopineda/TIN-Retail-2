@@ -33,8 +33,15 @@ IPC_BASE = '2024-12'                  # índice = 100 en dic-2024; venta real en
 PERIODO_INI = pd.Timestamp('2025-01-01')
 PERIODO_FIN = pd.Timestamp('2025-12-31')
 FECHA_CORTE = PERIODO_FIN             # corte de recencia / RFM
-VENTANAS = [30, 90, 180, 365]         # días de inactividad evaluados (365: alternativa del enunciado; con 12 meses de datos no discrimina)
+VENTANAS = [30, 90, 180]              # días de inactividad evaluados. 365 se retiró (feedback E1): con 12 meses de datos da 100% por construcción
 VENTANA_PRINCIPAL = 90                # p90 intercompra = 74 d; 92,8% recompras <= 90 d (medido)
+# Regla de lectura "retiene / repone" (feedback E1 y P1): se aplica igual a cualquier ventana.
+#   ¿De dónde sale la base de clientes activos al cierre del trimestre?
+#   RETIENE  : al menos UMBRAL_BASE_RETENIDA de los activos al cierre ya estaban activos al inicio.
+#   REPONE   : menos que eso, pero los que entran (nuevos + reactivados + primeras compras de previos) cubren a los perdidos.
+#   SE ACHICA: los que entran no alcanzan a cubrir a los perdidos.
+UMBRAL_BASE_RETENIDA = 0.50
+HORIZONTE_SEGUNDA_COMPRA = 90         # días: un cliente nuevo es "de una sola vez" si no vuelve dentro de este plazo
 UMBRAL_N_MIN = 10                     # cortes con base < 10 clientes se marcan como no concluyentes
 UMBRAL_MUESTRA_PEQUENA = 50           # cortes con base < 50 clientes: tasas volátiles, mostrar con advertencia
 
@@ -146,10 +153,12 @@ SUPUESTOS = [
      'efecto_si_falso': 'Si fuera por persona, la frecuencia por cliente estaría sobrestimada; no hay dato para separarlo.',
      'decidio': 'Acta de la reunión', 'fecha': '04-09-2026'},
     {'id': 'S11', 'tema': 'Ventana de inactividad',
-     'supuesto': '90 días como ventana principal; 30, 180 y 365 días como sensibilidad.',
-     'por_que': 'No hay ventana oficial. El 92,8% de las recompras ocurre dentro de 90 días (p90 = 74 días); 30 es la creencia de la empresa; '
-                '365 es una alternativa del enunciado, pero con 12 meses de datos no discrimina.',
-     'efecto_si_falso': 'La retención de Q4 cambia según la ventana: 33,2% (30 días), 51,1% (90), 82,5% (180) y 100% (365). La conclusión depende de la definición.',
+     'supuesto': '90 días como ventana principal; 30 (regla de un mes de la empresa) y 180 días como alternativas. 365 días se retiró.',
+     'por_que': 'No hay ventana oficial. El 92,8% de las recompras ocurre dentro de 90 días (p90 = 74 días): a los 90 días casi todos los que iban a volver ya volvieron, '
+                'así que es el momento en que un cliente se puede dar por perdido y la acción de reactivación deja de gastar en clientes que vuelven solos. '
+                'Con 365 días la retención da 100% solo porque hay un año de datos.',
+     'efecto_si_falso': 'Retención Q4: 33,2% (30 d), 51,1% (90 d), 82,5% (180 d). Reposición: 0,76, 1,07 y 2,34. Veredicto de la regla S22 en Q4: '
+                        'se achica (30 d), repone (90 d), retiene (180 d). La conclusión depende de la ventana y se presenta condicionada a ella.',
      'decidio': 'Equipo', 'fecha': '09-10-2026'},
     {'id': 'S12', 'tema': 'Duplicados y anónimos',
      'supuesto': 'Las 61 boletas idénticas cuentan una vez. Las boletas sin cliente quedan fuera de la retención, sin repartirlas.',
@@ -187,22 +196,42 @@ SUPUESTOS = [
      'supuesto': f'CLP {CONTACTO_COSTO_ENVIO_CLP} por contacto + un cupón de {CONTACTO_CUPON_PCT}% sobre el ticket promedio, que usan todos los que vuelven '
                  '(también los que habrían vuelto solos).',
      'por_que': 'No hay dato de costo de campañas de la empresa. Es un orden de magnitud de un envío masivo por SMS/WhatsApp; se cambia en pantalla.',
-     'efecto_si_falso': 'Cambia el costo y el punto de equilibrio de la acción, no la retención. El prototipo muestra el resultado para cualquier costo.',
+     'efecto_si_falso': 'Contactando a los 60 días: con CLP 200 por contacto (en vez de 50) el costo sube de CLP 0,48 M a 0,67 M al año y el punto de equilibrio de 3,4% a 5,1%; '
+                        'con un cupón de 15% el equilibrio también sube a 5,1%. La retención no cambia. El cupón de 10% no es externo: es el mismo descuento que ya da la tarjeta (S05).',
      'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
     {'id': 'S19', 'tema': 'Tasa de recuperación del contacto',
      'supuesto': f'{CONTACTO_TASA_RECUPERACION:.0%} de los clientes que se iban a perder vuelve por el contacto. No está medida: '
                  'se reporta junto al punto de equilibrio (la tasa mínima para que la acción pague su costo).',
      'por_que': 'Las campañas de 2025 no tuvieron grupo de control; no hay forma de medir el efecto causal con estos datos.',
-     'efecto_si_falso': 'Si la tasa real es menor que el punto de equilibrio, la acción pierde plata. Por eso se recomienda un piloto con grupo de control.',
+     'efecto_si_falso': 'Con 5% de recuperación (en vez de 10%) el resultado a los 60 días baja de CLP 0,75 M a 0,18 M al año; bajo 3,4% la acción pierde plata. '
+                        'Por eso la recomendación se presenta con el punto de equilibrio y un piloto con grupo de control, no con el 10%.',
      'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
     {'id': 'S20', 'tema': 'Valor en riesgo en margen',
      'supuesto': 'Margen anual en riesgo = margen trimestral típico de cada cliente perdido en Q4 (margen 2025 / trimestres entre su primera y última compra) × 4.',
      'por_que': 'Es la misma regla de la E1 (venta en riesgo), aplicada al margen en vez de la venta.',
-     'efecto_si_falso': 'Si los perdidos ya venían gastando menos antes de irse, el valor en riesgo está sobrestimado.',
+     'efecto_si_falso': 'Si en vez del margen trimestral típico se usa el margen que los perdidos dejaron en Q3 (su último trimestre completo) × 4, '
+                        'el margen en riesgo baja de CLP 4,57 M a CLP 4,03 M al año (−12%): ya venían comprando algo menos antes de irse.',
      'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
     {'id': 'S21', 'tema': 'Falla de la API del IPC',
      'supuesto': 'Si mindicador.cl no responde, se usa el último snapshot bueno versionado en cadena_datos/referencias/ y la corrida queda marcada con aviso.',
      'por_que': 'El IPC solo afecta la venta real (deflactada); la retención y el margen nominal no dependen de él.',
      'efecto_si_falso': 'Si el IPC 2025 se revisara después del snapshot, la venta real cambiaría levemente; ninguna cifra de la respuesta cambia.',
      'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
+    {'id': 'S22', 'tema': 'Regla retiene / repone',
+     'supuesto': f'En un trimestre la cadena RETIENE si al menos {UMBRAL_BASE_RETENIDA:.0%} de sus clientes activos al cierre ya estaban activos al inicio; '
+                 'REPONE si no, pero los que entran cubren a los perdidos; SE ACHICA si los que entran no cubren a los perdidos. La misma regla para toda ventana.',
+     'por_que': 'Feedback de la E1 y la P1: una regla que decida entre retener y reponer, independiente de la ventana. '
+                'Responde la pregunta tal como está escrita: si la base de clientes activos se sostiene con los que se quedan o con los que llegan.',
+     'efecto_si_falso': 'Con un umbral de 40% en vez de 50%, el veredicto con 90 días en Q4 pasa de "repone" (44,5%) a "retiene"; con 30 y 180 días no cambia.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
 ]
+
+# Tipo de evidencia de cada supuesto (rúbrica P1, criterio 2): verbalizado (lo dijo la contraparte), medido (sale de los datos)
+# o inferido (decisión del grupo a partir de los datos).
+EVIDENCIA_SUPUESTO = {
+    'S01': 'verbalizado + medido', 'S02': 'inferido', 'S03': 'inferido', 'S04': 'inferido', 'S05': 'medido',
+    'S06': 'verbalizado', 'S07': 'verbalizado', 'S08': 'verbalizado', 'S09': 'inferido', 'S10': 'verbalizado',
+    'S11': 'medido', 'S12': 'verbalizado', 'S13': 'medido', 'S14': 'inferido', 'S15': 'inferido (norma legal)',
+    'S16': 'verbalizado (acta y enunciado)', 'S17': 'medido (costo) + inferido (sin IVA)', 'S18': 'inferido',
+    'S19': 'inferido', 'S20': 'inferido', 'S21': 'inferido', 'S22': 'inferido',
+}

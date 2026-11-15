@@ -33,6 +33,17 @@ METRICAS = {
         'formula': 'Σ margen bruto trimestral típico de los clientes perdidos en el trimestre × 4',
         'unidad': 'CLP nominales 2025 de margen bruto (sin IVA) por año',
     },
+    'veredicto': {
+        'nombre': 'Veredicto retiene / repone',
+        'formula': (f'RETIENE si retenidos / activos al cierre >= {config.UMBRAL_BASE_RETENIDA:.0%}; si no, REPONE si '
+                    '(nuevos + reactivados + primeras compras de previos) >= perdidos; si no, SE ACHICA'),
+        'unidad': 'categoría (la misma regla para cualquier ventana)',
+    },
+    'pct_una_sola_vez': {
+        'nombre': 'Clientes nuevos de una sola vez',
+        'formula': f'clientes nuevos 2025 sin una segunda compra dentro de {config.HORIZONTE_SEGUNDA_COMPRA} días de la primera / clientes nuevos evaluables',
+        'unidad': '% de clientes nuevos (horizonte fijo, no depende de la ventana)',
+    },
     'cobertura': {
         'nombre': 'Cobertura de la retención',
         'formula': 'boletas del origen que entran a la retención / boletas del origen',
@@ -44,6 +55,20 @@ METRICAS = {
 def regla_lectura(ventana):
     return (f'Un cliente se retiene si compró en los {ventana} días previos al inicio del trimestre '
             f'y vuelve a aparecer activo al cierre (alguna compra en los {ventana} días previos al último día).')
+
+
+def veredicto(retenidos, activos_fin, perdidos, incorporados, umbral=config.UMBRAL_BASE_RETENIDA):
+    """Regla S22. Devuelve 'Retiene', 'Repone', 'Se achica' o None si no hay base."""
+    if not activos_fin or pd.isna(activos_fin) or activos_fin <= 0:
+        return None
+    if retenidos / activos_fin >= umbral:
+        return 'Retiene'
+    return 'Repone' if incorporados >= perdidos else 'Se achica'
+
+
+def regla_veredicto():
+    return (f'La cadena RETIENE si al menos el {config.UMBRAL_BASE_RETENIDA:.0%} de sus clientes activos al cierre ya estaban activos al inicio. '
+            'Si no, REPONE si los que llegan (nuevos y reactivados) cubren a los perdidos; si tampoco, la base SE ACHICA.')
 
 
 def wilson(k, n, z=config.Z_IC95):

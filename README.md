@@ -75,7 +75,7 @@ Las cifras principales quedan en `datos/oro/resumen_hallazgos.md`. Por ejemplo, 
 python -m pytest cadena_datos/tests -q
 ```
 
-Resultado esperado: `70 passed`.
+Resultado esperado: `71 passed`.
 
 ### Prototipo
 
