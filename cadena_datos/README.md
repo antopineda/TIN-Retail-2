@@ -36,6 +36,7 @@ origen/ ──► BRONCE ──► PLATA ──► ORO ──► pruebas ──�
 python cadena_datos/run_pipeline.py --refrescar-ipc     # vuelve a consultar la API del IPC
 python cadena_datos/run_pipeline.py --fuente RUTA        # usa otra carpeta de origen (por defecto: origen/)
 python cadena_datos/run_pipeline.py --simular-falla-api  # demostración: la API del IPC no responde
+python cadena_datos/run_pipeline.py --simular-falla-calidad  # demostración: falla una prueba que bloquea; oro no se publica
 ```
 
 ## Definiciones clave

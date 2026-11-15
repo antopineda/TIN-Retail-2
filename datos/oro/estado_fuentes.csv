@@ -1,5 +1,5 @@
 ﻿archivo,estado,ruta_origen,bytes,sha256,copiado,corrida
-origen_pos.sqlite,ok,./origen/origen_pos.sqlite,942080,4e9f0c36d2a9cbbf062dbdbf3f8f7087db72fdbdaf372b7e6b296bfd529aff54,2026-11-15T16:40:22,2026-11-15T16:40:22
-origen_maestro_productos.csv,ok,./origen/origen_maestro_productos.csv,14355,02d68e233cd3e21666ea886790803fd8e23d96776d3338167df3f00c5daf396f,2026-11-15T16:40:22,2026-11-15T16:40:22
-origen_promociones.json,ok,./origen/origen_promociones.json,960,dc7738dd6ee259aa4ef6e36626ff88ad279effa65c0258bf1e1b58da124daf21,2026-11-15T16:40:22,2026-11-15T16:40:22
-ipc_2025_raw.json,ok,API https://mindicador.cl/api/ipc/2025,1083,1aa4fa5a28514e4e0a19027cf9a5e4f986f4310529c07ef75335e32243ee3877,2026-11-15T16:40:23,2026-11-15T16:40:22
+origen_pos.sqlite,ok,./origen/origen_pos.sqlite,942080,4e9f0c36d2a9cbbf062dbdbf3f8f7087db72fdbdaf372b7e6b296bfd529aff54,2026-11-15T16:48:54,2026-11-15T16:48:54
+origen_maestro_productos.csv,ok,./origen/origen_maestro_productos.csv,14355,02d68e233cd3e21666ea886790803fd8e23d96776d3338167df3f00c5daf396f,2026-11-15T16:48:54,2026-11-15T16:48:54
+origen_promociones.json,ok,./origen/origen_promociones.json,960,dc7738dd6ee259aa4ef6e36626ff88ad279effa65c0258bf1e1b58da124daf21,2026-11-15T16:48:54,2026-11-15T16:48:54
+ipc_2025_raw.json,ok,API https://mindicador.cl/api/ipc/2025,1083,3d9d2fcfbbf1b835fba615d4a4a2d21f66a77c4eef4c0f49973332a7ec9b2f28,2026-11-15T16:48:55,2026-11-15T16:48:54

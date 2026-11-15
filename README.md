@@ -64,7 +64,7 @@ Listo en 4.7 s. Salidas en .../datos
 Retención Q4 2025 (90 días): 51.1%  ·  pruebas 36/36  ·  IPC: ok
 ```
 
-Si alguna prueba que bloquea falla, la cadena termina con código de salida 1 y lo indica en pantalla.
+Si alguna prueba que bloquea falla, la cadena **no publica** `datos/oro/` (queda la última corrida buena), deja el detalle en `datos/cuarentena/` y termina con código de salida 1.
 
 Las cifras principales quedan en `datos/oro/resumen_hallazgos.md`. Por ejemplo, la retención del cuarto trimestre de
 2025 con ventana de 90 días es **51,1%**.
@@ -92,6 +92,8 @@ cuesta y cuánto margen recupera) y el detalle en tablas. El pie muestra la fuen
 las pruebas en verde y el dueño del dato.
 
 Para mostrar qué pasa si la API del IPC no responde: `python cadena_datos/run_pipeline.py --simular-falla-api`.
+Para mostrar qué pasa si falla una prueba que bloquea (oro no se publica y el prototipo avisa):
+`python cadena_datos/run_pipeline.py --simular-falla-calidad`. Después, correr la cadena normal para volver a publicar.
 
 ## Fuentes de datos
 
@@ -150,7 +152,8 @@ Capas, decisiones de arquitectura, pruebas, linaje y acuerdo de servicio: [`docs
 | `log_calidad.csv` | Cada regla de limpieza con el número de registros afectados |
 | `validaciones.csv` | Resultado de las 36 pruebas de calidad de la última corrida (bloquea o avisa) |
 | `estado_fuentes.csv` | Estado de cada fuente en la última corrida (ok o respaldo) |
-| `historial_corridas.csv` | Una fila por corrida: pruebas en verde, estado del IPC y cifra principal |
+| `historial_corridas.csv` | Una fila por corrida: si se publicó, pruebas en verde, estado del IPC y cifra principal |
+| `historial_pruebas.csv` | Cada prueba de cada corrida, con cuántas filas fallaron |
 | `metricas.csv` | Definición de cada métrica (capa semántica) |
 
 ## Estructura del repositorio

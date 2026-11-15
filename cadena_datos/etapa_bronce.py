@@ -33,6 +33,16 @@ def _contexto_ssl():
         return ssl.create_default_context()
 
 
+def _respuesta_valida(crudo):
+    """La API puede responder pero con datos inválidos: se exige una serie con los 12 meses de 2025 y valores numéricos."""
+    try:
+        serie = crudo['serie']
+        meses = {x['fecha'][:7] for x in serie if str(x['fecha']).startswith('2025-') and isinstance(x['valor'], (int, float))}
+        return len(meses) == 12
+    except (KeyError, TypeError):
+        return False
+
+
 def _snapshot_ipc(refrescar):
     """Devuelve (ruta, origen, estado). estado: 'ok' (API o snapshot de esta máquina) o 'respaldo' (la API falló)."""
     destino = config.BRONCE / 'ipc_2025_raw.json'
@@ -42,16 +52,18 @@ def _snapshot_ipc(refrescar):
     try:
         with urllib.request.urlopen(config.IPC_URL, timeout=config.IPC_TIMEOUT_S, context=_contexto_ssl()) as r:
             crudo = json.load(r)
+        if not _respuesta_valida(crudo):
+            raise ValueError('la API respondió, pero sin los 12 meses de 2025')
         origen, estado = f'API {config.IPC_URL}', 'ok'
     except Exception as e:  # sin internet, API caída o certificado
         motivo = e.__class__.__name__
         if config.IPC_SNAPSHOT_VERSIONADO.exists():
             crudo = json.loads(config.IPC_SNAPSHOT_VERSIONADO.read_text(encoding='utf-8'))
-            origen = f'snapshot versionado {config.IPC_SNAPSHOT_VERSIONADO.name} (API no respondió: {motivo})'
+            origen = f'snapshot versionado {config.IPC_SNAPSHOT_VERSIONADO.name} (API sin respuesta válida: {motivo})'
         else:
             crudo = {'serie': [{'fecha': f'2025-{m:02d}-01T03:00:00.000Z', 'valor': v}
                                for m, v in config.IPC_RESPALDO_2025.items()]}
-            origen = f'respaldo embebido en config.py (API no respondió: {motivo})'
+            origen = f'respaldo embebido en config.py (API sin respuesta válida: {motivo})'
         estado = 'respaldo'
     crudo['_metadatos_cadena'] = {'origen': origen, 'estado': estado, 'consultado': datetime.now().isoformat(timespec='seconds')}
     destino.write_text(json.dumps(crudo, ensure_ascii=False, indent=1), encoding='utf-8')

@@ -553,7 +553,13 @@ def ejecutar(pl):
            'mart_cobertura': cob, 'mart_valor_riesgo': rie, 'mart_episodios_inactividad': epi, 'mart_caso_contacto': caso,
            'mart_campanas': mca, 'mart_perfil_local': mpl, 'mart_una_sola_vez': usv, 'fact_cliente_trimestre': fct,
            'mart_kpi_resumen': kpi}
-    for nombre, df in oro.items():
-        L.escribir_csv(df, config.ORO / f'{nombre}.csv')
     oro['_estados'] = estados
     return oro
+
+
+def publicar(oro):
+    """Escribe las tablas oro. Se llama SOLO si pasaron todas las pruebas que bloquean (run_pipeline): así una corrida
+    con fallas nunca reemplaza la última versión buena que lee el prototipo."""
+    for nombre, df in oro.items():
+        if not nombre.startswith('_'):
+            L.escribir_csv(df, config.ORO / f'{nombre}.csv')

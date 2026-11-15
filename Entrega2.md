@@ -108,7 +108,9 @@ El informe es la E1 corregida más tres secciones nuevas (arquitectura, prototip
 5. **36 pruebas**, todas en verde: 5 por fuente (F01–F05), 23 de integridad de la E1 (V01–V22) y 8 que protegen la métrica (M01–M08). Cada una dice si bloquea o avisa.
 6. **Linaje** de cada campo de la métrica, desde la fuente hasta la pantalla del prototipo (diagrama en `docs/arquitectura.md`).
 7. **Acuerdo de servicio:** frescura mensual, completitud ≥ 80% de boletas con tarjeta por mes, 100% de las pruebas que bloquean en verde. Dueño: Subgerente de Clientes y Fidelización (métrica) y Jefe de BI (dato). **Son cargos propuestos: confirmarlos.**
-8. Cada corrida queda registrada en `datos/oro/historial_corridas.csv` (fecha, pruebas en verde, estado del IPC, cifra principal).
+8. Cada corrida queda registrada en `datos/oro/historial_corridas.csv` (fecha, si se publicó, pruebas en verde, estado del IPC, cifra principal), y cada prueba de cada corrida en `historial_pruebas.csv`, con cuántas filas fallaron.
+9. **Las pruebas que bloquean se aprueban antes de publicar** (lo pide la cápsula de la ayudantía): oro se arma en memoria y se escribe solo si todas pasan. Si una falla, `datos/oro/` y el prototipo quedan con la última corrida buena y la pantalla avisa en rojo. Demostración: `python cadena_datos/run_pipeline.py --simular-falla-calidad`.
+10. **La API se valida aunque responda:** si no trae los 12 meses de 2025, se usa el respaldo.
 
 ### C. Modelo dimensional y una sola definición (10%)
 
@@ -235,7 +237,8 @@ Sobre la cifra: no presentar el "CLP 1,23 millones recuperados" como resultado, 
 | `cadena_datos/etapa_oro.py` | Margen bruto en los hechos; intervalo de confianza y veredicto en `mart_retencion`; nuevo hecho `fact_cliente_trimestre`; nuevos marts: `mart_una_sola_vez`, `mart_episodios_inactividad`, `mart_caso_contacto`, `mart_campanas`, `mart_perfil_local`; corte por compras de enero a septiembre |
 | `cadena_datos/validaciones.py` | 13 pruebas nuevas (F01–F05, M01–M08) y columna "accion" (bloquea o avisa) |
 | `cadena_datos/etapa_bronce.py` | Arreglo de certificados para la API; respaldo con el último snapshot bueno; estado de cada fuente |
-| `cadena_datos/run_pipeline.py` | `estado_fuentes.csv`, `historial_corridas.csv`, opción `--simular-falla-api` |
+| `cadena_datos/run_pipeline.py` | Publica oro solo si pasan las pruebas que bloquean (si no, `datos/cuarentena/`); `estado_fuentes.csv`, `historial_corridas.csv`, `historial_pruebas.csv`; opciones `--simular-falla-api` y `--simular-falla-calidad` |
+| `docs/instrucciones_power_bi_javiera.md` | **Nuevo.** Si conviene hacer Power BI (no es obligatorio) y, si se hace, cómo armarlo sin crear una segunda definición de la métrica |
 | `cadena_datos/config.py` | Parámetros de margen, caso de contacto, dueño y acuerdo de servicio; supuestos S17–S21 |
 | `cadena_datos/documentacion.py` | Resumen en CLP con unidades, caso de negocio, campañas y perfil por local; diccionario de todas las columnas nuevas |
 | `cadena_datos/tests/test_metricas.py` | **Nuevo.** Pruebas unitarias de la capa semántica y de la regla S22 (71 en total) |
@@ -271,4 +274,5 @@ Sobre la cifra: no presentar el "CLP 1,23 millones recuperados" como resultado, 
 - [ ] **Declaración de uso de IA.**
 - [ ] **Etiqueta E2** en el repositorio cuando todo esté listo (`git tag E2`).
 - [ ] **Presentación:** primera lámina con el número, la recomendación con valor y costo, y qué cambió desde la P1. Máximo 6 láminas, una sola técnica (la arquitectura). Al menos 2 minutos de demostración en vivo. Presenta alguien distinto que en la P1.
+- [ ] **Decidir si se hace Power BI.** No es obligatorio y la recomendación es no hacerlo por el plazo; ver [`docs/instrucciones_power_bi_javiera.md`](docs/instrucciones_power_bi_javiera.md).
 - [ ] **Llevar una copia local** del prototipo funcionando el viernes 20 (correr la cadena antes y probar `streamlit run prototipo/app.py` en el computador que se va a usar).

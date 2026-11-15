@@ -1,0 +1,37 @@
+﻿id,validacion,severidad,accion,resultado,filas_fallidas,detalle,corrida
+F01,Fuente SQLite (POS): están las 7 tablas y hay boletas,critica,bloquea,OK,0,faltan: []; boletas: 6251,2026-11-15T16:48:54
+F02,Fuente CSV (maestro): columnas requeridas presentes y filas > 0,critica,bloquea,OK,0,faltan: [],2026-11-15T16:48:54
+F03,Fuente JSON (campañas): cada campaña tiene id y fechas dentro de 2025,critica,bloquea,OK,0,2 campañas,2026-11-15T16:48:54
+F04,Fuente API (IPC): 12 meses de 2025 con variación entre -2.0% y 3.0%,critica,bloquea,OK,0,12 meses,2026-11-15T16:48:54
+F05,"Fuente API (IPC) respondió en esta corrida (si no: se usó el último snapshot bueno, S21)",advertencia,avisa,OK,0,API https://mindicador.cl/api/ipc/2025,2026-11-15T16:48:54
+V01,Boletas plata = bronce − duplicados,critica,bloquea,OK,0,6251 − 61 − 0 = 6190; plata = 6190,2026-11-15T16:48:54
+V02,boleta_id único en plata,critica,bloquea,OK,0,,2026-11-15T16:48:54
+V03,Ninguna línea de detalle se elimina,critica,bloquea,OK,0,bronce 14344 / plata 14344,2026-11-15T16:48:54
+V04,"(boleta_id, linea_seq) único",critica,bloquea,OK,0,,2026-11-15T16:48:54
+V05,Todas las fechas de boleta parseadas,critica,bloquea,OK,0,nulas: 0,2026-11-15T16:48:54
+V06,Montos y descuentos parseados sin nulos,critica,bloquea,OK,0,"{'precio_unitario': 0, 'monto_linea': 0, 'descuento_pct': 0}",2026-11-15T16:48:54
+V07,"Descuentos en el dominio [0, 10, 25]",advertencia,avisa,OK,0,fuera de dominio: 0,2026-11-15T16:48:54
+V08,Todas las tiendas tienen región y macrozona,critica,bloquea,OK,0,[],2026-11-15T16:48:54
+V09,SKU único en productos,critica,bloquea,OK,0,,2026-11-15T16:48:54
+V10,Todas las categorías de producto mapeadas,advertencia,avisa,OK,0,,2026-11-15T16:48:54
+V11,FK fact_venta_boleta -> dimensiones,critica,bloquea,OK,0,"{'tienda_key': 0, 'medio_key': 0, 'cliente_key': 0, 'fecha': 0}",2026-11-15T16:48:54
+V12,FK fact_venta_linea -> boleta y producto,critica,bloquea,OK,0,"{'boleta_id': 0, 'sku_key': 0}",2026-11-15T16:48:54
+V13,Llaves de dimensiones únicas,critica,bloquea,OK,0,,2026-11-15T16:48:54
+V14,Σ líneas = Σ boletas (oro),critica,bloquea,OK,0,"77,376,751 vs 77,376,751",2026-11-15T16:48:54
+V15,Σ detalle plata = Σ líneas oro,critica,bloquea,OK,0,"77,376,751 vs 77,376,751",2026-11-15T16:48:54
+V16,Venta registrada vs calculada 2025 difiere < 2% (sustento S02),advertencia,avisa,OK,0,0.81%,2026-11-15T16:48:54
+V17,Oro sin RUT ni nombre de cliente (S15),critica,bloquea,OK,0,[],2026-11-15T16:48:54
+V17b,Ningún valor de oro tiene forma de RUT,critica,bloquea,OK,0,[],2026-11-15T16:48:54
+V18,Identidad de retención (A1 = ret + nuevos + react + prim.obs; A0 = ret + perdidos),critica,bloquea,OK,0,,2026-11-15T16:48:54
+V19,Activos al cierre de Q4 (mart_retencion) = activos al corte (RFM),critica,bloquea,OK,0,"{30: (367, 367), 90: (674, 674), 180: (967, 967)}",2026-11-15T16:48:54
+V20,Cada corte reparte a todos los clientes (suma por corte = Total),advertencia,avisa,OK,0,,2026-11-15T16:48:54
+V21,mart_cliente_mes = clientes × 12 meses,critica,bloquea,OK,0,14304 filas,2026-11-15T16:48:54
+V22,Embudo de cobertura cuadra: origen − exclusiones = compras usadas,critica,bloquea,OK,0,5305 vs 5305,2026-11-15T16:48:54
+M01,Clave del hecho única: boleta_id en fact_venta_boleta,critica,bloquea,OK,0,0 boleta_id repetidos,2026-11-15T16:48:54
+M02,Recarga sin duplicar ni perder: filas del hecho = boletas en plata,critica,bloquea,OK,0,hecho 6190 / plata 6190,2026-11-15T16:48:54
+M03,Fechas de las compras de la métrica dentro de 2025,critica,bloquea,OK,0,2025-01-01 a 2025-12-28,2026-11-15T16:48:54
+M04,"Tasas de retención entre 0 y 1, dentro de su intervalo de confianza",critica,bloquea,OK,0,,2026-11-15T16:48:54
+M05,"Cifra oficial (retención Q4, 90 d) = recálculo directo desde fact_cliente_trimestre",critica,bloquea,OK,0,0.5111,2026-11-15T16:48:54
+M06,Margen bruto 2025 entre 0% y 60% de la venta sin IVA,critica,bloquea,OK,0,17.9%,2026-11-15T16:48:54
+M07,"Al menos 95% de la venta tiene costo del maestro (el resto se imputa, S17)",advertencia,avisa,OK,0,98.4%,2026-11-15T16:48:54
+M08,"Acuerdo de servicio, completitud: cada mes con >= 80% de boletas con tarjeta",advertencia,avisa,OK,0,mínimo mensual 82.1% (2025-05),2026-11-15T16:48:54

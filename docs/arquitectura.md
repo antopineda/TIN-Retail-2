@@ -123,13 +123,19 @@ Cada corrida reescribe bronce, plata y oro desde el origen.
 | Fuente | Si falla | Cómo se avisa | Qué muestra el prototipo |
 |---|---|---|---|
 | API del IPC | Se usa el último snapshot bueno, versionado en `cadena_datos/referencias/ipc_2025_snapshot.json` | Prueba F05 en amarillo (avisa, no bloquea); `estado_fuentes.csv` queda en `respaldo`; la salida de la consola lo dice | Un aviso arriba de la pantalla: "la API no respondió, se usó el último dato bueno". La retención y el margen no cambian: el IPC solo afecta la venta deflactada |
-| SQLite, CSV o JSON | La corrida se detiene (pruebas F01 a F03 bloquean) | Código de salida 1 y el nombre de la prueba en la consola | Sigue mostrando la última corrida buena, con su fecha en el pie. Si se llegara a publicar una corrida con fallas que bloquean, la pantalla muestra un error rojo y dice que las cifras no están certificadas |
+| SQLite, CSV o JSON | La corrida no se publica (pruebas F01 a F03 bloquean) | Código de salida 1, el nombre de la prueba en la consola y la corrida registrada con `publicada = False` en `historial_corridas.csv` | Sigue mostrando la última corrida buena, con un aviso rojo arriba que dice qué corrida falló, qué pruebas y desde qué fecha son los datos que se ven |
 
-Para mostrarlo en vivo: `python cadena_datos/run_pipeline.py --simular-falla-api`.
+La API también puede responder con datos malos. Por eso, antes de aceptar la respuesta, la cadena exige la serie completa de los 12 meses de 2025 con valores numéricos; si no la trae, se trata igual que una caída y se usa el respaldo.
+
+Para mostrarlo en vivo: `python cadena_datos/run_pipeline.py --simular-falla-api` (API caída, se usa el respaldo y se publica con aviso) y `python cadena_datos/run_pipeline.py --simular-falla-calidad` (se duplica una boleta en el hecho, las pruebas M01, M02 y V14 bloquean y oro no se toca).
 
 ## 3. Pruebas de calidad (36, todas corren en cada ejecución)
 
-Resultado de la última corrida: **36 de 36 en verde** (`datos/oro/validaciones.csv`). Bloquea = la cadena termina con código 1; avisa = se publica con el aviso a la vista.
+Resultado de la última corrida: **36 de 36 en verde** (`datos/oro/validaciones.csv`).
+
+- **Bloquea:** si falla, la capa oro **no se publica**. La cadena arma oro en memoria, corre las pruebas y solo si todas las que bloquean pasan escribe `datos/oro/`, los gráficos y la documentación. Si no, deja las pruebas fallidas en `datos/cuarentena/` y el tablero sigue con la última corrida buena.
+- **Avisa:** se publica, con el aviso a la vista en el prototipo.
+- **Cada resultado se guarda en una tabla**, no solo en la consola: corrida, qué verifica, si pasó, cuántas filas fallaron (`filas_fallidas`) y qué acción corresponde. La última corrida está en `validaciones.csv` y todas las corridas se acumulan en `historial_pruebas.csv`.
 
 | Grupo | Pruebas | Qué protegen | Si fallan |
 |---|---|---|---|
