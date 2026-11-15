@@ -1,0 +1,49 @@
+# Databricks Asset Bundle: despliega la cadena como un job de 3 tareas (bronce -> plata/oro -> vistas del tablero).
+# Uso (con la CLI de Databricks configurada):  databricks bundle deploy  ·  databricks bundle run cadena_retail
+# Sin CLI: crear el job a mano desde la interfaz (ver databricks/README.md). La versión local (Python + Streamlit) no usa este archivo.
+bundle:
+  name: retail-g2
+
+variables:
+  catalogo:
+    description: Catálogo de Unity Catalog (en Free Edition se llama "workspace")
+    default: workspace
+  esquema:
+    description: Esquema donde quedan las tablas
+    default: retail_g2
+
+resources:
+  jobs:
+    cadena_retail:
+      name: cadena-retail-g2
+      description: Multitienda del Sur · retención de clientes. Bronce (ELT, crudo) -> plata/oro (mismo código de cadena_datos/) -> vistas del tablero.
+      max_concurrent_runs: 1
+      schedule:
+        # Acuerdo de servicio: frescura mensual, día 3 de cada mes a las 7:00. Pausado hasta que la contraparte lo apruebe.
+        quartz_cron_expression: "0 0 7 3 * ?"
+        timezone_id: America/Santiago
+        pause_status: PAUSED
+      parameters:
+        - name: catalogo
+          default: ${var.catalogo}
+        - name: esquema
+          default: ${var.esquema}
+      tasks:
+        - task_key: bronce
+          notebook_task:
+            notebook_path: ./databricks/notebooks/01_bronce.py
+        - task_key: plata_oro
+          depends_on:
+            - task_key: bronce
+          notebook_task:
+            notebook_path: ./databricks/notebooks/02_plata_oro.py
+        - task_key: vistas_tablero
+          depends_on:
+            - task_key: plata_oro
+          notebook_task:
+            notebook_path: ./databricks/notebooks/03_vistas_tablero.py
+
+targets:
+  dev:
+    mode: development
+    default: true

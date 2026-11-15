@@ -5,13 +5,14 @@ Configuración y supuestos de la cadena de datos (Retail, grupo_2).
 Todo parámetro de negocio vive aquí: si la contraparte responde algo distinto
 a lo supuesto, se cambia este archivo y se vuelve a correr la cadena.
 """
+import os
 from pathlib import Path
 import pandas as pd
 
 # ---------------------------------------------------------------- rutas
 RAIZ = Path(__file__).resolve().parent.parent
 FUENTE_DEFAULT = RAIZ / 'origen'     # set de datos 2 (idéntico a casos/retail_multitienda/grupo_2 del repo del curso)
-DATOS = RAIZ / 'datos'
+DATOS = Path(os.environ.get('RETAIL_DATOS', RAIZ / 'datos'))   # Databricks la apunta al disco local del clúster
 BRONCE, PLATA, ORO = DATOS / 'bronce', DATOS / 'plata', DATOS / 'oro'
 
 ARCHIVOS_FUENTE = ['origen_pos.sqlite', 'origen_maestro_productos.csv', 'origen_promociones.json']

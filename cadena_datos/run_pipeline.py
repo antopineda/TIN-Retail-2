@@ -15,6 +15,7 @@ Termina con código 1 si alguna prueba que bloquea falla. Prototipo: streamlit r
 import argparse
 import sys
 import time
+from types import SimpleNamespace
 from datetime import datetime
 from pathlib import Path
 
@@ -36,6 +37,7 @@ from limpieza import LogCalidad  # noqa: E402
 
 
 def main():
+    """Línea de comandos: python cadena_datos/run_pipeline.py [opciones]. Termina con código 1 si no se publica."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--fuente', type=Path, default=config.FUENTE_DEFAULT, help='carpeta con las 3 fuentes (por defecto origen/)')
     ap.add_argument('--refrescar-ipc', action='store_true', help='consultar de nuevo la API del IPC')
@@ -43,7 +45,17 @@ def main():
                     help='demostración: la API del IPC no responde; la cadena usa el último snapshot bueno y avisa (S21)')
     ap.add_argument('--simular-falla-calidad', action='store_true',
                     help='demostración: duplica una boleta en el hecho; la prueba M01 bloquea y oro NO se publica')
-    args = ap.parse_args()
+    a = ap.parse_args()
+    r = ejecutar(a.fuente, a.refrescar_ipc, a.simular_falla_api, a.simular_falla_calidad)
+    if not r['publicada']:
+        sys.exit(1)
+
+
+def ejecutar(fuente=config.FUENTE_DEFAULT, refrescar_ipc=False, simular_falla_api=False, simular_falla_calidad=False):
+    """Corre la cadena completa. La usan la línea de comandos (main) y los notebooks de Databricks (databricks/).
+    Devuelve {'publicada', 'corrida', 'oro', 'plata', 'validaciones', 'manifiesto'}; oro solo se escribe si publicada."""
+    args = SimpleNamespace(fuente=Path(fuente), refrescar_ipc=refrescar_ipc, simular_falla_api=simular_falla_api,
+                           simular_falla_calidad=simular_falla_calidad)
     if args.simular_falla_api:
         config.IPC_URL = 'https://api-inexistente.invalid/ipc/2025'
         args.refrescar_ipc = True
@@ -104,7 +116,7 @@ def main():
         cuarentena = config.DATOS / 'cuarentena'
         L.escribir_csv(val, cuarentena / f'validaciones_{corrida.replace(":", "")}.csv')
         print(f'[5/6] NO SE PUBLICA: {len(criticas)} prueba(s) que bloquean fallaron. datos/oro/ queda con la última corrida buena.')
-        print(f'      Detalle en {cuarentena.relative_to(config.RAIZ)}/')
+        print(f'      Detalle en {cuarentena}/')
         print('[6/6] Gráficos: no se regeneran')
 
     duracion = time.time() - t0
@@ -119,7 +131,7 @@ def main():
           f'  ·  {"PUBLICADA" if publicada else "NO PUBLICADA"}')
     if not publicada:
         print(f'ERROR: {len(criticas)} pruebas que bloquean fallaron: {criticas.id.tolist()}')
-        sys.exit(1)
+    return {'publicada': publicada, 'corrida': corrida, 'oro': oro, 'plata': pl, 'validaciones': val, 'manifiesto': man}
 
 
 def _anexar(df, ruta):

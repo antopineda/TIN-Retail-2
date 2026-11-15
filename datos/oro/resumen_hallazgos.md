@@ -1,6 +1,6 @@
 # Resumen de hallazgos
 
-Generado automáticamente por la cadena el 15-11-2026 16:48. Todas las cifras salen de `datos/oro/`.
+Generado automáticamente por la cadena el 15-11-2026 17:14. Todas las cifras salen de `datos/oro/`.
 Validaciones: 36 OK / 0 con falla (ver `validaciones.csv`).
 
 ## Contexto

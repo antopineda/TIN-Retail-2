@@ -95,6 +95,12 @@ Para mostrar qué pasa si la API del IPC no responde: `python cadena_datos/run_p
 Para mostrar qué pasa si falla una prueba que bloquea (oro no se publica y el prototipo avisa):
 `python cadena_datos/run_pipeline.py --simular-falla-calidad`. Después, correr la cadena normal para volver a publicar.
 
+## Versión Databricks (opcional)
+
+La rama `databricks` agrega la misma cadena en Databricks (fuentes crudas en Unity Catalog, tablas Delta, job de 3 tareas
+y tablero AI/BI), reutilizando el código de `cadena_datos/`. No cambia nada de la versión local. Ver
+[`databricks/README.md`](databricks/README.md).
+
 ## Fuentes de datos
 
 Las cuatro fuentes del caso están en `origen/` y nunca se modifican:
