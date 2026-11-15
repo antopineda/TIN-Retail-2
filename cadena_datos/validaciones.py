@@ -1,16 +1,53 @@
 # -*- coding: utf-8 -*-
-"""Validaciones automáticas de la cadena. Una falla 'critica' detiene la entrega (exit code 1)."""
+"""Pruebas de calidad automáticas: corren en cada ejecución de la cadena.
+
+- severidad 'critica'  -> accion 'bloquea': la cadena termina con código 1 y el prototipo muestra la corrida como no publicable.
+- severidad 'advertencia' -> accion 'avisa': se publica, pero el aviso queda en validaciones.csv y en el pie del prototipo.
+
+Grupos: F = una por fuente (SQLite, CSV, JSON, API); V = integridad bronce -> plata -> oro; M = protegen la métrica.
+"""
+import json
+import sqlite3
+
+import numpy as np
 import pandas as pd
 
 import config
+import metricas as Mt
 
 
 def ejecutar(pl, oro, log):
     res = []
 
     def chequear(vid, descripcion, severidad, ok, detalle=''):
-        res.append({'id': vid, 'validacion': descripcion, 'severidad': severidad, 'resultado': 'OK' if ok else 'FALLA',
+        res.append({'id': vid, 'validacion': descripcion, 'severidad': severidad,
+                    'accion': 'bloquea' if severidad == 'critica' else 'avisa', 'resultado': 'OK' if bool(ok) else 'FALLA',
                     'detalle': detalle})
+
+    # --- una prueba por fuente (sobre la copia en bronce)
+    with sqlite3.connect(config.BRONCE / 'origen_pos.sqlite') as con:
+        tablas = set(pd.read_sql("select name from sqlite_master where type='table'", con).name)
+        n_bol = con.execute('select count(*) from boletas').fetchone()[0] if 'boletas' in tablas else 0
+    faltan = sorted(set(config.TABLAS_POS) - tablas)
+    chequear('F01', 'Fuente SQLite (POS): están las 7 tablas y hay boletas', 'critica', not faltan and n_bol > 0,
+             f'faltan: {faltan}; boletas: {n_bol}')
+    cab = pd.read_csv(config.BRONCE / 'origen_maestro_productos.csv', sep=';', encoding=config.ENCODING_MAESTRO, nrows=0).columns
+    req = {'sku', 'categoria', 'costo_unitario', 'precio_lista', 'activo'}
+    chequear('F02', 'Fuente CSV (maestro): columnas requeridas presentes y filas > 0', 'critica',
+             req <= set(cab) and len(pl['productos']) > 0, f'faltan: {sorted(req - set(cab))}')
+    js = json.loads((config.BRONCE / 'origen_promociones.json').read_text(encoding='utf-8'))
+    camp = pl['campanas']
+    chequear('F03', 'Fuente JSON (campañas): cada campaña tiene id y fechas dentro de 2025', 'critica',
+             len(js.get('campanas', [])) == len(camp) and camp.fecha_ini.ge(config.PERIODO_INI).all()
+             and camp.fecha_fin.le(config.PERIODO_FIN + pd.Timedelta(days=1)).all(), f'{len(camp)} campañas')
+    ipc = pl['ipc_mensual'].dropna(subset=['ipc_var_pct'])
+    lo, hi = config.IPC_RANGO_VALIDO
+    chequear('F04', f'Fuente API (IPC): 12 meses de 2025 con variación entre {lo}% y {hi}%', 'critica',
+             len(ipc) == 12 and ipc.ipc_var_pct.between(lo, hi).all(), f'{len(ipc)} meses')
+    man = pd.read_csv(config.BRONCE / 'manifiesto_bronce.csv')
+    est_ipc = man.loc[man.archivo.str.contains('ipc'), 'estado'].iloc[0] if 'estado' in man else 'ok'
+    chequear('F05', 'Fuente API (IPC) respondió en esta corrida (si no: se usó el último snapshot bueno, S21)', 'advertencia',
+             est_ipc == 'ok', man.loc[man.archivo.str.contains('ipc'), 'ruta_origen'].iloc[0])
 
     nb = pl['_n_bronce']
     lg = log.df().set_index('regla').filas_afectadas
@@ -81,4 +118,33 @@ def ejecutar(pl, oro, log):
     cob = oro['mart_cobertura']
     chequear('V22', 'Embudo de cobertura cuadra: origen − exclusiones = compras usadas', 'critica',
              cob.iloc[-2].boletas_restantes == cob.iloc[-1].boletas, f'{cob.iloc[-2].boletas_restantes} vs {cob.iloc[-1].boletas}')
+
+    # --- pruebas que protegen la métrica
+    chequear('M01', 'Clave del hecho única: boleta_id en fact_venta_boleta', 'critica', fb.boleta_id.is_unique)
+    chequear('M02', 'Recarga sin duplicar ni perder: filas del hecho = boletas en plata', 'critica', len(fb) == len(b),
+             f'hecho {len(fb)} / plata {len(b)}')
+    comp = fb[fb.es_identificada & fb.es_compra_valida & fb.en_periodo]
+    chequear('M03', 'Fechas de las compras de la métrica dentro de 2025', 'critica',
+             comp.fecha.between(config.PERIODO_INI, config.PERIODO_FIN).all(),
+             f'{comp.fecha.min().date()} a {comp.fecha.max().date()}')
+    t = m.tasa_retencion.dropna()
+    ic_ok = ((m.ic95_inf <= m.tasa_retencion + 1e-9) & (m.tasa_retencion <= m.ic95_sup + 1e-9)) | m.tasa_retencion.isna()
+    chequear('M04', 'Tasas de retención entre 0 y 1, dentro de su intervalo de confianza', 'critica', t.between(0, 1).all() and ic_ok.all())
+    est = oro['_estados']
+    e = est[(est.periodo == '2025Q4') & (est.ventana_dias == config.VENTANA_PRINCIPAL)]
+    directa = e.retenido.sum() / e.activo_inicio.sum()
+    oficial = Mt.retencion(m).tasa_retencion
+    chequear('M05', 'Cifra oficial (retención Q4, 90 d) = recálculo directo desde los estados de cada cliente', 'critica',
+             abs(directa - oficial) < 1e-12, f'{oficial:.4f}')
+    pv = fb[fb.en_periodo]
+    pm = pv.margen_bruto.sum() / pv.venta_sin_iva.sum()
+    chequear('M06', 'Margen bruto 2025 entre 0% y 60% de la venta sin IVA', 'critica', 0 < pm < 0.6, f'{pm:.1%}')
+    lp = fl[fl.fecha.between(config.PERIODO_INI, config.PERIODO_FIN)]
+    cob_costo = 1 - lp.loc[lp.flag_costo_imputado, 'monto_linea'].sum() / lp.monto_linea.sum()
+    chequear('M07', 'Al menos 95% de la venta tiene costo del maestro (el resto se imputa, S17)', 'advertencia', cob_costo >= 0.95,
+             f'{cob_costo:.1%}')
+    mens = pv.groupby('anio_mes').es_identificada.mean()
+    minimo = config.SLA['completitud_min_boletas_identificadas']
+    chequear('M08', f'Acuerdo de servicio, completitud: cada mes con >= {minimo:.0%} de boletas con tarjeta', 'advertencia',
+             (mens >= minimo).all(), f'mínimo mensual {mens.min():.1%} ({mens.idxmin()})')
     return pd.DataFrame(res)

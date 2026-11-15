@@ -31,5 +31,15 @@ indice_reposicion_Q4_365d,,razón,Nuevos / perdidos en Q4 (W=365); <1 = no repon
 cohorte_Q1_nuevos_activos_en_Q4,0.3185840707964602,proporción,Clientes nuevos que llegaron en Q1-2025 y compran en Q4-2025
 pct_boletas_fuera_de_retencion,0.15133578627419608,proporción,"Boletas del origen que no entran a la retención (duplicadas, 2026, anónimas o solo devolución); ver mart_cobertura"
 pct_venta_2025_en_retencion,0.9367796350419914,proporción,Venta 2025 cubierta por las compras usadas en la retención
-venta_anual_en_riesgo_90d,31787944.0,CLP nominal / año,Gasto trimestral de los clientes perdidos en Q4 (mientras estuvieron activos) × 4; supone que su gasto se habría mantenido
-valor_anual_1pp_retencion_90d,713464.2000000001,CLP nominal / año,Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4
+margen_bruto_2025,11569427.473646455,CLP nominal sin IVA,Σ (venta sin IVA − unidades × costo unitario) de 2025 (S17)
+pct_margen_bruto_2025,0.1787915052104568,proporción,Margen bruto / venta sin IVA 2025
+pct_venta_con_costo_real,0.9838804630885376,proporción,"Venta 2025 cuyo costo viene del maestro (el resto se imputa, S17)"
+venta_anual_en_riesgo_90d,31787944.0,CLP nominal con IVA / año,Cifra de la E1. Gasto trimestral de los clientes perdidos en Q4 × 4; supone que su gasto se habría mantenido
+valor_anual_1pp_retencion_90d,713464.2000000001,CLP nominal con IVA / año,Cifra de la E1. Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4
+margen_anual_en_riesgo_90d,4568603.053739767,CLP nominal de margen bruto (sin IVA) / año,Margen trimestral típico de los clientes perdidos en Q4 × 4 (S20). Reemplaza a la venta en riesgo de la E1
+margen_anual_1pp_retencion_90d,104750.53554316923,CLP nominal de margen bruto (sin IVA) / año,Margen anual que significa retener 1 punto porcentual más de los activos al inicio de Q4
+contacto_dia60_contactados,1259.0,contactos / año,Episodios que llegan al día de contacto sin comprar (2025)
+contacto_dia60_costo_total,484696.7196493776,CLP sin IVA / año,Envíos + cupones (S18)
+contacto_dia60_margen_recuperado,1231782.291926297,CLP de margen bruto / año,"Tasa de recuperación supuesta (10%, S19) × margen anual de los que se pierden"
+contacto_dia60_resultado_neto,747085.5722769193,CLP de margen bruto / año,margen recuperado − costo
+contacto_dia60_tasa_equilibrio,0.034392132220494205,proporción,Tasa de recuperación mínima para que la acción pague su costo

@@ -8,8 +8,10 @@ import pandas as pd
 
 import config
 import limpieza as L
+import metricas as M
 import retencion as R
 
+TRAMOS_FRECUENCIA = ['0 (primera compra en Q4)', '1 compra', '2 a 4 compras', '5 o más compras']
 DIAS_SEMANA = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
 
 # ----------------------------------------------------------------- dimensiones
@@ -51,18 +53,24 @@ def dim_producto(productos, detalle):
     return pd.concat([p, extra], ignore_index=True).rename(columns={'sku': 'sku_key'})
 
 # ----------------------------------------------------------------- hechos
-def fact_venta_linea(detalle, boletas):
+def fact_venta_linea(detalle, boletas, productos):
     f = detalle.merge(boletas[['boleta_id', 'fecha']], on='boleta_id', how='left')
+    f = f.merge(productos[['sku', 'costo_unitario']], on='sku', how='left')
     f['venta_lista'] = f.cantidad * f.precio_unitario
     f['descuento_monto'] = f.venta_lista - f.monto_calculado
+    con_costo = f.costo_unitario.notna()
+    razon = (f.cantidad * f.costo_unitario)[con_costo].sum() / (f.monto_linea[con_costo] / config.FACTOR_IVA).sum()
+    f['venta_sin_iva'], f['costo_linea'], f['margen_bruto'], f['flag_costo_imputado'] = M.margen_linea(
+        f.monto_linea, f.cantidad, f.costo_unitario, razon)
     f = f.rename(columns={'sku': 'sku_key'})
     cols = ['boleta_id', 'linea_seq', 'fecha', 'sku_key', 'cantidad', 'precio_unitario', 'descuento_pct', 'venta_lista',
-            'descuento_monto', 'monto_linea', 'monto_calculado', 'campana_id', 'tipo_descuento', 'es_devolucion',
-            'flag_monto_inconsistente', 'flag_volumen_mayorista', 'flag_sku_sin_maestro', 'flag_linea_posible_duplicada']
+            'descuento_monto', 'monto_linea', 'monto_calculado', 'venta_sin_iva', 'costo_linea', 'margen_bruto',
+            'campana_id', 'tipo_descuento', 'es_devolucion', 'flag_monto_inconsistente', 'flag_volumen_mayorista',
+            'flag_sku_sin_maestro', 'flag_costo_imputado', 'flag_linea_posible_duplicada']
     return f[cols]
 
 
-def fact_venta_boleta(boletas, detalle, tiendas, ipc):
+def fact_venta_boleta(boletas, detalle, tiendas, ipc, fl):
     d = detalle.assign(venta_lista=detalle.cantidad * detalle.precio_unitario,
                        monto_dev=detalle.monto_linea.where(detalle.es_devolucion, 0),
                        unid_dev=(-detalle.cantidad).where(detalle.es_devolucion, 0),
@@ -75,6 +83,9 @@ def fact_venta_boleta(boletas, detalle, tiendas, ipc):
         tiene_linea_campana=('con_campana', 'any'), tiene_beneficio_tarjeta=('con_tarjeta', 'any'),
         flag_monto_inconsistente=('flag_monto_inconsistente', 'any')).reset_index()
     f = boletas.merge(ag, on='boleta_id', how='left')
+    mg = fl.groupby('boleta_id').agg(venta_sin_iva=('venta_sin_iva', 'sum'), costo=('costo_linea', 'sum'),
+                                     margen_bruto=('margen_bruto', 'sum'), tiene_costo_imputado=('flag_costo_imputado', 'any'))
+    f = f.merge(mg, left_on='boleta_id', right_index=True, how='left')
     f['descuento_monto'] = f.venta_lista - f.venta_neta_calculada
     f['es_solo_devolucion'] = f.lineas_devolucion == f.n_lineas
     f['es_compra_valida'] = (f.venta_neta > 0) & ~f.es_solo_devolucion
@@ -86,7 +97,8 @@ def fact_venta_boleta(boletas, detalle, tiendas, ipc):
     f = f.rename(columns={'tienda_id': 'tienda_key', 'medio_id': 'medio_key'})
     return f[['boleta_id', 'fecha', 'anio_mes', 'tienda_key', 'cliente_key', 'medio_key', 'canal', 'es_online',
               'es_identificada', 'n_lineas', 'unidades', 'unidades_devueltas', 'venta_lista', 'descuento_monto',
-              'venta_neta', 'venta_neta_calculada', 'monto_devolucion', 'venta_real_base', 'es_solo_devolucion',
+              'venta_neta', 'venta_neta_calculada', 'monto_devolucion', 'venta_real_base', 'venta_sin_iva', 'costo',
+              'margen_bruto', 'tiene_costo_imputado', 'es_solo_devolucion',
               'es_compra_valida', 'en_periodo', 'tiene_linea_campana', 'tiene_beneficio_tarjeta',
               'flag_monto_inconsistente', 'flag_fuera_periodo', 'flag_mes_inconsistente', 'flag_region_inconsistente']]
 
@@ -94,7 +106,8 @@ def fact_venta_boleta(boletas, detalle, tiendas, ipc):
 def compras_validas(fb):
     """Compras que cuentan para retención: identificadas, válidas y dentro del período."""
     c = fb[fb.es_identificada & fb.es_compra_valida & fb.en_periodo]
-    return c.rename(columns={'cliente_key': 'cliente_id'})[['cliente_id', 'boleta_id', 'fecha', 'tienda_key', 'venta_neta']]
+    return c.rename(columns={'cliente_key': 'cliente_id'})[['cliente_id', 'boleta_id', 'fecha', 'tienda_key', 'venta_neta',
+                                                            'margen_bruto']]
 
 
 def _tienda_principal(compras):
@@ -114,6 +127,9 @@ def dim_cliente(clientes, geo, compras, tiendas):
     c['cohorte_trimestre'] = c.fecha_primera_compra.dt.to_period('Q').astype(str).where(c.fecha_primera_compra.notna())
     c['flag_alta_posterior_compra'] = c.fecha_primera_compra < c.fecha_alta
     c['dias_alta_a_primera_compra'] = (c.fecha_primera_compra - c.fecha_alta).dt.days
+    n_prev = compras[compras.fecha < '2025-10-01'].groupby('cliente_id').size()
+    n_prev = c.cliente_id.map(n_prev).fillna(0).astype(int)
+    c['tramo_frecuencia_ene_sep'] = np.select([n_prev == 0, n_prev == 1, n_prev <= 4], TRAMOS_FRECUENCIA[:3], TRAMOS_FRECUENCIA[3])
     tp = _tienda_principal(compras)
     ti = tiendas.set_index('tienda_id')
     c['tienda_principal_key'] = c.cliente_id.map(tp).astype('Int64')
@@ -125,10 +141,10 @@ def dim_cliente(clientes, geo, compras, tiendas):
     cols = ['cliente_key', 'segmento', 'clasificacion_nombre', 'comuna_residencia', 'region_residencia', 'macrozona_residencia',
             'fecha_alta', 'es_cliente_previo_2025', 'es_nuevo_2025', 'tipo_cohorte', 'fecha_primera_compra',
             'fecha_ultima_compra', 'n_compras_2025', 'cohorte_trimestre', 'tienda_principal_key', 'tienda_principal',
-            'formato_principal', 'macrozona_principal', 'flag_rut_invalido', 'flag_alta_posterior_compra',
+            'formato_principal', 'macrozona_principal', 'tramo_frecuencia_ene_sep', 'flag_rut_invalido', 'flag_alta_posterior_compra',
             'dias_alta_a_primera_compra']
     anon = pd.DataFrame([{'cliente_key': -1, 'clasificacion_nombre': 'Anónimo', 'segmento': 'Anónimo', 'tipo_cohorte': 'Anónimo',
-                          'n_compras_2025': 0}])
+                          'n_compras_2025': 0, 'tramo_frecuencia_ene_sep': 'Anónimo'}])
     return pd.concat([c[cols], anon], ignore_index=True)[cols]
 
 # ----------------------------------------------------------------- marts
@@ -164,10 +180,12 @@ def mart_cliente_mes(fechas, dimc, compras):
     return pd.DataFrame(filas)
 
 
+CORTE_FRECUENCIA = 'Compras ene–sep (comportamiento; leer solo Q4)'
 # Cortes pedidos por la contraparte (13-10): local y segmento. Persona/negocio es solo complementario (clasificación del equipo).
 CORTES = [('Total', None), ('Tienda principal', 'tienda_principal'), ('Formato principal', 'formato_principal'),
           ('Macrozona principal', 'macrozona_principal'), ('Segmento', 'segmento'),
-          (config.CORTE_CLASIFICACION_NOMBRE, 'clasificacion_nombre')]
+          (config.CORTE_CLASIFICACION_NOMBRE, 'clasificacion_nombre'),
+          (CORTE_FRECUENCIA, 'tramo_frecuencia_ene_sep')]
 
 
 def mart_retencion(fechas, dimc):
@@ -190,6 +208,9 @@ def mart_retencion(fechas, dimc):
     m['es_ventana_principal'] = m.ventana_dias == config.VENTANA_PRINCIPAL
     m['n_suficiente'] = m.activos_inicio >= config.UMBRAL_N_MIN
     m['muestra_pequena'] = m.activos_inicio < config.UMBRAL_MUESTRA_PEQUENA
+    ic = [M.wilson(k, n) for k, n in zip(m.retenidos, m.activos_inicio)]
+    m['ic95_inf'], m['ic95_sup'] = [x[0] for x in ic], [x[1] for x in ic]
+    m['se_puede_rankear'] = ~m.muestra_pequena
     return m, est
 
 
@@ -316,37 +337,145 @@ def mart_cobertura(n_origen, fb, compras):
     return c
 
 
-def mart_valor_riesgo(estados, compras):
-    """Traduce la pérdida de clientes de Q4 a pesos: gasto trimestral de esos clientes mientras estuvieron activos, anualizado.
-    Gasto trimestral de un cliente = su venta 2025 / n° de trimestres entre su primera y su última compra (inclusive)."""
-    g = compras.groupby('cliente_id').agg(venta=('venta_neta', 'sum'), ini=('fecha', 'min'), fin=('fecha', 'max'))
+def _por_cliente_trimestral(compras):
+    """Venta y margen trimestral típico de cada cliente = total 2025 / trimestres entre su primera y última compra (inclusive)."""
+    g = compras.groupby('cliente_id').agg(venta=('venta_neta', 'sum'), margen=('margen_bruto', 'sum'), n=('boleta_id', 'size'),
+                                          ini=('fecha', 'min'), fin=('fecha', 'max'))
     trimestres = (g.fin.dt.to_period('Q') - g.ini.dt.to_period('Q')).apply(lambda x: x.n) + 1
-    gasto_q3 = g.venta / trimestres                               # gasto trimestral típico de cada cliente
+    return pd.DataFrame({'venta_trim': g.venta / trimestres, 'margen_trim': g.margen / trimestres, 'ticket': g.venta / g.n})
+
+
+def mart_valor_riesgo(estados, compras):
+    """Traduce la pérdida de clientes de Q4 a pesos, en venta (E1) y en margen bruto (E2, S20)."""
+    t = _por_cliente_trimestral(compras)
     filas = []
     for w in config.VENTANAS:
         e = estados[(estados.periodo == '2025Q4') & (estados.ventana_dias == w)]
         perdidos, activos = e.loc[e.perdido, 'cliente_id'], e.loc[e.activo_inicio, 'cliente_id']
-        venta_perd = gasto_q3.reindex(perdidos).fillna(0).sum()
-        gasto_prom = gasto_q3.reindex(activos).fillna(0).mean() if len(activos) else np.nan
-        filas.append({'ventana_dias': w, 'perdidos_q4': len(perdidos), 'gasto_trimestral_perdidos': venta_perd,
-                      'venta_anual_en_riesgo': venta_perd * 4, 'activos_inicio_q4': len(activos),
-                      'gasto_trimestral_promedio_activo': gasto_prom,
-                      'valor_anual_1pp_retencion': 0.01 * len(activos) * gasto_prom * 4})
+        tp, ta = t.reindex(perdidos).fillna(0), t.reindex(activos).fillna(0)
+        filas.append({'ventana_dias': w, 'perdidos_q4': len(perdidos), 'activos_inicio_q4': len(activos),
+                      'gasto_trimestral_perdidos': tp.venta_trim.sum(), 'venta_anual_en_riesgo': tp.venta_trim.sum() * 4,
+                      'margen_trimestral_perdidos': tp.margen_trim.sum(), 'margen_anual_en_riesgo': tp.margen_trim.sum() * 4,
+                      'gasto_trimestral_promedio_activo': ta.venta_trim.mean() if len(ta) else np.nan,
+                      'margen_trimestral_promedio_activo': ta.margen_trim.mean() if len(ta) else np.nan,
+                      'valor_anual_1pp_retencion': 0.01 * len(activos) * ta.venta_trim.mean() * 4 if len(ta) else np.nan,
+                      'margen_anual_1pp_retencion': 0.01 * len(activos) * ta.margen_trim.mean() * 4 if len(ta) else np.nan})
     return pd.DataFrame(filas)
 
 
-def kpi_cobertura_riesgo(cob, rie):
+def mart_episodios_inactividad(fechas, compras, dimc):
+    """Una fila por compra válida de un cliente: cuántos días pasaron hasta su siguiente compra (o hasta el 31-12-2025, censurado).
+    Es la base del caso de negocio (metricas.caso_contacto): a quién se contacta, quién vuelve solo y quién se pierde."""
+    t = _por_cliente_trimestral(compras)
+    corte = np.datetime64(config.FECHA_CORTE.date(), 'D')
+    filas = []
+    for c, f in fechas.items():
+        f = np.unique(f)
+        sig = np.append(f[1:], corte)
+        for a, b, cens in zip(f, sig, [False] * (len(f) - 1) + [True]):
+            filas.append((c, a, int((b - a).astype(int)), cens))
+    e = pd.DataFrame(filas, columns=['cliente_key', 'fecha_compra', 'dias_observados', 'censurado'])
+    e['fecha_compra'] = pd.to_datetime(e.fecha_compra)
+    e['margen_anual_cliente'] = e.cliente_key.map(t.margen_trim * 4)
+    e['ticket_promedio_cliente'] = e.cliente_key.map(t.ticket)
+    e['tienda_principal'] = e.cliente_key.map(dimc.set_index('cliente_key').tienda_principal)
+    return e
+
+
+def mart_caso_contacto(episodios):
+    """Caso de negocio con los supuestos por defecto (S18, S19) para varios días de contacto. El prototipo lo recalcula en vivo."""
+    filas = [M.caso_contacto(episodios, dia_contacto=d) for d in (30, 45, 60, 75)]
+    return pd.DataFrame(filas)
+
+
+def mart_campanas(fb, fl, compras, camp):
+    """¿Las campañas retienen? Clientes que compraron durante la acción, separados en los que la usaron y los que no,
+    y cuántos vuelven a comprar en los 90 días siguientes. Correlación, no causalidad: no hubo grupo de control."""
+    lineas = fl.merge(fb[['boleta_id', 'cliente_key', 'es_identificada', 'es_compra_valida', 'en_periodo']], on='boleta_id')
+    lineas = lineas[lineas.es_identificada & lineas.en_periodo]
+    acciones = [(r.campana_id, f'{r.nombre} ({r.descuento_pct:.0f}%, {r.tipo})', r.fecha_ini.normalize(), r.fecha_fin.normalize(),
+                 lineas.campana_id == r.campana_id) for r in camp.itertuples()]
+    acciones.append(('BENEFICIO_TARJETA_Q3', 'Beneficio tarjeta 10% (permanente), medido en Q3', pd.Timestamp('2025-07-01'),
+                     pd.Timestamp('2025-09-30'), lineas.tipo_descuento == 'beneficio_tarjeta'))
+    filas = []
+    for aid, nombre, ini, fin, usa in acciones:
+        en_ventana = compras[compras.fecha.between(ini, fin)].cliente_id.unique()
+        usaron = set(lineas.loc[usa & lineas.fecha.between(ini, fin), 'cliente_key']) & set(en_ventana)
+        seg_ini, seg_fin = fin + pd.Timedelta(days=1), fin + pd.Timedelta(days=90)
+        volvieron = set(compras.loc[compras.fecha.between(seg_ini, seg_fin), 'cliente_id'])
+        desc = lineas.loc[usa & lineas.fecha.between(ini, fin), 'descuento_monto'].sum() / config.FACTOR_IVA
+        margen = lineas.loc[usa & lineas.fecha.between(ini, fin), 'margen_bruto'].sum()
+        for grupo, cl in [('Usó la acción', usaron), ('Compró en el período sin usarla', set(en_ventana) - usaron)]:
+            n, v = len(cl), len(cl & volvieron)
+            lo, hi = M.wilson(v, n)
+            filas.append({'accion_id': aid, 'accion': nombre, 'ventana_ini': ini.date(), 'ventana_fin': fin.date(),
+                          'seguimiento_hasta': min(seg_fin, config.FECHA_CORTE).date(), 'grupo': grupo, 'clientes': n,
+                          'volvieron_90d': v, 'pct_volvio_90d': v / n if n else np.nan, 'ic95_inf': lo, 'ic95_sup': hi,
+                          'descuento_otorgado_sin_iva': desc if grupo == 'Usó la acción' else np.nan,
+                          'margen_bruto_lineas_accion': margen if grupo == 'Usó la acción' else np.nan})
+    m = pd.DataFrame(filas)
+    base = m[m.grupo != 'Usó la acción'].set_index('accion_id').pct_volvio_90d
+    m['diferencia_pp_vs_no_uso'] = np.where(m.grupo == 'Usó la acción', (m.pct_volvio_90d - m.accion_id.map(base)) * 100, np.nan)
+    return m
+
+
+def mart_perfil_local(mret, compras, dimc, estados):
+    """¿Por qué unos locales retienen más? Perfil de los clientes activos al 1-oct (W principal) según su local principal."""
+    w = config.VENTANA_PRINCIPAL
+    e = estados[(estados.periodo == '2025Q4') & (estados.ventana_dias == w) & estados.activo_inicio]
+    act = dimc.set_index('cliente_key').loc[e.cliente_id]
+    pre = compras[compras.fecha < '2025-10-01']
+    n_tiendas = compras.groupby('cliente_id').tienda_key.nunique()
+    g = pre.groupby('cliente_id').agg(n=('boleta_id', 'size'), venta=('venta_neta', 'sum'), margen=('margen_bruto', 'sum'))
+    gaps = {c: np.diff(np.unique(f)).astype(int) for c, f in compras.groupby('cliente_id').fecha.apply(
+        lambda s: s.values.astype('datetime64[D]')).items()}
+    filas = []
+    for tienda, d in act.groupby('tienda_principal'):
+        ids = d.index
+        r = M.retencion(mret, '2025Q4', w, 'Tienda principal', tienda)
+        gg = g.reindex(ids)
+        todos_gaps = np.concatenate([gaps.get(c, np.array([], dtype=int)) for c in ids]) if len(ids) else np.array([])
+        filas.append({'tienda_principal': tienda, 'activos_inicio_q4': len(ids), 'tasa_retencion_q4': r.tasa_retencion,
+                      'ic95_inf': r.ic95_inf, 'ic95_sup': r.ic95_sup, 'perdidos_q4': int(r.perdidos),
+                      'pct_nuevos_2025': d.es_nuevo_2025.mean(),
+                      'compras_ene_sep_por_cliente': gg.n.mean(), 'ticket_promedio_ene_sep': (gg.venta / gg.n).mean(),
+                      'margen_ene_sep_por_cliente': gg.margen.mean(),
+                      'pct_clientes_multilocal': (n_tiendas.reindex(ids) > 1).mean(),
+                      'pct_una_sola_compra_ene_sep': (gg.n == 1).mean(),
+                      'dias_entre_compras_mediana': float(np.median(todos_gaps)) if len(todos_gaps) else np.nan})
+    return pd.DataFrame(filas).sort_values('tasa_retencion_q4')
+
+
+def kpi_cobertura_riesgo(cob, rie, fl, fb, caso):
     k = []
     add = lambda kpi, v, u, d: k.append({'kpi': kpi, 'valor': v, 'unidad': u, 'definicion': d})
     usadas = cob.iloc[-1]
     add('pct_boletas_fuera_de_retencion', 1 - usadas.boletas / cob.iloc[0].boletas, 'proporción',
         'Boletas del origen que no entran a la retención (duplicadas, 2026, anónimas o solo devolución); ver mart_cobertura')
     add('pct_venta_2025_en_retencion', usadas.pct_venta_2025, 'proporción', 'Venta 2025 cubierta por las compras usadas en la retención')
-    r = rie.set_index('ventana_dias').loc[config.VENTANA_PRINCIPAL]
-    add(f'venta_anual_en_riesgo_{config.VENTANA_PRINCIPAL}d', r.venta_anual_en_riesgo, 'CLP nominal / año',
-        'Gasto trimestral de los clientes perdidos en Q4 (mientras estuvieron activos) × 4; supone que su gasto se habría mantenido')
-    add(f'valor_anual_1pp_retencion_{config.VENTANA_PRINCIPAL}d', r.valor_anual_1pp_retencion, 'CLP nominal / año',
-        'Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4')
+    p = fb[fb.en_periodo]
+    add('margen_bruto_2025', p.margen_bruto.sum(), 'CLP nominal sin IVA', 'Σ (venta sin IVA − unidades × costo unitario) de 2025 (S17)')
+    add('pct_margen_bruto_2025', p.margen_bruto.sum() / p.venta_sin_iva.sum(), 'proporción', 'Margen bruto / venta sin IVA 2025')
+    lp = fl[fl.fecha.between(config.PERIODO_INI, config.PERIODO_FIN)]
+    add('pct_venta_con_costo_real', 1 - lp.loc[lp.flag_costo_imputado, 'monto_linea'].sum() / lp.monto_linea.sum(), 'proporción',
+        'Venta 2025 cuyo costo viene del maestro (el resto se imputa, S17)')
+    w = config.VENTANA_PRINCIPAL
+    r = rie.set_index('ventana_dias').loc[w]
+    add(f'venta_anual_en_riesgo_{w}d', r.venta_anual_en_riesgo, 'CLP nominal con IVA / año',
+        'Cifra de la E1. Gasto trimestral de los clientes perdidos en Q4 × 4; supone que su gasto se habría mantenido')
+    add(f'valor_anual_1pp_retencion_{w}d', r.valor_anual_1pp_retencion, 'CLP nominal con IVA / año',
+        'Cifra de la E1. Venta anual que significa retener 1 punto porcentual más de los activos al inicio de Q4')
+    add(f'margen_anual_en_riesgo_{w}d', r.margen_anual_en_riesgo, 'CLP nominal de margen bruto (sin IVA) / año',
+        'Margen trimestral típico de los clientes perdidos en Q4 × 4 (S20). Reemplaza a la venta en riesgo de la E1')
+    add(f'margen_anual_1pp_retencion_{w}d', r.margen_anual_1pp_retencion, 'CLP nominal de margen bruto (sin IVA) / año',
+        'Margen anual que significa retener 1 punto porcentual más de los activos al inicio de Q4')
+    c = caso.set_index('dia_contacto').loc[config.CONTACTO_DIA_DEFECTO]
+    for col, u, d in [('contactados', 'contactos / año', 'Episodios que llegan al día de contacto sin comprar (2025)'),
+                      ('costo_total', 'CLP sin IVA / año', 'Envíos + cupones (S18)'),
+                      ('margen_recuperado', 'CLP de margen bruto / año', f'Tasa de recuperación supuesta ({config.CONTACTO_TASA_RECUPERACION:.0%}, S19) × margen anual de los que se pierden'),
+                      ('resultado_neto', 'CLP de margen bruto / año', 'margen recuperado − costo'),
+                      ('tasa_equilibrio', 'proporción', 'Tasa de recuperación mínima para que la acción pague su costo')]:
+        add(f'contacto_dia{config.CONTACTO_DIA_DEFECTO}_{col}', c[col], u, d)
     return pd.DataFrame(k)
 
 # ----------------------------------------------------------------- orquestación
@@ -356,8 +485,8 @@ def ejecutar(pl):
     dmp = dim_medio_pago(pl['medios_pago'])
     dpr = dim_producto(pl['productos'], pl['boleta_detalle'])
     dca = pl['campanas'].drop(columns=['descuento_pct_origen'])
-    fl = fact_venta_linea(pl['boleta_detalle'], pl['boletas'])
-    fb = fact_venta_boleta(pl['boletas'], pl['boleta_detalle'], pl['tiendas'], pl['ipc_mensual'])
+    fl = fact_venta_linea(pl['boleta_detalle'], pl['boletas'], pl['productos'])
+    fb = fact_venta_boleta(pl['boletas'], pl['boleta_detalle'], pl['tiendas'], pl['ipc_mensual'], fl)
     compras = compras_validas(fb)
     fechas = R.fechas_por_cliente(compras)
     dcl = dim_cliente(pl['clientes'], pl['geografia'], compras, pl['tiendas'])
@@ -368,11 +497,17 @@ def ejecutar(pl):
     mvm = mart_venta_mensual(fb, dti)
     cob = mart_cobertura(pl['_n_bronce']['boletas'], fb, compras)
     rie = mart_valor_riesgo(estados, compras)
-    kpi = pd.concat([kpi_resumen(fb, compras, rfm, mret, mcoh, fechas), kpi_cobertura_riesgo(cob, rie)], ignore_index=True)
+    epi = mart_episodios_inactividad(fechas, compras, dcl)
+    caso = mart_caso_contacto(epi)
+    mca = mart_campanas(fb, fl, compras, pl['campanas'])
+    mpl = mart_perfil_local(mret, compras, dcl, estados)
+    kpi = pd.concat([kpi_resumen(fb, compras, rfm, mret, mcoh, fechas), kpi_cobertura_riesgo(cob, rie, fl, fb, caso)],
+                    ignore_index=True)
     oro = {'dim_tiempo': dt, 'dim_tienda': dti, 'dim_medio_pago': dmp, 'dim_producto': dpr, 'dim_campana': dca,
            'dim_cliente': dcl, 'fact_venta_boleta': fb, 'fact_venta_linea': fl, 'mart_cliente_mes': mcm,
            'mart_retencion': mret, 'mart_cohortes': mcoh, 'mart_rfm_cliente': rfm, 'mart_venta_mensual': mvm,
-           'mart_cobertura': cob, 'mart_valor_riesgo': rie, 'mart_kpi_resumen': kpi}
+           'mart_cobertura': cob, 'mart_valor_riesgo': rie, 'mart_episodios_inactividad': epi, 'mart_caso_contacto': caso,
+           'mart_campanas': mca, 'mart_perfil_local': mpl, 'mart_kpi_resumen': kpi}
     for nombre, df in oro.items():
         L.escribir_csv(df, config.ORO / f'{nombre}.csv')
     oro['_estados'] = estados

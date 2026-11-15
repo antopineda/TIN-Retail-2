@@ -10,9 +10,10 @@ métrica que responde la pregunta de negocio:
 ## Requisitos
 
 - Python 3.10 o superior.
-- Las dependencias de `cadena_datos/requirements.txt`: `pandas`, `numpy`, `matplotlib` y `pytest`.
-- Conexión a internet para consultar la API del IPC. Si no hay conexión, la cadena usa un respaldo con los mismos
-  valores y lo indica en la salida, así que el resultado es el mismo.
+- Las dependencias de `cadena_datos/requirements.txt`: `pandas`, `numpy`, `matplotlib`, `pytest`, `certifi`, `streamlit` y `altair`.
+- Conexión a internet para consultar la API del IPC. Si no hay conexión, la cadena usa la última respuesta buena
+  guardada en `cadena_datos/referencias/ipc_2025_snapshot.json`, lo avisa (prueba F05) y el prototipo lo muestra.
+  La retención y el margen no dependen del IPC.
 
 ## Instalación
 
@@ -30,12 +31,12 @@ Desde la raíz del repositorio:
 python cadena_datos/run_pipeline.py
 ```
 
-**Duración:** menos de un minuto (entre 15 y 30 segundos en un computador personal).
+**Duración:** menos de un minuto (unos 30 segundos la primera vez, 5 segundos las siguientes).
 
 **Qué se espera ver al final:**
 - seis pasos numerados de `[1/6]` a `[6/6]`;
-- las 23 validaciones marcadas como `OK`;
-- la línea `Listo en … s`.
+- las 36 pruebas de calidad marcadas como `OK` y la línea `-> 36 de 36 pruebas en verde`;
+- al final: `Retención Q4 2025 (90 días): 51.1%  ·  pruebas 36/36  ·  IPC: ok`.
 
 La salida se ve así (abreviada):
 
@@ -50,18 +51,20 @@ La salida se ve así (abreviada):
       fact_venta_boleta      6,190 filas
       mart_retencion         1,536 filas
       ...
-[4/6] Validaciones
-      OK    V01 Boletas plata = bronce − duplicados
+[4/6] Pruebas de calidad
+      OK    F01 Fuente SQLite (POS): están las 7 tablas y hay boletas
       ...
-      OK    V22 Embudo de cobertura cuadra: origen − exclusiones = compras usadas
+      OK    M08 Acuerdo de servicio, completitud: cada mes con >= 80% de boletas con tarjeta
+      -> 36 de 36 pruebas en verde
 [5/6] Documentación (diccionario, supuestos, log, resumen)
 [6/6] Gráficos
       datos/oro/graficos/1_sensibilidad_ventana.png
       ...
-Listo en 25.3 s. Salidas en .../datos
+Listo en 4.7 s. Salidas en .../datos
+Retención Q4 2025 (90 días): 51.1%  ·  pruebas 36/36  ·  IPC: ok
 ```
 
-Si alguna validación crítica falla, la cadena termina con código de salida 1 y lo indica en pantalla.
+Si alguna prueba que bloquea falla, la cadena termina con código de salida 1 y lo indica en pantalla.
 
 Las cifras principales quedan en `datos/oro/resumen_hallazgos.md`. Por ejemplo, la retención del cuarto trimestre de
 2025 con ventana de 90 días es **51,1%**.
@@ -72,7 +75,23 @@ Las cifras principales quedan en `datos/oro/resumen_hallazgos.md`. Por ejemplo, 
 python -m pytest cadena_datos/tests -q
 ```
 
-Resultado esperado: `65 passed`.
+Resultado esperado: `70 passed`.
+
+### Prototipo
+
+Después de correr la cadena:
+
+```bash
+streamlit run prototipo/app.py
+```
+
+Se abre en el navegador (http://localhost:8501). La pantalla lee solo `datos/oro/`: si la cadena vuelve a correr,
+basta con recargar la página. Responde la pregunta en una pantalla: cifra clave con su comparación, tendencia,
+corte por local con su intervalo de confianza, el simulador de la decisión (a los cuántos días contactar, cuánto
+cuesta y cuánto margen recupera) y el detalle en tablas. El pie muestra la fuente, la fecha de la última corrida,
+las pruebas en verde y el dueño del dato.
+
+Para mostrar qué pasa si la API del IPC no responde: `python cadena_datos/run_pipeline.py --simular-falla-api`.
 
 ## Fuentes de datos
 
@@ -107,7 +126,10 @@ tasa de retención = clientes activos al inicio que siguen activos al cierre / c
 ```
 
 Un cliente está activo si tiene al menos una compra válida en los últimos *W* días. La ventana principal es de 90
-días, y también se reportan 30, 180 y 365 días como sensibilidad.
+días, y también se reportan 30, 180 y 365 días como sensibilidad. Cada métrica se define una sola vez en
+`cadena_datos/metricas.py` (capa semántica); el resumen y el prototipo la leen de ahí.
+
+Capas, decisiones de arquitectura, pruebas, linaje y acuerdo de servicio: [`docs/arquitectura.md`](docs/arquitectura.md).
 
 ## Salidas principales (`datos/oro/`)
 
@@ -117,12 +139,19 @@ días, y también se reportan 30, 180 y 365 días como sensibilidad.
 | `mart_retencion.csv` | Retención por mes o trimestre, por ventana y por corte (total, local, formato, macrozona, segmento) |
 | `mart_cohortes.csv` | Retención de cohortes de clientes por trimestre de llegada |
 | `mart_cobertura.csv` | Registros excluidos del análisis y motivo |
+| `mart_valor_riesgo.csv` | Clientes perdidos en Q4 en venta y en margen, por ventana |
+| `mart_caso_contacto.csv` | Costo y margen recuperado de contactar a los 30, 45, 60 y 75 días sin comprar |
+| `mart_campanas.csv` | Vuelta a comprar de quienes usaron cada campaña vs. quienes no |
+| `mart_perfil_local.csv` | Perfil de los clientes de cada local (una sola compra, ticket, margen) |
 | `mart_kpi_resumen.csv` | Cifras principales |
 | `graficos/` | Visualizaciones, con su unidad en el título y su fuente al pie |
 | `diccionario_datos.csv` | Definición de cada columna |
 | `supuestos.csv` | Bitácora de supuestos |
 | `log_calidad.csv` | Cada regla de limpieza con el número de registros afectados |
-| `validaciones.csv` | Resultado de las validaciones automáticas |
+| `validaciones.csv` | Resultado de las 36 pruebas de calidad de la última corrida (bloquea o avisa) |
+| `estado_fuentes.csv` | Estado de cada fuente en la última corrida (ok o respaldo) |
+| `historial_corridas.csv` | Una fila por corrida: pruebas en verde, estado del IPC y cifra principal |
+| `metricas.csv` | Definición de cada métrica (capa semántica) |
 
 ## Estructura del repositorio
 
@@ -132,7 +161,10 @@ TIN-Retail-2/
 ├── cadena_datos/    código de la cadena (detalle en cadena_datos/README.md)
 │   ├── run_pipeline.py    punto de entrada
 │   ├── config.py          parámetros y supuestos
+│   ├── metricas.py        capa semántica (definición única de cada métrica)
 │   └── tests/             pruebas unitarias
+├── prototipo/       app.py: el prototipo (Streamlit)
+├── docs/            arquitectura.md
 ├── datos/oro/       resultados (se regeneran en cada ejecución)
 └── exploracion/     perfilamiento inicial de las fuentes (solo lectura)
 ```

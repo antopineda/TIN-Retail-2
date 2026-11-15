@@ -6,6 +6,7 @@ import pandas as pd
 
 import config
 import limpieza as L
+import metricas as M
 
 TABLAS = {
     'dim_tiempo': 'Calendario diario (2025 + días de las boletas fuera de período). Grano: 1 día.',
@@ -24,6 +25,13 @@ TABLAS = {
     'mart_cobertura': 'Embudo de cobertura: boletas del origen que quedan fuera de la retención y por qué. Grano: 1 paso.',
     'mart_valor_riesgo': 'Clientes perdidos en Q4 traducidos a pesos, por ventana. Grano: 1 ventana.',
     'mart_kpi_resumen': 'Cifras principales del análisis. Grano: 1 KPI.',
+    'mart_episodios_inactividad': 'Base del caso de negocio: días desde cada compra hasta la siguiente (o hasta el 31-12-2025). Grano: 1 compra válida de un cliente.',
+    'mart_caso_contacto': 'Costo y margen recuperado de contactar a los clientes al cumplir N días sin comprar (supuestos S18, S19). Grano: 1 día de contacto.',
+    'mart_campanas': '¿Las campañas retienen? Vuelta a comprar en 90 días de quienes usaron cada acción vs. quienes compraron sin usarla. Grano: acción × grupo.',
+    'mart_perfil_local': 'Perfil de los clientes activos al 1-oct-2025 por local principal, para explicar por qué unos retienen más. Grano: 1 local.',
+    'estado_fuentes': 'Estado de cada fuente en la última corrida (ok / respaldo) con su huella SHA-256. Grano: 1 fuente.',
+    'historial_corridas': 'Una fila por ejecución de la cadena: pruebas en verde, estado del IPC y cifra principal. Grano: 1 corrida.',
+    'validaciones': 'Resultado de las pruebas de calidad de la última corrida. Grano: 1 prueba.',
 }
 
 COLUMNAS = {
@@ -63,7 +71,7 @@ COLUMNAS = {
     'precio_unitario': 'Precio unitario cobrado (CLP)', 'venta_lista': 'cantidad × precio_unitario',
     'descuento_monto': 'venta_lista − monto calculado con descuento', 'monto_linea': 'Monto registrado de la línea (oficial, S02)',
     'monto_calculado': 'cantidad × precio × (1 − descuento) (control)', 'tipo_descuento': 'sin_descuento, campana, beneficio_tarjeta (S05) o no_explicado',
-    'es_devolucion': 'Línea con cantidad negativa', 'flag_monto_inconsistente': 'Monto registrado difiere > $2 del calculado',
+    'es_devolucion': 'Línea con cantidad negativa', 'flag_monto_inconsistente': 'Monto registrado difiere en más de CLP 2 del calculado',
     'flag_volumen_mayorista': f'Cantidad >= {config.CANTIDAD_MAYORISTA} unidades', 'flag_sku_sin_maestro': 'SKU no existe en el maestro',
     'flag_linea_posible_duplicada': 'Misma boleta, línea, SKU y monto que otra línea (se conserva)',
     'es_identificada': 'Boleta con tarjeta (cliente identificado)', 'n_lineas': 'Líneas de la boleta', 'unidades': 'Unidades netas',
@@ -108,6 +116,36 @@ COLUMNAS = {
     'venta_identificada': 'Venta de boletas con tarjeta', 'ticket_promedio': 'Promedio de venta por compra válida',
     'ticket_mediano': 'Mediana de venta por compra válida', 'pct_boletas_identificadas': 'boletas_identificadas / boletas',
     'pct_venta_identificada': 'venta_identificada / venta_neta', 'kpi': 'Nombre del KPI', 'unidad': 'Unidad', 'definicion': 'Definición',
+    # E2: margen
+    'venta_sin_iva': 'Venta neta sin IVA (CLP nominales): venta / 1,19 (S03, S17)', 'costo_linea': 'Unidades × costo unitario del maestro (CLP sin IVA); imputado si falta (S17)',
+    'costo': 'Σ costo de las líneas de la boleta (CLP sin IVA)', 'margen_bruto': 'Margen bruto en CLP nominales sin IVA = venta sin IVA − costo (S17)',
+    'flag_costo_imputado': 'El SKU no tiene costo en el maestro: costo imputado con la razón costo/venta del resto (S17)',
+    'tiene_costo_imputado': 'Alguna línea de la boleta tiene costo imputado (S17)',
+    'tramo_frecuencia_ene_sep': 'Compras válidas entre enero y septiembre de 2025 (0, 1, 2 a 4, 5 o más). Segmento por comportamiento; leer solo en Q4',
+    'ic95_inf': 'Límite inferior del intervalo de confianza del 95% de la tasa (Wilson)', 'ic95_sup': 'Límite superior del intervalo de confianza del 95% de la tasa (Wilson)',
+    'se_puede_rankear': f'activos_inicio >= {config.UMBRAL_MUESTRA_PEQUENA}: la tasa se puede ordenar en un ranking; si no, mostrar con su intervalo',
+    'margen_trimestral_perdidos': 'Σ margen trimestral típico de los perdidos (CLP sin IVA)', 'margen_anual_en_riesgo': 'margen_trimestral_perdidos × 4 (CLP de margen bruto sin IVA por año, S20)',
+    'margen_trimestral_promedio_activo': 'Margen trimestral promedio de los activos al 1-oct (CLP sin IVA)', 'margen_anual_1pp_retencion': '1% × activos_inicio_q4 × margen trimestral × 4 (CLP sin IVA por año)',
+    'fecha_compra': 'Fecha de la compra válida que abre el episodio', 'dias_observados': 'Días hasta la siguiente compra o, si no hay, hasta el 31-12-2025',
+    'censurado': 'True si no hubo otra compra antes del 31-12-2025 (el desenlace no se observa)', 'margen_anual_cliente': 'Margen bruto trimestral típico del cliente × 4 (CLP sin IVA)',
+    'ticket_promedio_cliente': 'Venta promedio por compra del cliente en 2025 (CLP con IVA)',
+    'dia_contacto': 'Días sin comprar al momento de contactar', 'contactados': 'Episodios que llegan a dia_contacto sin compra en 2025 (contactos en el año)',
+    'vuelven_solos': 'Contactados que habrían vuelto antes de la ventana sin contacto (el cupón es costo sin beneficio)',
+    'se_pierden': 'Contactados que llegan a ventana_dias sin comprar (se pierden)', 'sin_desenlace': 'Contactados cuyo desenlace no se observa porque terminó el año',
+    'pct_contactos_desperdiciados': 'vuelven_solos / contactados', 'costo_cupon_unitario': 'Margen que cuesta un cupón: % cupón × ticket promedio / 1,19 (CLP)',
+    'margen_anual_de_los_que_se_pierden': 'Σ margen anual de los clientes que se pierden (CLP sin IVA)', 'recuperados': 'tasa de recuperación (S19) × se_pierden',
+    'costo_total': 'contactados × costo de envío + (vuelven_solos + recuperados) × cupón (CLP sin IVA por año)',
+    'margen_recuperado': 'tasa de recuperación × margen anual de los que se pierden (CLP sin IVA por año)', 'resultado_neto': 'margen_recuperado − costo_total (CLP por año)',
+    'tasa_equilibrio': 'Tasa de recuperación mínima para que la acción no pierda plata',
+    'accion_id': 'Identificador de la campaña o acción', 'accion': 'Nombre, descuento y tipo de la acción', 'ventana_ini': 'Inicio de la acción',
+    'ventana_fin': 'Fin de la acción', 'seguimiento_hasta': 'Último día de la ventana de 90 días en que se mira si el cliente volvió', 'grupo': 'Usó la acción / compró en el período sin usarla',
+    'clientes': 'Clientes identificados del grupo', 'volvieron_90d': 'Clientes del grupo con una compra válida en los 90 días siguientes al fin de la acción',
+    'pct_volvio_90d': 'volvieron_90d / clientes', 'descuento_otorgado_sin_iva': 'Descuento entregado en las líneas de la acción (CLP sin IVA)',
+    'margen_bruto_lineas_accion': 'Margen bruto de las líneas vendidas con la acción (CLP sin IVA)', 'diferencia_pp_vs_no_uso': 'pct_volvio_90d del grupo que la usó − el que no (puntos porcentuales). Correlación, no efecto causal',
+    'tasa_retencion_q4': 'Retención Q4 2025 con la ventana principal', 'pct_nuevos_2025': 'Proporción de clientes con alta en 2025',
+    'compras_ene_sep_por_cliente': 'Compras válidas promedio por cliente entre enero y septiembre', 'ticket_promedio_ene_sep': 'Venta promedio por compra entre enero y septiembre (CLP con IVA)',
+    'margen_ene_sep_por_cliente': 'Margen bruto promedio por cliente entre enero y septiembre (CLP sin IVA)', 'pct_clientes_multilocal': 'Proporción de clientes que compró en más de un local',
+    'pct_una_sola_compra_ene_sep': 'Proporción de clientes con una sola compra entre enero y septiembre', 'dias_entre_compras_mediana': 'Mediana de días entre compras de los clientes del local',
 }
 
 
@@ -120,6 +158,11 @@ def diccionario(oro):
             filas.append({'tabla': t, 'descripcion_tabla': TABLAS.get(t, ''), 'columna': c, 'tipo': str(df[c].dtype),
                           'descripcion': COLUMNAS.get(c, 'SIN DESCRIPCIÓN'), 'nulos': int(df[c].isna().sum()), 'filas': len(df)})
     return pd.DataFrame(filas)
+
+
+def metricas_df():
+    """Las definiciones de la capa semántica (metricas.py) como tabla, para el informe y el prototipo."""
+    return pd.DataFrame([{'metrica': k, **v} for k, v in M.METRICAS.items()])
 
 
 def supuestos():
@@ -138,6 +181,13 @@ def _num(x):
     return f'{x:,.0f}'.replace(',', '.')
 
 
+def _clp(x):
+    """Pesos chilenos con la unidad explícita (feedback P1: no usar solo '$')."""
+    if abs(x) >= 1e6:
+        return f'CLP {x / 1e6:,.2f} millones'.replace(',', 'X').replace('.', ',').replace('X', '.')
+    return f'CLP {_num(x)}'
+
+
 def resumen_hallazgos(oro, val):
     k = oro['mart_kpi_resumen'].set_index('kpi').valor
     m = oro['mart_retencion']
@@ -148,7 +198,7 @@ def resumen_hallazgos(oro, val):
            f'Generado automáticamente por la cadena el {datetime.now():%d-%m-%Y %H:%M}. Todas las cifras salen de `datos/oro/`.',
            f'Validaciones: {(val.resultado == "OK").sum()} OK / {(val.resultado != "OK").sum()} con falla (ver `validaciones.csv`).', '',
            '## Contexto', '',
-           f'- Boletas 2025: {_num(k.boletas_2025)}; venta neta nominal: ${_num(k.venta_neta_2025)}; venta real (pesos de {config.IPC_BASE}): ${_num(k.venta_real_2025)}.',
+           f'- Boletas 2025: {_num(k.boletas_2025)}; venta neta: {_clp(k.venta_neta_2025)} nominales con IVA; venta real: {_clp(k.venta_real_2025)} de {config.IPC_BASE}; margen bruto: {_clp(k.margen_bruto_2025)} sin IVA ({_pct(k.pct_margen_bruto_2025)} de la venta sin IVA; {_pct(k.pct_venta_con_costo_real)} de la venta con costo del maestro).',
            f'- Identificación: {_pct(k.pct_boletas_identificadas)} de las boletas y {_pct(k.pct_venta_identificada)} de la venta tienen tarjeta. '
            f'La retención se mide sobre {_num(k.clientes_con_compra_2025)} clientes.', '',
            '## Retención (pregunta 1)', '',
@@ -163,8 +213,9 @@ def resumen_hallazgos(oro, val):
            f'- Q4 con W={w} d: {_num(q.loc["2025Q4"].perdidos)} clientes perdidos vs. {_num(q.loc["2025Q4"].nuevos)} nuevos '
            f'(índice de reposición {_dec(q.loc["2025Q4"].indice_reposicion)}) y {_num(q.loc["2025Q4"].reactivados)} reactivados.',
            '- Sensibilidad Q4: retención ' + ' · '.join(f'{_pct(k[f"retencion_Q4_{v}d"])} ({v} d)' for v in config.VENTANAS) + '.',
-           f'- **En pesos:** los clientes perdidos en Q4 compraban ${_num(k[f"venta_anual_en_riesgo_{w}d"])} al año '
-           f'(su gasto trimestral típico × 4). Cada punto de retención vale ${_num(k[f"valor_anual_1pp_retencion_{w}d"])} al año.',
+           f'- **En margen (E2):** los clientes perdidos en Q4 dejaban {_clp(k[f"margen_anual_en_riesgo_{w}d"])} de margen bruto al año '
+           f'(CLP nominales 2025 sin IVA; su margen trimestral típico × 4). Cada punto de retención vale {_clp(k[f"margen_anual_1pp_retencion_{w}d"])} de margen al año. '
+           f'En la E1 se reportó la venta: {_clp(k[f"venta_anual_en_riesgo_{w}d"])} al año con IVA (misma regla, otra unidad).',
            f'- **Cobertura:** {_pct(k.pct_boletas_fuera_de_retencion)} de las boletas del origen queda fuera de la retención '
            f'(duplicadas, 2026, anónimas o solo devolución; ver `mart_cobertura`). Las compras usadas cubren {_pct(k.pct_venta_2025_en_retencion)} de la venta 2025.',
            ]
@@ -194,6 +245,33 @@ def resumen_hallazgos(oro, val):
             f'- **Persona/negocio** (clasificación del equipo, no de la empresa): {_pct(cn.tasa_retencion.min())} a {_pct(cn.tasa_retencion.max())}. '
                 'No separa el comportamiento; se deja solo como dato complementario.',
             '- **Macrozona "Online"**: clientes cuyo local principal es la Tienda Online, que viven en toda la cadena (S08).']
+    # --- caso de negocio
+    caso = oro['mart_caso_contacto']
+    lin += ['', f'## Caso de negocio: contactar al cliente antes de perderlo (W={w} d, supuestos S18 y S19)', '',
+            f'Costo por contacto CLP {config.CONTACTO_COSTO_ENVIO_CLP}, cupón de {config.CONTACTO_CUPON_PCT}% y tasa de recuperación supuesta de '
+            f'{_pct(config.CONTACTO_TASA_RECUPERACION)}. Cifras por año (2025), en CLP sin IVA.', '',
+            '| Contactar al cumplir | Contactos | Habrían vuelto solos | Costo | Margen recuperado | Resultado | Tasa de equilibrio |',
+            '|---|---|---|---|---|---|---|']
+    for r in caso.itertuples():
+        lin.append(f'| {r.dia_contacto} días | {_num(r.contactados)} | {_pct(r.pct_contactos_desperdiciados)} | {_clp(r.costo_total)} | '
+                   f'{_clp(r.margen_recuperado)} | {_clp(r.resultado_neto)} | {_pct(r.tasa_equilibrio)} |')
+    lin += ['', '- Contactar temprano (30 días) gasta en clientes que iban a volver solos; contactar tarde deja menos tiempo para recuperar. '
+                'La tasa de equilibrio es la recuperación mínima para que la acción pague su costo.']
+    # --- campañas
+    ca = oro['mart_campanas']
+    lin += ['', '## ¿Las campañas retienen? (vuelta a comprar en los 90 días siguientes)', '',
+            '| Acción | Grupo | Clientes | Volvió en 90 d | IC 95% | Descuento otorgado |', '|---|---|---|---|---|---|']
+    for r in ca.itertuples():
+        lin.append(f'| {r.accion} | {r.grupo} | {_num(r.clientes)} | {_pct(r.pct_volvio_90d)} | {_pct(r.ic95_inf)}–{_pct(r.ic95_sup)} | '
+                   + (_clp(r.descuento_otorgado_sin_iva) if pd.notna(r.descuento_otorgado_sin_iva) else '') + ' |')
+    lin += ['', '- Es una comparación, no un efecto causal: no hubo grupo de control y quien usa una promoción ya es más activo.']
+    # --- perfil por local
+    pl_ = oro['mart_perfil_local']
+    lin += ['', '## Por qué unos locales retienen más (clientes activos al 1-oct-2025)', '',
+            '| Local | Retención Q4 (IC 95%) | Una sola compra ene–sep | Ticket promedio | Margen por cliente ene–sep |', '|---|---|---|---|---|']
+    for r in pl_.itertuples():
+        lin.append(f'| {r.tienda_principal} | {_pct(r.tasa_retencion_q4)} ({_pct(r.ic95_inf)}–{_pct(r.ic95_sup)}) | {_pct(r.pct_una_sola_compra_ene_sep)} | '
+                   f'{_clp(r.ticket_promedio_ene_sep)} | {_clp(r.margen_ene_sep_por_cliente)} |')
     lin += ['', '## Cómo leer las tablas', '',
             '- `mart_retencion`: filtrar `ventana_dias = 90` (principal) y `base_confiable = True`. Usar `corte`/`valor` para los cortes.',
             '- `mart_cohortes`: usar `tipo_cohorte = "Nuevo 2025"` para curvas de cohorte (la cohorte Q1 "Todos" mezcla clientes antiguos).',
@@ -208,5 +286,6 @@ def ejecutar(oro, log, val):
     L.escribir_csv(supuestos(), config.ORO / 'supuestos.csv')
     L.escribir_csv(log.df(), config.ORO / 'log_calidad.csv')
     L.escribir_csv(val, config.ORO / 'validaciones.csv')
+    L.escribir_csv(metricas_df(), config.ORO / 'metricas.csv')
     (config.ORO / 'resumen_hallazgos.md').write_text(resumen_hallazgos(oro, val), encoding='utf-8')
     return dic

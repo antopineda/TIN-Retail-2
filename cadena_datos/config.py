@@ -21,8 +21,12 @@ ENCODING_SALIDA = 'utf-8-sig'         # UTF-8 con BOM: Excel abre bien las tilde
 
 # ---------------------------------------------------------------- IPC
 IPC_URL = 'https://mindicador.cl/api/ipc/2025'
-# Respaldo si la API no responde y no hay snapshot en bronce (valores consultados el 28-09-2026, var. % mensual)
+IPC_TIMEOUT_S = 20
+# Si la API falla, se usa la última respuesta buena versionada en el repositorio (consultada el 15-11-2026).
+IPC_SNAPSHOT_VERSIONADO = RAIZ / 'cadena_datos' / 'referencias' / 'ipc_2025_snapshot.json'
+# Último recurso si tampoco existe el snapshot (valores consultados el 28-09-2026, var. % mensual)
 IPC_RESPALDO_2025 = {1: 1.1, 2: 0.4, 3: 0.5, 4: 0.2, 5: 0.2, 6: -0.4, 7: 0.9, 8: 0.0, 9: 0.4, 10: 0.0, 11: 0.3, 12: -0.2}
+IPC_RANGO_VALIDO = (-2.0, 3.0)        # var. % mensual fuera de este rango = dato sospechoso (prueba F04)
 IPC_BASE = '2024-12'                  # índice = 100 en dic-2024; venta real en pesos de dic-2024
 
 # ---------------------------------------------------------------- período y ventanas
@@ -63,6 +67,27 @@ PREFIJOS_CLASIFICACION_NOMBRE = {     # clasificación del equipo por prefijo de
 DESCUENTOS_VALIDOS = {0, 10, 25}
 CANTIDAD_MAYORISTA = 10               # cantidades >= 10 se marcan (el resto está entre 1 y 4)
 TOLERANCIA_MONTO = 2                  # pesos de diferencia aceptados entre monto registrado y calculado
+
+# ---------------------------------------------------------------- margen (E2: la recomendación va en pesos de margen, no de venta)
+FACTOR_IVA = 1.19                     # venta registrada con IVA (S03); costo del maestro sin IVA (S17)
+# margen bruto de una línea = monto_linea / FACTOR_IVA − cantidad × costo_unitario  [CLP nominales, sin IVA]
+
+# ---------------------------------------------------------------- caso de negocio: contactar antes de perder al cliente
+# Valores por defecto del prototipo; la gerencia los cambia en pantalla. Son supuestos (S18, S19), no mediciones.
+CONTACTO_DIA_DEFECTO = 60             # se contacta al cliente cuando cumple N días sin comprar (E1: entre 60 y 75)
+CONTACTO_COSTO_ENVIO_CLP = 50         # CLP por contacto (SMS/WhatsApp masivo + gestión); sin IVA
+CONTACTO_CUPON_PCT = 10               # % de descuento del cupón de regreso, aplicado al ticket promedio
+CONTACTO_TASA_RECUPERACION = 0.10     # proporción de los que se iban a perder que vuelven por el contacto (no medida)
+
+# ---------------------------------------------------------------- gobierno: dueño y acuerdo de servicio (E2, componente B)
+DUENO_METRICA = 'Gerencia Comercial (Subgerente de Clientes y Fidelización)'
+DUENO_DATO = 'Jefe de BI (operación de la cadena de datos)'
+SLA = {
+    'frescura': 'Mensual: la cadena corre el día hábil 3 de cada mes con el cierre del mes anterior',
+    'completitud_min_boletas_identificadas': 0.80,   # % mínimo de boletas del mes con tarjeta (2025: 86,9%)
+    'calidad_min_pruebas_ok': 1.00,                  # 100% de las pruebas que bloquean en verde para publicar
+}
+Z_IC95 = 1.96                         # intervalo de confianza del 95% (Wilson) para tasas por local
 
 # ---------------------------------------------------------------- bitácora de supuestos (anexo obligatorio de la E1)
 # Cada supuesto: qué se asume, por qué, qué pasaría con el resultado si fuera falso, y quién lo decidió y cuándo.
@@ -151,4 +176,33 @@ SUPUESTOS = [
      'por_que': 'Es la fuente obligatoria del caso; la empresa usa un 3% fijo.',
      'efecto_si_falso': 'Con el 3% fijo la venta real cambia levemente (inflación 2025 acumulada: 3,44%). No afecta la retención.',
      'decidio': 'Enunciado del caso / acta', 'fecha': '04-09-2026'},
+    {'id': 'S17', 'tema': 'Margen bruto',
+     'supuesto': 'Margen bruto = venta sin IVA (monto_linea / 1,19) − unidades × costo_unitario del maestro. El costo del maestro está sin IVA. '
+                 'Las líneas sin costo (SKU sin maestro o costo N/A, 1,6% de la venta) usan la razón costo/venta del resto (flag_costo_imputado).',
+     'por_que': 'La E1 se observó por hablar de venta y no de margen. El maestro trae costo unitario para 98,4% de la venta.',
+     'efecto_si_falso': 'Si el costo incluyera IVA, el margen subiría de ~18% a ~31% de la venta sin IVA y el valor en riesgo crecería en la misma proporción. '
+                        'La retención no cambia.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
+    {'id': 'S18', 'tema': 'Costo de contactar a un cliente',
+     'supuesto': f'CLP {CONTACTO_COSTO_ENVIO_CLP} por contacto + un cupón de {CONTACTO_CUPON_PCT}% sobre el ticket promedio, que usan todos los que vuelven '
+                 '(también los que habrían vuelto solos).',
+     'por_que': 'No hay dato de costo de campañas de la empresa. Es un orden de magnitud de un envío masivo por SMS/WhatsApp; se cambia en pantalla.',
+     'efecto_si_falso': 'Cambia el costo y el punto de equilibrio de la acción, no la retención. El prototipo muestra el resultado para cualquier costo.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
+    {'id': 'S19', 'tema': 'Tasa de recuperación del contacto',
+     'supuesto': f'{CONTACTO_TASA_RECUPERACION:.0%} de los clientes que se iban a perder vuelve por el contacto. No está medida: '
+                 'se reporta junto al punto de equilibrio (la tasa mínima para que la acción pague su costo).',
+     'por_que': 'Las campañas de 2025 no tuvieron grupo de control; no hay forma de medir el efecto causal con estos datos.',
+     'efecto_si_falso': 'Si la tasa real es menor que el punto de equilibrio, la acción pierde plata. Por eso se recomienda un piloto con grupo de control.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
+    {'id': 'S20', 'tema': 'Valor en riesgo en margen',
+     'supuesto': 'Margen anual en riesgo = margen trimestral típico de cada cliente perdido en Q4 (margen 2025 / trimestres entre su primera y última compra) × 4.',
+     'por_que': 'Es la misma regla de la E1 (venta en riesgo), aplicada al margen en vez de la venta.',
+     'efecto_si_falso': 'Si los perdidos ya venían gastando menos antes de irse, el valor en riesgo está sobrestimado.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
+    {'id': 'S21', 'tema': 'Falla de la API del IPC',
+     'supuesto': 'Si mindicador.cl no responde, se usa el último snapshot bueno versionado en cadena_datos/referencias/ y la corrida queda marcada con aviso.',
+     'por_que': 'El IPC solo afecta la venta real (deflactada); la retención y el margen nominal no dependen de él.',
+     'efecto_si_falso': 'Si el IPC 2025 se revisara después del snapshot, la venta real cambiaría levemente; ninguna cifra de la respuesta cambia.',
+     'decidio': 'Antonia Pineda (Grupo 2)', 'fecha': '15-11-2026'},
 ]

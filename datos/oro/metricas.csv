@@ -1,0 +1,5 @@
+﻿metrica,nombre,formula,unidad,definicion_oficial,definicion_alternativa
+tasa_retencion,Retención trimestral de clientes con tarjeta,clientes activos al inicio del trimestre que siguen activos al cierre / clientes activos al inicio,% de clientes,ventana de 90 días,ventana de 30 días (regla de un mes que hoy usa la empresa)
+indice_reposicion,Índice de reposición,clientes nuevos del trimestre / clientes perdidos del trimestre,clientes nuevos por cada cliente perdido (< 1 = la base se achica),,
+margen_anual_en_riesgo,Margen anual en riesgo,Σ margen bruto trimestral típico de los clientes perdidos en el trimestre × 4,CLP nominales 2025 de margen bruto (sin IVA) por año,,
+cobertura,Cobertura de la retención,boletas del origen que entran a la retención / boletas del origen,% de boletas (y % de la venta 2025),,
