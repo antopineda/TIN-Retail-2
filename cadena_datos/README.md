@@ -42,7 +42,7 @@ python cadena_datos/run_pipeline.py --simular-falla-calidad  # demostración: fa
 ## Definiciones clave
 
 - **Compra válida:** boleta de 2025, con cliente identificado y venta neta mayor que cero. Las boletas duplicadas se cuentan una sola vez.
-- **Cliente activo (W):** tiene al menos una compra válida en los últimos W días. W = 90 es la ventana principal; 30, 180 y 365 se usan como sensibilidad.
+- **Cliente activo (W):** tiene al menos una compra válida en los últimos W días. W = 90 es la ventana principal; 30 y 180 se usan como sensibilidad (365 se retiró: con un año de datos da 100% por construcción).
 - **Tasa de retención:** clientes activos al inicio del período que siguen activos al cierre, divididos por los clientes activos al inicio.
 - **Cliente nuevo:** alta en 2025 y primera compra en el período. Los clientes con alta anterior a 2025 se tratan como previos.
 - **Margen bruto:** venta sin IVA (venta / 1,19) − unidades × costo unitario del maestro, en CLP nominales (S17).

@@ -261,11 +261,12 @@ d1.metric('Contactos en el año', num(caso['contactados']))
 d1.caption(f'{pct(caso["pct_contactos_desperdiciados"], 0)} habría vuelto solo (el cupón se regala).')
 d2.metric('Costo de la acción', clp(caso['costo_total']))
 d2.caption('Envíos + cupones usados (también por los que habrían vuelto solos).')
-d3.metric('Margen recuperado', clp(caso['margen_recuperado']))
-d3.caption(f'{num(caso["recuperados"])} de {num(caso["se_pierden"])} clientes que se iban a perder.')
-d4.metric('Resultado neto', clp(caso['resultado_neto']),
+d3.metric('Paga su costo si recupera al menos', pct(caso['tasa_equilibrio']))
+d3.caption(f'De los {num(caso["se_pierden"])} clientes que se iban a perder. Esta cifra no depende de la tasa de recuperación supuesta.')
+d4.metric(f'Resultado neto si recupera el {pct(tasa, 0)} (ejemplo)', clp(caso['resultado_neto']),
           delta='paga su costo' if caso['resultado_neto'] > 0 else 'pierde plata', delta_color='normal' if caso['resultado_neto'] > 0 else 'inverse')
-d4.caption(f'Paga su costo si recupera al menos el **{pct(caso["tasa_equilibrio"])}** de los que se iban.')
+d4.caption(f'Margen recuperado {clp(caso["margen_recuperado"])} ({num(caso["recuperados"])} clientes) − costo. '
+           f'La tasa es un supuesto (S19): se mide con el piloto.')
 curva = pd.DataFrame([M.caso_contacto(D['mart_episodios_inactividad'], d, W0, envio, cupon, tasa) for d in range(15, W0, 5)])
 lin = alt.Chart(curva).mark_line(point=True, color=GRIS).encode(
     x=alt.X('dia_contacto:Q', title='Día de contacto (días sin comprar)', axis=alt.Axis(values=list(range(15, W0, 5)))),

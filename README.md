@@ -134,7 +134,7 @@ tasa de retención = clientes activos al inicio que siguen activos al cierre / c
 ```
 
 Un cliente está activo si tiene al menos una compra válida en los últimos *W* días. La ventana principal es de 90
-días, y también se reportan 30, 180 y 365 días como sensibilidad. Cada métrica se define una sola vez en
+días, y también se reportan 30 y 180 días como sensibilidad (365 días se retiró: con un año de datos da 100%). Cada métrica se define una sola vez en
 `cadena_datos/metricas.py` (capa semántica); el resumen y el prototipo la leen de ahí.
 
 Capas, decisiones de arquitectura, pruebas, linaje y acuerdo de servicio: [`docs/arquitectura.md`](docs/arquitectura.md).

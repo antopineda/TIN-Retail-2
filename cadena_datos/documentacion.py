@@ -86,7 +86,7 @@ COLUMNAS = {
     # marts
     'n_compras': 'Compras válidas en el mes', 'compro_en_mes': 'Tuvo al menos una compra válida en el mes',
     'dias_desde_ultima_compra': 'Días desde la última compra al cierre del mes', 'activo_30d': 'Activo al cierre del mes (ventana 30 d)',
-    'activo_90d': 'Activo al cierre del mes (ventana 90 d)', 'activo_180d': 'Activo al cierre del mes (ventana 180 d)', 'activo_365d': 'Activo al cierre del mes (ventana 365 d)',
+    'activo_90d': 'Activo al cierre del mes (ventana 90 d)', 'activo_180d': 'Activo al cierre del mes (ventana 180 d)',
     'estado_90d': 'aun_sin_compras, nuevo, primera_obs_previo, reactivado, recurrente, activo_sin_compra o inactivo (ventana 90 d)',
     'corte': 'Dimensión de corte (Total, Tienda principal, Formato principal, Macrozona principal, Segmento, Persona/negocio; en ventas también Canal)', 'valor': 'Valor del corte',
     'periodo_tipo': 'mes o trimestre', 'periodo': 'Período (AAAA-MM o AAAAQn)', 'ventana_dias': 'Ventana de inactividad W (días)',
@@ -106,7 +106,7 @@ COLUMNAS = {
     'segmento_rfm': 'Campeones, Leales, Recientes, En riesgo, Hibernando / perdidos, Necesitan atención',
     'una_compra_evaluable': f'Primera compra <= {config.VENTANA_PRINCIPAL} días antes del corte (tuvo tiempo de volver)',
     'es_una_sola_vez': 'Una sola compra y evaluable', 'activo_30d_al_corte': 'Activo al 31-12-2025 (30 d)',
-    'activo_90d_al_corte': 'Activo al 31-12-2025 (90 d)', 'activo_180d_al_corte': 'Activo al 31-12-2025 (180 d)', 'activo_365d_al_corte': 'Activo al 31-12-2025 (365 d)',
+    'activo_90d_al_corte': 'Activo al 31-12-2025 (90 d)', 'activo_180d_al_corte': 'Activo al 31-12-2025 (180 d)',
     'paso': 'Orden del paso en el embudo', 'motivo': 'Motivo de exclusión (o total)', 'boletas_restantes': 'Boletas que siguen después del paso',
     'pct_del_origen': 'boletas del paso / boletas del origen', 'pct_venta_2025': 'venta del paso / venta 2025',
     'perdidos_q4': 'Clientes activos al 1-oct que ya no lo están al 31-dic', 'gasto_trimestral_perdidos': 'Σ gasto trimestral de los perdidos (venta 2025 / trimestres entre su primera y última compra)',
