@@ -82,6 +82,17 @@ def wilson(k, n, z=config.Z_IC95):
     return (max(0.0, centro - mitad), min(1.0, centro + mitad))
 
 
+def comparar_con_total(ic_inf, ic_sup, total):
+    """Lectura de un grupo frente al total: solo es distinto si su intervalo del 95% no contiene al total."""
+    if pd.isna(ic_inf) or pd.isna(ic_sup) or pd.isna(total):
+        return '—'
+    if ic_sup < total:
+        return 'Menor que el total'
+    if ic_inf > total:
+        return 'Mayor que el total'
+    return 'No se distingue del total'
+
+
 def margen_linea(monto_linea, cantidad, costo_unitario, razon_costo_imputada):
     """Margen bruto de una línea en CLP sin IVA. Si falta el costo, se imputa con la razón costo/venta sin IVA (S17)."""
     venta_sin_iva = monto_linea / config.FACTOR_IVA
