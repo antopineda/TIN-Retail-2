@@ -66,3 +66,10 @@ def test_veredicto_regla_s22():
     assert M.veredicto(45, 100, 50, 55, umbral=0.5) == 'Repone'       # entran 55 >= 50 perdidos
     assert M.veredicto(34, 100, 70, 66, umbral=0.5) == 'Se achica'    # entran 66 < 70 perdidos
     assert M.veredicto(0, 0, 0, 0) is None
+
+
+def test_comparar_con_total_usa_el_intervalo():
+    assert M.comparar_con_total(0.25, 0.51, 0.511) == 'Menor que el total'
+    assert M.comparar_con_total(0.25, 0.52, 0.511) == 'No se distingue del total'
+    assert M.comparar_con_total(0.55, 0.70, 0.511) == 'Mayor que el total'
+    assert M.comparar_con_total(np.nan, 0.5, 0.511) == '—'

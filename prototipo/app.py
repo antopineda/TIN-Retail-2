@@ -31,7 +31,8 @@ VENTANAS = {90: '90 días (oficial)', 30: '30 días (alternativa: regla de un me
 CORTES = {'Tienda principal': 'Local', 'Formato principal': 'Formato', 'Macrozona principal': 'Macrozona',
           'Segmento': 'Segmento de la tarjeta (Clásico, Plus, Black)', 'Compras ene–sep (comportamiento; leer solo Q4)': 'Compras ene–sep (comportamiento)'}
 
-st.set_page_config(page_title='Retención de clientes · Multitienda del Sur', page_icon='🛒', layout='wide')
+st.set_page_config(page_title='Retención de clientes · Multitienda del Sur', page_icon='🛒', layout='wide',
+                   initial_sidebar_state='expanded')
 
 # Letra más grande: se lee desde el fondo de la sala en la demostración (P2)
 TAM_GRAFICO = 15
@@ -116,10 +117,27 @@ for f in fuentes[fuentes.estado != 'ok'].itertuples():
 st.markdown('### ¿Estamos reteniendo a nuestros clientes o solo reponiéndolos?')
 st.caption('Multitienda del Sur · clientes con tarjeta (compras identificadas) · 10 locales, incluida la Tienda Online · 2025')
 
-c1, c2, c3 = st.columns([1.2, 1, 1.4])
-w = c1.radio('Cliente activo = compró en los últimos…', list(VENTANAS), format_func=VENTANAS.get, horizontal=False)
-trimestre = c2.selectbox('Trimestre', list(TRIMESTRES), index=2, format_func=TRIMESTRES.get)
-c3.info(f'**Regla de lectura.** {M.regla_lectura(w)}  \n'
+# Filtros en la barra lateral: quedan a la vista mientras se baja por la página (prueba de uso, 18-11-2026:
+# los dos usuarios cambiaron a 30 días y siguieron leyendo la página sin notar que ya no era la cifra oficial).
+with st.sidebar:
+    st.markdown('**Filtros** (aplican a toda la página)')
+    w = st.radio('Cliente activo = compró en los últimos…', list(VENTANAS), format_func=VENTANAS.get, horizontal=False,
+                 help='90 días es la definición oficial. 30 y 180 días son alternativas para ver si la conclusión cambia.')
+    trimestre = st.selectbox('Trimestre', list(TRIMESTRES), index=2, format_func=TRIMESTRES.get)
+    if w == config.VENTANA_PRINCIPAL:
+        st.success(f'Estás viendo la definición **oficial** ({w} días).')
+    else:
+        st.warning(f'Estás viendo una **alternativa** ({w} días). La oficial es {config.VENTANA_PRINCIPAL} días.')
+    st.caption('Secciones: cifra clave · ¿retiene o repone? · tendencia · por local · la decisión · detalle en tablas')
+
+if w == config.VENTANA_PRINCIPAL:
+    st.success(f'**Definición oficial:** cliente activo = compró en los últimos {w} días · {TRIMESTRES[trimestre]}. '
+               f'Los filtros están en la barra de la izquierda.')
+else:
+    st.warning(f'**Ojo: estás viendo una alternativa ({w} días), no la definición oficial ({config.VENTANA_PRINCIPAL} días).** '
+               f'Todas las cifras y gráficos de la página usan {w} días. Para volver, elige {config.VENTANA_PRINCIPAL} días '
+               f'en la barra de la izquierda.')
+st.info(f'**Regla de lectura.** {M.regla_lectura(w)}  \n'
         f'Retención = retenidos / activos al inicio. Q1 no se mide: sin datos de 2024 no se sabe quién estaba activo al 1 de enero.')
 
 r = M.retencion(mret, trimestre, w)
@@ -134,7 +152,8 @@ if not r.base_confiable:
     st.warning(f'Con {w} días, {TRIMESTRES[trimestre]} no tiene base confiable: harían falta {w} días de compras antes del trimestre '
                'y no hay datos de 2024. La cifra de abajo no se debe leer.')
 k1, k2, k3, k4 = st.columns([1.3, 1, 1.2, 1])
-k1.metric(f'Retención {TRIMESTRES[trimestre][:7]} · {w} días', pct(r.tasa_retencion),
+etiqueta_w = 'OFICIAL' if w == config.VENTANA_PRINCIPAL else 'alternativa'
+k1.metric(f'Retención {TRIMESTRES[trimestre][:7]} · {w} días ({etiqueta_w})', pct(r.tasa_retencion),
           delta=(f'{(r.tasa_retencion - r_prev.tasa_retencion) * 100:+.1f} pp vs trimestre anterior'.replace('.', ',')
                  if r_prev is not None else None))
 k1.caption(f'{num(r.retenidos)} de {num(r.activos_inicio)} clientes activos al inicio siguieron activos. '
@@ -222,14 +241,17 @@ cx['Lectura'] = cx.se_puede_rankear.map({True: f'{config.UMBRAL_MUESTRA_PEQUENA}
                                          False: f'Menos de {config.UMBRAL_MUESTRA_PEQUENA} clientes: no ordenar, mirar el intervalo'})
 cx = cx.sort_values('valor')   # orden alfabético: no es un ranking (feedback E1)
 total = r.tasa_retencion
-alto = max(180, 34 * len(cx))
-y = alt.Y('Grupo:N', sort=cx.Grupo.tolist(), title=None, axis=alt.Axis(labelLimit=260))
+cx['Frente al total'] = [M.comparar_con_total(a, b, total) for a, b in zip(cx.ic95_inf, cx.ic95_sup)]
+alto = max(220, 44 * len(cx))
+# labelOverlap=False: sin esto Altair esconde la mitad de los nombres de los locales (prueba de uso, 18-11-2026)
+y = alt.Y('Grupo:N', sort=cx.Grupo.tolist(), title=None, axis=alt.Axis(labelLimit=300, labelOverlap=False))
 puntos = alt.Chart(cx).mark_point(filled=True, size=110).encode(
     x=alt.X('tasa_retencion:Q', title='% de clientes retenidos', axis=alt.Axis(format='%'), scale=alt.Scale(domain=[0, 1])), y=y,
     color=alt.Color('Lectura:N', scale=alt.Scale(range=[VINO, GRIS]), legend=alt.Legend(orient='bottom', title=None, labelLimit=500)),
     tooltip=[alt.Tooltip('Grupo:N'), alt.Tooltip('tasa_retencion:Q', format='.1%', title='Retención'),
              alt.Tooltip('ic95_inf:Q', format='.1%', title='IC 95% desde'), alt.Tooltip('ic95_sup:Q', format='.1%', title='IC 95% hasta'),
-             alt.Tooltip('activos_inicio:Q', title='Activos al inicio (n°)'), alt.Tooltip('perdidos:Q', title='Perdidos (n°)')])
+             alt.Tooltip('activos_inicio:Q', title='Activos al inicio (n°)'), alt.Tooltip('perdidos:Q', title='Perdidos (n°)'),
+             alt.Tooltip('Frente al total:N')])
 ic = alt.Chart(cx).mark_rule(color=GRIS, strokeWidth=2).encode(x='ic95_inf:Q', x2='ic95_sup:Q', y=y)
 n_txt = alt.Chart(cx).mark_text(align='left', dx=6, color=GRIS).encode(x=alt.value(0), y=y, text=alt.Text('activos_inicio:Q'))
 ref = alt.Chart(pd.DataFrame({'x': [total]})).mark_rule(strokeDash=[4, 4], color='#333').encode(x='x:Q')
@@ -237,6 +259,13 @@ st.altair_chart(grande((ic + puntos + ref).properties(height=alto)), width='stre
 st.caption(f'Orden alfabético, no ranking. Línea punteada: total de la cadena ({pct(total)}). Barra gris: intervalo de confianza del 95% (Wilson). '
            f'Un local con pocos clientes puede subir o bajar 15 puntos por azar: si su barra cruza la línea punteada, '
            f'no es distinto del total. Cada cliente cuenta en su local principal (donde más compró en 2025).')
+distintos = cx[cx['Frente al total'] != 'No se distingue del total']
+if len(distintos):
+    st.markdown('**¿Algún grupo es distinto del total?** ' + ' · '.join(f'{g}: {l.lower()}' for g, l in zip(distintos.Grupo, distintos['Frente al total'])))
+else:
+    st.markdown(f'**¿Algún grupo es distinto del total?** No: el intervalo de todos cruza el total ({pct(total)}). '
+                f'Ninguno se puede señalar como peor o mejor que la cadena.')
+st.caption('Las cifras exactas de cada local, con la fila del total, están en "Detalle por local", al final de la página.')
 if corte.startswith('Compras'):
     st.caption('Este corte usa las compras de enero a septiembre, por eso solo tiene sentido en Q4. '
                'Separa mucho más que el segmento de la tarjeta: el cliente con una sola compra es el que se pierde.')
@@ -248,13 +277,21 @@ W0 = config.VENTANA_PRINCIPAL
 st.caption(f'Simula haber contactado durante 2025 a cada cliente con tarjeta que cumplió N días sin comprar. '
            f'Un cliente se da por perdido al cumplir {W0} días: la definición oficial, sin importar la ventana elegida arriba '
            f'(con 30 días se daría por perdidos a clientes que vuelven solos). Montos en CLP nominales sin IVA, por año.')
+st.markdown('**Cómo usarlo:** 1) mueve **"Contactar al cumplir"** al día que quieres evaluar. '
+            '2) Los otros tres controles son supuestos de la acción: si no tienes un dato mejor, déjalos como están. '
+            '3) Lee el **costo** en la segunda cifra y **desde qué tasa de recuperación paga su costo** en la tercera.')
 s1, s2, s3, s4 = st.columns(4)
 paso = 5
 dia_max = W0 - paso
-dia = s1.slider('Contactar al cumplir (días sin comprar)', 15, dia_max, min(config.CONTACTO_DIA_DEFECTO, dia_max), step=paso)
-envio = s2.number_input('Costo por contacto (CLP)', 0, 5000, config.CONTACTO_COSTO_ENVIO_CLP, step=10)
-cupon = s3.slider('Cupón de regreso (% del ticket)', 0, 30, config.CONTACTO_CUPON_PCT)
-tasa = s4.slider('Clientes recuperados (% de los que se iban)', 0, 50, int(config.CONTACTO_TASA_RECUPERACION * 100)) / 100
+dia = s1.slider('Contactar al cumplir (días sin comprar)', 15, dia_max, min(config.CONTACTO_DIA_DEFECTO, dia_max), step=paso,
+                help='El día en que se le envía el cupón a un cliente que no ha vuelto a comprar.')
+envio = s2.number_input('Costo por contacto (CLP)', 0, 5000, config.CONTACTO_COSTO_ENVIO_CLP, step=10,
+                        help='Supuesto S18: costo de enviar un mensaje (correo o SMS) a un cliente. Cámbialo si tienes el costo real.')
+cupon = s3.slider('Cupón de regreso (% del ticket)', 0, 30, config.CONTACTO_CUPON_PCT,
+                  help='Descuento que recibe el cliente en su próxima compra. 10% es el mismo que ya da la tarjeta.')
+tasa = s4.slider('Clientes recuperados (% de los que se iban)', 0, 50, int(config.CONTACTO_TASA_RECUPERACION * 100),
+                 help='Supuesto S19: de los clientes que se iban a perder, qué porcentaje vuelve gracias al contacto. '
+                      'Solo cambia el resultado neto; el costo y la tasa de equilibrio no dependen de este valor.') / 100
 caso = M.caso_contacto(D['mart_episodios_inactividad'], dia, W0, envio, cupon, tasa)
 d1, d2, d3, d4 = st.columns(4)
 d1.metric('Contactos en el año', num(caso['contactados']))
@@ -286,18 +323,30 @@ with st.expander('Detalle por local: quién retiene, cuántos clientes y por qu�
         ['valor', 'activos_inicio', 'retenidos', 'perdidos', 'nuevos', 'reactivados', 'tasa_retencion', 'ic95_inf', 'ic95_sup']]
     det = det.merge(pl_[['tienda_principal', 'pct_una_sola_compra_ene_sep', 'ticket_promedio_ene_sep', 'margen_ene_sep_por_cliente']],
                     left_on='valor', right_on='tienda_principal', how='left').drop(columns='tienda_principal')
-    det = det.sort_values('tasa_retencion')
+    det = det.sort_values('valor')   # orden alfabético, igual que el gráfico: no es un ranking (feedback E1)
+    det['frente'] = [M.comparar_con_total(a, b, r.tasa_retencion) for a, b in zip(det.ic95_inf, det.ic95_sup)]
+    fila_total = pd.DataFrame([{'valor': 'TOTAL CADENA', 'activos_inicio': r.activos_inicio, 'retenidos': r.retenidos,
+                                'perdidos': r.perdidos, 'nuevos': r.nuevos, 'reactivados': r.reactivados,
+                                'tasa_retencion': r.tasa_retencion, 'ic95_inf': r.ic95_inf, 'ic95_sup': r.ic95_sup, 'frente': '—'}])
+    det = pd.concat([det, fila_total], ignore_index=True)
+    det = det[['valor', 'activos_inicio', 'retenidos', 'perdidos', 'nuevos', 'reactivados', 'tasa_retencion', 'ic95_inf', 'ic95_sup',
+               'frente', 'pct_una_sola_compra_ene_sep', 'ticket_promedio_ene_sep', 'margen_ene_sep_por_cliente']]
+    ret_col = f'Retención (%, {w} d)'
     st.dataframe(det.rename(columns={
         'valor': 'Local', 'activos_inicio': 'Activos al inicio (n°)', 'retenidos': 'Retenidos (n°)', 'perdidos': 'Perdidos (n°)',
-        'nuevos': 'Nuevos (n°)', 'reactivados': 'Reactivados (n°)', 'tasa_retencion': 'Retención (%)', 'ic95_inf': 'IC 95% desde',
-        'ic95_sup': 'IC 95% hasta', 'pct_una_sola_compra_ene_sep': 'Una sola compra ene–sep (%)',
-        'ticket_promedio_ene_sep': 'Ticket promedio ene–sep (CLP)', 'margen_ene_sep_por_cliente': 'Margen por cliente ene–sep (CLP)'}),
+        'nuevos': 'Nuevos (n°)', 'reactivados': 'Reactivados (n°)', 'tasa_retencion': ret_col, 'ic95_inf': 'IC 95% desde',
+        'ic95_sup': 'IC 95% hasta', 'frente': '¿Distinto del total?', 'pct_una_sola_compra_ene_sep': 'Perfil 90 d: una sola compra ene–sep (%)',
+        'ticket_promedio_ene_sep': 'Perfil 90 d: ticket promedio ene–sep (CLP)',
+        'margen_ene_sep_por_cliente': 'Perfil 90 d: margen por cliente ene–sep (CLP)'}),
         hide_index=True, width='stretch',
         column_config={c: st.column_config.NumberColumn(format='percent') for c in
-                       ['Retención (%)', 'IC 95% desde', 'IC 95% hasta', 'Una sola compra ene–sep (%)']} |
+                       [ret_col, 'IC 95% desde', 'IC 95% hasta', 'Perfil 90 d: una sola compra ene–sep (%)']} |
                       {c: st.column_config.NumberColumn(format='localized') for c in
-                       ['Ticket promedio ene–sep (CLP)', 'Margen por cliente ene–sep (CLP)']})
-    st.caption('El perfil (una sola compra, ticket, margen) es de los clientes activos al 1-oct-2025 con ventana de 90 días.')
+                       ['Perfil 90 d: ticket promedio ene–sep (CLP)', 'Perfil 90 d: margen por cliente ene–sep (CLP)']})
+    st.caption(f'Retención, conteos e intervalos con la ventana elegida ({w} días). Las columnas "Perfil 90 d" (una sola compra, '
+               f'ticket, margen) son siempre de los clientes activos al 1-oct-2025 con la ventana oficial de 90 días. '
+               f'"¿Distinto del total?" compara el intervalo del 95% de cada local con el total de la cadena. '
+               f'Para comparar locales, mira la retención (%), no el n° de retenidos: los locales tienen distinta cantidad de clientes.')
 
 with st.expander('¿Las campañas de 2025 retuvieron clientes?', expanded=False):
     ca = D['mart_campanas'].copy()

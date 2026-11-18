@@ -149,7 +149,22 @@ Anatomía de la pantalla, de arriba hacia abajo:
 5. Ejes truncados o totales que no cierran: el eje de retención va de 0% a 100%; perdidos + retenidos = activos al inicio (prueba V18).
 6. Quién certificó las definiciones del pie: la contraparte confirmó ventana, cliente nuevo y Tienda Online por correo el 13-10-2026. **Falta que certifique la definición de margen.**
 
-**Falta (equipo):** la prueba de uso. Ver la sección 5.
+**Prueba de uso (hecha el 18-11-2026):** dos estudiantes de otros grupos del curso (Grupo 11 y Grupo 1) respondieron las tres preguntas de la sección 5 usando solo el prototipo. Los nombres, tiempos y respuestas van en la tabla del informe y en el anexo de la prueba de uso.
+
+| Pregunta | Resultado | Qué no entendieron |
+|---|---|---|
+| 1. Retención oficial y con 30 días | 1 de 2 correcta | No se veía con claridad cuál era la definición oficial |
+| 2. Local que retiene menos y si es peor que el total | 0 de 2: los dos dijeron Súper Maipú y ninguno respondió si era peor | Habían cambiado a 30 días en la pregunta 1 y no lo notaron (con 30 días Maipú sí es el más bajo; con 90 es Híper Concepción). En el gráfico se veían 5 de los 10 nombres. No sabían leer el intervalo |
+| 3. Costo a los 45 días y tasa de equilibrio | 0 de 2 completas: cada uno dio solo una de las dos cifras | Faltaban instrucciones en el simulador para el cupón y la tasa de recuperación |
+
+**Qué cambiamos en el prototipo después de la prueba:**
+1. Los filtros pasan a una barra lateral que queda a la vista, y un aviso arriba dice si la pantalla muestra la definición oficial o una alternativa. La tarjeta principal dice "(OFICIAL)".
+2. El gráfico por local muestra los 10 nombres (Altair escondía la mitad).
+3. Debajo del gráfico, una línea responde "¿algún local es distinto del total?" (hoy, ninguno). La misma lectura aparece en la tabla de detalle (columna "¿Distinto del total?"), con la regla en `metricas.comparar_con_total`.
+4. La tabla de detalle tiene la fila "TOTAL CADENA", va en orden alfabético (antes estaba ordenada por tasa, como un ranking) y dice qué columnas usan la ventana elegida y cuáles el perfil a 90 días.
+5. El simulador tiene un "cómo usarlo" de tres pasos y una ayuda en cada control.
+
+**Sugerencias que no atendimos:** un buscador en la parte superior (en una pantalla con una pregunta no hay nada que buscar) y subir la tabla de detalle (la anatomía de la clase 7 pone el detalle al final; en su lugar, el gráfico por local avisa dónde está).
 
 ### E. Caso de negocio, recomendación y adopción (15%)
 
@@ -260,7 +275,7 @@ Sobre la cifra: no presentar el "CLP 1,23 millones recuperados" como resultado, 
 
 ## 5. Pendientes del equipo (no se pueden hacer desde el código)
 
-- [ ] **Prueba de uso** con al menos 2 personas ajenas al grupo (otro grupo o la contraparte), sin ayuda. Registrar quién, cuánto demoró, qué no entendió y qué cambiamos después. Tres preguntas propuestas:
+- [x] **Prueba de uso** (hecha el 18-11-2026; resultado y cambios en la sección D) con al menos 2 personas ajenas al grupo (otro grupo o la contraparte), sin ayuda. Registrar quién, cuánto demoró, qué no entendió y qué cambiamos después. Tres preguntas propuestas:
   1. ¿Cuál es la retención de Q4 2025 con la definición oficial y cuánto baja si se usan 30 días? (51,1% y 33,2%)
   2. ¿Qué local retiene menos en Q4 y se puede decir que es peor que el total de la cadena? (Híper Concepción, 37,0%; no, su intervalo llega a 51,4%)
   3. Si contactamos a los clientes a los 45 días sin comprar, ¿cuánto cuesta al año y desde qué tasa de recuperación paga su costo? (CLP 0,79 millones; 6,1%)
