@@ -1,0 +1,5 @@
+# Dependencias para publicar el prototipo en Streamlit Community Cloud (lee solo datos/oro/).
+pandas>=2.0
+numpy>=1.24
+streamlit>=1.30
+altair>=5.0
